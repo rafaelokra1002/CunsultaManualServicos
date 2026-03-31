@@ -4,6 +4,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { manualSchema } from "@/lib/validations";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/manuais - Lista manuais (usuário autenticado e ativo)
 export async function GET(request: Request) {
   try {

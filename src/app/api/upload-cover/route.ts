@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
+
+export const dynamic = "force-dynamic";
 import { prisma } from "@/lib/prisma";
 
 // POST /api/upload-cover - Upload de capa de manual (somente admin)

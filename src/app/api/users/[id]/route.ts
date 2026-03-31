@@ -4,6 +4,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { updateUserSchema } from "@/lib/validations";
 
+export const dynamic = "force-dynamic";
+
 // PATCH /api/users/[id] - Ativar/desativar usuário (somente admin)
 export async function PATCH(
   request: Request,
