@@ -21,7 +21,7 @@ export default function ManuaisPage() {
   const [error, setError] = useState("");
 
   // Extrai marcas únicas para o filtro
-  const brands = [...new Set(manuais.map((m) => m.brand))].sort();
+  const brands = Array.from(new Set(manuais.map((m) => m.brand))).sort();
 
   async function fetchManuais() {
     setLoading(true);
