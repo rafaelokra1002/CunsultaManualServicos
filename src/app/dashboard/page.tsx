@@ -9,8 +9,8 @@ export default function DashboardPage() {
   return (
     <div>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">
           Olá, {session?.user?.name?.split(" ")[0]}! 👋
         </h1>
         <p className="mt-1 text-[#8888a4]">
@@ -19,7 +19,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Cards de status */}
-      <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         <div className="card-glass rounded-2xl p-6 transition-all hover:border-[#6c5ce7]/30">
           <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-xl">
             📄
@@ -68,7 +68,7 @@ export default function DashboardPage() {
 
       {/* Mensagem para admin */}
       {session?.user?.role === "ADMIN" && (
-        <div className="rounded-2xl border border-orange-500/20 bg-orange-500/5 p-6">
+        <div className="rounded-2xl border border-orange-500/20 bg-orange-500/5 p-5 sm:p-6">
           <h3 className="text-lg font-semibold text-orange-400">
             🔧 Painel Administrativo
           </h3>

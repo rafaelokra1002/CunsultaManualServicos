@@ -1,4 +1,7 @@
+"use client";
+
 import BrandCover from "@/components/BrandCover";
+import { useState } from "react";
 
 interface ManualCardProps {
   id: string;
@@ -6,24 +9,42 @@ interface ManualCardProps {
   brand: string;
   model: string;
   year: number;
-  fileUrl: string;
   coverUrl?: string | null;
 }
 
 export default function ManualCard({
+  id,
   title,
   brand,
   model,
   year,
-  fileUrl,
   coverUrl,
 }: ManualCardProps) {
+  const [loading, setLoading] = useState(false);
+
+  async function handleDownload(e: React.MouseEvent) {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+
+    try {
+      const res = await fetch(`/api/download?id=${id}`);
+      const data = await res.json();
+      if (data.url) {
+        window.open(data.url, "_blank");
+      }
+    } catch {
+      alert("Erro ao abrir o manual");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <a
-      href={fileUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative flex h-[380px] flex-col overflow-hidden rounded-2xl bg-[#111118] ring-1 ring-white/[0.06] transition-all duration-300 hover:ring-[#6c5ce7]/40 hover:shadow-xl hover:shadow-[#6c5ce7]/10 hover:-translate-y-1"
+    <button
+      onClick={handleDownload}
+      disabled={loading}
+      className="group relative flex h-[340px] w-full flex-col overflow-hidden rounded-2xl bg-[#111118] text-left ring-1 ring-white/[0.06] transition-all duration-300 hover:-translate-y-1 hover:ring-[#6c5ce7]/40 hover:shadow-xl hover:shadow-[#6c5ce7]/10 sm:h-[380px]"
     >
       {/* Imagem / Capa */}
       <div className="relative flex-1 overflow-hidden">
@@ -53,20 +74,20 @@ export default function ManualCard({
         {/* Download icon overlay on hover */}
         <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/30">
           <div className="flex h-14 w-14 scale-0 items-center justify-center rounded-full bg-[#6c5ce7] text-xl shadow-xl transition-transform duration-300 group-hover:scale-100">
-            ⬇️
+            {loading ? "⏳" : "⬇️"}
           </div>
         </div>
       </div>
 
       {/* Info - Bottom section */}
-      <div className="relative z-10 -mt-8 px-5 pb-5">
+      <div className="relative z-10 -mt-8 px-4 pb-4 sm:px-5 sm:pb-5">
         <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-[#6c5ce7]">
           {model}
         </p>
-        <h3 className="text-lg font-bold leading-tight text-white line-clamp-2">
+        <h3 className="line-clamp-2 text-base font-bold leading-tight text-white sm:text-lg">
           {title}
         </h3>
       </div>
-    </a>
+    </button>
   );
 }

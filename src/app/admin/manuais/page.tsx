@@ -118,9 +118,9 @@ export default function AdminManuaisPage() {
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-white">
+          <h1 className="text-2xl font-bold text-white sm:text-3xl">
             📄 Gerenciar Manuais
           </h1>
           <p className="mt-1 text-[#8888a4]">
@@ -129,7 +129,7 @@ export default function AdminManuaisPage() {
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className={showForm ? "btn-outline text-sm" : "btn-primary text-sm"}
+          className={showForm ? "btn-outline w-full text-sm sm:w-auto" : "btn-primary w-full text-sm sm:w-auto"}
         >
           {showForm ? "Cancelar" : "+ Novo Manual"}
         </button>
@@ -149,7 +149,7 @@ export default function AdminManuaisPage() {
 
       {/* Formulário de criação */}
       {showForm && (
-        <div className="card-glass mb-8 rounded-2xl p-6">
+        <div className="card-glass mb-8 rounded-2xl p-4 sm:p-6">
           <h2 className="mb-4 text-lg font-semibold text-white">
             Novo Manual
           </h2>
@@ -204,7 +204,65 @@ export default function AdminManuaisPage() {
             Nenhum manual cadastrado
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <>
+            <div className="space-y-4 p-4 md:hidden">
+              {manuais.map((manual) => (
+                <div key={manual.id} className="rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-4">
+                  <div className="flex gap-4">
+                    {manual.coverUrl ? (
+                      <img
+                        src={manual.coverUrl}
+                        alt="Capa"
+                        className="h-20 w-16 shrink-0 rounded-lg object-cover ring-1 ring-[#2a2a3e]"
+                      />
+                    ) : (
+                      <div className="flex h-20 w-16 shrink-0 items-center justify-center rounded-lg bg-[#1a1a2e] ring-1 ring-[#2a2a3e]">
+                        <span className="text-lg">📋</span>
+                      </div>
+                    )}
+
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium text-white">{manual.title}</p>
+                      <div className="mt-2 flex flex-wrap gap-2 text-xs text-[#8888a4]">
+                        <span className="rounded-md bg-[#1a1a2e] px-2 py-1">{manual.brand}</span>
+                        <span className="rounded-md bg-[#1a1a2e] px-2 py-1">{manual.model}</span>
+                        <span className="rounded-md bg-[#1a1a2e] px-2 py-1">{manual.year}</span>
+                      </div>
+                      <a
+                        href={manual.fileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-block text-sm font-medium text-[#6c5ce7] transition-colors hover:text-[#7c6ef7]"
+                      >
+                        Ver PDF
+                      </a>
+                    </div>
+                  </div>
+
+                  <label className="mt-4 flex cursor-pointer items-center justify-center gap-1 rounded-md bg-[#6c5ce7]/10 px-3 py-2 text-xs font-medium text-[#6c5ce7] transition-all hover:bg-[#6c5ce7]/20">
+                    {uploadingId === manual.id ? (
+                      <span className="text-[#8888a4]">Enviando...</span>
+                    ) : (
+                      <>
+                        📷 {manual.coverUrl ? "Trocar capa" : "Adicionar capa"}
+                        <input
+                          type="file"
+                          className="hidden"
+                          accept="image/jpeg,image/png,image/webp,image/gif"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleCoverUpload(manual.id, file);
+                            e.target.value = "";
+                          }}
+                        />
+                      </>
+                    )}
+                  </label>
+                </div>
+              ))}
+            </div>
+
+            <div className="hidden overflow-x-auto md:block">
             <table className="w-full text-left text-sm">
               <thead className="border-b border-[#2a2a3e] text-xs font-medium uppercase text-[#8888a4]">
                 <tr>
@@ -273,7 +331,8 @@ export default function AdminManuaisPage() {
                 ))}
               </tbody>
             </table>
-          </div>
+            </div>
+          </>
         )}
       </div>
     </div>

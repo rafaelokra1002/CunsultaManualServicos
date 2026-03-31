@@ -59,8 +59,8 @@ export default function AdminUsuariosPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">
           👥 Gerenciar Usuários
         </h1>
         <p className="mt-1 text-[#8888a4]">
@@ -79,7 +79,60 @@ export default function AdminUsuariosPage() {
             Nenhum usuário cadastrado
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <>
+            <div className="space-y-4 p-4 md:hidden">
+              {users.map((user) => (
+                <div key={user.id} className="rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="truncate font-medium text-white">{user.nome}</p>
+                      <p className="mt-1 break-all text-sm text-[#8888a4]">{user.email}</p>
+                    </div>
+                    <span
+                      className={`inline-block rounded-md px-2.5 py-0.5 text-xs font-semibold ${
+                        user.role === "ADMIN"
+                          ? "bg-orange-500/20 text-orange-400"
+                          : "bg-blue-500/20 text-blue-400"
+                      }`}
+                    >
+                      {user.role}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2 text-xs">
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 font-semibold ${
+                        user.active
+                          ? "bg-green-500/20 text-green-400"
+                          : "bg-gray-500/20 text-gray-400"
+                      }`}
+                    >
+                      <span className={`h-1.5 w-1.5 rounded-full ${user.active ? "bg-green-400" : "bg-gray-400"}`} />
+                      {user.active ? "Ativo" : "Inativo"}
+                    </span>
+                    <span className="rounded-md bg-[#1a1a2e] px-2.5 py-1 text-[#8888a4]">
+                      Cadastro: {new Date(user.createdAt).toLocaleDateString("pt-BR")}
+                    </span>
+                  </div>
+
+                  {user.role !== "ADMIN" && (
+                    <button
+                      onClick={() => toggleActive(user.id, user.active)}
+                      disabled={actionLoading === user.id}
+                      className={`mt-4 w-full rounded-lg px-3 py-2 text-sm font-semibold transition-all disabled:opacity-50 ${
+                        user.active
+                          ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
+                          : "bg-green-500/20 text-green-400 hover:bg-green-500/30"
+                      }`}
+                    >
+                      {actionLoading === user.id ? "..." : user.active ? "Desativar" : "Ativar"}
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="hidden overflow-x-auto md:block">
             <table className="w-full text-left text-sm">
               <thead className="border-b border-[#2a2a3e] text-xs font-medium uppercase text-[#8888a4]">
                 <tr>
@@ -147,7 +200,8 @@ export default function AdminUsuariosPage() {
                 ))}
               </tbody>
             </table>
-          </div>
+            </div>
+          </>
         )}
       </div>
     </div>

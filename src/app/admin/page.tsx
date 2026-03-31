@@ -37,8 +37,8 @@ export default function AdminDashboardPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">
           📊 Painel Administrativo
         </h1>
         <p className="mt-1 text-[#8888a4]">
@@ -47,7 +47,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Cards de estatísticas */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
         <div className="card-glass rounded-2xl p-6 transition-all hover:border-blue-500/30">
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/15 text-2xl">

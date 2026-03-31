@@ -55,23 +55,23 @@ export default function ManuaisPage() {
   return (
     <div>
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white">📄 Manuais</h1>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">📄 Manuais</h1>
         <p className="mt-1 text-[#8888a4]">
           Encontre o manual de serviço da sua motocicleta
         </p>
       </div>
 
       {/* Filtros */}
-      <div className="mb-6 flex flex-wrap gap-4">
-        <div className="w-full sm:w-auto">
+      <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,220px)_minmax(0,220px)_auto] lg:items-end">
+        <div className="w-full">
           <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
             Filtrar por marca
           </label>
           <select
             value={brandFilter}
             onChange={(e) => setBrandFilter(e.target.value)}
-            className="input-dark sm:w-52"
+            className="input-dark w-full"
           >
             <option value="">Todas as marcas</option>
             {brands.map((brand) => (
@@ -82,7 +82,7 @@ export default function ManuaisPage() {
           </select>
         </div>
 
-        <div className="w-full sm:w-auto">
+        <div className="w-full">
           <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
             Buscar por modelo
           </label>
@@ -91,7 +91,7 @@ export default function ManuaisPage() {
             value={modelFilter}
             onChange={(e) => setModelFilter(e.target.value)}
             placeholder="Ex: CG 160"
-            className="input-dark sm:w-52"
+            className="input-dark w-full"
           />
         </div>
 
@@ -102,7 +102,7 @@ export default function ManuaisPage() {
                 setBrandFilter("");
                 setModelFilter("");
               }}
-              className="btn-outline px-4 py-3 text-sm"
+              className="btn-outline w-full px-4 py-3 text-sm lg:w-auto"
             >
               Limpar filtros
             </button>
@@ -128,7 +128,7 @@ export default function ManuaisPage() {
       {!loading && !error && (
         <>
           {manuais.length === 0 ? (
-            <div className="card-glass rounded-2xl p-12 text-center">
+              <div className="card-glass rounded-2xl p-8 text-center sm:p-12">
               <div className="mb-4 text-4xl">📭</div>
               <h3 className="text-lg font-semibold text-white">
                 Nenhum manual encontrado
@@ -138,7 +138,7 @@ export default function ManuaisPage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
               {manuais.map((manual) => (
                 <ManualCard key={manual.id} {...manual} />
               ))}
