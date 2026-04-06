@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import path from "path";
-import { existsSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 
 export const dynamic = "force-dynamic";
 
@@ -45,12 +45,21 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // Arquivo local na VPS (ex: /manuais/arquivo.pdf)
+  // Arquivo local na VPS — servir o PDF diretamente pelo API
   if (manual.fileUrl.startsWith("/")) {
     const filePath = path.join(process.cwd(), "public", manual.fileUrl);
     if (!existsSync(filePath)) {
       return NextResponse.json({ error: "Arquivo não encontrado no servidor" }, { status: 404 });
     }
+    const fileBuffer = readFileSync(filePath);
+    const fileName = path.basename(manual.fileUrl);
+    return new NextResponse(fileBuffer, {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `inline; filename="${fileName}"`,
+        "Content-Length": fileBuffer.length.toString(),
+      },
+    });
   }
 
   return NextResponse.json({ url: manual.fileUrl });

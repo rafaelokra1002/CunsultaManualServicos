@@ -29,6 +29,17 @@ export default function ManualCard({
 
     try {
       const res = await fetch(`/api/download?id=${id}`);
+      const contentType = res.headers.get("content-type") || "";
+
+      // Se a API retornou o PDF diretamente (arquivo local na VPS)
+      if (contentType.includes("application/pdf")) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        window.open(url, "_blank");
+        return;
+      }
+
+      // Se retornou JSON com URL (Vercel Blob ou externo)
       const data = await res.json();
       if (data.url) {
         window.open(data.url, "_blank");
