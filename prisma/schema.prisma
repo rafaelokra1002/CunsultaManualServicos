@@ -14,15 +14,31 @@ enum Role {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   nome      String
-  email     String   @unique
+  email     String    @unique
   password  String
-  role      Role     @default(USER)
-  active    Boolean  @default(false)
-  createdAt DateTime @default(now())
+  role      Role      @default(USER)
+  active    Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  payments  Payment[]
 
   @@map("users")
+}
+
+model Payment {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  amount          Float
+  status          String   @default("pending") // pending, approved, expired
+  pushinPayId     String?  @unique
+  pixCode         String?
+  pixQrCode       String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("payments")
 }
 
 model Manual {
