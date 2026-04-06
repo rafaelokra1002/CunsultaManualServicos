@@ -21,6 +21,9 @@ export async function GET(request: Request) {
       status: true,
       amount: true,
       createdAt: true,
+      user: {
+        select: { active: true },
+      },
     },
   });
 
@@ -29,6 +32,15 @@ export async function GET(request: Request) {
       { error: "Pagamento não encontrado" },
       { status: 404 }
     );
+  }
+
+  // Se o usuário já foi ativado (por admin ou webhook), marcar pagamento como approved
+  if (payment.status === "pending" && payment.user.active) {
+    await prisma.payment.update({
+      where: { id: payment.id },
+      data: { status: "approved" },
+    });
+    return NextResponse.json({ ...payment, status: "approved" });
   }
 
   return NextResponse.json(payment);
