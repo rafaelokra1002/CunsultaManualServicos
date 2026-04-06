@@ -265,6 +265,21 @@ export default function DashboardPage() {
         </div>
       </div>
 
+      {/* Novos manuais */}
+      <div className="mt-6 rounded-2xl border border-emerald-500/20 bg-gradient-to-r from-emerald-500/[0.08] to-transparent p-5 sm:p-6">
+        <div className="flex items-start gap-4">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400">
+            <SparklesIcon />
+          </div>
+          <div>
+            <h3 className="font-bold text-white">Novos manuais toda semana!</h3>
+            <p className="mt-1 text-sm text-[#8888a4]">
+              Nossa biblioteca está em constante atualização. Novos manuais de serviço são adicionados <strong className="text-emerald-400">todas as semanas</strong>. Fique de olho!
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Mensagem para admin */}
       {session?.user?.role === "ADMIN" && (
         <div className="mt-6 overflow-hidden rounded-2xl border border-orange-500/20 bg-gradient-to-br from-orange-500/[0.08] to-transparent p-5 sm:p-6">
