@@ -13,7 +13,7 @@ export default withAuth(
 
     // Rotas protegidas requerem conta ativa (exceto admin)
     if (
-      (pathname.startsWith("/dashboard") || pathname.startsWith("/manuais")) &&
+      (pathname.startsWith("/dashboard") || pathname.startsWith("/manuais") || pathname.startsWith("/oleo-suspensao")) &&
       token?.role !== "ADMIN" &&
       !token?.active
     ) {
@@ -30,5 +30,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/manuais/:path*", "/admin/:path*"],
+  matcher: ["/dashboard/:path*", "/manuais/:path*", "/oleo-suspensao/:path*", "/admin/:path*"],
 };

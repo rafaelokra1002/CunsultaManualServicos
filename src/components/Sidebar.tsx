@@ -28,6 +28,17 @@ function ManuaisIcon({ active }: { active?: boolean }) {
   );
 }
 
+function OleoIcon({ active }: { active?: boolean }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={active ? "#6c5ce7" : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2v6" />
+      <path d="M8 8h8l2 10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L8 8z" />
+      <path d="M10 12h4" />
+      <path d="M10 15h4" />
+    </svg>
+  );
+}
+
 function LogoutIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -69,6 +80,7 @@ function CloseIcon() {
 const navItems = [
   { href: "/dashboard", label: "Dashboard", Icon: DashboardIcon },
   { href: "/manuais", label: "Manuais", Icon: ManuaisIcon },
+  { href: "/oleo-suspensao", label: "Óleo Suspensão", Icon: OleoIcon },
 ];
 
 export default function Sidebar() {
