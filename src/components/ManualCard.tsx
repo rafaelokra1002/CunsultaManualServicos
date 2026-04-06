@@ -35,14 +35,32 @@ export default function ManualCard({
       if (contentType.includes("application/pdf")) {
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);
-        window.open(url, "_blank");
+        // Usar <a> com download para compatibilidade mobile
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        // Em mobile, forçar download em vez de abrir inline
+        const fileName = res.headers.get("content-disposition")?.match(/filename="?(.+?)"?$/)?.[1] || "manual.pdf";
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        // Limpar blob URL após um delay
+        setTimeout(() => URL.revokeObjectURL(url), 5000);
         return;
       }
 
       // Se retornou JSON com URL (Vercel Blob ou externo)
       const data = await res.json();
       if (data.url) {
-        window.open(data.url, "_blank");
+        const a = document.createElement("a");
+        a.href = data.url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       }
     } catch {
       alert("Erro ao abrir o manual");
