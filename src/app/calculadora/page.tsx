@@ -158,7 +158,7 @@ export default function CalculadoraPage() {
             <ul className="space-y-2 text-sm text-[#8888a4]">
               <li className="flex items-start gap-2">
                 <span className="mt-0.5 text-[#6c5ce7]">1.</span>
-                Meça a folga atual encontrada na pastilha de freio
+                Meça a folga atual encontrada na pastilha
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-0.5 text-[#6c5ce7]">2.</span>

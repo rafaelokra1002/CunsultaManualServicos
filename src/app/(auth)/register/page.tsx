@@ -138,7 +138,7 @@ export default function RegisterPage() {
               </span>
               <h3 className="mt-1 text-lg font-bold text-white">Plano Acesso Total</h3>
               <p className="mt-1 text-sm text-[#8888a4]">
-                Manuais de serviço + Tabela de óleo
+                Manuais + Tabela de óleo + Calculadora
               </p>
             </div>
             <div className="text-right">
@@ -150,7 +150,7 @@ export default function RegisterPage() {
             </div>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
-            {["Todos os manuais", "Tabela de óleo/suspensão", "Acesso vitalício", "Atualizações grátis"].map((item) => (
+            {["Todos os manuais", "Tabela de óleo/suspensão", "Calculadora de Pastilha de Válvulas", "Acesso vitalício", "Atualizações grátis"].map((item) => (
               <span key={item} className="rounded-full border border-[#2a2a3e] bg-[#12121a] px-3 py-1 text-xs text-[#8888a4]">
                 ✓ {item}
               </span>

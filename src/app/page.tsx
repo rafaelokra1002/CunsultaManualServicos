@@ -51,7 +51,7 @@ export default function HomePage() {
         </div>
 
         {/* Features */}
-        <div className="mt-16 grid w-full max-w-5xl grid-cols-1 gap-4 pb-16 sm:mt-20 sm:grid-cols-2 sm:gap-6 sm:pb-20 lg:grid-cols-4">
+        <div className="mt-16 grid w-full max-w-5xl grid-cols-1 gap-4 pb-16 sm:mt-20 sm:grid-cols-2 sm:gap-6 sm:pb-20 lg:grid-cols-5">
           <div className="card-glass rounded-2xl p-6 text-left transition-all hover:border-[#6c5ce7]/30 hover:shadow-lg hover:shadow-[#6c5ce7]/5 sm:p-8">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-2xl">
               📚
@@ -89,6 +89,15 @@ export default function HomePage() {
             <h3 className="mb-2 text-xl font-bold text-white">Óleo de Suspensão</h3>
             <p className="text-[#8888a4]">
               Consulte o volume de óleo de suspensão, nível de fluido e óleo do motor por modelo.
+            </p>
+          </div>
+          <div className="card-glass rounded-2xl p-6 text-left transition-all hover:border-[#6c5ce7]/30 hover:shadow-lg hover:shadow-[#6c5ce7]/5 sm:p-8">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-2xl">
+              🧮
+            </div>
+            <h3 className="mb-2 text-xl font-bold text-white">Calculadora de Pastilha de Válvulas</h3>
+            <p className="text-[#8888a4]">
+              Calcule a folga de pastilha de válvulas para XRE 300, CB 300 e outros modelos.
             </p>
           </div>
         </div>
