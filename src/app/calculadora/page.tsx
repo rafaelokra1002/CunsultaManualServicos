@@ -49,10 +49,10 @@ export default function CalculadoraPage() {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-white sm:text-3xl">
-              Calculadora <span className="text-[#6c5ce7]">RBF Motos</span>
+              Calculadora de <span className="text-[#6c5ce7]">Pastilha de Válvulas</span>
             </h1>
             <p className="mt-2 text-sm text-[#8888a4]">
-              Calcule a folga de pastilha de freio
+              Calcule a folga de pastilha de válvulas
             </p>
           </div>
 
