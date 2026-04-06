@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import Logo from "@/components/Logo";
+import InstallButton from "@/components/InstallButton";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: "🏠" },
@@ -77,6 +78,9 @@ export default function Sidebar() {
         </nav>
 
         <div className="border-t border-[#2a2a3e] p-4">
+          <div className="mb-3">
+            <InstallButton />
+          </div>
           <div className="mb-3 overflow-hidden">
             <p className="truncate text-sm font-medium text-white">{session?.user?.name}</p>
             <p className="truncate text-xs text-[#8888a4]">{session?.user?.email}</p>
