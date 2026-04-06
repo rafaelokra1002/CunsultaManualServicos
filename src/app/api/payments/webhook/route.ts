@@ -7,51 +7,67 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    // PushinPay envia o webhook com os dados do pagamento
-    const { id, status, external_reference } = body;
+    console.log("Webhook PushinPay recebido:", JSON.stringify(body));
 
-    if (!id) {
-      return NextResponse.json(
-        { error: "Dados inválidos" },
-        { status: 400 }
-      );
-    }
+    // PushinPay Checkout envia dados do pagamento aprovado
+    // Campos possíveis: id, status, email, value, customer_name, etc.
+    const email = body.email || body.customer_email || body.customer?.email;
+    const status = body.status;
+    const transactionId = body.id || body.transaction_id;
 
-    // Busca o pagamento pelo pushinPayId
-    const payment = await prisma.payment.findUnique({
-      where: { pushinPayId: id },
-    });
-
-    if (!payment) {
-      console.error("Pagamento não encontrado para pushinPayId:", id);
-      return NextResponse.json(
-        { error: "Pagamento não encontrado" },
-        { status: 404 }
-      );
-    }
-
-    // Se o pagamento foi aprovado
-    if (status === "approved" || status === "completed" || status === "paid") {
-      // Atualiza o status do pagamento
-      await prisma.payment.update({
-        where: { id: payment.id },
-        data: { status: "approved" },
+    // Se tem email, busca o usuário e ativa
+    if (email) {
+      const user = await prisma.user.findUnique({
+        where: { email: email.toLowerCase().trim() },
       });
 
-      // Ativa a conta do usuário
-      await prisma.user.update({
-        where: { id: payment.userId },
-        data: { active: true },
-      });
+      if (user) {
+        // Registra o pagamento
+        await prisma.payment.create({
+          data: {
+            userId: user.id,
+            amount: 34.90,
+            status: "approved",
+            pushinPayId: transactionId || `checkout_${Date.now()}`,
+          },
+        });
 
-      console.log(`Pagamento ${id} aprovado. Usuário ${payment.userId} ativado.`);
-    } else if (status === "expired" || status === "cancelled" || status === "refunded") {
-      await prisma.payment.update({
-        where: { id: payment.id },
-        data: { status: "expired" },
-      });
+        // Ativa a conta do usuário
+        if (!user.active) {
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { active: true },
+          });
+        }
 
-      console.log(`Pagamento ${id} expirado/cancelado.`);
+        console.log(`Pagamento aprovado. Usuário ${user.email} ativado.`);
+      } else {
+        console.log(`Webhook recebido mas usuário com email ${email} não encontrado.`);
+      }
+    } else {
+      // Fallback: tenta buscar por pushinPayId se não tem email
+      if (transactionId) {
+        const payment = await prisma.payment.findUnique({
+          where: { pushinPayId: transactionId },
+        });
+
+        if (payment) {
+          await prisma.payment.update({
+            where: { id: payment.id },
+            data: { status: status === "approved" || status === "completed" || status === "paid" ? "approved" : "expired" },
+          });
+
+          if (status === "approved" || status === "completed" || status === "paid") {
+            await prisma.user.update({
+              where: { id: payment.userId },
+              data: { active: true },
+            });
+            console.log(`Pagamento ${transactionId} aprovado via ID.`);
+          }
+        }
+      }
+
+      console.log("Webhook sem email, body:", JSON.stringify(body));
     }
 
     return NextResponse.json({ received: true });
