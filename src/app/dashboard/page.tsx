@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import InstallButton from "@/components/InstallButton";
 
 function BookIcon() {
   return (
@@ -246,18 +247,20 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Dica */}
+      {/* Instalar App */}
       <div className="rounded-2xl border border-[#6c5ce7]/20 bg-gradient-to-r from-[#6c5ce7]/[0.08] to-transparent p-5 sm:p-6">
         <div className="flex items-start gap-4">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-[#6c5ce7]">
             <DownloadIcon />
           </div>
-          <div>
-            <h3 className="font-bold text-white">Dica: Instale o App!</h3>
+          <div className="flex-1">
+            <h3 className="font-bold text-white">Instale o App no Celular!</h3>
             <p className="mt-1 text-sm text-[#8888a4]">
-              Você pode instalar o OficinaDigital no seu celular como um app. 
-              Basta abrir o site no Chrome e tocar em &quot;Instalar&quot; ou &quot;Adicionar à tela inicial&quot;.
+              Tenha o OficinaDigital como app na tela inicial do seu celular. Acesso rápido sem precisar abrir o navegador.
             </p>
+            <div className="mt-3">
+              <InstallButton />
+            </div>
           </div>
         </div>
       </div>

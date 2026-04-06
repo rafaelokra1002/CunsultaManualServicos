@@ -31,7 +31,7 @@ export default function Sidebar() {
         <Link href="/dashboard" className="flex items-center text-lg font-bold text-white">
           <Logo size="sm" /> <span className="ml-2">Oficina<span className="text-[#6c5ce7]">Digital</span></span>
         </Link>
-        <div className="w-10" />
+        <InstallButton compact />
       </div>
 
       {open && (
