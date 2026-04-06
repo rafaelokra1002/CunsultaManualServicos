@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import ManualCard from "@/components/ManualCard";
 
 interface Manual {
@@ -13,33 +13,75 @@ interface Manual {
   coverUrl?: string | null;
 }
 
+const brandColors: Record<string, string> = {
+  Honda: "bg-red-500",
+  Yamaha: "bg-blue-500",
+  BMW: "bg-sky-500",
+  Kawasaki: "bg-green-500",
+  Suzuki: "bg-yellow-500",
+  Triumph: "bg-amber-500",
+  "Royal Enfield": "bg-stone-400",
+  Husqvarna: "bg-indigo-500",
+  Hyosung: "bg-teal-500",
+  Sundown: "bg-orange-500",
+  Outros: "bg-gray-500",
+};
+
 export default function ManuaisPage() {
   const [manuais, setManuais] = useState<Manual[]>([]);
   const [loading, setLoading] = useState(true);
-  const [brandFilter, setBrandFilter] = useState("");
-  const [modelFilter, setModelFilter] = useState("");
   const [error, setError] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState<string>("all");
+  const [modelFilter, setModelFilter] = useState("");
 
-  // Extrai marcas únicas para o filtro
-  const brands = Array.from(new Set(manuais.map((m) => m.brand))).sort();
+  // Agrupar por marca
+  const brandGroups = useMemo(() => {
+    const groups: Record<string, Manual[]> = {};
+    manuais.forEach((m) => {
+      if (!groups[m.brand]) groups[m.brand] = [];
+      groups[m.brand].push(m);
+    });
+    // Ordenar por quantidade (desc)
+    return Object.entries(groups).sort((a, b) => b[1].length - a[1].length);
+  }, [manuais]);
+
+  // Filtrar manuais
+  const filteredManuais = useMemo(() => {
+    let list = manuais;
+    if (selectedBrand !== "all") {
+      list = list.filter((m) => m.brand === selectedBrand);
+    }
+    if (modelFilter.trim()) {
+      const q = modelFilter.toLowerCase();
+      list = list.filter(
+        (m) =>
+          m.model.toLowerCase().includes(q) ||
+          m.title.toLowerCase().includes(q)
+      );
+    }
+    return list;
+  }, [manuais, selectedBrand, modelFilter]);
+
+  // Agrupar filtrados por marca
+  const filteredGroups = useMemo(() => {
+    const groups: Record<string, Manual[]> = {};
+    filteredManuais.forEach((m) => {
+      if (!groups[m.brand]) groups[m.brand] = [];
+      groups[m.brand].push(m);
+    });
+    return Object.entries(groups).sort((a, b) => b[1].length - a[1].length);
+  }, [filteredManuais]);
 
   async function fetchManuais() {
     setLoading(true);
     setError("");
-
     try {
-      const params = new URLSearchParams();
-      if (brandFilter) params.set("brand", brandFilter);
-      if (modelFilter) params.set("model", modelFilter);
-
-      const res = await fetch(`/api/manuais?${params.toString()}`);
+      const res = await fetch("/api/manuais");
       const data = await res.json();
-
       if (!res.ok) {
         setError(data.error || "Erro ao carregar manuais");
         return;
       }
-
       setManuais(data);
     } catch {
       setError("Erro ao conectar com o servidor");
@@ -50,65 +92,62 @@ export default function ManuaisPage() {
 
   useEffect(() => {
     fetchManuais();
-  }, [brandFilter, modelFilter]);
+  }, []);
 
   return (
     <div>
       {/* Header */}
       <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl font-bold text-white sm:text-3xl">📄 Manuais</h1>
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">📄 Manuais de Serviço</h1>
         <p className="mt-1 text-[#8888a4]">
-          Encontre o manual de serviço da sua motocicleta
+          {manuais.length} manuais disponíveis &middot; {brandGroups.length} montadoras
         </p>
       </div>
 
-      {/* Filtros */}
-      <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,220px)_minmax(0,220px)_auto] lg:items-end">
-        <div className="w-full">
-          <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
-            Filtrar por marca
-          </label>
-          <select
-            value={brandFilter}
-            onChange={(e) => setBrandFilter(e.target.value)}
-            className="input-dark w-full"
-          >
-            <option value="">Todas as marcas</option>
-            {brands.map((brand) => (
-              <option key={brand} value={brand}>
-                {brand}
-              </option>
+      {/* Tabs das Montadoras */}
+      {!loading && !error && (
+        <div className="mb-6">
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setSelectedBrand("all")}
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                selectedBrand === "all"
+                  ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
+                  : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              Todas ({manuais.length})
+            </button>
+            {brandGroups.map(([brand, items]) => (
+              <button
+                key={brand}
+                onClick={() => setSelectedBrand(brand)}
+                className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                  selectedBrand === brand
+                    ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
+                    : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                <span className={`inline-block h-2.5 w-2.5 rounded-full ${brandColors[brand] || "bg-purple-500"}`} />
+                {brand} ({items.length})
+              </button>
             ))}
-          </select>
+          </div>
         </div>
+      )}
 
-        <div className="w-full">
-          <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
-            Buscar por modelo
-          </label>
+      {/* Busca por modelo */}
+      {!loading && !error && (
+        <div className="mb-6 max-w-md">
           <input
             type="text"
             value={modelFilter}
             onChange={(e) => setModelFilter(e.target.value)}
-            placeholder="Ex: CG 160"
+            placeholder="🔍 Buscar por modelo ou título..."
             className="input-dark w-full"
           />
         </div>
-
-        {(brandFilter || modelFilter) && (
-          <div className="flex items-end">
-            <button
-              onClick={() => {
-                setBrandFilter("");
-                setModelFilter("");
-              }}
-              className="btn-outline w-full px-4 py-3 text-sm lg:w-auto"
-            >
-              Limpar filtros
-            </button>
-          </div>
-        )}
-      </div>
+      )}
 
       {/* Error */}
       {error && (
@@ -124,11 +163,11 @@ export default function ManuaisPage() {
         </div>
       )}
 
-      {/* Lista de manuais */}
+      {/* Lista agrupada por marca */}
       {!loading && !error && (
         <>
-          {manuais.length === 0 ? (
-              <div className="card-glass rounded-2xl p-8 text-center sm:p-12">
+          {filteredManuais.length === 0 ? (
+            <div className="card-glass rounded-2xl p-8 text-center sm:p-12">
               <div className="mb-4 text-4xl">📭</div>
               <h3 className="text-lg font-semibold text-white">
                 Nenhum manual encontrado
@@ -138,9 +177,23 @@ export default function ManuaisPage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
-              {manuais.map((manual) => (
-                <ManualCard key={manual.id} {...manual} />
+            <div className="space-y-10">
+              {filteredGroups.map(([brand, items]) => (
+                <section key={brand}>
+                  {/* Cabeçalho da montadora */}
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className={`inline-block h-4 w-4 rounded-full ${brandColors[brand] || "bg-purple-500"}`} />
+                    <h2 className="text-xl font-bold text-white">{brand}</h2>
+                    <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-medium text-[#8888a4]">
+                      {items.length} {items.length === 1 ? "manual" : "manuais"}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
+                    {items.map((manual) => (
+                      <ManualCard key={manual.id} {...manual} />
+                    ))}
+                  </div>
+                </section>
               ))}
             </div>
           )}
