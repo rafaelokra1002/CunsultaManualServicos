@@ -20,10 +20,10 @@ const motorcycleDatabase: MotorcycleData[] = [
   { model: "honda crf 230", leftVolume: "380 ± 2,5 ml", rightVolume: "380 ± 2,5 ml", fluidLevel: "144 mm", recommendation: "Óleo de suspensão SAE 10W é o mais indicado para este modelo.", engineOil: "1 L" },
   { model: "honda xre 300", leftVolume: "547 ± 2,5 ml", rightVolume: "547 ± 2,5 ml", fluidLevel: "143 mm", recommendation: "Óleo de suspensão SAE 10W é o mais indicado para este modelo.", engineOil: "1.5 L" },
   { model: "honda pcx 150", leftVolume: "116 ± 2,5 ml", rightVolume: "116 ± 2,5 ml", fluidLevel: "81 mm", recommendation: "Óleo de suspensão SAE 10W é o mais indicado para este modelo.", engineOil: "0.8 L" },
-  { model: "honda cb twister 250", leftVolume: "306 ± 2,5 ml", rightVolume: "306 ± 2,5 ml", fluidLevel: "150 mm", recommendation: "Para melhor desempenho em estradas irregulares, use óleo SAE 10W.", engineOil: "1.5 L" },
+  { model: "honda cb twister 250", leftVolume: "306 ± 2,5 cm³", rightVolume: "306 ± 2,5 cm³", fluidLevel: "150 mm", recommendation: "Recomenda-se óleo de suspensão SAE 10W. Fonte: Manual de Serviço CB 250F Twister.", engineOil: "1,3 L" },
   { model: "honda cb twister 300", leftVolume: "464 ± 2,5 ml", rightVolume: "306 ± 2,5 ml", fluidLevel: "114", recommendation: "Para melhor desempenho em estradas irregulares, use óleo SAE 10W.", engineOil: "1.5 L" },
   { model: "honda biz 125", leftVolume: "60 ml", rightVolume: "60 ml", fluidLevel: "98 mm", recommendation: "Use óleo de suspensão SAE 10W neste modelo.", engineOil: "0.8 L" },
-  { model: "honda crf 250", leftVolume: "637 ± 2,5 ml", rightVolume: "637 ± 2,5 ml", fluidLevel: "94 mm", recommendation: "Recomenda-se óleo de suspensão SAE 10W.", engineOil: "1.5 L" },
+  { model: "honda crf 250f", leftVolume: "637 cm³", rightVolume: "637 cm³", fluidLevel: "94 mm", recommendation: "Óleo recomendado: Honda Ultra Cushion Oil 10W ou equivalente. Fonte: Manual de Serviço CRF250F 2019-2022.", engineOil: "1,4 L" },
   { model: "honda pop 110", leftVolume: "58 ± 1 ml", rightVolume: "58 ± 1 ml", recommendation: "Recomenda-se óleo de suspensão SAE 10W.", engineOil: "0.8 L" },
   { model: "honda pop 100", leftVolume: "58 ± 1 ml", rightVolume: "58 ± 1 ml", recommendation: "Recomenda-se óleo de suspensão SAE 10W.", engineOil: "0.8 L" },
   { model: "honda cg 160 2016", leftVolume: "139 ± 2,5 ml", rightVolume: "139 ± 2,5 ml", recommendation: "Recomenda-se óleo de suspensão SAE 10W.", engineOil: "1 L" },
@@ -60,6 +60,11 @@ const motorcycleDatabase: MotorcycleData[] = [
   { model: "honda cbr 650f", leftVolume: "505 ± 2,5 ml", rightVolume: "505± 2,5 ml", fluidLevel: "140 mm", recommendation: "Recomenda-se óleo de suspensão SAE 10W.", engineOil: "2.9 L" },
   { model: "honda cbr 650fa", leftVolume: "482 ± 2,5 ml", rightVolume: "482± 2,5 ml", fluidLevel: "128 mm", recommendation: "Recomenda-se óleo de suspensão SAE 10W.", engineOil: "" },
   { model: "honda cbr 650x", leftVolume: "505 ± 2,5 ml", rightVolume: "505 ± 2,5 ml", fluidLevel: "140 mm", recommendation: "Recomenda-se óleo de suspensão SAE 10W.", engineOil: "" },
+  // Dados extraídos automaticamente dos manuais de serviço em PDF
+  { model: "honda fan 125i", leftVolume: "72 ± 1 cm³", rightVolume: "72 ± 1 cm³", fluidLevel: "178 mm", recommendation: "Fluido para suspensão recomendado pelo fabricante. Fonte: Manual de Serviço Fan 125i.", engineOil: "1,0 L" },
+  { model: "honda nxr 150 bros", leftVolume: "176 ± 2,5 cm³", rightVolume: "176 ± 2,5 cm³", fluidLevel: "184 mm", recommendation: "Fluido para suspensão recomendado pelo fabricante. Fonte: Manual de Serviço NXR150 Bros 2009-2011.", engineOil: "1,0 L" },
+  { model: "yamaha xj6n", leftVolume: "473,0 cm³", rightVolume: "473,0 cm³", recommendation: "Óleo para suspensão 01 (Yamaha). Fonte: Manual de Serviço XJ6N 2013.", engineOil: "3,40 L" },
+  { model: "kawasaki z 650", leftVolume: "410 ml", rightVolume: "410 ml", fluidLevel: "41 mm", recommendation: "Óleo de suspensão KHL34-G10. Fonte: Manual de Serviço Z 650 2017-2020.", engineOil: "1,6 L" },
 ];
 
 function findMotorcycle(searchTerm: string): MotorcycleData | undefined {
