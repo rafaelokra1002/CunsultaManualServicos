@@ -7,67 +7,51 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    console.log("Webhook PushinPay recebido:", JSON.stringify(body));
+    console.log("Webhook Mistic Pay recebido:", JSON.stringify(body));
 
-    // PushinPay Checkout envia dados do pagamento aprovado
-    // Campos possíveis: id, status, email, value, customer_name, etc.
-    const email = body.email || body.customer_email || body.customer?.email;
-    const status = body.status;
-    const transactionId = body.id || body.transaction_id;
+    // Mistic Pay envia webhook quando o pagamento é confirmado
+    // Campos esperados: transactionId, transactionState, etc.
+    const transactionId = body.transactionId || body.data?.transactionId || body.id;
+    const state = body.transactionState || body.data?.transactionState || body.status;
 
-    // Se tem email, busca o usuário e ativa
-    if (email) {
-      const user = await prisma.user.findUnique({
-        where: { email: email.toLowerCase().trim() },
+    if (!transactionId) {
+      console.log("Webhook sem transactionId, body:", JSON.stringify(body));
+      return NextResponse.json({ received: true });
+    }
+
+    // Busca o pagamento pelo ID da transação Mistic Pay
+    const payment = await prisma.payment.findUnique({
+      where: { pushinPayId: String(transactionId) },
+    });
+
+    if (!payment) {
+      console.log(`Pagamento não encontrado para transactionId: ${transactionId}`);
+      return NextResponse.json({ received: true });
+    }
+
+    // Verifica se o pagamento foi aprovado
+    const approvedStates = ["APROVADO", "APROVADA", "COMPLETED", "PAID", "approved", "completed", "paid"];
+    if (approvedStates.some(s => s.toLowerCase() === String(state).toLowerCase())) {
+      // Atualiza status do pagamento
+      await prisma.payment.update({
+        where: { id: payment.id },
+        data: { status: "approved" },
       });
 
-      if (user) {
-        // Registra o pagamento
-        await prisma.payment.create({
-          data: {
-            userId: user.id,
-            amount: 34.90,
-            status: "approved",
-            pushinPayId: transactionId || `checkout_${Date.now()}`,
-          },
-        });
+      // Ativa a conta do usuário
+      await prisma.user.update({
+        where: { id: payment.userId },
+        data: { active: true },
+      });
 
-        // Ativa a conta do usuário
-        if (!user.active) {
-          await prisma.user.update({
-            where: { id: user.id },
-            data: { active: true },
-          });
-        }
+      console.log(`Pagamento ${transactionId} aprovado. Usuário ${payment.userId} ativado.`);
+    } else if (["EXPIRADO", "CANCELADO", "expired", "cancelled", "refunded"].some(s => s.toLowerCase() === String(state).toLowerCase())) {
+      await prisma.payment.update({
+        where: { id: payment.id },
+        data: { status: "expired" },
+      });
 
-        console.log(`Pagamento aprovado. Usuário ${user.email} ativado.`);
-      } else {
-        console.log(`Webhook recebido mas usuário com email ${email} não encontrado.`);
-      }
-    } else {
-      // Fallback: tenta buscar por pushinPayId se não tem email
-      if (transactionId) {
-        const payment = await prisma.payment.findUnique({
-          where: { pushinPayId: transactionId },
-        });
-
-        if (payment) {
-          await prisma.payment.update({
-            where: { id: payment.id },
-            data: { status: status === "approved" || status === "completed" || status === "paid" ? "approved" : "expired" },
-          });
-
-          if (status === "approved" || status === "completed" || status === "paid") {
-            await prisma.user.update({
-              where: { id: payment.userId },
-              data: { active: true },
-            });
-            console.log(`Pagamento ${transactionId} aprovado via ID.`);
-          }
-        }
-      }
-
-      console.log("Webhook sem email, body:", JSON.stringify(body));
+      console.log(`Pagamento ${transactionId} expirado/cancelado.`);
     }
 
     return NextResponse.json({ received: true });
