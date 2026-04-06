@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import { PUSHINPAY_CHECKOUT_URL } from "@/lib/pushinpay";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -35,16 +36,10 @@ export default function RegisterPage() {
       }
 
       // Redireciona para o checkout do PushinPay
-      const checkoutUrl = process.env.NEXT_PUBLIC_PUSHINPAY_CHECKOUT_URL;
-      if (checkoutUrl) {
-        setSuccess("Cadastro realizado! Redirecionando para pagamento...");
-        setTimeout(() => {
-          window.location.href = checkoutUrl;
-        }, 1500);
-      } else {
-        setSuccess("Cadastro realizado! Aguarde a ativação da sua conta.");
-        setTimeout(() => router.push("/login"), 2500);
-      }
+      setSuccess("Cadastro realizado! Redirecionando para pagamento...");
+      setTimeout(() => {
+        window.location.href = PUSHINPAY_CHECKOUT_URL;
+      }, 1500);
     } catch {
       setError("Erro ao conectar com o servidor");
     } finally {

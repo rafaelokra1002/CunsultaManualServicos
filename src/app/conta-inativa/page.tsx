@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-
-const CHECKOUT_URL = process.env.NEXT_PUBLIC_PUSHINPAY_CHECKOUT_URL || "";
+import { PUSHINPAY_CHECKOUT_URL } from "@/lib/pushinpay";
 
 export default function ContaInativaPage() {
   return (
@@ -32,9 +31,9 @@ export default function ContaInativaPage() {
             <p className="mt-1 text-xs text-[#8888a4]">Acesso total • Pagamento único</p>
           </div>
 
-          {CHECKOUT_URL ? (
+          {PUSHINPAY_CHECKOUT_URL ? (
             <a
-              href={CHECKOUT_URL}
+              href={PUSHINPAY_CHECKOUT_URL}
               className="btn-primary mb-4 inline-block w-full text-center"
             >
               Pagar com PIX - R$ 34,90
