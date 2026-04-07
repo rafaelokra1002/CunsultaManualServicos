@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     }
 
     // Verifica se o pagamento foi aprovado
-    const approvedStates = ["APROVADO", "APROVADA", "COMPLETED", "PAID", "approved", "completed", "paid"];
+    const approvedStates = ["APROVADO", "APROVADA", "COMPLETO", "COMPLETA", "COMPLETED", "PAID", "approved", "completed", "paid"];
     if (approvedStates.some(s => s.toLowerCase() === String(state).toLowerCase())) {
       // Atualiza status do pagamento
       await prisma.payment.update({
