@@ -76,7 +76,7 @@ export default function HomePage() {
           </div>
 
           {/* ===== VÍDEO DEMO ===== */}
-          <div id="video-demo" className="mt-16 w-full max-w-3xl sm:mt-20">
+          <div id="video-demo" className="mt-16 w-full max-w-xl sm:mt-20">
             <p className="mb-6 text-center text-lg font-semibold text-[#8888a4] sm:text-xl">
               Veja como funciona na prática 👇
             </p>
