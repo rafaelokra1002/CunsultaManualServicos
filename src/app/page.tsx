@@ -48,8 +48,8 @@ export default function HomePage() {
         {/* Features */}
         <div className="mt-16 grid w-full max-w-5xl grid-cols-1 gap-4 pb-16 sm:mt-20 sm:grid-cols-2 sm:gap-6 sm:pb-20 lg:grid-cols-3">
           <div className="card-glass rounded-2xl p-6 text-left transition-all hover:border-[#6c5ce7]/30 hover:shadow-lg hover:shadow-[#6c5ce7]/5 sm:p-8">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-2xl">
-              📚
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#6c5ce7]/20 to-[#a78bfa]/10 ring-1 ring-[#6c5ce7]/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
             </div>
             <h3 className="mb-2 text-xl font-bold text-white">Biblioteca Completa</h3>
             <p className="text-[#8888a4]">
@@ -58,8 +58,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card-glass rounded-2xl p-6 text-left transition-all hover:border-[#6c5ce7]/30 hover:shadow-lg hover:shadow-[#6c5ce7]/5 sm:p-8">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-2xl">
-              ⬇️
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#6c5ce7]/20 to-[#a78bfa]/10 ring-1 ring-[#6c5ce7]/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
             </div>
             <h3 className="mb-2 text-xl font-bold text-white">Download em PDF</h3>
             <p className="text-[#8888a4]">
@@ -68,8 +68,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card-glass rounded-2xl p-6 text-left transition-all hover:border-[#6c5ce7]/30 hover:shadow-lg hover:shadow-[#6c5ce7]/5 sm:p-8">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-2xl">
-              🔍
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#6c5ce7]/20 to-[#a78bfa]/10 ring-1 ring-[#6c5ce7]/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
             </div>
             <h3 className="mb-2 text-xl font-bold text-white">Busca Inteligente</h3>
             <p className="text-[#8888a4]">
@@ -78,8 +78,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card-glass rounded-2xl p-6 text-left transition-all hover:border-[#6c5ce7]/30 hover:shadow-lg hover:shadow-[#6c5ce7]/5 sm:p-8">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-2xl">
-              🛢️
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#6c5ce7]/20 to-[#a78bfa]/10 ring-1 ring-[#6c5ce7]/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v6"/><path d="M8 8h8l2 10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L8 8z"/><path d="M10 12h4"/><path d="M10 15h4"/></svg>
             </div>
             <h3 className="mb-2 text-xl font-bold text-white">Óleo de Suspensão</h3>
             <p className="text-[#8888a4]">
@@ -87,8 +87,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card-glass rounded-2xl p-6 text-left transition-all hover:border-[#6c5ce7]/30 hover:shadow-lg hover:shadow-[#6c5ce7]/5 sm:p-8">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-2xl">
-              🧮
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#6c5ce7]/20 to-[#a78bfa]/10 ring-1 ring-[#6c5ce7]/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><circle cx="9" cy="11" r="1" fill="#a78bfa"/><circle cx="15" cy="11" r="1" fill="#a78bfa"/><circle cx="9" cy="15" r="1" fill="#a78bfa"/><circle cx="15" cy="15" r="1" fill="#a78bfa"/><circle cx="12" cy="19" r="1" fill="#a78bfa"/></svg>
             </div>
             <h3 className="mb-2 text-xl font-bold text-white">Calculadora de Pastilha de Válvulas</h3>
             <p className="text-[#8888a4]">
@@ -96,8 +96,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card-glass rounded-2xl p-6 text-left transition-all hover:border-[#6c5ce7]/30 hover:shadow-lg hover:shadow-[#6c5ce7]/5 sm:p-8">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-2xl">
-              🔧
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#6c5ce7]/20 to-[#a78bfa]/10 ring-1 ring-[#6c5ce7]/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
             </div>
             <h3 className="mb-2 text-xl font-bold text-white">Diagnóstico Eletrônico</h3>
             <p className="text-[#8888a4]">
