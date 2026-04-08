@@ -70,3 +70,59 @@ export async function PATCH(
     );
   }
 }
+
+// DELETE /api/users/[id] - Remover usuário (somente admin)
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user) {
+      return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+    }
+
+    if (session.user.role !== "ADMIN") {
+      return NextResponse.json(
+        { error: "Acesso restrito a administradores" },
+        { status: 403 }
+      );
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: { id: params.id },
+    });
+
+    if (!existingUser) {
+      return NextResponse.json(
+        { error: "Usuário não encontrado" },
+        { status: 404 }
+      );
+    }
+
+    if (existingUser.role === "ADMIN") {
+      return NextResponse.json(
+        { error: "Não é possível remover um administrador" },
+        { status: 403 }
+      );
+    }
+
+    // Remove pagamentos associados primeiro
+    await prisma.payment.deleteMany({
+      where: { userId: params.id },
+    });
+
+    await prisma.user.delete({
+      where: { id: params.id },
+    });
+
+    return NextResponse.json({ message: "Usuário removido com sucesso" });
+  } catch (error) {
+    console.error("Erro ao remover usuário:", error);
+    return NextResponse.json(
+      { error: "Erro interno do servidor" },
+      { status: 500 }
+    );
+  }
+}

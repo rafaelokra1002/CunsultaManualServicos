@@ -116,17 +116,26 @@ export default function AdminUsuariosPage() {
                   </div>
 
                   {user.role !== "ADMIN" && (
-                    <button
-                      onClick={() => toggleActive(user.id, user.active)}
-                      disabled={actionLoading === user.id}
-                      className={`mt-4 w-full rounded-lg px-3 py-2 text-sm font-semibold transition-all disabled:opacity-50 ${
-                        user.active
-                          ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
-                          : "bg-green-500/20 text-green-400 hover:bg-green-500/30"
-                      }`}
-                    >
-                      {actionLoading === user.id ? "..." : user.active ? "Desativar" : "Ativar"}
-                    </button>
+                    <div className="mt-4 flex gap-2">
+                      <button
+                        onClick={() => toggleActive(user.id, user.active)}
+                        disabled={actionLoading === user.id}
+                        className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-all disabled:opacity-50 ${
+                          user.active
+                            ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
+                            : "bg-green-500/20 text-green-400 hover:bg-green-500/30"
+                        }`}
+                      >
+                        {actionLoading === user.id ? "..." : user.active ? "Desativar" : "Ativar"}
+                      </button>
+                      <button
+                        onClick={() => deleteUser(user.id, user.nome)}
+                        disabled={actionLoading === user.id}
+                        className="rounded-lg bg-red-600/20 px-3 py-2 text-sm font-semibold text-red-400 transition-all hover:bg-red-600/40 disabled:opacity-50"
+                      >
+                        Remover
+                      </button>
+                    </div>
                   )}
                 </div>
               ))}
@@ -179,21 +188,30 @@ export default function AdminUsuariosPage() {
                     </td>
                     <td className="px-6 py-4">
                       {user.role !== "ADMIN" && (
-                        <button
-                          onClick={() => toggleActive(user.id, user.active)}
-                          disabled={actionLoading === user.id}
-                          className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all disabled:opacity-50 ${
-                            user.active
-                              ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
-                              : "bg-green-500/20 text-green-400 hover:bg-green-500/30"
-                          }`}
-                        >
-                          {actionLoading === user.id
-                            ? "..."
-                            : user.active
-                            ? "Desativar"
-                            : "Ativar"}
-                        </button>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => toggleActive(user.id, user.active)}
+                            disabled={actionLoading === user.id}
+                            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all disabled:opacity-50 ${
+                              user.active
+                                ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
+                                : "bg-green-500/20 text-green-400 hover:bg-green-500/30"
+                            }`}
+                          >
+                            {actionLoading === user.id
+                              ? "..."
+                              : user.active
+                              ? "Desativar"
+                              : "Ativar"}
+                          </button>
+                          <button
+                            onClick={() => deleteUser(user.id, user.nome)}
+                            disabled={actionLoading === user.id}
+                            className="rounded-lg bg-red-600/20 px-3 py-1.5 text-xs font-semibold text-red-400 transition-all hover:bg-red-600/40 disabled:opacity-50"
+                          >
+                            Remover
+                          </button>
+                        </div>
                       )}
                     </td>
                   </tr>
