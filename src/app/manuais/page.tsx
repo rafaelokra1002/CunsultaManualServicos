@@ -11,6 +11,7 @@ interface Manual {
   year: number;
   fileUrl: string;
   coverUrl?: string | null;
+  category?: string;
 }
 
 const brandColors: Record<string, string> = {
@@ -33,21 +34,30 @@ export default function ManuaisPage() {
   const [error, setError] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string>("all");
   const [modelFilter, setModelFilter] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("servico");
 
-  // Agrupar por marca
+  // Manuais filtrados por categoria
+  const categoryManuais = useMemo(() => {
+    return manuais.filter((m) => (m.category || "servico") === selectedCategory);
+  }, [manuais, selectedCategory]);
+
+  // Contagem por categoria
+  const servicoCount = useMemo(() => manuais.filter((m) => (m.category || "servico") === "servico").length, [manuais]);
+  const catalogoCount = useMemo(() => manuais.filter((m) => (m.category || "servico") === "catalogo").length, [manuais]);
+
+  // Agrupar por marca (dentro da categoria)
   const brandGroups = useMemo(() => {
     const groups: Record<string, Manual[]> = {};
-    manuais.forEach((m) => {
+    categoryManuais.forEach((m) => {
       if (!groups[m.brand]) groups[m.brand] = [];
       groups[m.brand].push(m);
     });
-    // Ordenar por quantidade (desc)
     return Object.entries(groups).sort((a, b) => b[1].length - a[1].length);
-  }, [manuais]);
+  }, [categoryManuais]);
 
   // Filtrar manuais
   const filteredManuais = useMemo(() => {
-    let list = manuais;
+    let list = categoryManuais;
     if (selectedBrand !== "all") {
       list = list.filter((m) => m.brand === selectedBrand);
     }
@@ -60,7 +70,7 @@ export default function ManuaisPage() {
       );
     }
     return list;
-  }, [manuais, selectedBrand, modelFilter]);
+  }, [categoryManuais, selectedBrand, modelFilter]);
 
   // Agrupar filtrados por marca
   const filteredGroups = useMemo(() => {
@@ -98,11 +108,43 @@ export default function ManuaisPage() {
     <div>
       {/* Header */}
       <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl font-bold text-white sm:text-3xl">📄 Manuais de Serviço</h1>
+        <h1 className="text-2xl font-bold text-white sm:text-3xl">📄 Manuais</h1>
         <p className="mt-1 text-[#8888a4]">
           {manuais.length} manuais disponíveis &middot; {brandGroups.length} montadoras
         </p>
       </div>
+
+      {/* Tabs de Categoria */}
+      {!loading && !error && (
+        <div className="mb-6 flex gap-2">
+          <button
+            onClick={() => { setSelectedCategory("servico"); setSelectedBrand("all"); setModelFilter(""); }}
+            className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${
+              selectedCategory === "servico"
+                ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
+                : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
+            }`}
+          >
+            📋 Manuais de Serviço
+            <span className={`rounded-full px-2 py-0.5 text-xs ${
+              selectedCategory === "servico" ? "bg-white/20" : "bg-white/10"
+            }`}>{servicoCount}</span>
+          </button>
+          <button
+            onClick={() => { setSelectedCategory("catalogo"); setSelectedBrand("all"); setModelFilter(""); }}
+            className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${
+              selectedCategory === "catalogo"
+                ? "bg-amber-500 text-white shadow-lg shadow-amber-500/25"
+                : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
+            }`}
+          >
+            📦 Catálogo de Peças
+            <span className={`rounded-full px-2 py-0.5 text-xs ${
+              selectedCategory === "catalogo" ? "bg-white/20" : "bg-white/10"
+            }`}>{catalogoCount}</span>
+          </button>
+        </div>
+      )}
 
       {/* Tabs das Montadoras */}
       {!loading && !error && (
@@ -116,7 +158,7 @@ export default function ManuaisPage() {
                   : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
               }`}
             >
-              Todas ({manuais.length})
+              Todas ({categoryManuais.length})
             </button>
             {brandGroups.map(([brand, items]) => (
               <button

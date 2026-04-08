@@ -78,7 +78,14 @@ export async function POST(request: Request) {
     }
 
     const manual = await prisma.manual.create({
-      data: result.data,
+      data: {
+        title: result.data.title,
+        brand: result.data.brand,
+        model: result.data.model,
+        year: result.data.year,
+        fileUrl: result.data.fileUrl,
+        category: result.data.category,
+      },
     });
 
     return NextResponse.json(manual, { status: 201 });

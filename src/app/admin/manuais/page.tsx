@@ -10,6 +10,7 @@ interface Manual {
   year: number;
   fileUrl: string;
   coverUrl?: string | null;
+  category: string;
   createdAt: string;
 }
 
@@ -28,6 +29,7 @@ export default function AdminManuaisPage() {
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
   const [fileUrl, setFileUrl] = useState("");
+  const [category, setCategory] = useState("servico");
 
   async function fetchManuais() {
     try {
@@ -62,6 +64,7 @@ export default function AdminManuaisPage() {
           model,
           year: parseInt(year),
           fileUrl,
+          category,
         }),
       });
 
@@ -78,6 +81,7 @@ export default function AdminManuaisPage() {
       setModel("");
       setYear("");
       setFileUrl("");
+      setCategory("servico");
       setShowForm(false);
       fetchManuais();
     } catch {
@@ -180,11 +184,22 @@ export default function AdminManuaisPage() {
                 <input type="number" required value={year} onChange={(e) => setYear(e.target.value)} placeholder="2024" min="1900" max="2030" className="input-dark" />
               </div>
             </div>
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
-                URL do PDF
-              </label>
-              <input type="url" required value={fileUrl} onChange={(e) => setFileUrl(e.target.value)} placeholder="https://exemplo.com/manual.pdf" className="input-dark" />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+                  URL do PDF
+                </label>
+                <input type="url" required value={fileUrl} onChange={(e) => setFileUrl(e.target.value)} placeholder="https://exemplo.com/manual.pdf" className="input-dark" />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+                  Categoria
+                </label>
+                <select value={category} onChange={(e) => setCategory(e.target.value)} className="input-dark">
+                  <option value="servico">Manual de Serviço</option>
+                  <option value="catalogo">Catálogo de Peças</option>
+                </select>
+              </div>
             </div>
             <button type="submit" disabled={formLoading} className="btn-primary text-sm">
               {formLoading ? "Salvando..." : "Salvar Manual"}
@@ -227,6 +242,11 @@ export default function AdminManuaisPage() {
                         <span className="rounded-md bg-[#1a1a2e] px-2 py-1">{manual.brand}</span>
                         <span className="rounded-md bg-[#1a1a2e] px-2 py-1">{manual.model}</span>
                         <span className="rounded-md bg-[#1a1a2e] px-2 py-1">{manual.year}</span>
+                        <span className={`rounded-md px-2 py-1 ${
+                          manual.category === "catalogo" ? "bg-amber-500/20 text-amber-400" : "bg-blue-500/20 text-blue-400"
+                        }`}>
+                          {manual.category === "catalogo" ? "Catálogo" : "Serviço"}
+                        </span>
                       </div>
                       <a
                         href={manual.fileUrl}
@@ -271,6 +291,7 @@ export default function AdminManuaisPage() {
                   <th className="px-4 py-4">Marca</th>
                   <th className="px-4 py-4">Modelo</th>
                   <th className="px-4 py-4">Ano</th>
+                  <th className="px-4 py-4">Tipo</th>
                   <th className="px-4 py-4">Link</th>
                 </tr>
               </thead>
@@ -317,6 +338,13 @@ export default function AdminManuaisPage() {
                     <td className="px-4 py-3 text-[#8888a4]">{manual.brand}</td>
                     <td className="px-4 py-3 text-[#8888a4]">{manual.model}</td>
                     <td className="px-4 py-3 text-[#8888a4]">{manual.year}</td>
+                    <td className="px-4 py-3">
+                      <span className={`inline-block rounded-md px-2.5 py-0.5 text-xs font-semibold ${
+                        manual.category === "catalogo" ? "bg-amber-500/20 text-amber-400" : "bg-blue-500/20 text-blue-400"
+                      }`}>
+                        {manual.category === "catalogo" ? "Catálogo" : "Serviço"}
+                      </span>
+                    </td>
                     <td className="px-4 py-3">
                       <a
                         href={manual.fileUrl}

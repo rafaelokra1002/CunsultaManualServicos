@@ -27,6 +27,7 @@ export const manualSchema = z.object({
     .min(1900, "Ano inválido")
     .max(new Date().getFullYear() + 2, "Ano inválido"),
   fileUrl: z.string().min(1, "URL do arquivo é obrigatória"),
+  category: z.enum(["servico", "catalogo"]).default("servico"),
 });
 
 export const updateUserSchema = z.object({

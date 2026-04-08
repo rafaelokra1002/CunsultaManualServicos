@@ -49,6 +49,7 @@ model Manual {
   year      Int
   fileUrl   String
   coverUrl  String?
+  category  String   @default("servico") // "servico" ou "catalogo"
   createdAt DateTime @default(now())
 
   @@map("manuals")
