@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
-import InstallButton from "@/components/InstallButton";
 
 export default function HomePage() {
   return (
@@ -44,10 +43,6 @@ export default function HomePage() {
           <Link href="/login" className="btn-outline px-6 py-3 text-base sm:px-8 sm:py-3.5 sm:text-lg">
             Já tenho conta
           </Link>
-        </div>
-
-        <div className="mt-4">
-          <InstallButton />
         </div>
 
         {/* Features */}
