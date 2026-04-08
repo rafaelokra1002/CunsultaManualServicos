@@ -15,6 +15,10 @@ export default function AdminUsuariosPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [createLoading, setCreateLoading] = useState(false);
+  const [createError, setCreateError] = useState("");
+  const [newUser, setNewUser] = useState({ nome: "", email: "", password: "" });
 
   async function fetchUsers() {
     try {
@@ -82,16 +86,111 @@ export default function AdminUsuariosPage() {
     }
   }
 
+  async function createUser(e: React.FormEvent) {
+    e.preventDefault();
+    setCreateError("");
+    setCreateLoading(true);
+
+    try {
+      const res = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newUser),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setUsers((prev) => [data, ...prev]);
+        setNewUser({ nome: "", email: "", password: "" });
+        setShowCreateForm(false);
+      } else {
+        setCreateError(data.error || "Erro ao criar usuário");
+      }
+    } catch (err) {
+      console.error("Erro ao criar usuário:", err);
+      setCreateError("Erro ao criar usuário");
+    } finally {
+      setCreateLoading(false);
+    }
+  }
+
   return (
     <div>
-      <div className="mb-6 sm:mb-8">
-        <h1 className="text-2xl font-bold text-white sm:text-3xl">
-          👥 Gerenciar Usuários
-        </h1>
-        <p className="mt-1 text-[#8888a4]">
-          Ative ou desative o acesso dos usuários
-        </p>
+      <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-white sm:text-3xl">
+            👥 Gerenciar Usuários
+          </h1>
+          <p className="mt-1 text-[#8888a4]">
+            Ative ou desative o acesso dos usuários
+          </p>
+        </div>
+        <button
+          onClick={() => { setShowCreateForm(!showCreateForm); setCreateError(""); }}
+          className="rounded-xl bg-[#6c5ce7] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#5a4bd6] self-start sm:self-auto"
+        >
+          {showCreateForm ? "✕ Cancelar" : "+ Novo Usuário"}
+        </button>
       </div>
+
+      {/* Formulário de criar usuário */}
+      {showCreateForm && (
+        <div className="mb-6 card-glass rounded-2xl p-6">
+          <h2 className="mb-4 text-lg font-semibold text-white">Criar Novo Usuário</h2>
+          <form onSubmit={createUser} className="space-y-4">
+            <div className="grid gap-4 sm:grid-cols-3">
+              <div>
+                <label className="mb-1 block text-sm text-[#8888a4]">Nome</label>
+                <input
+                  type="text"
+                  required
+                  minLength={2}
+                  value={newUser.nome}
+                  onChange={(e) => setNewUser({ ...newUser, nome: e.target.value })}
+                  className="w-full rounded-lg border border-[#2a2a3e] bg-[#12121a] px-4 py-2.5 text-sm text-white placeholder-[#8888a4] outline-none focus:border-[#6c5ce7] transition-colors"
+                  placeholder="Nome completo"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm text-[#8888a4]">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={newUser.email}
+                  onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                  className="w-full rounded-lg border border-[#2a2a3e] bg-[#12121a] px-4 py-2.5 text-sm text-white placeholder-[#8888a4] outline-none focus:border-[#6c5ce7] transition-colors"
+                  placeholder="email@exemplo.com"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm text-[#8888a4]">Senha</label>
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={newUser.password}
+                  onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                  className="w-full rounded-lg border border-[#2a2a3e] bg-[#12121a] px-4 py-2.5 text-sm text-white placeholder-[#8888a4] outline-none focus:border-[#6c5ce7] transition-colors"
+                  placeholder="Mínimo 6 caracteres"
+                />
+              </div>
+            </div>
+
+            {createError && (
+              <p className="text-sm text-red-400">{createError}</p>
+            )}
+
+            <button
+              type="submit"
+              disabled={createLoading}
+              className="rounded-lg bg-[#6c5ce7] px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#5a4bd6] disabled:opacity-50"
+            >
+              {createLoading ? "Criando..." : "Criar Usuário"}
+            </button>
+          </form>
+        </div>
+      )}
 
       {/* Tabela de usuários */}
       <div className="card-glass overflow-hidden rounded-2xl">
