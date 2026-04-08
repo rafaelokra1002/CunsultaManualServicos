@@ -57,6 +57,31 @@ export default function AdminUsuariosPage() {
     }
   }
 
+  async function deleteUser(userId: string, userName: string) {
+    if (!confirm(`Tem certeza que deseja remover o usuário "${userName}"? Esta ação não pode ser desfeita.`)) {
+      return;
+    }
+
+    setActionLoading(userId);
+
+    try {
+      const res = await fetch(`/api/users/${userId}`, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        setUsers((prev) => prev.filter((u) => u.id !== userId));
+      } else {
+        const data = await res.json();
+        alert(data.error || "Erro ao remover usuário");
+      }
+    } catch (err) {
+      console.error("Erro ao remover usuário:", err);
+    } finally {
+      setActionLoading(null);
+    }
+  }
+
   return (
     <div>
       <div className="mb-6 sm:mb-8">
