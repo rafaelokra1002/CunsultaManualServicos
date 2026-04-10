@@ -1034,6 +1034,344 @@ export const motorcycleModels: MotorcycleModel[] = [
       { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Y + | Terra -", tipo: "AL" }, { padrao: "2,5 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min.97 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
     ]},
   ]},
+  // ==================== CRF 250F ====================
+  { name: "CRF 250F", variants: [
+    { yearRange: "2019 - 2025", yearStart: 2019, yearEnd: 2025, codes: [
+      { code: "7 PISCADAS MIL", name: "EOT", tests: [
+        { padrao: "4,75 - 5,25 V", localizacao: "Am/Az+ | Terra-", tipo: "AL" },
+        { padrao: "Contín. (N)", localizacao: "Am/Az | Terra", tipo: "CC" },
+        { padrao: "2,5 - 2,8 kΩ", localizacao: "Am/Az | Vd/Bc", tipo: "RS" },
+        { padrao: "Contín. (S)", localizacao: "Am/Az | Pino 24", tipo: "CA" },
+        { padrao: "Contín. (S)", localizacao: "Vd/Bc | Pino 4", tipo: "CA" },
+        { padrao: "2,70 - 3,10 V", localizacao: "Pino 4- | Pino 24+", tipo: "SN" },
+      ]},
+      { code: "8 PISCADAS MIL", name: "TPS", tests: [
+        { padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra-", tipo: "AL" },
+        { padrao: "0,29 - 0,71 V", localizacao: "Am | Vd/Bc", tipo: "SN" },
+        { padrao: "4,13 - 4,76 V", localizacao: "Am | Vd/Bc", tipo: "SN" },
+        { padrao: "Contín. (N)", localizacao: "Am | Terra", tipo: "CC" },
+        { padrao: "Contín. (S)", localizacao: "Vd/Bc | Pino 4", tipo: "CA" },
+        { padrao: "Contín. (S)", localizacao: "Am | Pino 5", tipo: "CA" },
+        { padrao: "Contín. (S)", localizacao: "Am/Vm | Pino 6", tipo: "CA" },
+      ]},
+      { code: "12 PISCADAS MIL", name: "BICO INJETOR", tests: [
+        { padrao: "Volt. Bat. - 1,1V", localizacao: "Pt/Az | Terra", tipo: "AL" },
+        { padrao: "Contín. (N)", localizacao: "Rs/Bc | Terra", tipo: "CC" },
+        { padrao: "Contín. (S)", localizacao: "Rs/Bc | Pino 16", tipo: "CA" },
+        { padrao: "11 - 13 Ω |24ºC", localizacao: "Teste no Atuador", tipo: "RS" },
+      ]},
+      { code: "21 PISCADAS MIL", name: "SENSOR OXIGÊNIO", note: "Aqueça a moto até 80ºC", tests: [
+        { padrao: "Contín. (N)", localizacao: "Pt/Bc | Terra", tipo: "CC" },
+        { padrao: "Contín. (S)", localizacao: "Pt/Bc | Pino 3", tipo: "CA" },
+        { padrao: "0,1 á 0,9 V Osc.", localizacao: "Pt/Bc | Terra", tipo: "SN" },
+      ]},
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [
+        { padrao: "Volt.Bat.-1,1V", localizacao: "Pt/Az+ | Terra", tipo: "AL" },
+        { padrao: "2,6 - 3,2 bar", localizacao: "Manômetro", tipo: "PR" },
+        { padrao: "Min. 82 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" },
+        { padrao: "Pulso", localizacao: "Mr", tipo: "PV" },
+      ]},
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+  ]},
+  // ==================== NX 400i FALCON ====================
+  { name: "NX 400i FALCON", variants: [
+    { yearRange: "2013 - 2014", yearStart: 2013, yearEnd: 2014, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [
+        { padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" },
+        { padrao: "Contín. (N)", localizacao: "Vc/Am | Terra", tipo: "CC" },
+        { padrao: "2,70 - 3,10 V", localizacao: "Vc/Am + | Vd/Bc -", tipo: "SN" },
+        { padrao: "3,80 - 5,25 V", localizacao: "Vc/Am + | Vd/Bc -", tipo: "VS" },
+      ]},
+      { code: "7 PISCADAS MIL", name: "EOT", tests: [
+        { padrao: "4,75 - 5,25 V", localizacao: "Am/Az+ | Terra-", tipo: "AL" },
+        { padrao: "2,5 - 2,8 kΩ", localizacao: "Am/Az | Vd/Bc", tipo: "RS" },
+        { padrao: "2,70 - 3,10 V", localizacao: "Pino 4- | Pino 24+", tipo: "SN" },
+      ]},
+      { code: "8 PISCADAS MIL", name: "TPS", tests: [
+        { padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra-", tipo: "AL" },
+        { padrao: "0,29 - 0,71 V", localizacao: "Am | Vd/Bc", tipo: "SN" },
+        { padrao: "4,13 - 4,76 V", localizacao: "Am | Vd/Bc", tipo: "SN" },
+      ]},
+      { code: "12 PISCADAS MIL", name: "BICO INJETOR", tests: [
+        { padrao: "Volt. Bat. - 1,1V", localizacao: "Pt/Az | Terra", tipo: "AL" },
+        { padrao: "9 - 12 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" },
+      ]},
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [
+        { padrao: "Volt.Bat.-1,1V", localizacao: "Mr/Am + | Terra -", tipo: "AL" },
+        { padrao: "3,0 bar", localizacao: "Manômetro", tipo: "PR" },
+        { padrao: "Min. 120 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" },
+      ]},
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+  ]},
+  // ==================== FAN 150 ====================
+  { name: "FAN 150", variants: [
+    { yearRange: "2010 - 2013", yearStart: 2010, yearEnd: 2013, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" }, { padrao: "Contín. (N)", localizacao: "Vc/Am | Terra", tipo: "CC" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Pt/Az + | Terra -", tipo: "AL" }, { padrao: "3,0 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min.120 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+    { yearRange: "2014 - 2015", yearStart: 2014, yearEnd: 2015, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" }] },
+      { code: "7 PISCADAS MIL", name: "EOT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Az+ | Terra-", tipo: "AL" }, { padrao: "2,5 - 2,8 kΩ", localizacao: "Am/Az | Vd/Bc", tipo: "RS" }] },
+      { code: "12 PISCADAS MIL", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bat. - 1,1V", localizacao: "Pt/Az | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |24ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Pt/Az + | Terra -", tipo: "AL" }, { padrao: "3,0 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min.120 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+  ]},
+  // ==================== TITAN 150 ====================
+  { name: "TITAN 150", variants: [
+    { yearRange: "2009 - 2010", yearStart: 2009, yearEnd: 2010, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" }, { padrao: "Contín. (N)", localizacao: "Vc/Am | Terra", tipo: "CC" }] },
+      { code: "12 PISCADAS MIL", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bat.- 1,1V", localizacao: "Pt/Bc| Terra", tipo: "AL" }, { padrao: "9 - 12 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Pt/Az + | Terra -", tipo: "AL" }, { padrao: "3,0 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min.120 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+    { yearRange: "2011 - 2013", yearStart: 2011, yearEnd: 2013, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Pt/Az + | Terra -", tipo: "AL" }, { padrao: "3,0 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min.120 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+    { yearRange: "2014 - 2015", yearStart: 2014, yearEnd: 2015, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" }] },
+      { code: "7 PISCADAS MIL", name: "EOT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Az+ | Terra-", tipo: "AL" }, { padrao: "2,5 - 2,8 kΩ", localizacao: "Am/Az | Vd/Bc", tipo: "RS" }] },
+      { code: "12 PISCADAS MIL", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bat. - 1,1V", localizacao: "Pt/Az | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |24ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Pt/Az + | Terra -", tipo: "AL" }, { padrao: "3,0 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min.120 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+  ]},
+  // ==================== TITAN 160 ====================
+  { name: "TITAN 160", variants: [
+    { yearRange: "2016 - 2017", yearStart: 2016, yearEnd: 2017, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" }] },
+      { code: "12 PISCADAS MIL", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bat.- 1,1V", localizacao: "Pt/Az| Terra", tipo: "AL" }, { padrao: "11 - 13 Ω|20 ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Pt/Az + | Terra -", tipo: "AL" }, { padrao: "2,5 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 82 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+    { yearRange: "2018 - 2021", yearStart: 2018, yearEnd: 2021, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" }] },
+      { code: "12 PISCADAS MIL", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bat.- 1,1V", localizacao: "Pt/Az| Terra", tipo: "AL" }, { padrao: "11 - 13 Ω|20 ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Pt/Az| Terra", tipo: "AL" }, { padrao: "2,5 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 82 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+    { yearRange: "2022 - 2024", yearStart: 2022, yearEnd: 2024, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" }] },
+      { code: "12 PISCADAS MIL", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bat.- 1,1V", localizacao: "Vm/Pt| Terra", tipo: "AL" }, { padrao: "11 - 13 Ω|20 ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Vm/Pt + | Terra -", tipo: "AL" }, { padrao: "2,5 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 82 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+    { yearRange: "2025 - 2026", yearStart: 2025, yearEnd: 2026, codes: [
+      { code: "1 PISCADA MIL", name: "MAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Am/Vm+ | Terra -", tipo: "AL" }] },
+      { code: "19 PISCADAS MIL", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "Az/Am| Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "Az/Am | Bc/Am", tipo: "PV" }] },
+      { code: "88 PISCADAS", name: "VÁLVULA EVAP", tests: [{ padrao: "Volt. Bateria", localizacao: "Pt/Az | Terra", tipo: "AL" }, { padrao: "22 á 26 Ω 20°C", localizacao: "A - B", tipo: "RS" }] },
+      { code: "91 PISCADAS", name: "BOBINA IGNIÇÃO", tests: [{ padrao: "Volt. Bateria", localizacao: "Pt/Az | Terra", tipo: "AL" }, { padrao: "Contín. (N)", localizacao: "Rs/Az | Terra", tipo: "CC" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt.Bat.-1,1V", localizacao: "Pt/Az + | Terra -", tipo: "AL" }, { padrao: "2,5 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min.76 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL ACESA DIRETA", tests: [{ padrao: "Contín. (N)", localizacao: "Pino 15 | Terra", tipo: "CC" }] },
+      { code: "CIRCUITO DA MIL", name: "MIL NÃO ACENDE", tests: [{ padrao: "Acende a Mil", localizacao: "Pino 18 | Terra jumper", tipo: "AL" }] },
+    ]},
+  ]},
+  // ==================== YAMAHA CROSSER XTZ 150 ====================
+  { name: "CROSSER XTZ 150", variants: [
+    { yearRange: "2015 - 2021", yearStart: 2015, yearEnd: 2021, codes: [
+      { code: "12", name: "CKP", tests: [
+        { padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" },
+        { padrao: "Contín. (N)", localizacao: "B/W | Terra", tipo: "CC" },
+        { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" },
+      ]},
+      { code: "14", name: "IAP (Pressão Ar)", tests: [
+        { padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" },
+        { padrao: "Contín. (N)", localizacao: "Gy | Terra", tipo: "CC" },
+        { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" },
+      ]},
+      { code: "19", name: "TPS", tests: [
+        { padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" },
+        { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" },
+        { padrao: "4,00 - 5,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" },
+        { padrao: "Contín. (N)", localizacao: "B/R | Terra", tipo: "CC" },
+      ]},
+      { code: "22", name: "IAT", tests: [
+        { padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" },
+        { padrao: "2,70 - 3,10 V", localizacao: "G/Y + | B/Y -", tipo: "SN" },
+        { padrao: "1 - 4 kΩ |20ºC", localizacao: "G/Y | B/Y", tipo: "RS" },
+      ]},
+      { code: "23", name: "ECT (Temp. Água)", tests: [
+        { padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" },
+        { padrao: "2,70 - 3,10 V", localizacao: "L/B + | B/Y -", tipo: "SN" },
+        { padrao: "2,0 - 3,0 kΩ |20ºC", localizacao: "A + B", tipo: "RS" },
+      ]},
+      { code: "30", name: "BICO INJETOR", tests: [
+        { padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" },
+        { padrao: "Contín. (N)", localizacao: "L/Y | Terra", tipo: "CC" },
+        { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" },
+        { padrao: "Pulso", localizacao: "L/Y", tipo: "PV" },
+      ]},
+      { code: "41", name: "ISC (Marcha Lenta)", tests: [
+        { padrao: "Contín. (N)", localizacao: "B/Br | Terra", tipo: "CC" },
+        { padrao: "20 - 33 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" },
+      ]},
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [
+        { padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" },
+        { padrao: "2,5 - 3,5 bar", localizacao: "Manômetro", tipo: "PR" },
+        { padrao: "Min. 90 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" },
+      ]},
+    ]},
+    { yearRange: "2022 - 2024", yearStart: 2022, yearEnd: 2024, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }, { padrao: "4,00 - 5,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,5 - 3,5 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 90 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2025 - 2026", yearStart: 2025, yearEnd: 2026, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,5 - 3,5 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 90 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+  ]},
+  // ==================== YAMAHA FACTOR 125 ====================
+  { name: "FACTOR 125", variants: [
+    { yearRange: "2020 - 2024", yearStart: 2020, yearEnd: 2024, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }, { padrao: "4,00 - 5,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "22", name: "IAT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "1 - 4 kΩ |20ºC", localizacao: "G/Y | B/Y", tipo: "RS" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "41", name: "ISC", tests: [{ padrao: "20 - 33 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,5 - 3,5 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 90 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+  ]},
+  // ==================== YAMAHA FACTOR 150 ====================
+  { name: "FACTOR 150", variants: [
+    { yearRange: "2018 - 2024", yearStart: 2018, yearEnd: 2024, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }, { padrao: "4,00 - 5,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "22", name: "IAT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "1 - 4 kΩ |20ºC", localizacao: "G/Y | B/Y", tipo: "RS" }] },
+      { code: "23", name: "ECT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,0 - 3,0 kΩ |20ºC", localizacao: "A + B", tipo: "RS" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "41", name: "ISC", tests: [{ padrao: "20 - 33 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,5 - 3,5 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 90 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+  ]},
+  // ==================== YAMAHA FAZER 150 ====================
+  { name: "FAZER 150", variants: [
+    { yearRange: "2013 - 2016", yearStart: 2013, yearEnd: 2016, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,5 - 3,5 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 90 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2017 - 2022", yearStart: 2017, yearEnd: 2022, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }, { padrao: "4,00 - 5,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "22", name: "IAT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "1 - 4 kΩ |20ºC", localizacao: "G/Y | B/Y", tipo: "RS" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "41", name: "ISC", tests: [{ padrao: "20 - 33 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,5 - 3,5 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 90 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2023 - 2025", yearStart: 2023, yearEnd: 2025, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,5 - 3,5 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 90 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+  ]},
+  // ==================== YAMAHA FAZER 250 ====================
+  { name: "FAZER 250", variants: [
+    { yearRange: "2005 - 2009", yearStart: 2005, yearEnd: 2009, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }, { padrao: "4,00 - 5,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "22", name: "IAT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "1 - 4 kΩ |20ºC", localizacao: "G/Y | B/Y", tipo: "RS" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2010 - 2015", yearStart: 2010, yearEnd: 2015, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2016 - 2021", yearStart: 2016, yearEnd: 2021, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "22", name: "IAT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "1 - 4 kΩ |20ºC", localizacao: "G/Y | B/Y", tipo: "RS" }] },
+      { code: "23", name: "ECT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,0 - 3,0 kΩ |20ºC", localizacao: "A + B", tipo: "RS" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2022 - 2024", yearStart: 2022, yearEnd: 2024, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2025 - 2026", yearStart: 2025, yearEnd: 2026, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+  ]},
+  // ==================== YAMAHA LANDER XTZ 250 ====================
+  { name: "LANDER XTZ 250", variants: [
+    { yearRange: "2006 - 2010", yearStart: 2006, yearEnd: 2010, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }, { padrao: "4,00 - 5,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "22", name: "IAT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "1 - 4 kΩ |20ºC", localizacao: "G/Y | B/Y", tipo: "RS" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2011 - 2015", yearStart: 2011, yearEnd: 2015, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2016 - 2020", yearStart: 2016, yearEnd: 2020, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "22", name: "IAT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "1 - 4 kΩ |20ºC", localizacao: "G/Y | B/Y", tipo: "RS" }] },
+      { code: "23", name: "ECT", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,0 - 3,0 kΩ |20ºC", localizacao: "A + B", tipo: "RS" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2021 - 2024", yearStart: 2021, yearEnd: 2024, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+    { yearRange: "2025 - 2026", yearStart: 2025, yearEnd: 2026, codes: [
+      { code: "12", name: "CKP", tests: [{ padrao: "Contín. (N)", localizacao: "W | Terra", tipo: "CC" }, { padrao: "0,7 V", localizacao: "W | B/W", tipo: "PV" }] },
+      { code: "14", name: "IAP", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "2,40 - 2,90 V", localizacao: "Gy + | B/Y -", tipo: "SN" }] },
+      { code: "19", name: "TPS", tests: [{ padrao: "4,75 - 5,25 V", localizacao: "Dg/G + | B/Y -", tipo: "AL" }, { padrao: "0,50 - 1,00 V", localizacao: "B/R + | B/Y -", tipo: "SN" }] },
+      { code: "30", name: "BICO INJETOR", tests: [{ padrao: "Volt. Bateria", localizacao: "Y | Terra", tipo: "AL" }, { padrao: "11 - 13 Ω |20ºC", localizacao: "Teste no Atuador", tipo: "RS" }] },
+      { code: "BOMBA DE COMBUSTÍVEL", name: "BOMBA", tests: [{ padrao: "Volt. Bateria", localizacao: "W/G + | Terra", tipo: "AL" }, { padrao: "2,8 - 3,4 bar", localizacao: "Manômetro", tipo: "PR" }, { padrao: "Min. 100 ml|10s", localizacao: "Girar Ignição 5x", tipo: "VZ" }] },
+    ]},
+  ]},
 ];
 
 // Legenda de siglas dos tipos de teste
