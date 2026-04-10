@@ -8,13 +8,20 @@ export default function AdminDashboardPage() {
     activeUsers: 0,
     totalManuais: 0,
   });
+  const [views, setViews] = useState({
+    total: 0,
+    today: 0,
+    week: 0,
+    month: 0,
+  });
 
   useEffect(() => {
     async function fetchStats() {
       try {
-        const [usersRes, manuaisRes] = await Promise.all([
+        const [usersRes, manuaisRes, viewsRes] = await Promise.all([
           fetch("/api/users"),
           fetch("/api/manuais"),
+          fetch("/api/stats/views"),
         ]);
 
         if (usersRes.ok && manuaisRes.ok) {
@@ -26,6 +33,10 @@ export default function AdminDashboardPage() {
             activeUsers: users.filter((u: any) => u.active).length,
             totalManuais: manuais.length,
           });
+        }
+
+        if (viewsRes.ok) {
+          setViews(await viewsRes.json());
         }
       } catch (error) {
         console.error("Erro ao carregar estatísticas:", error);
@@ -85,6 +96,50 @@ export default function AdminDashboardPage() {
               <p className="text-sm text-[#8888a4]">Manuais Cadastrados</p>
               <p className="text-2xl font-bold text-white">
                 {stats.totalManuais}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Cards de visitantes */}
+      <div className="mt-6 sm:mt-8">
+        <h2 className="mb-4 text-lg font-semibold text-white">
+          👁️ Visualizações do Site
+        </h2>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
+          <div className="card-glass rounded-2xl p-6 transition-all hover:border-yellow-500/30">
+            <div className="text-center">
+              <p className="text-sm text-[#8888a4]">Hoje</p>
+              <p className="mt-1 text-3xl font-bold text-yellow-400">
+                {views.today}
+              </p>
+            </div>
+          </div>
+
+          <div className="card-glass rounded-2xl p-6 transition-all hover:border-orange-500/30">
+            <div className="text-center">
+              <p className="text-sm text-[#8888a4]">Últimos 7 dias</p>
+              <p className="mt-1 text-3xl font-bold text-orange-400">
+                {views.week}
+              </p>
+            </div>
+          </div>
+
+          <div className="card-glass rounded-2xl p-6 transition-all hover:border-cyan-500/30">
+            <div className="text-center">
+              <p className="text-sm text-[#8888a4]">Este mês</p>
+              <p className="mt-1 text-3xl font-bold text-cyan-400">
+                {views.month}
+              </p>
+            </div>
+          </div>
+
+          <div className="card-glass rounded-2xl p-6 transition-all hover:border-pink-500/30">
+            <div className="text-center">
+              <p className="text-sm text-[#8888a4]">Total</p>
+              <p className="mt-1 text-3xl font-bold text-pink-400">
+                {views.total}
               </p>
             </div>
           </div>

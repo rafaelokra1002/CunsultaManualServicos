@@ -55,3 +55,11 @@ model Manual {
 
   @@map("manuals")
 }
+
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  createdAt DateTime @default(now())
+
+  @@map("page_views")
+}
