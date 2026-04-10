@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import AccessBlock from "@/components/AccessBlock";
-import { useAccess } from "@/hooks/useAccess";
+import { useFreeTrial } from "@/hooks/useAccess";
 
 interface MotorcycleData {
   model: string;
@@ -87,7 +87,7 @@ export default function OleoSuspensaoPage() {
   const [result, setResult] = useState<MotorcycleData | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [searched, setSearched] = useState(false);
-  const { isPremium } = useAccess();
+  const { blocked, markUsed } = useFreeTrial("oleo-suspensao");
 
   function handleSearch() {
     const term = search.toLowerCase().trim();
@@ -98,6 +98,7 @@ export default function OleoSuspensaoPage() {
     if (found) {
       setResult(found);
       setNotFound(false);
+      markUsed();
     } else {
       setResult(null);
       setNotFound(true);
@@ -143,13 +144,13 @@ export default function OleoSuspensaoPage() {
           {/* Results */}
           {searched && result && (
             <div className="relative mt-6 space-y-4">
-              {!isPremium && (
+              {blocked && (
                 <AccessBlock
                   title="🔒 Dados bloqueados"
-                  message="Libere o acesso para ver volumes, níveis de fluido e recomendações"
+                  message="Você já usou sua consulta grátis. Libere o acesso para ver todos os dados"
                 />
               )}
-              <div className={!isPremium ? "pointer-events-none select-none" : ""}>
+              <div className={blocked ? "pointer-events-none select-none" : ""}>
               <div className="rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-6">
                 <h3 className="mb-4 border-b border-[#2a2a3e] pb-3 text-lg font-semibold text-[#6c5ce7]">
                   Modelo: {formatModelName(result.model)}

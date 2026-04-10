@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import AccessBlock from "@/components/AccessBlock";
-import { useAccess } from "@/hooks/useAccess";
+import { useFreeTrial } from "@/hooks/useAccess";
 import {
   motorcycleModels,
   testTypeLegend,
@@ -30,7 +30,7 @@ export default function DiagnosticoPage() {
   const [selectedVariant, setSelectedVariant] = useState<ModelVariant | null>(null);
   const [selectedCode, setSelectedCode] = useState<DiagnosticCode | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const { isPremium } = useAccess();
+  const { blocked, markUsed } = useFreeTrial("diagnostico");
 
   const filteredModels = searchTerm
     ? motorcycleModels.filter((m) =>
@@ -47,6 +47,7 @@ export default function DiagnosticoPage() {
   const handleVariantSelect = (variant: ModelVariant) => {
     setSelectedVariant(variant);
     setSelectedCode(null);
+    markUsed();
   };
 
   const handleBack = () => {
@@ -264,13 +265,13 @@ export default function DiagnosticoPage() {
               </div>
 
               <div className="relative">
-                {!isPremium && (
+                {blocked && (
                   <AccessBlock
                     title="🔒 Diagnóstico bloqueado"
-                    message="Libere o acesso para ver os testes e padrões completos"
+                    message="Você já usou seu diagnóstico grátis. Libere o acesso para ver todos os testes"
                   />
                 )}
-                <div className={!isPremium ? "pointer-events-none select-none" : ""}>
+                <div className={blocked ? "pointer-events-none select-none" : ""}>
                   <div className="overflow-x-auto rounded-xl border border-[#2a2a3e]">
                     <table className="w-full text-sm">
                       <thead>
@@ -281,7 +282,7 @@ export default function DiagnosticoPage() {
                         </tr>
                       </thead>
                       <tbody>
-                        {selectedCode.tests.slice(0, isPremium ? undefined : 1).map((test, i) => (
+                        {selectedCode.tests.slice(0, blocked ? 1 : undefined).map((test, i) => (
                           <tr key={i} className="border-b border-[#2a2a3e]/50 transition-colors hover:bg-[#1a1a2e]/50">
                             <td className="px-4 py-3 font-mono text-sm text-white">{test.padrao}</td>
                             <td className="px-4 py-3 text-[#e4e4ef]">{test.localizacao}</td>
