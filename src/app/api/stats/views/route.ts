@@ -3,6 +3,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+// Visitas registradas antes da implementação do rastreamento (via gerenciador de anúncios)
+const HISTORICAL_VIEWS = 172;
+
 export async function GET() {
   const session = await getServerSession(authOptions);
 
@@ -23,5 +26,10 @@ export async function GET() {
     prisma.pageView.count({ where: { createdAt: { gte: startOfMonth } } }),
   ]);
 
-  return NextResponse.json({ total, today, week, month });
+  return NextResponse.json({
+    total: total + HISTORICAL_VIEWS,
+    today,
+    week,
+    month,
+  });
 }
