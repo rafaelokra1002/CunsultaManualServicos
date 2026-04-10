@@ -63,3 +63,39 @@ model PageView {
 
   @@map("page_views")
 }
+
+model Moto {
+  id          String       @id @default(cuid())
+  marca       String
+  modelo      String
+  ano         String
+  ecuTipo     String?
+  parametros  Parametro[]
+  pinagens    Pinagem[]
+
+  @@map("motos")
+}
+
+model Parametro {
+  id        String  @id @default(cuid())
+  nome      String
+  descricao String?
+  valorMin  String
+  valorMax  String
+  unidade   String
+  motoId    String
+  moto      Moto    @relation(fields: [motoId], references: [id], onDelete: Cascade)
+
+  @@map("parametros")
+}
+
+model Pinagem {
+  id     String @id @default(cuid())
+  pino   String
+  cor    String
+  funcao String
+  motoId String
+  moto   Moto   @relation(fields: [motoId], references: [id], onDelete: Cascade)
+
+  @@map("pinagens")
+}
