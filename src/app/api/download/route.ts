@@ -19,6 +19,13 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Conta inativa" }, { status: 403 });
   }
 
+  if (!user.isPremium && user.role !== "ADMIN") {
+    return NextResponse.json(
+      { error: "Acesso restrito a usuários premium", requiresPremium: true },
+      { status: 403 }
+    );
+  }
+
   const { searchParams } = new URL(req.url);
   const manualId = searchParams.get("id");
 

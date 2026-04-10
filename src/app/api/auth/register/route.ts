@@ -35,12 +35,13 @@ export async function POST(request: Request) {
     // Criptografa a senha
     const hashedPassword = await hash(password, 12);
 
-    // Cria o usuário (active = false por padrão, precisa ser ativado pelo admin)
+    // Cria o usuário (active = true, isPremium = false por padrão — modo demo)
     const user = await prisma.user.create({
       data: {
         nome,
         email,
         password: hashedPassword,
+        active: true,
       },
       select: {
         id: true,
@@ -48,12 +49,13 @@ export async function POST(request: Request) {
         email: true,
         role: true,
         active: true,
+        isPremium: true,
         createdAt: true,
       },
     });
 
     return NextResponse.json(
-      { message: "Cadastro realizado com sucesso! Aguarde a ativação.", user },
+      { message: "Cadastro realizado com sucesso!", user },
       { status: 201 }
     );
   } catch (error) {

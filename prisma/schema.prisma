@@ -19,7 +19,8 @@ model User {
   email     String    @unique
   password  String
   role      Role      @default(USER)
-  active    Boolean   @default(false)
+  active    Boolean   @default(true)
+  isPremium Boolean   @default(false)
   createdAt DateTime  @default(now())
   payments  Payment[]
 

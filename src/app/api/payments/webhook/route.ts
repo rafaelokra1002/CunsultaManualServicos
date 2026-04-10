@@ -38,10 +38,10 @@ export async function POST(request: Request) {
         data: { status: "approved" },
       });
 
-      // Ativa a conta do usuário
+      // Ativa a conta do usuário e libera acesso premium
       await prisma.user.update({
         where: { id: payment.userId },
-        data: { active: true },
+        data: { active: true, isPremium: true },
       });
 
       console.log(`Pagamento ${transactionId} aprovado. Usuário ${payment.userId} ativado.`);

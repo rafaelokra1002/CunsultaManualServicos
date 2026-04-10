@@ -30,6 +30,7 @@ export async function GET() {
         email: true,
         role: true,
         active: true,
+        isPremium: true,
         createdAt: true,
       },
       orderBy: { createdAt: "desc" },
@@ -92,6 +93,7 @@ export async function POST(request: Request) {
         email,
         password: hashedPassword,
         active: true,
+        isPremium: true,
       },
       select: {
         id: true,
@@ -99,6 +101,7 @@ export async function POST(request: Request) {
         email: true,
         role: true,
         active: true,
+        isPremium: true,
         createdAt: true,
       },
     });

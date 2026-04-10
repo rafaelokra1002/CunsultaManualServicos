@@ -27,9 +27,9 @@ export async function POST(request: Request) {
       );
     }
 
-    if (user.active) {
+    if (user.isPremium) {
       return NextResponse.json(
-        { error: "Sua conta já está ativa" },
+        { error: "Sua conta já possui acesso premium" },
         { status: 400 }
       );
     }

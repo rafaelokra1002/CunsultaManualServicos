@@ -204,15 +204,22 @@ export default function DashboardPage() {
             </div>
             <h3 className="text-lg font-bold text-white">Seu Plano</h3>
             <p className="mt-1 text-sm text-[#8888a4]">
-              {session?.user?.active
-                ? "Acesso liberado a todos os manuais"
-                : "Efetue o pagamento para liberar o acesso"}
+              {session?.user?.isPremium
+                ? "Acesso liberado a todos os recursos"
+                : "Modo demo — libere o acesso completo"}
             </p>
-            {session?.user?.active && (
+            {session?.user?.isPremium ? (
               <div className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-400">
                 <CrownIcon />
                 Premium
               </div>
+            ) : (
+              <Link
+                href="/conta-inativa"
+                className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#6c5ce7] to-[#a78bfa] px-4 py-1.5 text-xs font-bold text-white shadow-lg shadow-[#6c5ce7]/25 transition-all hover:shadow-[#6c5ce7]/40"
+              >
+                🚀 Liberar acesso
+              </Link>
             )}
           </div>
         </div>

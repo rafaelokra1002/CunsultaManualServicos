@@ -78,11 +78,11 @@ export default function ContaInativaPage() {
       <div className="relative z-10 w-full max-w-md text-center">
         <div className="card-glass rounded-2xl p-10">
           <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#6c5ce7]/15 text-4xl">
-            🔒
+            �
           </div>
-          <h1 className="mb-3 text-2xl font-bold text-white">Conta Inativa</h1>
+          <h1 className="mb-3 text-2xl font-bold text-white">Liberar Acesso Completo</h1>
           <p className="mb-6 text-[#8888a4]">
-            Sua conta ainda não foi ativada. Efetue o pagamento para liberar seu acesso.
+            Pague uma única vez e libere todos os recursos da plataforma.
           </p>
 
           {/* Plan info */}
@@ -163,8 +163,8 @@ export default function ContaInativaPage() {
             </div>
           )}
 
-          <Link href="/login" className="btn-outline inline-block px-6 py-2.5">
-            Voltar ao login
+          <Link href="/dashboard" className="btn-outline inline-block px-6 py-2.5">
+            Voltar ao painel
           </Link>
         </div>
       </div>

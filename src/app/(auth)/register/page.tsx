@@ -66,7 +66,6 @@ export default function RegisterPage() {
 
       setUserId(data.user.id);
       setStep("payment");
-      handleGeneratePayment(data.user.id);
     } catch {
       setError("Erro ao conectar com o servidor");
     } finally {
@@ -211,14 +210,14 @@ export default function RegisterPage() {
               </div>
 
               <button type="submit" disabled={loading} className="btn-primary w-full">
-                {loading ? "Cadastrando..." : "Criar conta e pagar R$ 34,90"}
+                {loading ? "Cadastrando..." : "Criar conta"}
               </button>
             </form>
 
             <div className="mt-4 rounded-xl border border-[#2a2a3e] bg-[#12121a] p-3">
               <p className="text-center text-xs text-[#8888a4]">
-                ⚡ Após o cadastro, o QR Code PIX será gerado automaticamente.
-                Seu acesso é liberado após a confirmação do pagamento.
+                ⚡ Após o cadastro, você já pode explorar a plataforma em modo demo.
+                Pague para liberar o acesso completo.
               </p>
             </div>
 
@@ -237,10 +236,19 @@ export default function RegisterPage() {
         {/* Step: Payment */}
         {step === "payment" && (
           <div className="card-glass rounded-2xl p-8">
-            <h2 className="mb-2 text-2xl font-bold text-white">Pagamento via PIX</h2>
-            <p className="mb-6 text-sm text-[#8888a4]">
-              Escaneie o QR Code ou copie o código PIX para pagar
+            <div className="mb-4 rounded-xl border border-green-500/30 bg-green-500/10 p-3 text-center text-sm text-green-400">
+              ✅ Conta criada com sucesso!
+            </div>
+            <h2 className="mb-2 text-2xl font-bold text-white">Liberar Acesso Completo</h2>
+            <p className="mb-4 text-sm text-[#8888a4]">
+              Pague via PIX para liberar todos os recursos, ou explore a plataforma em modo demo.
             </p>
+            <a
+              href="/login"
+              className="btn-outline mb-6 block w-full text-center"
+            >
+              Acessar modo demo →
+            </a>
 
             {error && (
               <div className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-400">

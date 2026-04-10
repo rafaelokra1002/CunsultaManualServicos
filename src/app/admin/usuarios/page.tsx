@@ -8,6 +8,7 @@ interface User {
   email: string;
   role: string;
   active: boolean;
+  isPremium: boolean;
   createdAt: string;
 }
 
@@ -50,7 +51,7 @@ export default function AdminUsuariosPage() {
       if (res.ok) {
         setUsers((prev) =>
           prev.map((u) =>
-            u.id === userId ? { ...u, active: !currentActive } : u
+            u.id === userId ? { ...u, active: !currentActive, isPremium: !currentActive } : u
           )
         );
       }
@@ -234,6 +235,15 @@ export default function AdminUsuariosPage() {
                       <span className={`h-1.5 w-1.5 rounded-full ${user.active ? "bg-green-400" : "bg-gray-400"}`} />
                       {user.active ? "Ativo" : "Inativo"}
                     </span>
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 font-semibold ${
+                        user.isPremium
+                          ? "bg-amber-500/20 text-amber-400"
+                          : "bg-gray-500/20 text-gray-400"
+                      }`}
+                    >
+                      {user.isPremium ? "👑 Premium" : "Demo"}
+                    </span>
                     <span className="rounded-md bg-[#1a1a2e] px-2.5 py-1 text-[#8888a4]">
                       Cadastro: {new Date(user.createdAt).toLocaleDateString("pt-BR")}
                     </span>
@@ -273,6 +283,7 @@ export default function AdminUsuariosPage() {
                   <th className="px-6 py-4">Email</th>
                   <th className="px-6 py-4">Tipo</th>
                   <th className="px-6 py-4">Status</th>
+                  <th className="px-6 py-4">Plano</th>
                   <th className="px-6 py-4">Cadastro</th>
                   <th className="px-6 py-4">Ações</th>
                 </tr>
@@ -305,6 +316,17 @@ export default function AdminUsuariosPage() {
                       >
                         <span className={`h-1.5 w-1.5 rounded-full ${user.active ? "bg-green-400" : "bg-gray-400"}`} />
                         {user.active ? "Ativo" : "Inativo"}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-0.5 text-xs font-semibold ${
+                          user.isPremium
+                            ? "bg-amber-500/20 text-amber-400"
+                            : "bg-gray-500/20 text-gray-400"
+                        }`}
+                      >
+                        {user.isPremium ? "👑 Premium" : "Demo"}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-[#8888a4]">

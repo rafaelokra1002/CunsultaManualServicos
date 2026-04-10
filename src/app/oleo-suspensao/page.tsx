@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import AccessBlock from "@/components/AccessBlock";
+import { useAccess } from "@/hooks/useAccess";
 
 interface MotorcycleData {
   model: string;
@@ -85,6 +87,7 @@ export default function OleoSuspensaoPage() {
   const [result, setResult] = useState<MotorcycleData | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [searched, setSearched] = useState(false);
+  const { isPremium } = useAccess();
 
   function handleSearch() {
     const term = search.toLowerCase().trim();
@@ -139,7 +142,14 @@ export default function OleoSuspensaoPage() {
 
           {/* Results */}
           {searched && result && (
-            <div className="mt-6 space-y-4">
+            <div className="relative mt-6 space-y-4">
+              {!isPremium && (
+                <AccessBlock
+                  title="🔒 Dados bloqueados"
+                  message="Libere o acesso para ver volumes, níveis de fluido e recomendações"
+                />
+              )}
+              <div className={!isPremium ? "pointer-events-none select-none" : ""}>
               <div className="rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-6">
                 <h3 className="mb-4 border-b border-[#2a2a3e] pb-3 text-lg font-semibold text-[#6c5ce7]">
                   Modelo: {formatModelName(result.model)}
@@ -179,6 +189,7 @@ export default function OleoSuspensaoPage() {
                     <span className="font-semibold text-white">Recomendação:</span> {result.recommendation}
                   </p>
                 </div>
+              </div>
               </div>
             </div>
           )}

@@ -16,6 +16,7 @@ export async function GET(request: Request) {
     }
 
     // Verifica se o usuário está ativo (admin sempre pode acessar)
+    // Usuários demo (isPremium=false) podem listar manuais para navegação
     if (session.user.role !== "ADMIN" && !session.user.active) {
       return NextResponse.json(
         {

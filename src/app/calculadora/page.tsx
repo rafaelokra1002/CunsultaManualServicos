@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import AccessBlock from "@/components/AccessBlock";
+import { useAccess } from "@/hooks/useAccess";
 
 export default function CalculadoraPage() {
   const [folgaEncontrada, setFolgaEncontrada] = useState("");
@@ -9,6 +11,7 @@ export default function CalculadoraPage() {
   const [manual, setManual] = useState("");
   const [resultado, setResultado] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const { isPremium } = useAccess();
 
   function calcular() {
     setError("");
@@ -134,9 +137,15 @@ export default function CalculadoraPage() {
 
               {/* Resultado */}
               {resultado !== null && (
-                <div className="rounded-xl border border-[#6c5ce7]/30 bg-[#6c5ce7]/10 p-4">
+                <div className="relative rounded-xl border border-[#6c5ce7]/30 bg-[#6c5ce7]/10 p-4">
+                  {!isPremium && (
+                    <AccessBlock
+                      title="🔒 Resultado bloqueado"
+                      message="Libere o acesso para ver o cálculo"
+                    />
+                  )}
                   <p className="text-sm font-medium text-[#8888a4]">Resultado</p>
-                  <p className="mt-1 text-3xl font-extrabold text-[#6c5ce7]">{resultado}</p>
+                  <p className={`mt-1 text-3xl font-extrabold text-[#6c5ce7] ${!isPremium ? "blur-md select-none" : ""}`}>{resultado}</p>
                 </div>
               )}
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react";
 import ManualCard from "@/components/ManualCard";
+import { useAccess } from "@/hooks/useAccess";
 
 interface Manual {
   id: string;
@@ -35,6 +36,7 @@ export default function ManuaisPage() {
   const [selectedBrand, setSelectedBrand] = useState<string>("all");
   const [modelFilter, setModelFilter] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("servico");
+  const { isPremium } = useAccess();
 
   // Manuais filtrados por categoria
   const categoryManuais = useMemo(() => {
@@ -232,7 +234,7 @@ export default function ManuaisPage() {
                   </div>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
                     {items.map((manual) => (
-                      <ManualCard key={manual.id} {...manual} />
+                      <ManualCard key={manual.id} {...manual} isPremium={isPremium} />
                     ))}
                   </div>
                 </section>

@@ -2,6 +2,7 @@
 
 import BrandCover from "@/components/BrandCover";
 import { useState } from "react";
+import AccessBlock from "@/components/AccessBlock";
 
 interface ManualCardProps {
   id: string;
@@ -10,6 +11,7 @@ interface ManualCardProps {
   model: string;
   year: number;
   coverUrl?: string | null;
+  isPremium?: boolean;
 }
 
 export default function ManualCard({
@@ -19,12 +21,20 @@ export default function ManualCard({
   model,
   year,
   coverUrl,
+  isPremium = true,
 }: ManualCardProps) {
   const [loading, setLoading] = useState(false);
+  const [showBlock, setShowBlock] = useState(false);
 
   async function handleDownload(e: React.MouseEvent) {
     e.preventDefault();
     if (loading) return;
+
+    if (!isPremium) {
+      setShowBlock(true);
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -70,11 +80,34 @@ export default function ManualCard({
   }
 
   return (
-    <button
-      onClick={handleDownload}
-      disabled={loading}
-      className="group relative flex h-[340px] w-full flex-col overflow-hidden rounded-2xl bg-[#111118] text-left ring-1 ring-white/[0.06] transition-all duration-300 hover:-translate-y-1 hover:ring-[#6c5ce7]/40 hover:shadow-xl hover:shadow-[#6c5ce7]/10 sm:h-[380px]"
-    >
+    <div className="relative">
+      {showBlock && (
+        <div className="absolute inset-0 z-40 flex items-center justify-center rounded-2xl backdrop-blur-sm">
+          <div className="absolute inset-0 rounded-2xl bg-[#0a0a0f]/80" />
+          <div className="relative z-10 mx-2 rounded-xl border border-[#2a2a3e] bg-[#12121a] p-5 text-center shadow-2xl">
+            <div className="mb-2 text-2xl">🔒</div>
+            <p className="mb-1 text-sm font-bold text-white">Download bloqueado</p>
+            <p className="mb-3 text-xs text-[#8888a4]">Libere o acesso para baixar</p>
+            <a
+              href="/conta-inativa"
+              className="inline-block rounded-lg bg-gradient-to-r from-[#6c5ce7] to-[#a78bfa] px-4 py-2 text-xs font-bold text-white"
+            >
+              LIBERAR ACESSO
+            </a>
+            <button
+              onClick={(e) => { e.stopPropagation(); setShowBlock(false); }}
+              className="mt-2 block w-full text-xs text-[#555570] hover:text-[#8888a4]"
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
+      <button
+        onClick={handleDownload}
+        disabled={loading}
+        className="group relative flex h-[340px] w-full flex-col overflow-hidden rounded-2xl bg-[#111118] text-left ring-1 ring-white/[0.06] transition-all duration-300 hover:-translate-y-1 hover:ring-[#6c5ce7]/40 hover:shadow-xl hover:shadow-[#6c5ce7]/10 sm:h-[380px]"
+      >
       {/* Imagem / Capa */}
       <div className="relative flex-1 overflow-hidden">
         {coverUrl ? (
@@ -118,5 +151,6 @@ export default function ManualCard({
         </h3>
       </div>
     </button>
+    </div>
   );
 }

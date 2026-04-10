@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import AccessBlock from "@/components/AccessBlock";
+import { useAccess } from "@/hooks/useAccess";
 import {
   motorcycleModels,
   testTypeLegend,
@@ -28,6 +30,7 @@ export default function DiagnosticoPage() {
   const [selectedVariant, setSelectedVariant] = useState<ModelVariant | null>(null);
   const [selectedCode, setSelectedCode] = useState<DiagnosticCode | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const { isPremium } = useAccess();
 
   const filteredModels = searchTerm
     ? motorcycleModels.filter((m) =>
@@ -260,32 +263,42 @@ export default function DiagnosticoPage() {
                 )}
               </div>
 
-              <div className="overflow-x-auto rounded-xl border border-[#2a2a3e]">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-[#2a2a3e] bg-[#12121a]">
-                      <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#8888a4]">Padrão</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#8888a4]">Localização</th>
-                      <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#8888a4]">Tipo</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selectedCode.tests.map((test, i) => (
-                      <tr key={i} className="border-b border-[#2a2a3e]/50 transition-colors hover:bg-[#1a1a2e]/50">
-                        <td className="px-4 py-3 font-mono text-sm text-white">{test.padrao}</td>
-                        <td className="px-4 py-3 text-[#e4e4ef]">{test.localizacao}</td>
-                        <td className="px-4 py-3">
-                          <span
-                            className={`inline-flex rounded px-2 py-0.5 text-xs font-medium ${typeColors[test.tipo] || "bg-[#2a2a3e] text-[#8888a4]"}`}
-                            title={testTypeLegend[test.tipo]}
-                          >
-                            {test.tipo}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="relative">
+                {!isPremium && (
+                  <AccessBlock
+                    title="🔒 Diagnóstico bloqueado"
+                    message="Libere o acesso para ver os testes e padrões completos"
+                  />
+                )}
+                <div className={!isPremium ? "pointer-events-none select-none" : ""}>
+                  <div className="overflow-x-auto rounded-xl border border-[#2a2a3e]">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-[#2a2a3e] bg-[#12121a]">
+                          <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#8888a4]">Padrão</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#8888a4]">Localização</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#8888a4]">Tipo</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {selectedCode.tests.slice(0, isPremium ? undefined : 1).map((test, i) => (
+                          <tr key={i} className="border-b border-[#2a2a3e]/50 transition-colors hover:bg-[#1a1a2e]/50">
+                            <td className="px-4 py-3 font-mono text-sm text-white">{test.padrao}</td>
+                            <td className="px-4 py-3 text-[#e4e4ef]">{test.localizacao}</td>
+                            <td className="px-4 py-3">
+                              <span
+                                className={`inline-flex rounded px-2 py-0.5 text-xs font-medium ${typeColors[test.tipo] || "bg-[#2a2a3e] text-[#8888a4]"}`}
+                                title={testTypeLegend[test.tipo]}
+                              >
+                                {test.tipo}
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
 
               {/* Legend */}
