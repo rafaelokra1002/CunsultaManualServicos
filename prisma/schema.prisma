@@ -21,6 +21,7 @@ model User {
   role      Role      @default(USER)
   active    Boolean   @default(true)
   isPremium Boolean   @default(false)
+  demoUsed  Boolean   @default(false)
   createdAt DateTime  @default(now())
   payments  Payment[]
 

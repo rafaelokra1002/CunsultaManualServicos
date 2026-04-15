@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 export function useAccess() {
   const { data: session, status } = useSession();
@@ -10,41 +10,40 @@ export function useAccess() {
   const isAuthenticated = !!session?.user;
   const isPremium =
     session?.user?.isPremium === true || session?.user?.role === "ADMIN";
+  const demoUsed = session?.user?.demoUsed === true;
 
   return {
     isLoading,
     isAuthenticated,
     isPremium,
+    demoUsed,
     user: session?.user ?? null,
   };
 }
 
 /**
- * Hook para controlar trial gratuito por funcionalidade.
- * Permite ao usuário demo usar a funcionalidade 1 vez antes de bloquear.
- * O bloqueio só aparece na próxima visita (após reload/navegação).
+ * Hook para controlar trial gratuito (1 uso total para todas as ferramentas).
+ * Usa flag server-side (demoUsed) no banco de dados — não pode ser burlado.
+ * Após o primeiro uso de QUALQUER ferramenta, TODAS ficam bloqueadas.
  */
 export function useFreeTrial(featureKey: string) {
-  const { isPremium } = useAccess();
-  const [blocked, setBlocked] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const { isPremium, demoUsed } = useAccess();
+  const { update } = useSession();
+  const [justUsed, setJustUsed] = useState(false);
 
-  const storageKey = `demo_used_${featureKey}`;
+  const blocked = !isPremium && demoUsed && !justUsed;
+  const loaded = true;
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setBlocked(localStorage.getItem(storageKey) === "true");
-      setLoaded(true);
-    }
-  }, [storageKey]);
-
-  const markUsed = useCallback(() => {
-    if (!isPremium && typeof window !== "undefined") {
-      // Grava no localStorage para bloquear na próxima visita,
-      // mas NÃO atualiza o estado — o usuário vê o resultado desta vez.
-      localStorage.setItem(storageKey, "true");
-    }
-  }, [isPremium, storageKey]);
+  const markUsed = useCallback(async () => {
+    if (isPremium || demoUsed) return;
+    // Permite ver o resultado desta vez, mas marca no servidor
+    setJustUsed(true);
+    try {
+      await fetch("/api/demo/mark-used", { method: "POST" });
+      // Atualiza a sessão para refletir a mudança
+      await update();
+    } catch {}
+  }, [isPremium, demoUsed, update]);
 
   // Premium sempre tem acesso
   if (isPremium) {

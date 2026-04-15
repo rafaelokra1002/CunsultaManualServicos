@@ -59,17 +59,30 @@ export const authOptions: NextAuthOptions = {
           role: user.role,
           active: user.active,
           isPremium: user.isPremium,
+          demoUsed: user.demoUsed,
         };
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       if (user) {
         token.id = user.id;
         token.role = (user as any).role;
         token.active = (user as any).active;
         token.isPremium = (user as any).isPremium;
+        token.demoUsed = (user as any).demoUsed;
+      }
+      // Atualizar demoUsed do banco a cada request para refletir mudanças em tempo real
+      if (trigger === "update" || !user) {
+        try {
+          const dbUser = await prisma.user.findUnique({ where: { id: token.id as string }, select: { demoUsed: true, isPremium: true, active: true } });
+          if (dbUser) {
+            token.demoUsed = dbUser.demoUsed;
+            token.isPremium = dbUser.isPremium;
+            token.active = dbUser.active;
+          }
+        } catch {}
       }
       return token;
     },
@@ -79,6 +92,7 @@ export const authOptions: NextAuthOptions = {
         (session.user as any).role = token.role;
         (session.user as any).active = token.active;
         (session.user as any).isPremium = token.isPremium;
+        (session.user as any).demoUsed = token.demoUsed;
       }
       return session;
     },

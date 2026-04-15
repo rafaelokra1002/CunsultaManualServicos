@@ -3,6 +3,8 @@
 import { useEffect, useState, useMemo } from "react";
 import ManualCard from "@/components/ManualCard";
 import { useAccess } from "@/hooks/useAccess";
+import { useFreeTrial } from "@/hooks/useAccess";
+import AccessBlock from "@/components/AccessBlock";
 
 interface Manual {
   id: string;
@@ -37,6 +39,7 @@ export default function ManuaisPage() {
   const [modelFilter, setModelFilter] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("servico");
   const { isPremium } = useAccess();
+  const { blocked: demoBlocked, markUsed } = useFreeTrial("manuais");
 
   // Manuais filtrados por categoria
   const categoryManuais = useMemo(() => {
@@ -95,6 +98,7 @@ export default function ManuaisPage() {
         return;
       }
       setManuais(data);
+      markUsed();
     } catch {
       setError("Erro ao conectar com o servidor");
     } finally {
@@ -209,7 +213,14 @@ export default function ManuaisPage() {
 
       {/* Lista agrupada por marca */}
       {!loading && !error && (
-        <>
+        <div className="relative">
+          {demoBlocked && (
+            <AccessBlock
+              title="🔒 Manuais bloqueados"
+              message="Libere o acesso para consultar todos os manuais de serviço"
+            />
+          )}
+          <div className={demoBlocked ? "pointer-events-none select-none" : ""}>
           {filteredManuais.length === 0 ? (
             <div className="card-glass rounded-2xl p-8 text-center sm:p-12">
               <div className="mb-4 text-4xl">📭</div>
@@ -241,7 +252,8 @@ export default function ManuaisPage() {
               ))}
             </div>
           )}
-        </>
+          </div>
+        </div>
       )}
     </div>
   );
