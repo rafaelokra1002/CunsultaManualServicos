@@ -19,9 +19,9 @@ export default function AdminDashboardPage() {
     async function fetchStats() {
       try {
         const [usersRes, manuaisRes, viewsRes] = await Promise.all([
-          fetch("/api/users"),
-          fetch("/api/manuais"),
-          fetch("/api/stats/views"),
+          fetch("/api/users", { cache: "no-store" }),
+          fetch("/api/manuais?summary=counts", { cache: "no-store" }),
+          fetch("/api/stats/views", { cache: "no-store" }),
         ]);
 
         if (usersRes.ok && manuaisRes.ok) {
@@ -31,7 +31,7 @@ export default function AdminDashboardPage() {
           setStats({
             totalUsers: users.length,
             activeUsers: users.filter((u: any) => u.active).length,
-            totalManuais: manuais.length,
+            totalManuais: manuais.total,
           });
         }
 

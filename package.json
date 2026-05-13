@@ -4,9 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:3001": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "covers:generate": "node prisma/generate-covers.js",
+    "import:drive": "tsx prisma/import-google-drive.ts",
+    "migrate:drive-local": "node prisma/migrate-drive-manuals-to-local.js",
+    "relink:remote-local": "node prisma/relink-remote-manuals-from-local.js",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
@@ -17,11 +22,14 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@napi-rs/canvas": "^1.0.0",
     "@prisma/client": "^5.22.0",
     "@vercel/blob": "^2.3.2",
     "bcryptjs": "^2.4.3",
     "next": "14.2.15",
     "next-auth": "^4.24.8",
+    "pdf-poppler": "^0.2.3",
+    "pdfjs-dist": "^5.7.284",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "zod": "^3.23.8"

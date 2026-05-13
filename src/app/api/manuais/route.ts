@@ -31,17 +31,69 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const brand = searchParams.get("brand");
     const model = searchParams.get("model");
+    const view = searchParams.get("view");
+    const summary = searchParams.get("summary");
 
     const where: any = {};
     if (brand) where.brand = { contains: brand, mode: "insensitive" };
     if (model) where.model = { contains: model, mode: "insensitive" };
 
+    if (summary === "counts") {
+      const [total, servico, catalogo] = await Promise.all([
+        prisma.manual.count({ where }),
+        prisma.manual.count({ where: { ...where, category: "servico" } }),
+        prisma.manual.count({ where: { ...where, category: "catalogo" } }),
+      ]);
+
+      return NextResponse.json(
+        { total, servico, catalogo },
+        {
+          headers: {
+            "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
+        }
+      );
+    }
+
     const manuais = await prisma.manual.findMany({
       where,
+      ...(view === "listing"
+        ? {
+            select: {
+              id: true,
+              title: true,
+              brand: true,
+              model: true,
+              year: true,
+              coverUrl: true,
+              category: true,
+              createdAt: true,
+            },
+          }
+        : {}),
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json(manuais);
+    const orderedManuais = [...manuais].sort((left, right) => {
+      const leftHasCover = Boolean(left.coverUrl);
+      const rightHasCover = Boolean(right.coverUrl);
+
+      if (leftHasCover !== rightHasCover) {
+        return leftHasCover ? -1 : 1;
+      }
+
+      return right.createdAt.getTime() - left.createdAt.getTime();
+    });
+
+    return NextResponse.json(orderedManuais, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+    });
   } catch (error) {
     console.error("Erro ao listar manuais:", error);
     return NextResponse.json(

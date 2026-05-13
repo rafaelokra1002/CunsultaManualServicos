@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { startTransition, useDeferredValue, useEffect, useMemo, useState } from "react";
 import ManualCard from "@/components/ManualCard";
 import { useAccess } from "@/hooks/useAccess";
 import { useFreeTrial } from "@/hooks/useAccess";
@@ -16,6 +16,9 @@ interface Manual {
   coverUrl?: string | null;
   category?: string;
 }
+
+const INITIAL_RENDER_COUNT = 120;
+const RENDER_STEP = 120;
 
 const brandColors: Record<string, string> = {
   Honda: "bg-red-500",
@@ -38,8 +41,12 @@ export default function ManuaisPage() {
   const [selectedBrand, setSelectedBrand] = useState<string>("all");
   const [modelFilter, setModelFilter] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("servico");
+  const [visibleCount, setVisibleCount] = useState(INITIAL_RENDER_COUNT);
   const { isPremium } = useAccess();
   const { blocked: demoBlocked, markUsed } = useFreeTrial("manuais");
+  const [selectedYear, setSelectedYear] = useState<string>("all");
+  const [sortOrder, setSortOrder] = useState<string>("recent");
+  const deferredModelFilter = useDeferredValue(modelFilter);
 
   // Manuais filtrados por categoria
   const categoryManuais = useMemo(() => {
@@ -60,22 +67,37 @@ export default function ManuaisPage() {
     return Object.entries(groups).sort((a, b) => b[1].length - a[1].length);
   }, [categoryManuais]);
 
-  // Filtrar manuais
+  const availableYears = useMemo(() => {
+    return [...new Set(categoryManuais.map((m) => m.year))].sort((a, b) => b - a);
+  }, [categoryManuais]);
+
+  const totalBrands = useMemo(() => new Set(manuais.map((m) => m.brand)).size, [manuais]);
+
+  // Filtrar e ordenar manuais
   const filteredManuais = useMemo(() => {
     let list = categoryManuais;
     if (selectedBrand !== "all") {
       list = list.filter((m) => m.brand === selectedBrand);
     }
-    if (modelFilter.trim()) {
-      const q = modelFilter.toLowerCase();
+    if (selectedYear !== "all") {
+      list = list.filter((m) => m.year === parseInt(selectedYear));
+    }
+    if (deferredModelFilter.trim()) {
+      const q = deferredModelFilter.toLowerCase();
       list = list.filter(
         (m) =>
           m.model.toLowerCase().includes(q) ||
           m.title.toLowerCase().includes(q)
       );
     }
-    return list;
-  }, [categoryManuais, selectedBrand, modelFilter]);
+    const sorted = [...list];
+    if (sortOrder === "year_desc") {
+      sorted.sort((a, b) => b.year - a.year);
+    } else if (sortOrder === "az") {
+      sorted.sort((a, b) => a.model.localeCompare(b.model, "pt-BR"));
+    }
+    return sorted;
+  }, [categoryManuais, selectedBrand, selectedYear, deferredModelFilter, sortOrder]);
 
   // Agrupar filtrados por marca
   const filteredGroups = useMemo(() => {
@@ -87,17 +109,40 @@ export default function ManuaisPage() {
     return Object.entries(groups).sort((a, b) => b[1].length - a[1].length);
   }, [filteredManuais]);
 
+  const visibleGroups = useMemo(() => {
+    let remaining = visibleCount;
+
+    return filteredGroups.reduce<Array<[string, Manual[]]>>((groups, [brand, items]) => {
+      if (remaining <= 0) {
+        return groups;
+      }
+
+      const visibleItems = items.slice(0, remaining);
+      remaining -= visibleItems.length;
+
+      if (visibleItems.length > 0) {
+        groups.push([brand, visibleItems]);
+      }
+
+      return groups;
+    }, []);
+  }, [filteredGroups, visibleCount]);
+
+  const hasMoreManuais = visibleCount < filteredManuais.length;
+
   async function fetchManuais() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("/api/manuais");
+      const res = await fetch("/api/manuais?view=listing", { cache: "no-store" });
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || "Erro ao carregar manuais");
         return;
       }
-      setManuais(data);
+      startTransition(() => {
+        setManuais(data);
+      });
       markUsed();
     } catch {
       setError("Erro ao conectar com o servidor");
@@ -110,13 +155,17 @@ export default function ManuaisPage() {
     fetchManuais();
   }, []);
 
+  useEffect(() => {
+    setVisibleCount(INITIAL_RENDER_COUNT);
+  }, [selectedCategory, selectedBrand, selectedYear, deferredModelFilter, sortOrder, manuais.length]);
+
   return (
     <div>
       {/* Header */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-2xl font-bold text-white sm:text-3xl">📄 Manuais</h1>
         <p className="mt-1 text-[#8888a4]">
-          {manuais.length} manuais disponíveis &middot; {brandGroups.length} montadoras
+          {manuais.length} manuais &middot; {servicoCount} serviço · {catalogoCount} catálogo &middot; {totalBrands} montadoras
         </p>
       </div>
 
@@ -124,7 +173,7 @@ export default function ManuaisPage() {
       {!loading && !error && (
         <div className="mb-6 flex gap-2">
           <button
-            onClick={() => { setSelectedCategory("servico"); setSelectedBrand("all"); setModelFilter(""); }}
+            onClick={() => { setSelectedCategory("servico"); setSelectedBrand("all"); setSelectedYear("all"); setSortOrder("recent"); setModelFilter(""); }}
             className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${
               selectedCategory === "servico"
                 ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
@@ -137,7 +186,7 @@ export default function ManuaisPage() {
             }`}>{servicoCount}</span>
           </button>
           <button
-            onClick={() => { setSelectedCategory("catalogo"); setSelectedBrand("all"); setModelFilter(""); }}
+            onClick={() => { setSelectedCategory("catalogo"); setSelectedBrand("all"); setSelectedYear("all"); setSortOrder("recent"); setModelFilter(""); }}
             className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${
               selectedCategory === "catalogo"
                 ? "bg-amber-500 text-white shadow-lg shadow-amber-500/25"
@@ -184,14 +233,45 @@ export default function ManuaisPage() {
         </div>
       )}
 
-      {/* Busca por modelo */}
+      {/* Filtro de Ano + Ordenação */}
+      {!loading && !error && (
+        <div className="mb-4 flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-medium text-[#8888a4]">Ano:</span>
+            <select
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(e.target.value)}
+              className="rounded-lg border border-white/10 bg-[#111118] px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#6c5ce7]/50"
+            >
+              <option value="all">Todos</option>
+              {availableYears.map((y) => (
+                <option key={y} value={String(y)}>{y}</option>
+              ))}
+            </select>
+          </div>
+          <div className="ml-auto flex items-center gap-2">
+            <span className="text-xs font-medium text-[#8888a4]">Ordenar:</span>
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              className="rounded-lg border border-white/10 bg-[#111118] px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#6c5ce7]/50"
+            >
+              <option value="recent">Mais recentes (cadastro)</option>
+              <option value="year_desc">Ano mais novo</option>
+              <option value="az">A-Z (modelo)</option>
+            </select>
+          </div>
+        </div>
+      )}
+
+      {/* Busca por modelo / código de falha */}
       {!loading && !error && (
         <div className="mb-6 max-w-md">
           <input
             type="text"
             value={modelFilter}
             onChange={(e) => setModelFilter(e.target.value)}
-            placeholder="🔍 Buscar por modelo ou título..."
+            placeholder="🔍 Buscar modelo, código de falha (ex: P0420)..."
             className="input-dark w-full"
           />
         </div>
@@ -233,7 +313,16 @@ export default function ManuaisPage() {
             </div>
           ) : (
             <div className="space-y-10">
-              {filteredGroups.map(([brand, items]) => (
+              <div className="flex flex-col gap-2 text-sm text-[#8888a4] sm:flex-row sm:items-center sm:justify-between">
+                <span>
+                  Mostrando {Math.min(visibleCount, filteredManuais.length)} de {filteredManuais.length} manuais
+                </span>
+                {deferredModelFilter !== modelFilter && (
+                  <span>Atualizando busca...</span>
+                )}
+              </div>
+
+              {visibleGroups.map(([brand, items]) => (
                 <section key={brand}>
                   {/* Cabeçalho da montadora */}
                   <div className="mb-4 flex items-center gap-3">
@@ -250,6 +339,17 @@ export default function ManuaisPage() {
                   </div>
                 </section>
               ))}
+
+              {hasMoreManuais && (
+                <div className="flex justify-center pt-2">
+                  <button
+                    onClick={() => setVisibleCount((current) => current + RENDER_STEP)}
+                    className="rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                  >
+                    Carregar mais manuais
+                  </button>
+                </div>
+              )}
             </div>
           )}
           </div>

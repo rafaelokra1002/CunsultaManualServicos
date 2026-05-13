@@ -33,7 +33,7 @@ export default function AdminManuaisPage() {
 
   async function fetchManuais() {
     try {
-      const res = await fetch("/api/manuais");
+      const res = await fetch("/api/manuais", { cache: "no-store" });
       if (res.ok) {
         setManuais(await res.json());
       }
@@ -228,6 +228,8 @@ export default function AdminManuaisPage() {
                       <img
                         src={manual.coverUrl}
                         alt="Capa"
+                        loading="lazy"
+                        decoding="async"
                         className="h-20 w-16 shrink-0 rounded-lg object-cover ring-1 ring-[#2a2a3e]"
                       />
                     ) : (
@@ -304,6 +306,8 @@ export default function AdminManuaisPage() {
                           <img
                             src={manual.coverUrl}
                             alt="Capa"
+                            loading="lazy"
+                            decoding="async"
                             className="h-14 w-11 rounded-lg object-cover ring-1 ring-[#2a2a3e]"
                           />
                         ) : (

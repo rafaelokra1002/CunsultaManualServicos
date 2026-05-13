@@ -137,4 +137,80 @@ npm run dev          # Servidor de desenvolvimento
 npm run build        # Build de produção
 npm run db:studio    # Abre o Prisma Studio (GUI do banco)
 npm run db:seed      # Popula banco com dados de teste
+npm run import:drive # Importa manuais de uma pasta do Google Drive
 ```
+
+## Importação em lote via Google Drive
+
+Se voce tem uma pasta no Google Drive com centenas de PDFs, o projeto agora consegue importar isso em lote direto para a tabela `manuals`.
+
+### 1. Configure as variáveis
+
+No `.env`:
+
+```env
+GOOGLE_DRIVE_FOLDER_ID="id-da-pasta"
+GOOGLE_DRIVE_API_KEY="sua_google_api_key"
+```
+
+Tambem pode usar a URL completa da pasta:
+
+```env
+GOOGLE_DRIVE_FOLDER_URL="https://drive.google.com/drive/folders/12TFYooATXzWwDqWllYeek71TDWxNR05H"
+```
+
+Se a pasta for privada, use um token em vez da API key:
+
+```env
+GOOGLE_DRIVE_ACCESS_TOKEN="seu_access_token"
+```
+
+### 2. Escolha o modo de armazenamento
+
+- `storage=drive`: grava no banco um link do Google Drive. Nesse modo, os arquivos precisam estar compartilhados para os usuarios finais.
+- `storage=local`: baixa os PDFs para `public/manuais/drive-import` e grava URL local no sistema. Esse e o modo mais seguro para colocar os arquivos realmente dentro do sistema.
+
+### 3. Rode a importação
+
+Somente simular:
+
+```bash
+npm run import:drive -- --folder="https://drive.google.com/drive/folders/12TFYooATXzWwDqWllYeek71TDWxNR05H" --storage=local --dry-run
+```
+
+Importar de verdade:
+
+```bash
+npm run import:drive -- --folder="https://drive.google.com/drive/folders/12TFYooATXzWwDqWllYeek71TDWxNR05H" --storage=local
+```
+
+### 4. Override opcional de metadata
+
+Se os nomes dos arquivos nao estiverem padronizados, voce pode passar um manifesto JSON com os dados corretos por arquivo:
+
+```json
+[
+    {
+        "fileId": "1AbCdEf...",
+        "title": "Manual de Servico Honda CG 160",
+        "brand": "Honda",
+        "model": "CG 160",
+        "year": 2022,
+        "category": "servico"
+    }
+]
+```
+
+Executando com manifesto:
+
+```bash
+npm run import:drive -- --folder="https://drive.google.com/drive/folders/12TFYooATXzWwDqWllYeek71TDWxNR05H" --storage=local --manifest=prisma/google-drive-manifest.json
+```
+
+Voce pode usar [prisma/google-drive-manifest.example.json](c:/Users/Administrator/Desktop/ConsultaManual%20serviços/prisma/google-drive-manifest.example.json) como base.
+
+### Observações importantes
+
+- O script percorre subpastas automaticamente.
+- O script atualiza registros existentes quando encontra o mesmo `fileUrl`.
+- Sem manifesto, marca/modelo/ano sao inferidos pelo nome do arquivo e pela estrutura das pastas. Para 1200 manuais, o ideal e validar um `dry-run` primeiro.

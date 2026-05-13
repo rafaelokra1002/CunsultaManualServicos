@@ -1,0 +1,22 @@
+[
+  {
+    "fileId": "1AbCdEfGhIjKlMnOpQrStUvWxYz",
+    "title": "Manual de Servico Honda CG 160 Titan",
+    "brand": "Honda",
+    "model": "CG 160 Titan",
+    "year": 2022,
+    "category": "servico"
+  },
+  {
+    "path": "Honda/CB 500X/parts-catalog-2021.pdf",
+    "title": "Catalogo de Pecas Honda CB 500X",
+    "brand": "Honda",
+    "model": "CB 500X",
+    "year": 2021,
+    "category": "catalogo"
+  },
+  {
+    "name": "manual-antigo-sem-uso.pdf",
+    "skip": true
+  }
+]

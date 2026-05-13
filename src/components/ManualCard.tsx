@@ -39,10 +39,21 @@ export default function ManualCard({
 
     try {
       const res = await fetch(`/api/download?id=${id}`);
+      if (!res.ok) {
+        let message = "Erro ao abrir o manual";
+        try {
+          const data = await res.json();
+          if (data?.error) {
+            message = data.error;
+          }
+        } catch {}
+        throw new Error(message);
+      }
+
       const contentType = res.headers.get("content-type") || "";
 
       // Se a API retornou o PDF diretamente (arquivo local na VPS)
-      if (contentType.includes("application/pdf")) {
+      if (contentType.includes("application/pdf") || contentType.includes("application/octet-stream")) {
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);
         // Usar <a> com download para compatibilidade mobile
@@ -71,9 +82,13 @@ export default function ManualCard({
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+        return;
       }
-    } catch {
-      alert("Erro ao abrir o manual");
+
+      throw new Error("Link de download inválido");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Erro ao abrir o manual";
+      alert(message);
     } finally {
       setLoading(false);
     }
@@ -114,6 +129,8 @@ export default function ManualCard({
           <img
             src={coverUrl}
             alt={title}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
@@ -143,11 +160,11 @@ export default function ManualCard({
 
       {/* Info - Bottom section */}
       <div className="relative z-10 -mt-8 px-4 pb-4 sm:px-5 sm:pb-5">
-        <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-[#6c5ce7]">
-          {model}
+        <p className="mb-0.5 text-[11px] font-medium text-[#8888a4]">
+          {brand} · {year}
         </p>
-        <h3 className="line-clamp-2 text-base font-bold leading-tight text-white sm:text-lg">
-          {title}
+        <h3 className="line-clamp-1 text-xl font-bold leading-tight text-white sm:text-2xl">
+          {model}
         </h3>
       </div>
     </button>
