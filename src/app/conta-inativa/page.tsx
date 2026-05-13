@@ -91,8 +91,8 @@ export default function ContaInativaPage() {
               🔥 Oferta Especial
             </span>
             <div className="mt-2">
-              <span className="text-sm text-[#8888a4] line-through">R$ 49,90</span>
-              <span className="ml-2 text-2xl font-extrabold text-[#00d68f]">R$ 34,90</span>
+              <span className="text-sm text-[#8888a4] line-through">R$ 97,90</span>
+              <span className="ml-2 text-2xl font-extrabold text-[#00d68f]">R$ 67</span>
             </div>
             <p className="mt-1 text-xs text-[#8888a4]">Acesso total • Pagamento único</p>
           </div>
@@ -111,7 +111,7 @@ export default function ContaInativaPage() {
 
           {!pixCode && !loading && (
             <button onClick={handlePay} className="btn-primary mb-4 w-full">
-              Pagar com PIX - R$ 34,90
+              Pagar com PIX - R$ 67
             </button>
           )}
 

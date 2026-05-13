@@ -135,10 +135,8 @@ export default function RegisterPage() {
               </p>
             </div>
             <div className="text-right">
-              <span className="text-sm text-[#8888a4] line-through">R$ 49,90</span>
-              <div className="text-3xl font-extrabold text-[#00d68f]">
-                R$ 34<span className="text-xl">,90</span>
-              </div>
+              <span className="text-sm text-[#8888a4] line-through">R$ 97,90</span>
+              <div className="text-3xl font-extrabold text-[#00d68f]">R$ 67</div>
               <span className="text-xs text-[#8888a4]">pagamento único</span>
             </div>
           </div>

@@ -6,9 +6,9 @@ const MISTICPAY_CLIENT_ID = process.env.MISTICPAY_CLIENT_ID || "";
 const MISTICPAY_CLIENT_SECRET = process.env.MISTICPAY_CLIENT_SECRET || "";
 
 // Valor do plano
-export const PLAN_PRICE = 34.90;
-export const PLAN_PRICE_ORIGINAL = "49,90";
-export const PLAN_PRICE_CURRENT = "34,90";
+export const PLAN_PRICE = 67.00;
+export const PLAN_PRICE_ORIGINAL = "97,90";
+export const PLAN_PRICE_CURRENT = "67,00";
 
 interface CreatePixParams {
   amount: number;
