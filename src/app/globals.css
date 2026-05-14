@@ -53,3 +53,11 @@ body {
 .btn-outline {
   @apply rounded-xl border border-[#2a2a3e] px-6 py-3 font-semibold text-[#e4e4ef] transition-all hover:border-[#6c5ce7] hover:bg-[#6c5ce7]/10 hover:text-white;
 }
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

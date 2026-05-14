@@ -227,19 +227,19 @@ export default function ECUDiagnosticoPage() {
               </div>
 
               {/* Tabs */}
-              <div className="mb-6 flex gap-1 overflow-x-auto rounded-xl border border-[#2a2a3e] bg-[#12121a] p-1">
+              <div className="mb-6 flex gap-1 overflow-x-auto rounded-xl border border-[#2a2a3e] bg-[#12121a] p-1 scrollbar-none">
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2.5 text-xs font-medium transition-all ${
+                    className={`flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2.5 text-xs font-medium transition-all sm:flex-1 ${
                       activeTab === tab.id
                         ? "bg-[#6c5ce7]/20 text-[#6c5ce7] shadow-sm"
                         : "text-[#8888a4] hover:bg-[#1a1a2e] hover:text-white"
                     }`}
                   >
                     <span>{tab.icon}</span>
-                    <span className="hidden sm:inline">{tab.label}</span>
+                    <span>{tab.label}</span>
                   </button>
                 ))}
               </div>
