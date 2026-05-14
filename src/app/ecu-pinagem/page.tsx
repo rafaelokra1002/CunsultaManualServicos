@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import AccessBlock from "@/components/AccessBlock";
 import { useFreeTrial } from "@/hooks/useAccess";
 import { motosECU, searchMotos, diagnosticarPorSintoma, type MotoECU, type TechnicalParameter, type ECUPin, type ChecklistItem } from "@/data/ecu-database";
+import { FerramentaInicializacao, FerramentaResetCombustivel, ReferenciaIndicador } from "@/components/ResetEcmTools";
 
 const categoriaCores: Record<string, string> = {
   sensor: "bg-blue-500/20 text-blue-300 border border-blue-500/30",
@@ -30,7 +31,9 @@ const checklistCategoriaLabels: Record<string, string> = {
   atuador: "🎯 Atuadores",
 };
 
-type TabId = "parametros" | "pinagem" | "diagnostico" | "checklist";
+type TabId = "parametros" | "pinagem" | "diagnostico" | "checklist" | "reset-ecm";
+
+const RESET_ECM_MOTO_IDS = ["cg160"];
 
 export default function ECUDiagnosticoPage() {
   const [selectedMoto, setSelectedMoto] = useState<MotoECU | null>(null);
@@ -91,6 +94,9 @@ export default function ECUDiagnosticoPage() {
     { id: "pinagem", label: "Pinagem ECU", icon: "🔌" },
     { id: "diagnostico", label: "Diagnóstico", icon: "🔍" },
     { id: "checklist", label: "Checklist", icon: "✅" },
+    ...(selectedMoto && RESET_ECM_MOTO_IDS.includes(selectedMoto.id)
+      ? [{ id: "reset-ecm" as TabId, label: "Reset ECM", icon: "🔄" }]
+      : []),
   ];
 
   return (
@@ -453,6 +459,11 @@ export default function ECUDiagnosticoPage() {
                 </div>
               )}
 
+              {/* ==================== TAB: RESET ECM ==================== */}
+              {activeTab === "reset-ecm" && (
+                <ResetECMTab />
+              )}
+
               {/* ==================== TAB: CHECKLIST ==================== */}
               {activeTab === "checklist" && (
                 <div>
@@ -526,6 +537,111 @@ export default function ECUDiagnosticoPage() {
           {blocked && <AccessBlock title="🔒 ECU & Pinagem" message="Libere o acesso para consultar parâmetros, pinagem e diagnóstico completo" />}
         </div>
       </main>
+    </div>
+  );
+}
+
+function ResetECMTab() {
+  const [tool, setTool] = useState<"inicializacao" | "reset-combustivel" | "indicador" | null>(null);
+
+  return (
+    <div>
+      <div className="mb-5 flex items-center justify-between">
+        <h2 className="text-lg font-bold text-white">Reset / Inicialização ECM</h2>
+        {tool && (
+          <button
+            onClick={() => setTool(null)}
+            className="flex items-center gap-1.5 text-sm text-[#8888a4] transition hover:text-white"
+          >
+            ← Voltar
+          </button>
+        )}
+      </div>
+
+      <div className="mb-4 rounded-xl border border-red-500/30 bg-red-500/8 p-3.5">
+        <p className="text-sm font-semibold text-red-300">
+          ⚠️ Execute com a moto parada e em local ventilado. Siga cada passo na ordem correta.
+        </p>
+      </div>
+
+      {!tool && (
+        <div className="space-y-3">
+          <button
+            onClick={() => setTool("inicializacao")}
+            className="group w-full rounded-2xl border border-blue-500/30 bg-[#0f0f18] p-4 text-left transition hover:border-blue-500/60 hover:bg-blue-500/5"
+          >
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-blue-500/30 bg-blue-500/10 text-xl">⚙️</div>
+              <div className="flex-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-blue-400">Ferramenta 1</p>
+                <h3 className="font-extrabold text-white">Inicialização do ECM</h3>
+                <p className="mt-0.5 text-xs text-[#8888a4]">5 passos · Jumper EOT · Conector SCS · Cronômetro 10s</p>
+              </div>
+              <span className="self-center text-[#555570] transition group-hover:text-white">→</span>
+            </div>
+          </button>
+
+          <button
+            onClick={() => setTool("reset-combustivel")}
+            className="group w-full rounded-2xl border border-purple-500/30 bg-[#0f0f18] p-4 text-left transition hover:border-purple-500/60 hover:bg-purple-500/5"
+          >
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-purple-500/30 bg-purple-500/10 text-xl">⛽</div>
+              <div className="flex-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-purple-400">Ferramenta 2</p>
+                <h3 className="font-extrabold text-white">Reset de Dados de Combustível</h3>
+                <p className="mt-0.5 text-xs text-[#8888a4]">8 passos · Padrões A–D · Acelerador · Cronômetros</p>
+              </div>
+              <span className="self-center text-[#555570] transition group-hover:text-white">→</span>
+            </div>
+          </button>
+
+          <button
+            onClick={() => setTool("indicador")}
+            className="group w-full rounded-2xl border border-[#f59e0b]/30 bg-[#0f0f18] p-4 text-left transition hover:border-[#f59e0b]/60 hover:bg-[#f59e0b]/5"
+          >
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#f59e0b]/30 bg-[#f59e0b]/10 text-xl">💡</div>
+              <div className="flex-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#f59e0b]">Referência</p>
+                <h3 className="font-extrabold text-white">Indicador de Partida a Frio & Padrões A–D</h3>
+                <p className="mt-0.5 text-xs text-[#8888a4]">Comportamento do indicador · Tabela % etanol</p>
+              </div>
+              <span className="self-center text-[#555570] transition group-hover:text-white">→</span>
+            </div>
+          </button>
+        </div>
+      )}
+
+      {tool === "inicializacao" && (
+        <div>
+          <div className="mb-4 rounded-xl border border-blue-500/20 bg-blue-500/5 px-4 py-3">
+            <p className="text-sm font-bold text-blue-300">⚙️ Inicialização do ECM</p>
+            <p className="text-xs text-[#8888a4]">Marque cada passo conforme executar. Use o cronômetro no passo com tempo crítico.</p>
+          </div>
+          <FerramentaInicializacao />
+        </div>
+      )}
+
+      {tool === "reset-combustivel" && (
+        <div>
+          <div className="mb-4 rounded-xl border border-purple-500/20 bg-purple-500/5 px-4 py-3">
+            <p className="text-sm font-bold text-purple-300">⛽ Reset de Dados de Combustível</p>
+            <p className="text-xs text-[#8888a4]">Siga o fluxograma. Use os cronômetros nos passos com tempo crítico.</p>
+          </div>
+          <FerramentaResetCombustivel />
+        </div>
+      )}
+
+      {tool === "indicador" && (
+        <div>
+          <div className="mb-4 rounded-xl border border-[#f59e0b]/20 bg-[#f59e0b]/5 px-4 py-3">
+            <p className="text-sm font-bold text-[#f59e0b]">💡 Referência — Indicador de Partida a Frio</p>
+            <p className="text-xs text-[#8888a4]">Honda CG160 Fan ESDi · CG160 Titan EX</p>
+          </div>
+          <ReferenciaIndicador />
+        </div>
+      )}
     </div>
   );
 }
