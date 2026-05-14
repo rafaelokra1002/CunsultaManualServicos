@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
 import path from "path";
 import { existsSync, readFileSync } from "fs";
 
@@ -118,6 +115,9 @@ async function resolveGoogleDriveDownloadUrl(fileUrl: string): Promise<string | 
 }
 
 export async function GET(req: NextRequest) {
+  const { getServerSession } = await import("next-auth");
+  const { authOptions } = await import("@/lib/auth");
+
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
@@ -142,6 +142,8 @@ export async function GET(req: NextRequest) {
   if (!manualId) {
     return NextResponse.json({ error: "ID do manual obrigatório" }, { status: 400 });
   }
+
+  const { prisma } = await import("@/lib/prisma");
 
   const manual = await prisma.manual.findUnique({
     where: { id: manualId },
