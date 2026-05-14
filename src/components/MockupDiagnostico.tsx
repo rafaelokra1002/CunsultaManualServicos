@@ -61,8 +61,8 @@ export default function MockupDiagnostico() {
       {/* ── Keyframes ─────────────────────────────────────────────────────── */}
       <style>{`
         @keyframes od-float-phone {
-          0%,100% { transform: perspective(900px) rotateY(-18deg) rotateX(5deg) translateY(0px); }
-          50%      { transform: perspective(900px) rotateY(-15deg) rotateX(3deg) translateY(-18px); }
+          0%,100% { transform: perspective(1100px) rotateY(-22deg) rotateX(7deg) translateY(0px) translateZ(0); }
+          50%      { transform: perspective(1100px) rotateY(-17deg) rotateX(4deg) translateY(-22px) translateZ(10px); }
         }
         @keyframes od-glow-pulse {
           0%,100% { opacity:.50; transform:scale(1) translateX(-5%); }
@@ -265,23 +265,27 @@ export default function MockupDiagnostico() {
                   borderRadius: "50px",
                   padding: "3px",
                   background:
-                    "linear-gradient(155deg," +
-                    "#7a7a9a 0%," +
-                    "#3a3a56 8%," +
-                    "#1e1e30 25%," +
-                    "#2c2c44 50%," +
-                    "#1a1a2a 72%," +
-                    "#3e3e5a 88%," +
-                    "#1c1c2c 100%)",
+                    "linear-gradient(158deg," +
+                    "#b0b0d0 0%," +
+                    "#8888aa 3%," +
+                    "#3e3e5c 9%," +
+                    "#1e1e32 22%," +
+                    "#28283e 40%," +
+                    "#1a1a2c 60%," +
+                    "#222238 75%," +
+                    "#383858 88%," +
+                    "#1e1e2e 95%," +
+                    "#141422 100%)",
                   boxShadow:
-                    "0 90px 180px rgba(0,0,0,.92)," +
-                    "0 35px 90px rgba(0,0,0,.72)," +
-                    "-16px 16px 40px rgba(0,0,0,.60)," +
-                    "6px -4px 12px rgba(0,0,0,.40)," +
-                    "inset 0 1.5px 0 rgba(255,255,255,.22)," +
-                    "inset 0 -1px 0 rgba(0,0,0,.60)," +
-                    "inset 1px 0 0 rgba(255,255,255,.08)," +
-                    "inset -1px 0 0 rgba(0,0,0,.40)",
+                    "0 110px 220px rgba(0,0,0,.95)," +
+                    "0 50px 110px rgba(0,0,0,.82)," +
+                    "-24px 24px 60px rgba(0,0,0,.70)," +
+                    "10px -8px 20px rgba(0,0,0,.50)," +
+                    "inset 0 2px 0 rgba(255,255,255,.30)," +
+                    "inset 0 -1.5px 0 rgba(0,0,0,.80)," +
+                    "inset 1.5px 0 0 rgba(255,255,255,.14)," +
+                    "inset -1.5px 0 0 rgba(0,0,0,.55)," +
+                    "0 0 0 0.5px rgba(255,255,255,.06)",
                   animation: "od-float-phone 8s ease-in-out infinite",
                 }}
               >
@@ -331,8 +335,27 @@ export default function MockupDiagnostico() {
                       borderRadius: "20px",
                       background: "#000",
                       boxShadow: "0 0 0 1px rgba(255,255,255,.06), 0 2px 8px rgba(0,0,0,.8)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-end",
+                      paddingRight: "12px",
                     }}
-                  />
+                  >
+                    {/* Camera lens */}
+                    <div style={{
+                      width: "11px", height: "11px", borderRadius: "50%",
+                      background: "radial-gradient(circle at 38% 32%, #1c2e1c, #020802)",
+                      border: "1.5px solid rgba(255,255,255,.08)",
+                      boxShadow: "inset 0 0 4px rgba(0,0,0,.9), 0 0 3px rgba(0,180,80,.10)",
+                      position: "relative",
+                    }}>
+                      <div style={{
+                        position: "absolute", top: "2px", left: "2px",
+                        width: "3px", height: "3px", borderRadius: "50%",
+                        background: "rgba(255,255,255,.15)",
+                      }} />
+                    </div>
+                  </div>
 
                   {/* Screen */}
                   <div
@@ -645,15 +668,25 @@ export default function MockupDiagnostico() {
                     </div>{/* end content area */}
                   </div>{/* end screen */}
 
+                  {/* Home indicator */}
+                  <div
+                    className="pointer-events-none absolute bottom-3 left-1/2 z-30 -translate-x-1/2"
+                    style={{
+                      width: "130px", height: "4px", borderRadius: "2px",
+                      background: "rgba(255,255,255,.28)",
+                    }}
+                  />
+
                   {/* Screen gloss reflection */}
                   <div
                     className="pointer-events-none absolute inset-0 z-30"
                     style={{
                       borderRadius: "48px",
                       background:
-                        "linear-gradient(145deg," +
-                        "rgba(255,255,255,.09) 0%," +
-                        "rgba(255,255,255,.04) 25%," +
+                        "linear-gradient(148deg," +
+                        "rgba(255,255,255,.14) 0%," +
+                        "rgba(255,255,255,.07) 18%," +
+                        "rgba(255,255,255,.02) 38%," +
                         "transparent 55%)",
                     }}
                   />
@@ -661,11 +694,30 @@ export default function MockupDiagnostico() {
 
                 {/* Left edge chamfer highlight */}
                 <div
-                  className="pointer-events-none absolute inset-y-[12%] left-0 z-40 w-[1.5px]"
+                  className="pointer-events-none absolute inset-y-[8%] left-0 z-40 w-[2px]"
                   style={{
                     background:
-                      "linear-gradient(180deg, transparent 0%, rgba(255,255,255,.28) 20%, rgba(255,255,255,.18) 70%, transparent 100%)",
+                      "linear-gradient(180deg, transparent 0%, rgba(255,255,255,.35) 16%, rgba(255,255,255,.22) 65%, rgba(255,255,255,.06) 88%, transparent 100%)",
+                    borderRadius: "2px",
+                  }}
+                />
+
+                {/* Right edge chamfer highlight */}
+                <div
+                  className="pointer-events-none absolute inset-y-[15%] right-0 z-40 w-[1px]"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 0%, rgba(255,255,255,.09) 25%, rgba(255,255,255,.06) 65%, transparent 100%)",
                     borderRadius: "1px",
+                  }}
+                />
+
+                {/* Top edge extra bright line */}
+                <div
+                  className="pointer-events-none absolute inset-x-[10%] top-0 z-40 h-[1px]"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.40) 30%, rgba(255,255,255,.55) 50%, rgba(255,255,255,.40) 70%, transparent 100%)",
                   }}
                 />
               </div>{/* end outer metallic frame */}
