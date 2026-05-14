@@ -3,12 +3,10 @@ const nextConfig = {
   serverExternalPackages: ["@prisma/client", "prisma", "bcryptjs"],
   experimental: {
     outputFileTracingExcludes: {
-      "/api/download": [
-        "node_modules/@prisma/engines/**",
-        "node_modules/@prisma/client/libquery_engine*",
-        "node_modules/prisma/libquery_engine*",
-        "node_modules/pdfjs-dist/**",
-        "node_modules/@napi-rs/canvas/**",
+      "*": [
+        "./node_modules/@prisma/engines/**",
+        "./node_modules/pdfjs-dist/**",
+        "./node_modules/@napi-rs/canvas/**",
       ],
     },
   },
