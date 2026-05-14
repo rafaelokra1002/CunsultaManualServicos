@@ -433,9 +433,166 @@ function FerramentaResetCombustivel() {
   );
 }
 
+// ─── Pulse Pattern Visualizer ────────────────────────────────────────────────
+
+const PATTERNS = [
+  {
+    id: 1, label: "A", ethanol: "0 a 40%", pulses: 1,
+    color: "emerald", border: "border-emerald-500/40", bg: "bg-emerald-500/20", text: "text-emerald-300", bar: "bg-emerald-400",
+  },
+  {
+    id: 2, label: "B", ethanol: "30 a 70%", pulses: 2,
+    color: "blue", border: "border-blue-500/40", bg: "bg-blue-500/20", text: "text-blue-300", bar: "bg-blue-400",
+  },
+  {
+    id: 3, label: "C", ethanol: "60 a 90%", pulses: 3,
+    color: "yellow", border: "border-yellow-500/40", bg: "bg-yellow-500/20", text: "text-yellow-300", bar: "bg-yellow-400",
+  },
+  {
+    id: 4, label: "D", ethanol: "80 a 100%", pulses: 4,
+    color: "red", border: "border-red-500/40", bg: "bg-red-500/20", text: "text-red-300", bar: "bg-red-400",
+  },
+];
+
+// Each unit = 0.3s. Pulse=1u, gap between pulses=1u, long pause≈4.3u
+function PulseDiagram({ pulses, barClass }: { pulses: number; barClass: string }) {
+  // Build segments: [pulse, gap, pulse, gap, ..., long-pause, repeat-dot]
+  const segments: { on: boolean; w: number }[] = [];
+  for (let i = 0; i < pulses; i++) {
+    segments.push({ on: true, w: 14 });   // pulse 0.3s
+    if (i < pulses - 1) segments.push({ on: false, w: 10 }); // gap 0.3s
+  }
+  segments.push({ on: false, w: 36 }); // long pause 1.3s
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex items-end gap-0" style={{ height: 28 }}>
+        {segments.map((seg, i) => (
+          <div
+            key={i}
+            style={{ width: seg.w, height: seg.on ? 24 : 4, flexShrink: 0 }}
+            className={`rounded-sm ${seg.on ? barClass : "bg-[#1a1a2e]"}`}
+          />
+        ))}
+        {/* "repeats" arrow */}
+        <div className="flex flex-1 items-center gap-1 self-center pl-1">
+          <div className="h-px flex-1 border-t border-dashed border-[#3a3a5e]" />
+          <span className="text-[9px] text-[#555570]">repete</span>
+        </div>
+      </div>
+      {/* Time labels */}
+      <div className="flex gap-0 text-[8px] text-[#555570]" style={{ lineHeight: 1 }}>
+        {segments.map((seg, i) => (
+          <div key={i} style={{ width: seg.w, flexShrink: 0 }} className="text-center">
+            {seg.on ? "0.3" : seg.w > 20 ? "1.3" : ""}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ReferenciaIndicador() {
+  return (
+    <div className="space-y-4">
+
+      {/* Comportamento do indicador */}
+      <div className="rounded-2xl border border-[#2a2a3e] bg-[#0f0f18] p-5">
+        <h3 className="mb-4 text-base font-extrabold text-white">
+          💡 Indicador de Partida a Frio — Comportamento
+        </h3>
+        <div className="space-y-3">
+
+          <div className="rounded-xl border border-[#2a2a3e] bg-[#151522] p-3.5">
+            <p className="mb-1 text-xs font-bold uppercase tracking-wider text-[#555570]">Normal</p>
+            <p className="text-sm text-[#c8cad7]">
+              Ao ligar a ignição, o indicador acende por{" "}
+              <span className="font-bold text-white">2 segundos</span> e então se apaga.
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/8 p-3.5">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-yellow-400">
+              ⚠️ Indicador Piscando ao Ligar → Partida Difícil
+            </p>
+            <ul className="space-y-1.5 text-sm text-[#c8cad7]">
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 shrink-0 text-yellow-400">—</span>
+                Temperatura do ar abaixo de <strong className="text-white">15 °C</strong>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-0.5 shrink-0 text-yellow-400">—</span>
+                Taxa de etanol aproximadamente <strong className="text-white">80–100%</strong>
+              </li>
+            </ul>
+            <div className="mt-2.5 rounded-lg border border-yellow-500/20 bg-[#0f0f18] p-2.5 text-xs font-semibold text-yellow-300">
+              → Adicione <strong>3 L de gasolina</strong> ao tanque e deixe em marcha lenta por 2 minutos
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-blue-500/30 bg-blue-500/8 p-3.5">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-blue-400">
+              🔵 Indicador NÃO Acende + Motor Não Pega
+            </p>
+            <div className="rounded-lg border border-blue-500/20 bg-[#0f0f18] p-2.5 text-xs font-semibold text-blue-300">
+              → Adicione <strong>2 L de gasolina</strong> ao tanque e deixe em marcha lenta por 2 minutos
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Tabela de padrões */}
+      <div className="rounded-2xl border border-[#2a2a3e] bg-[#0f0f18] p-5">
+        <h3 className="mb-1 text-base font-extrabold text-white">
+          📊 Índice de Dados de Condição de Combustível no ECM
+        </h3>
+        <p className="mb-4 text-xs text-[#8888a4]">
+          Leitura igual ao procedimento de leitura do DTC — unidade: segundos.
+        </p>
+
+        {/* Table header */}
+        <div className="mb-2 grid grid-cols-[40px_1fr_1fr] gap-2 px-1 text-[10px] font-bold uppercase tracking-wider text-[#555570]">
+          <span>Cód.</span>
+          <span>Etanol aprox.</span>
+          <span>Padrão de piscadas</span>
+        </div>
+
+        <div className="space-y-2.5">
+          {PATTERNS.map((p) => (
+            <div
+              key={p.id}
+              className={`grid grid-cols-[40px_1fr_1fr] items-center gap-2 rounded-xl border ${p.border} bg-[#151522] p-3`}
+            >
+              {/* Code */}
+              <div className={`flex h-9 w-9 items-center justify-center rounded-lg text-sm font-extrabold ${p.bg} ${p.text} border ${p.border}`}>
+                {p.id}
+              </div>
+
+              {/* Ethanol + pattern label */}
+              <div>
+                <p className={`text-sm font-extrabold ${p.text}`}>Padrão {p.label}</p>
+                <p className="text-xs text-[#8888a4]">{p.ethanol}</p>
+              </div>
+
+              {/* Pulse diagram */}
+              <PulseDiagram pulses={p.pulses} barClass={p.bar} />
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-3 text-[10px] text-[#555570]">
+          * Padrão repetido em ciclos. Largura de cada pulso = 0,3 s · Pausa = 1,3 s
+        </p>
+      </div>
+
+    </div>
+  );
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-type Tool = "inicializacao" | "reset-combustivel";
+type Tool = "inicializacao" | "reset-combustivel" | "indicador";
 
 export default function ResetECMPage() {
   const [tool, setTool] = useState<Tool | null>(null);
@@ -524,6 +681,30 @@ export default function ResetECMPage() {
                   <span className="text-[#555570] transition group-hover:text-white">→</span>
                 </div>
               </button>
+
+              <button
+                onClick={() => setTool("indicador")}
+                className="group w-full rounded-2xl border border-[#f59e0b]/30 bg-[#0f0f18] p-5 text-left transition hover:border-[#f59e0b]/60 hover:bg-[#f59e0b]/5"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#f59e0b]/30 bg-[#f59e0b]/10 text-2xl">
+                    💡
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#f59e0b]">Referência</p>
+                    <h2 className="text-lg font-extrabold text-white">Indicador de Partida a Frio & Padrões A–D</h2>
+                    <p className="mt-1 text-sm text-[#8888a4]">
+                      Como interpretar o indicador, condições de partida difícil e tabela de padrões de piscada por % de etanol.
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {["Padrão A", "Padrão B", "Padrão C", "Padrão D", "% Etanol"].map((t) => (
+                        <span key={t} className="rounded-full border border-[#f59e0b]/30 bg-[#f59e0b]/10 px-2.5 py-0.5 text-xs font-semibold text-[#f59e0b]">{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <span className="text-[#555570] transition group-hover:text-white">→</span>
+                </div>
+              </button>
             </div>
           )}
 
@@ -544,6 +725,16 @@ export default function ResetECMPage() {
                 <p className="text-xs text-[#8888a4]">Siga o fluxograma. Use os cronômetros nos passos com tempo crítico.</p>
               </div>
               <FerramentaResetCombustivel />
+            </div>
+          )}
+
+          {tool === "indicador" && (
+            <div>
+              <div className="mb-4 rounded-xl border border-[#f59e0b]/20 bg-[#f59e0b]/5 px-4 py-3">
+                <p className="text-sm font-bold text-[#f59e0b]">💡 Referência — Indicador de Partida a Frio</p>
+                <p className="text-xs text-[#8888a4]">Honda CG160 Fan ESDi · CG160 Titan EX</p>
+              </div>
+              <ReferenciaIndicador />
             </div>
           )}
 
