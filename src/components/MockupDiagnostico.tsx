@@ -61,8 +61,8 @@ export default function MockupDiagnostico() {
       {/* ── Keyframes ─────────────────────────────────────────────────────── */}
       <style>{`
         @keyframes od-float-phone {
-          0%,100% { transform: perspective(1100px) rotateY(-22deg) rotateX(7deg) translateY(0px) translateZ(0); }
-          50%      { transform: perspective(1100px) rotateY(-17deg) rotateX(4deg) translateY(-22px) translateZ(10px); }
+          0%,100% { transform: rotateY(-22deg) rotateX(7deg) translateY(0px); }
+          50%      { transform: rotateY(-17deg) rotateX(4deg) translateY(-22px); }
         }
         @keyframes od-glow-pulse {
           0%,100% { opacity:.50; transform:scale(1) translateX(-5%); }
@@ -242,7 +242,7 @@ export default function MockupDiagnostico() {
             {/* ══════════════════════════════════════════════════════
                 RIGHT — PHONE MOCKUP
                 ══════════════════════════════════════════════════════ */}
-            <div className="od-phone-wrap relative flex shrink-0 items-center justify-center" style={{ width: "380px", height: "760px" }}>
+            <div className="od-phone-wrap relative flex shrink-0 items-center justify-center" style={{ width: "380px", height: "760px", perspective: "1100px", perspectiveOrigin: "58% 48%" }}>
 
               {/* Glow blob — asymmetric to match tilt */}
               <div
@@ -256,65 +256,105 @@ export default function MockupDiagnostico() {
                 }}
               />
 
-              {/* ── Outer metallic frame (animation wrapper) ─────── */}
+              {/* ── 3D container (preserve-3d + animation) ──────── */}
               <div
-                className="relative"
                 style={{
                   width: "340px",
                   height: "720px",
-                  borderRadius: "50px",
-                  padding: "3px",
-                  background:
-                    "linear-gradient(158deg," +
-                    "#b0b0d0 0%," +
-                    "#8888aa 3%," +
-                    "#3e3e5c 9%," +
-                    "#1e1e32 22%," +
-                    "#28283e 40%," +
-                    "#1a1a2c 60%," +
-                    "#222238 75%," +
-                    "#383858 88%," +
-                    "#1e1e2e 95%," +
-                    "#141422 100%)",
-                  boxShadow:
-                    "0 110px 220px rgba(0,0,0,.95)," +
-                    "0 50px 110px rgba(0,0,0,.82)," +
-                    "-24px 24px 60px rgba(0,0,0,.70)," +
-                    "10px -8px 20px rgba(0,0,0,.50)," +
-                    "inset 0 2px 0 rgba(255,255,255,.30)," +
-                    "inset 0 -1.5px 0 rgba(0,0,0,.80)," +
-                    "inset 1.5px 0 0 rgba(255,255,255,.14)," +
-                    "inset -1.5px 0 0 rgba(0,0,0,.55)," +
-                    "0 0 0 0.5px rgba(255,255,255,.06)",
+                  position: "relative",
+                  transformStyle: "preserve-3d",
                   animation: "od-float-phone 8s ease-in-out infinite",
                 }}
               >
-                {/* Physical buttons — right (power) */}
+
+                {/* ── LEFT SIDE FACE ───────────────────────────────── */}
                 <div
-                  className="absolute -right-[7px] top-24 h-16 w-[7px]"
                   style={{
-                    background: "linear-gradient(90deg, #3a3a56, #252538, #1a1a28)",
-                    boxShadow: "3px 0 8px rgba(0,0,0,.60), inset 0 1px 0 rgba(255,255,255,.12)",
-                    borderRadius: "0 4px 4px 0",
+                    position: "absolute",
+                    left: "-24px",
+                    top: "24px",
+                    width: "24px",
+                    height: "672px",
+                    transformOrigin: "right center",
+                    transform: "rotateY(-90deg)",
+                    borderRadius: "14px 0 0 14px",
+                    background:
+                      "linear-gradient(to right," +
+                      "#0a0a14 0%," +
+                      "#1a1a2c 25%," +
+                      "#28283e 52%," +
+                      "#1e1e30 76%," +
+                      "#0d0d1a 100%)",
+                    boxShadow:
+                      "inset 1px 0 0 rgba(255,255,255,.12)," +
+                      "inset 0 1px 0 rgba(255,255,255,.08)," +
+                      "inset 0 -1px 0 rgba(0,0,0,.6)",
                   }}
-                />
-                {/* Physical buttons — left (volume) */}
+                >
+                  {/* Silent switch */}
+                  <div style={{
+                    position: "absolute", left: "4px", top: "44px",
+                    width: "5px", height: "26px", borderRadius: "3px",
+                    background: "linear-gradient(to bottom, #32324e, #1c1c2e)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,.16), 0 2px 5px rgba(0,0,0,.9)",
+                  }} />
+                  {/* Volume up */}
+                  <div style={{
+                    position: "absolute", left: "4px", top: "108px",
+                    width: "5px", height: "54px", borderRadius: "3px",
+                    background: "linear-gradient(to bottom, #34344e, #20202e)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,.16), 0 2px 5px rgba(0,0,0,.9)",
+                  }} />
+                  {/* Volume down */}
+                  <div style={{
+                    position: "absolute", left: "4px", top: "176px",
+                    width: "5px", height: "54px", borderRadius: "3px",
+                    background: "linear-gradient(to bottom, #34344e, #20202e)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,.16), 0 2px 5px rgba(0,0,0,.9)",
+                  }} />
+                </div>
+
+                {/* ── Outer metallic frame (front face) ────────────── */}
                 <div
-                  className="absolute -left-[7px] top-20 h-10 w-[7px]"
                   style={{
-                    background: "linear-gradient(270deg, #3a3a56, #252538, #1a1a28)",
-                    boxShadow: "-3px 0 8px rgba(0,0,0,.60), inset 0 1px 0 rgba(255,255,255,.12)",
-                    borderRadius: "4px 0 0 4px",
+                    position: "absolute",
+                    width: "340px",
+                    height: "720px",
+                    borderRadius: "50px",
+                    padding: "3px",
+                    background:
+                      "linear-gradient(158deg," +
+                      "#b0b0d0 0%," +
+                      "#8888aa 3%," +
+                      "#3e3e5c 9%," +
+                      "#1e1e32 22%," +
+                      "#28283e 40%," +
+                      "#1a1a2c 60%," +
+                      "#222238 75%," +
+                      "#383858 88%," +
+                      "#1e1e2e 95%," +
+                      "#141422 100%)",
+                    boxShadow:
+                      "0 110px 220px rgba(0,0,0,.95)," +
+                      "0 50px 110px rgba(0,0,0,.82)," +
+                      "-24px 24px 60px rgba(0,0,0,.70)," +
+                      "10px -8px 20px rgba(0,0,0,.50)," +
+                      "inset 0 2px 0 rgba(255,255,255,.30)," +
+                      "inset 0 -1.5px 0 rgba(0,0,0,.80)," +
+                      "inset 1.5px 0 0 rgba(255,255,255,.14)," +
+                      "inset -1.5px 0 0 rgba(0,0,0,.55)," +
+                      "0 0 0 0.5px rgba(255,255,255,.06)",
                   }}
-                />
-                <div
-                  className="absolute -left-[7px] top-36 h-10 w-[7px]"
-                  style={{
-                    background: "linear-gradient(270deg, #3a3a56, #252538, #1a1a28)",
-                    boxShadow: "-3px 0 8px rgba(0,0,0,.60), inset 0 1px 0 rgba(255,255,255,.12)",
-                    borderRadius: "4px 0 0 4px",
-                  }}
-                />
+                >
+                  {/* Physical button — right (power) */}
+                  <div
+                    className="absolute -right-[7px] top-24 h-16 w-[7px]"
+                    style={{
+                      background: "linear-gradient(90deg, #3a3a56, #252538, #1a1a28)",
+                      boxShadow: "3px 0 8px rgba(0,0,0,.60), inset 0 1px 0 rgba(255,255,255,.12)",
+                      borderRadius: "0 4px 4px 0",
+                    }}
+                  />
 
                 {/* ── Inner screen bezel ──────────────────────────── */}
                 <div
@@ -720,7 +760,8 @@ export default function MockupDiagnostico() {
                       "linear-gradient(90deg, transparent 0%, rgba(255,255,255,.40) 30%, rgba(255,255,255,.55) 50%, rgba(255,255,255,.40) 70%, transparent 100%)",
                   }}
                 />
-              </div>{/* end outer metallic frame */}
+                </div>{/* end outer metallic frame / front face */}
+              </div>{/* end preserve-3d wrapper */}
 
               {/* Step indicator dots */}
               <div className="absolute -bottom-6 left-1/2 flex -translate-x-1/2 gap-1.5">
