@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/components/Logo";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const refCode = searchParams.get("ref") ?? undefined;
   const [step, setStep] = useState<"register" | "payment">("register");
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -55,7 +57,7 @@ export default function RegisterPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome, email, phone, password }),
+        body: JSON.stringify({ nome, email, phone, password, referralCode: refCode }),
       });
 
       const data = await res.json();

@@ -14,19 +14,29 @@ enum Role {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  nome      String
-  email     String    @unique
-  password  String
-  phone     String?
-  role      Role      @default(USER)
-  active    Boolean   @default(true)
-  isPremium Boolean   @default(false)
-  demoUsed  Boolean   @default(false)
-  createdAt DateTime  @default(now())
-  payments  Payment[]
+  id           String    @id @default(cuid())
+  nome         String
+  email        String    @unique
+  password     String
+  phone        String?
+  role         Role      @default(USER)
+  active       Boolean   @default(true)
+  isPremium    Boolean   @default(false)
+  demoUsed     Boolean   @default(false)
+  referralCode String?   // código do link de indicação usado no cadastro
+  createdAt    DateTime  @default(now())
+  payments     Payment[]
 
   @@map("users")
+}
+
+model ReferralLink {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  label     String
+  createdAt DateTime @default(now())
+
+  @@map("referral_links")
 }
 
 model Payment {

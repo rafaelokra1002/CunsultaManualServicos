@@ -9,6 +9,7 @@ interface User {
   role: string;
   active: boolean;
   isPremium: boolean;
+  referralLabel: string | null;
   createdAt: string;
 }
 
@@ -244,6 +245,11 @@ export default function AdminUsuariosPage() {
                     >
                       {user.isPremium ? "👑 Premium" : "Demo"}
                     </span>
+                    {user.referralLabel && (
+                      <span className="inline-flex items-center gap-1 rounded-md bg-purple-500/20 px-2.5 py-1 font-semibold text-purple-400">
+                        🔗 {user.referralLabel}
+                      </span>
+                    )}
                     <span className="rounded-md bg-[#1a1a2e] px-2.5 py-1 text-[#8888a4]">
                       Cadastro: {new Date(user.createdAt).toLocaleDateString("pt-BR")}
                     </span>
@@ -284,6 +290,7 @@ export default function AdminUsuariosPage() {
                   <th className="px-6 py-4">Tipo</th>
                   <th className="px-6 py-4">Status</th>
                   <th className="px-6 py-4">Plano</th>
+                  <th className="px-6 py-4">Indicado por</th>
                   <th className="px-6 py-4">Cadastro</th>
                   <th className="px-6 py-4">Ações</th>
                 </tr>
@@ -328,6 +335,15 @@ export default function AdminUsuariosPage() {
                       >
                         {user.isPremium ? "👑 Premium" : "Demo"}
                       </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      {user.referralLabel ? (
+                        <span className="inline-flex items-center gap-1 rounded-md bg-purple-500/20 px-2.5 py-0.5 text-xs font-semibold text-purple-400">
+                          🔗 {user.referralLabel}
+                        </span>
+                      ) : (
+                        <span className="text-[#8888a4]">—</span>
+                      )}
                     </td>
                     <td className="px-6 py-4 text-[#8888a4]">
                       {new Date(user.createdAt).toLocaleDateString("pt-BR")}

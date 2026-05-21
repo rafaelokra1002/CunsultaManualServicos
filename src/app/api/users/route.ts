@@ -31,12 +31,26 @@ export async function GET() {
         role: true,
         active: true,
         isPremium: true,
+        referralCode: true,
         createdAt: true,
       },
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json(users);
+    // Resolve referral labels
+    const codes = users.filter((u) => u.referralCode).map((u) => u.referralCode!);
+    const referralLinks =
+      codes.length > 0
+        ? await prisma.referralLink.findMany({ where: { code: { in: codes } } })
+        : [];
+    const codeToLabel = Object.fromEntries(referralLinks.map((r) => [r.code, r.label]));
+
+    return NextResponse.json(
+      users.map((u) => ({
+        ...u,
+        referralLabel: u.referralCode ? (codeToLabel[u.referralCode] ?? null) : null,
+      }))
+    );
   } catch (error) {
     console.error("Erro ao listar usuários:", error);
     return NextResponse.json(

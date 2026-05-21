@@ -19,6 +19,7 @@ export async function POST(request: Request) {
     }
 
     const { nome, email, phone, password } = result.data;
+    const referralCode = typeof body.referralCode === "string" ? body.referralCode.trim() || null : null;
 
     // Verifica se o email já está cadastrado
     const existingUser = await prisma.user.findUnique({
@@ -35,6 +36,13 @@ export async function POST(request: Request) {
     // Criptografa a senha
     const hashedPassword = await hash(password, 12);
 
+    // Valida o referralCode se fornecido
+    let validReferralCode: string | null = null;
+    if (referralCode) {
+      const link = await prisma.referralLink.findUnique({ where: { code: referralCode } });
+      if (link) validReferralCode = referralCode;
+    }
+
     // Cria o usuário (active = true, isPremium = false por padrão — modo demo)
     const user = await prisma.user.create({
       data: {
@@ -43,6 +51,7 @@ export async function POST(request: Request) {
         phone: phone ?? null,
         password: hashedPassword,
         active: true,
+        referralCode: validReferralCode,
       },
       select: {
         id: true,
