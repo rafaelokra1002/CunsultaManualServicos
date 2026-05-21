@@ -22,7 +22,7 @@ export async function GET(request: Request) {
       amount: true,
       createdAt: true,
       user: {
-        select: { active: true },
+        select: { isPremium: true },
       },
     },
   });
@@ -34,8 +34,8 @@ export async function GET(request: Request) {
     );
   }
 
-  // Se o usuário já foi ativado (por admin ou webhook), marcar pagamento como approved
-  if (payment.status === "pending" && payment.user.active) {
+  // Se o usuário já é premium (ativado por admin ou webhook), sincroniza o status do pagamento
+  if (payment.status === "pending" && payment.user.isPremium) {
     await prisma.payment.update({
       where: { id: payment.id },
       data: { status: "approved" },
