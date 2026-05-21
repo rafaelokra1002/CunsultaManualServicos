@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { nome, email, password } = result.data;
+    const { nome, email, phone, password } = result.data;
 
     // Verifica se o email já está cadastrado
     const existingUser = await prisma.user.findUnique({
@@ -40,6 +40,7 @@ export async function POST(request: Request) {
       data: {
         nome,
         email,
+        phone: phone ?? null,
         password: hashedPassword,
         active: true,
       },

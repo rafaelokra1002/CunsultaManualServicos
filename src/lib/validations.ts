@@ -6,6 +6,17 @@ export const registerSchema = z.object({
     .min(2, "Nome deve ter pelo menos 2 caracteres")
     .max(100, "Nome muito longo"),
   email: z.string().email("Email inválido"),
+  phone: z
+    .string()
+    .min(10, "Telefone inválido — informe com DDD")
+    .max(20, "Telefone muito longo")
+    .transform((v) => {
+      const digits = v.replace(/\D/g, "");
+      // Normaliza para formato internacional 55 + DDD + número
+      if (digits.length === 10 || digits.length === 11) return `55${digits}`;
+      return digits;
+    })
+    .optional(),
   password: z
     .string()
     .min(6, "Senha deve ter pelo menos 6 caracteres")

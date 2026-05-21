@@ -18,6 +18,7 @@ model User {
   nome      String
   email     String    @unique
   password  String
+  phone     String?
   role      Role      @default(USER)
   active    Boolean   @default(true)
   isPremium Boolean   @default(false)
@@ -34,11 +35,12 @@ model Payment {
   user            User     @relation(fields: [userId], references: [id])
   amount          Float
   status          String   @default("pending") // pending, approved, expired
-  pushinPayId     String?  @unique
-  pixCode         String?
-  pixQrCode       String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  pushinPayId         String?  @unique
+  pixCode             String?
+  pixQrCode           String?
+  recoveryMessageSent Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
   @@map("payments")
 }

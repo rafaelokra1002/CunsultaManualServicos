@@ -10,6 +10,7 @@ export default function RegisterPage() {
   const [step, setStep] = useState<"register" | "payment">("register");
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [userId, setUserId] = useState("");
   const [error, setError] = useState("");
@@ -54,7 +55,7 @@ export default function RegisterPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome, email, password }),
+        body: JSON.stringify({ nome, email, phone, password }),
       });
 
       const data = await res.json();
@@ -188,6 +189,20 @@ export default function RegisterPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="input-dark"
                   placeholder="seu@email.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+                  WhatsApp (com DDD)
+                </label>
+                <input
+                  id="phone"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="input-dark"
+                  placeholder="(71) 99999-9999"
                 />
               </div>
 
