@@ -183,23 +183,31 @@ export default function AssistentePage() {
                       : "bg-[#1a1a2e] text-[#d0d0e8]"
                   }`}
                 >
-                  {msg.content === "" && msg.role === "assistant" ? (
-                    <div className="flex gap-1">
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "0ms" }} />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "150ms" }} />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "300ms" }} />
-                    </div>
-                  ) : (
-                    msg.content.split("\n").map((line, j) => (
-                      <span key={j}>
-                        {line}
-                        {j < msg.content.split("\n").length - 1 && <br />}
-                      </span>
-                    ))
-                  )}
+                  {msg.content.split("\n").map((line, j) => (
+                    <span key={j}>
+                      {line}
+                      {j < msg.content.split("\n").length - 1 && <br />}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}
+
+            {/* Indicador enquanto busca no banco / aguarda stream */}
+            {loading && messages[messages.length - 1]?.role === "user" && (
+              <div className="flex gap-3">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#1a1a2e] text-sm">
+                  🤖
+                </div>
+                <div className="rounded-2xl bg-[#1a1a2e] px-4 py-3">
+                  <div className="flex gap-1">
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "0ms" }} />
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "150ms" }} />
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "300ms" }} />
+                  </div>
+                </div>
+              </div>
+            )}
             <div ref={bottomRef} />
           </div>
         )}
