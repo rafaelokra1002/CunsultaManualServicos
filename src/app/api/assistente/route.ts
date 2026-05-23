@@ -99,25 +99,51 @@ Recomendação: ${entry.recommendation}`;
     if (isEcuQuestion) {
       try {
         const stopWords2 = new Set(["da","do","de","das","dos","a","o","e","em","para","na","no","com","que","qual","como","um","uma","os","as","esta","está","por"]);
-        const techWords = question.split(/\s+/).filter((w: string) => w.length > 2 && !stopWords2.has(w.toLowerCase())).slice(0, 4);
-        const [ek1, ek2, ek3, ek4] = techWords.map((w: string) => `%${w}%`);
+        const ecuWords = question.split(/\s+/).filter((w: string) => w.length > 2 && !stopWords2.has(w.toLowerCase())).slice(0, 5);
+        const [ek1, ek2, ek3, ek4] = ecuWords.map((w: string) => `%${w}%`);
+
+        // Extrai o termo específico do sensor/componente da pergunta (EOT, MAP, TPS, etc.)
+        const sensorMatch = question.match(/\b(EOT|TPS|MAP|CKP|IAT|IACV|lambda|sonda|injetor|bico)\b/gi);
+        const sensorTerm = sensorMatch ? `%${sensorMatch[0]}%` : (ek1 ?? null);
+
+        // Detecta se é pergunta sobre pinagem/pino/cor de fio
+        const isPinagemQ = /pino|pinagem|cor.{0,10}fio|fio.{0,15}(cor|aliment|ligar)|conector/i.test(question);
+
         if (ek1) {
-          // Se tiver modelo identificado, busca ebook chunks que tenham o modelo + termos técnicos
-          const modelFilter = modelTerms ? `%${modelTerms.split(" ")[0]}%` : `%${ek1.slice(1,-1)}%`;
-          const modelFilter2 = modelTerms?.split(" ")[1] ? `%${modelTerms.split(" ")[1]}%` : modelFilter;
+          // Busca A: sensor específico + contexto de pinagem (pino/conector) — não requer nome do modelo
+          // Evita buscar chunks de Parâmetros quando a pergunta é sobre pinos
+          if (isPinagemQ && sensorTerm) {
+            ebookChunks = await prisma.$queryRaw`
+              SELECT mc.content, m.title, m.brand, m.model, m.year
+              FROM manual_chunks mc
+              JOIN manuals m ON m.id = mc."manualId"
+              WHERE m.category = 'ebook'
+                AND unaccent(mc.content) ILIKE unaccent(${sensorTerm})
+                AND (
+                  unaccent(mc.content) ILIKE '%pino%'
+                  OR unaccent(mc.content) ILIKE '%conector%'
+                  OR unaccent(mc.content) ILIKE '%pinagem%'
+                )
+              LIMIT 4
+            `;
+          }
 
-          // Primeiro: chunks do modelo específico no ebook
-          ebookChunks = await prisma.$queryRaw`
-            SELECT mc.content, m.title, m.brand, m.model, m.year
-            FROM manual_chunks mc
-            JOIN manuals m ON m.id = mc."manualId"
-            WHERE m.category = 'ebook'
-              AND unaccent(mc.content) ILIKE unaccent(${modelFilter})
-              AND unaccent(mc.content) ILIKE unaccent(${modelFilter2})
-            LIMIT 4
-          `;
+          // Busca B: modelo + segundo termo técnico (para parâmetros ou quando A não achou)
+          if (ebookChunks.length === 0) {
+            const modelFilter = modelTerms ? `%${modelTerms.split(" ")[0]}%` : `%${ecuWords[0]}%`;
+            const modelFilter2 = modelTerms?.split(" ")[1] ? `%${modelTerms.split(" ")[1]}%` : modelFilter;
+            ebookChunks = await prisma.$queryRaw`
+              SELECT mc.content, m.title, m.brand, m.model, m.year
+              FROM manual_chunks mc
+              JOIN manuals m ON m.id = mc."manualId"
+              WHERE m.category = 'ebook'
+                AND unaccent(mc.content) ILIKE unaccent(${modelFilter})
+                AND unaccent(mc.content) ILIKE unaccent(${modelFilter2})
+              LIMIT 4
+            `;
+          }
 
-          // Se não achou pelo modelo, busca pelos termos técnicos
+          // Busca C: termos técnicos (OR) como último recurso
           if (ebookChunks.length === 0) {
             ebookChunks = await prisma.$queryRaw`
               SELECT mc.content, m.title, m.brand, m.model, m.year
