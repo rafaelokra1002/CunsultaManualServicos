@@ -102,19 +102,37 @@ Recomendação: ${entry.recommendation}`;
         const techWords = question.split(/\s+/).filter((w: string) => w.length > 2 && !stopWords2.has(w.toLowerCase())).slice(0, 4);
         const [ek1, ek2, ek3, ek4] = techWords.map((w: string) => `%${w}%`);
         if (ek1) {
+          // Se tiver modelo identificado, busca ebook chunks que tenham o modelo + termos técnicos
+          const modelFilter = modelTerms ? `%${modelTerms.split(" ")[0]}%` : `%${ek1.slice(1,-1)}%`;
+          const modelFilter2 = modelTerms?.split(" ")[1] ? `%${modelTerms.split(" ")[1]}%` : modelFilter;
+
+          // Primeiro: chunks do modelo específico no ebook
           ebookChunks = await prisma.$queryRaw`
             SELECT mc.content, m.title, m.brand, m.model, m.year
             FROM manual_chunks mc
             JOIN manuals m ON m.id = mc."manualId"
             WHERE m.category = 'ebook'
-              AND (
-                unaccent(mc.content) ILIKE unaccent(${ek1})
-                OR unaccent(mc.content) ILIKE unaccent(${ek2 ?? ek1})
-                OR unaccent(mc.content) ILIKE unaccent(${ek3 ?? ek1})
-                OR unaccent(mc.content) ILIKE unaccent(${ek4 ?? ek1})
-              )
+              AND unaccent(mc.content) ILIKE unaccent(${modelFilter})
+              AND unaccent(mc.content) ILIKE unaccent(${modelFilter2})
             LIMIT 4
           `;
+
+          // Se não achou pelo modelo, busca pelos termos técnicos
+          if (ebookChunks.length === 0) {
+            ebookChunks = await prisma.$queryRaw`
+              SELECT mc.content, m.title, m.brand, m.model, m.year
+              FROM manual_chunks mc
+              JOIN manuals m ON m.id = mc."manualId"
+              WHERE m.category = 'ebook'
+                AND (
+                  unaccent(mc.content) ILIKE unaccent(${ek1})
+                  OR unaccent(mc.content) ILIKE unaccent(${ek2 ?? ek1})
+                  OR unaccent(mc.content) ILIKE unaccent(${ek3 ?? ek1})
+                  OR unaccent(mc.content) ILIKE unaccent(${ek4 ?? ek1})
+                )
+              LIMIT 4
+            `;
+          }
         }
       } catch (dbErr) {
         console.error("Erro busca ebook:", dbErr);
