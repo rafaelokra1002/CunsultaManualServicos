@@ -32,6 +32,33 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Pergunta inválida" }, { status: 400 });
     }
 
+    // Reescreve a pergunta em termos técnicos para melhorar a busca
+    let searchQuery = question;
+    try {
+      const rewrite = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        max_tokens: 60,
+        temperature: 0,
+        messages: [
+          {
+            role: "system",
+            content: `Você é um especialista em manuais de moto. Converta a pergunta do mecânico em termos técnicos usados em manuais de serviço (português técnico). Retorne APENAS as palavras-chave técnicas separadas por espaço, sem pontuação. Exemplos:
+"óleo do garfo" → "fluido suspensão dianteira nível capacidade"
+"vela" → "vela ignição"
+"correia" → "correia dentada transmissão"
+"folga das válvulas" → "folga válvula admissão escape"
+"quanto de óleo vai no motor" → "capacidade óleo motor lubrificação"
+"bateria fraca" → "bateria tensão carga sistema elétrico"
+"carburador entupido" → "carburador limpeza combustível ralenti"`,
+          },
+          { role: "user", content: question },
+        ],
+      });
+      searchQuery = rewrite.choices[0].message.content?.trim() ?? question;
+    } catch {
+      // Se falhar, usa a pergunta original
+    }
+
     // Busca chunks relevantes — full-text com 'simple' (sem stemming) + unaccent
     let chunks: { content: string; title: string; brand: string; model: string; year: number }[] = [];
     try {
@@ -44,8 +71,8 @@ export async function POST(request: Request) {
           m.year
         FROM manual_chunks mc
         JOIN manuals m ON m.id = mc."manualId"
-        WHERE to_tsvector('simple', unaccent(mc.content)) @@ plainto_tsquery('simple', unaccent(${question}))
-        ORDER BY ts_rank(to_tsvector('simple', unaccent(mc.content)), plainto_tsquery('simple', unaccent(${question}))) DESC
+        WHERE to_tsvector('simple', unaccent(mc.content)) @@ plainto_tsquery('simple', unaccent(${searchQuery}))
+        ORDER BY ts_rank(to_tsvector('simple', unaccent(mc.content)), plainto_tsquery('simple', unaccent(${searchQuery}))) DESC
         LIMIT 8
       `;
     } catch (dbErr) {
@@ -56,11 +83,11 @@ export async function POST(request: Request) {
     if (chunks.length === 0) {
       try {
         const stopWords = new Set(['da','do','de','das','dos','a','o','e','em','para','na','no','com','que','qual','como','um','uma','os','as']);
-        const words = question.trim().split(/\s+/)
+        const words = searchQuery.trim().split(/\s+/)
           .filter((w: string) => w.length > 2 && !stopWords.has(w.toLowerCase()))
           .slice(0, 5);
 
-        if (words.length === 0) words.push(question.trim().split(/\s+/)[0]);
+        if (words.length === 0) words.push(searchQuery.trim().split(/\s+/)[0]);
 
         // Busca chunks que contenham pelo menos 2 palavras da pergunta (OR em pares)
         const kw1 = `%${words[0]}%`;
