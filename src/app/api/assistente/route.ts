@@ -75,22 +75,28 @@ export async function POST(request: Request) {
     )
     .join("\n\n---\n\n");
 
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    max_tokens: 800,
-    messages: [
-      {
-        role: "system",
-        content: `Você é um assistente técnico especialista em motocicletas. Responda com base APENAS nos trechos dos manuais fornecidos. Se a informação não estiver nos trechos, diga que não encontrou. Seja direto e técnico. Use listas quando houver múltiplos itens.`,
-      },
-      {
-        role: "user",
-        content: `Trechos dos manuais:\n\n${contextText}\n\n---\n\nPergunta: ${question}`,
-      },
-    ],
-  });
-
-  const answer = completion.choices[0].message.content ?? "";
+  let answer: string;
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      max_tokens: 800,
+      messages: [
+        {
+          role: "system",
+          content: `Você é um assistente técnico especialista em motocicletas. Responda com base APENAS nos trechos dos manuais fornecidos. Se a informação não estiver nos trechos, diga que não encontrou. Seja direto e técnico. Use listas quando houver múltiplos itens.`,
+        },
+        {
+          role: "user",
+          content: `Trechos dos manuais:\n\n${contextText}\n\n---\n\nPergunta: ${question}`,
+        },
+      ],
+    });
+    answer = completion.choices[0].message.content ?? "";
+  } catch (aiError: unknown) {
+    const msg = aiError instanceof Error ? aiError.message : String(aiError);
+    console.error("Erro OpenAI:", msg);
+    return NextResponse.json({ error: `Erro ao consultar IA: ${msg}` }, { status: 500 });
+  }
 
   return NextResponse.json({ answer, sources: context.length });
 }
