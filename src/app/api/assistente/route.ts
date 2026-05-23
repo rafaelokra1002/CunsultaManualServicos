@@ -93,6 +93,34 @@ Recomendação: ${entry.recommendation}`;
       }
     }
 
+    // Busca dedicada nos ebooks quando a pergunta é sobre ECU/pinagem/parâmetros
+    const isEcuQuestion = /\b(EOT|TPS|MAP|CKP|IAT|IACV|ECU|ECM|pino|pinagem|param[eê]tro|sensor|injetor|bico|lambda|sonda)\b/i.test(question);
+    let ebookChunks: { content: string; title: string; brand: string; model: string; year: number }[] = [];
+    if (isEcuQuestion) {
+      try {
+        const stopWords2 = new Set(["da","do","de","das","dos","a","o","e","em","para","na","no","com","que","qual","como","um","uma","os","as","esta","está","por"]);
+        const techWords = question.split(/\s+/).filter((w: string) => w.length > 2 && !stopWords2.has(w.toLowerCase())).slice(0, 4);
+        const [ek1, ek2, ek3, ek4] = techWords.map((w: string) => `%${w}%`);
+        if (ek1) {
+          ebookChunks = await prisma.$queryRaw`
+            SELECT mc.content, m.title, m.brand, m.model, m.year
+            FROM manual_chunks mc
+            JOIN manuals m ON m.id = mc."manualId"
+            WHERE m.category = 'ebook'
+              AND (
+                unaccent(mc.content) ILIKE unaccent(${ek1})
+                OR unaccent(mc.content) ILIKE unaccent(${ek2 ?? ek1})
+                OR unaccent(mc.content) ILIKE unaccent(${ek3 ?? ek1})
+                OR unaccent(mc.content) ILIKE unaccent(${ek4 ?? ek1})
+              )
+            LIMIT 4
+          `;
+        }
+      } catch (dbErr) {
+        console.error("Erro busca ebook:", dbErr);
+      }
+    }
+
     // Busca full-text
     let chunks: { content: string; title: string; brand: string; model: string; year: number }[] = [];
     try {
@@ -166,7 +194,13 @@ Recomendação: ${entry.recommendation}`;
       "X-Accel-Buffering": "no",
     };
 
-    if (chunks.length === 0 && !suspensionContext) {
+    // Mescla chunks dos ebooks com chunks normais (ebooks primeiro quando relevante)
+    const allChunks = [
+      ...ebookChunks,
+      ...chunks.filter((c) => !ebookChunks.some((e) => e.content === c.content)),
+    ].slice(0, 8);
+
+    if (allChunks.length === 0 && !suspensionContext) {
       return new Response(
         "Não encontrei informações específicas sobre isso nos manuais indexados. Tente reformular com o modelo da moto ou termo técnico.",
         { headers: streamHeaders }
@@ -175,7 +209,7 @@ Recomendação: ${entry.recommendation}`;
 
     const contextText = [
       suspensionContext,
-      ...chunks.map((c, i) => `[Trecho ${i + 1} — ${c.brand} ${c.model} ${c.year}]\n${c.content}`),
+      ...allChunks.map((c, i) => `[Trecho ${i + 1} — ${c.brand} ${c.model} ${c.year}]\n${c.content}`),
     ].filter(Boolean).join("\n\n---\n\n");
 
     // Streaming da resposta
