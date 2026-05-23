@@ -139,28 +139,78 @@ Recomendação: ${entry.recommendation}`;
       }
     }
 
-    // Busca full-text
+    const stopWords = new Set(["da","do","de","das","dos","a","o","e","em","para","na","no","com","que","qual","como","um","uma","os","as","esta","está","por"]);
+    const techWords = searchQuery.trim().split(/\s+/).filter((w: string) => w.length > 2 && !stopWords.has(w.toLowerCase())).slice(0, 6);
+    const orQuery = techWords.length > 0 ? techWords.join(" | ") : searchQuery;
+
     let chunks: { content: string; title: string; brand: string; model: string; year: number }[] = [];
-    try {
-      chunks = await prisma.$queryRaw`
-        SELECT mc.content, m.title, m.brand, m.model, m.year
-        FROM manual_chunks mc
-        JOIN manuals m ON m.id = mc."manualId"
-        WHERE to_tsvector('simple', unaccent(mc.content)) @@ plainto_tsquery('simple', unaccent(${searchQuery}))
-        ORDER BY ts_rank(to_tsvector('simple', unaccent(mc.content)), plainto_tsquery('simple', unaccent(${searchQuery}))) DESC
-        LIMIT 6
-      `;
-    } catch (dbErr) {
-      console.error("Erro na busca full-text:", dbErr);
+
+    // Busca 1: quando modelo identificado, busca dentro dos manuais do modelo
+    if (modelTerms) {
+      try {
+        const modelParts = modelTerms.split(" ").filter((w) => w.length > 1);
+        const mk1 = `%${modelParts[0]}%`;
+        const mk2 = modelParts[1] ? `%${modelParts[1]}%` : mk1;
+
+        // Encontra IDs dos manuais do modelo
+        const matchedManuals = await prisma.$queryRaw<{ id: string }[]>`
+          SELECT id FROM manuals
+          WHERE (unaccent(model) ILIKE unaccent(${mk1}) OR unaccent(model) ILIKE unaccent(${mk2})
+              OR unaccent(title) ILIKE unaccent(${mk1}) OR unaccent(title) ILIKE unaccent(${mk2}))
+            AND category != 'ebook'
+          LIMIT 5
+        `;
+
+        if (matchedManuals.length > 0) {
+          const manualIds = matchedManuals.map((m) => m.id);
+          const kw1 = techWords[0] ? `%${techWords[0]}%` : `%${modelParts[0]}%`;
+          const kw2 = techWords[1] ? `%${techWords[1]}%` : kw1;
+          const kw3 = techWords[2] ? `%${techWords[2]}%` : kw1;
+
+          chunks = await prisma.$queryRaw`
+            SELECT mc.content, m.title, m.brand, m.model, m.year,
+              (
+                (CASE WHEN unaccent(mc.content) ILIKE unaccent(${kw1}) THEN 3 ELSE 0 END) +
+                (CASE WHEN unaccent(mc.content) ILIKE unaccent(${kw2}) THEN 2 ELSE 0 END) +
+                (CASE WHEN unaccent(mc.content) ILIKE unaccent(${kw3}) THEN 1 ELSE 0 END)
+              ) AS score
+            FROM manual_chunks mc
+            JOIN manuals m ON m.id = mc."manualId"
+            WHERE mc."manualId" = ANY(${manualIds})
+              AND (
+                unaccent(mc.content) ILIKE unaccent(${kw1})
+                OR unaccent(mc.content) ILIKE unaccent(${kw2})
+                OR unaccent(mc.content) ILIKE unaccent(${kw3})
+              )
+            ORDER BY score DESC
+            LIMIT 6
+          `;
+        }
+      } catch (dbErr) {
+        console.error("Erro na busca por modelo:", dbErr);
+      }
     }
 
-    // Fallback ILIKE
+    // Busca 2: full-text OR global (quando sem modelo ou busca por modelo não achou)
     if (chunks.length === 0) {
       try {
-        const stopWords = new Set(["da","do","de","das","dos","a","o","e","em","para","na","no","com","que","qual","como","um","uma","os","as","esta","está","com","por"]);
-        const words = searchQuery.trim().split(/\s+/).filter((w: string) => w.length > 2 && !stopWords.has(w.toLowerCase())).slice(0, 5);
-        if (words.length === 0) words.push(searchQuery.trim().split(/\s+/)[0]);
+        chunks = await prisma.$queryRaw`
+          SELECT mc.content, m.title, m.brand, m.model, m.year
+          FROM manual_chunks mc
+          JOIN manuals m ON m.id = mc."manualId"
+          WHERE to_tsvector('simple', unaccent(mc.content)) @@ to_tsquery('simple', unaccent(${orQuery}))
+          ORDER BY ts_rank(to_tsvector('simple', unaccent(mc.content)), to_tsquery('simple', unaccent(${orQuery}))) DESC
+          LIMIT 6
+        `;
+      } catch (dbErr) {
+        console.error("Erro na busca full-text:", dbErr);
+      }
+    }
 
+    // Busca 3: ILIKE global por palavras-chave
+    if (chunks.length === 0) {
+      try {
+        const words = techWords.length > 0 ? techWords : [searchQuery.trim().split(/\s+/)[0]];
         const kw1 = `%${words[0]}%`;
         const kw2 = `%${words[1] ?? words[0]}%`;
         const kw3 = `%${words[2] ?? words[0]}%`;
@@ -182,27 +232,6 @@ Recomendação: ${entry.recommendation}`;
         `;
       } catch (dbErr) {
         console.error("Erro no fallback ILIKE:", dbErr);
-      }
-    }
-
-    // Fallback por modelo
-    if (chunks.length === 0 && modelTerms) {
-      try {
-        const modelWords = modelTerms.split(" ").filter((w) => w.length > 1);
-        if (modelWords.length > 0) {
-          const kw = `%${modelWords[0]}%`;
-          chunks = await prisma.$queryRaw`
-            SELECT mc.content, m.title, m.brand, m.model, m.year
-            FROM manual_chunks mc
-            JOIN manuals m ON m.id = mc."manualId"
-            WHERE unaccent(mc.content) ILIKE unaccent(${kw})
-               OR unaccent(m.model) ILIKE unaccent(${kw})
-               OR unaccent(m.title) ILIKE unaccent(${kw})
-            LIMIT 6
-          `;
-        }
-      } catch (dbErr) {
-        console.error("Erro no fallback modelo:", dbErr);
       }
     }
 
