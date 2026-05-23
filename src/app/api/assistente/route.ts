@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Pergunta inválida" }, { status: 400 });
     }
 
-    // Busca chunks relevantes com full-text search
+    // Busca chunks relevantes com full-text search + unaccent
     let chunks: { content: string; title: string; brand: string; model: string; year: number }[] = [];
     try {
       chunks = await prisma.$queryRaw`
@@ -44,19 +44,25 @@ export async function POST(request: Request) {
           m.year
         FROM manual_chunks mc
         JOIN manuals m ON m.id = mc."manualId"
-        WHERE to_tsvector('portuguese', mc.content) @@ plainto_tsquery('portuguese', ${question})
-        ORDER BY ts_rank(to_tsvector('portuguese', mc.content), plainto_tsquery('portuguese', ${question})) DESC
-        LIMIT 6
+        WHERE to_tsvector('portuguese', unaccent(mc.content)) @@ plainto_tsquery('portuguese', unaccent(${question}))
+        ORDER BY ts_rank(to_tsvector('portuguese', unaccent(mc.content)), plainto_tsquery('portuguese', unaccent(${question}))) DESC
+        LIMIT 8
       `;
     } catch (dbErr) {
       console.error("Erro na busca full-text:", dbErr);
     }
 
-    // Fallback com ILIKE
+    // Fallback: busca por palavras-chave com unaccent
     if (chunks.length === 0) {
       try {
-        const words = question.trim().split(/\s+/).slice(0, 3);
-        const pattern = words.map((w: string) => `%${w}%`);
+        const stopWords = new Set(['da','do','de','das','dos','a','o','e','para','na','no','com','que','qual','como']);
+        const words = question.trim().split(/\s+/)
+          .filter((w: string) => w.length > 2 && !stopWords.has(w.toLowerCase()))
+          .slice(0, 3);
+
+        const kw1 = `%${words[0] ?? question.split(' ')[0]}%`;
+        const kw2 = `%${words[1] ?? words[0] ?? question.split(' ')[0]}%`;
+
         chunks = await prisma.$queryRaw`
           SELECT
             mc.content,
@@ -66,11 +72,26 @@ export async function POST(request: Request) {
             m.year
           FROM manual_chunks mc
           JOIN manuals m ON m.id = mc."manualId"
-          WHERE mc.content ILIKE ${pattern[0]}
-             OR mc.content ILIKE ${pattern[1] ?? pattern[0]}
-             OR mc.content ILIKE ${pattern[2] ?? pattern[0]}
-          LIMIT 6
+          WHERE unaccent(mc.content) ILIKE unaccent(${kw1})
+            AND unaccent(mc.content) ILIKE unaccent(${kw2})
+          LIMIT 8
         `;
+
+        // Se ainda não achou, busca só pela primeira palavra
+        if (chunks.length === 0) {
+          chunks = await prisma.$queryRaw`
+            SELECT
+              mc.content,
+              m.title,
+              m.brand,
+              m.model,
+              m.year
+            FROM manual_chunks mc
+            JOIN manuals m ON m.id = mc."manualId"
+            WHERE unaccent(mc.content) ILIKE unaccent(${kw1})
+            LIMIT 8
+          `;
+        }
       } catch (dbErr) {
         console.error("Erro no fallback ILIKE:", dbErr);
       }
