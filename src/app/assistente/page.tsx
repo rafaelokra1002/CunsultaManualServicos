@@ -101,7 +101,7 @@ export default function AssistentePage() {
   const isPremium = session?.user?.isPremium;
 
   return (
-    <div className="flex h-[calc(100vh-5rem)] flex-col md:h-[calc(100vh-4rem)]">
+    <div className="flex h-[calc(100vh-5rem)] flex-col pb-20 sm:pb-0 md:h-[calc(100vh-4rem)]">
       {/* Header */}
       <div className="mb-4 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#6c5ce7] to-[#a78bfa] text-lg">
