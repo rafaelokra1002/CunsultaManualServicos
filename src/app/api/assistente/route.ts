@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import OpenAI from "openai";
+import { findSuspensionData } from "@/lib/suspension-data";
 
 export const dynamic = "force-dynamic";
 
@@ -57,6 +58,20 @@ export async function POST(request: Request) {
       searchQuery = rewrite.choices[0].message.content?.trim() ?? question;
     } catch {
       // Se falhar, usa a pergunta original
+    }
+
+    // Consulta tabela de óleo de suspensão quando relevante
+    const isSuspensionOilQuestion = /suspen|garfo|bengala|fluido|oleo.*(suspen|garfo)|garfo.*(oleo|fluido)/i.test(question);
+    let suspensionContext = "";
+    if (isSuspensionOilQuestion) {
+      const entry = findSuspensionData(question);
+      if (entry) {
+        suspensionContext = `[Tabela de Óleo de Suspensão — ${entry.model.toUpperCase()}]
+Volume esquerdo: ${entry.leftVolume}
+Volume direito: ${entry.rightVolume}${entry.fluidLevel ? `\nNível do fluido: ${entry.fluidLevel}` : ""}
+Óleo do motor: ${entry.engineOil || "não informado"}
+Recomendação: ${entry.recommendation}`;
+      }
     }
 
     // Busca chunks relevantes — full-text com 'simple' (sem stemming) + unaccent
@@ -119,19 +134,21 @@ export async function POST(request: Request) {
       }
     }
 
-    if (chunks.length === 0) {
+    // Se não achou nos chunks mas tem dados da tabela de suspensão, usa só eles
+    if (chunks.length === 0 && !suspensionContext) {
       return NextResponse.json({
         answer:
           "Não encontrei informações específicas sobre isso nos manuais indexados. Verifique se os manuais já foram indexados ou tente reformular com o modelo da moto ou termo técnico.",
       });
     }
 
-    const contextText = chunks
-      .map(
+    const contextText = [
+      suspensionContext,
+      ...chunks.map(
         (c, i) =>
           `[Trecho ${i + 1} — ${c.brand} ${c.model} ${c.year}]\n${c.content}`
-      )
-      .join("\n\n---\n\n");
+      ),
+    ].filter(Boolean).join("\n\n---\n\n");
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
