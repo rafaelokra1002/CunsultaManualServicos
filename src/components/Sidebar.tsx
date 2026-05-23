@@ -129,9 +129,20 @@ function CloseIcon() {
   );
 }
 
+function AssistenteIcon({ active }: { active?: boolean }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={active ? "#6c5ce7" : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2a10 10 0 1 0 10 10H12V2z" />
+      <path d="M12 2a10 10 0 0 1 10 10" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
 const navItems = [
   { href: "/dashboard", label: "Dashboard", Icon: DashboardIcon },
   { href: "/manuais", label: "Manuais", Icon: ManuaisIcon },
+  { href: "/assistente", label: "Assistente IA", Icon: AssistenteIcon },
   { href: "/oleo-suspensao", label: "Óleo Suspensão", Icon: OleoIcon },
   { href: "/calculadora", label: "Calculadora", Icon: CalculadoraIcon },
   { href: "/diagnostico", label: "Diagnóstico", Icon: DiagnosticoIcon },
