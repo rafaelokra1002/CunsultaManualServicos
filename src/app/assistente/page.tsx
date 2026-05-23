@@ -30,8 +30,7 @@ export default function AssistentePage() {
   async function sendMessage(question: string) {
     if (!question.trim() || loading) return;
 
-    const userMsg: Message = { role: "user", content: question };
-    setMessages((prev) => [...prev, userMsg]);
+    setMessages((prev) => [...prev, { role: "user", content: question }]);
     setInput("");
     setLoading(true);
 
@@ -42,9 +41,8 @@ export default function AssistentePage() {
         body: JSON.stringify({ question }),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
+        const data = await res.json();
         setMessages((prev) => [
           ...prev,
           { role: "assistant", content: data.error || "Erro ao consultar o assistente." },
@@ -52,10 +50,23 @@ export default function AssistentePage() {
         return;
       }
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: data.answer },
-      ]);
+      // Adiciona mensagem vazia e vai preenchendo com o stream
+      setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+
+      const reader = res.body!.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const text = decoder.decode(value, { stream: true });
+        setMessages((prev) => {
+          const msgs = [...prev];
+          const last = msgs[msgs.length - 1];
+          msgs[msgs.length - 1] = { ...last, content: last.content + text };
+          return msgs;
+        });
+      }
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -80,7 +91,6 @@ export default function AssistentePage() {
   }
 
   const isPremium = session?.user?.isPremium;
-  const isActive = session?.user?.active;
 
   return (
     <div className="flex h-[calc(100vh-5rem)] flex-col md:h-[calc(100vh-4rem)]">
@@ -165,30 +175,23 @@ export default function AssistentePage() {
                       : "bg-[#1a1a2e] text-[#d0d0e8]"
                   }`}
                 >
-                  {msg.content.split("\n").map((line, j) => (
-                    <span key={j}>
-                      {line}
-                      {j < msg.content.split("\n").length - 1 && <br />}
-                    </span>
-                  ))}
+                  {msg.content === "" && msg.role === "assistant" ? (
+                    <div className="flex gap-1">
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "0ms" }} />
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "150ms" }} />
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "300ms" }} />
+                    </div>
+                  ) : (
+                    msg.content.split("\n").map((line, j) => (
+                      <span key={j}>
+                        {line}
+                        {j < msg.content.split("\n").length - 1 && <br />}
+                      </span>
+                    ))
+                  )}
                 </div>
               </div>
             ))}
-
-            {loading && (
-              <div className="flex gap-3">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#1a1a2e] text-sm">
-                  🤖
-                </div>
-                <div className="rounded-2xl bg-[#1a1a2e] px-4 py-3">
-                  <div className="flex gap-1">
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "0ms" }} />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "150ms" }} />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-[#6c5ce7]" style={{ animationDelay: "300ms" }} />
-                  </div>
-                </div>
-              </div>
-            )}
             <div ref={bottomRef} />
           </div>
         )}
