@@ -32,7 +32,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Pergunta inválida" }, { status: 400 });
     }
 
-    // Busca chunks relevantes com full-text search + unaccent
+    // Busca chunks relevantes — full-text com 'simple' (sem stemming) + unaccent
     let chunks: { content: string; title: string; brand: string; model: string; year: number }[] = [];
     try {
       chunks = await prisma.$queryRaw`
@@ -44,24 +44,28 @@ export async function POST(request: Request) {
           m.year
         FROM manual_chunks mc
         JOIN manuals m ON m.id = mc."manualId"
-        WHERE to_tsvector('portuguese', unaccent(mc.content)) @@ plainto_tsquery('portuguese', unaccent(${question}))
-        ORDER BY ts_rank(to_tsvector('portuguese', unaccent(mc.content)), plainto_tsquery('portuguese', unaccent(${question}))) DESC
+        WHERE to_tsvector('simple', unaccent(mc.content)) @@ plainto_tsquery('simple', unaccent(${question}))
+        ORDER BY ts_rank(to_tsvector('simple', unaccent(mc.content)), plainto_tsquery('simple', unaccent(${question}))) DESC
         LIMIT 8
       `;
     } catch (dbErr) {
       console.error("Erro na busca full-text:", dbErr);
     }
 
-    // Fallback: busca por palavras-chave com unaccent
+    // Fallback: ILIKE com OR em todas as palavras relevantes
     if (chunks.length === 0) {
       try {
-        const stopWords = new Set(['da','do','de','das','dos','a','o','e','para','na','no','com','que','qual','como']);
+        const stopWords = new Set(['da','do','de','das','dos','a','o','e','em','para','na','no','com','que','qual','como','um','uma','os','as']);
         const words = question.trim().split(/\s+/)
           .filter((w: string) => w.length > 2 && !stopWords.has(w.toLowerCase()))
-          .slice(0, 3);
+          .slice(0, 5);
 
-        const kw1 = `%${words[0] ?? question.split(' ')[0]}%`;
-        const kw2 = `%${words[1] ?? words[0] ?? question.split(' ')[0]}%`;
+        if (words.length === 0) words.push(question.trim().split(/\s+/)[0]);
+
+        // Busca chunks que contenham pelo menos 2 palavras da pergunta (OR em pares)
+        const kw1 = `%${words[0]}%`;
+        const kw2 = `%${words[1] ?? words[0]}%`;
+        const kw3 = `%${words[2] ?? words[0]}%`;
 
         chunks = await prisma.$queryRaw`
           SELECT
@@ -69,29 +73,20 @@ export async function POST(request: Request) {
             m.title,
             m.brand,
             m.model,
-            m.year
+            m.year,
+            (
+              (CASE WHEN unaccent(mc.content) ILIKE unaccent(${kw1}) THEN 1 ELSE 0 END) +
+              (CASE WHEN unaccent(mc.content) ILIKE unaccent(${kw2}) THEN 1 ELSE 0 END) +
+              (CASE WHEN unaccent(mc.content) ILIKE unaccent(${kw3}) THEN 1 ELSE 0 END)
+            ) AS score
           FROM manual_chunks mc
           JOIN manuals m ON m.id = mc."manualId"
           WHERE unaccent(mc.content) ILIKE unaccent(${kw1})
-            AND unaccent(mc.content) ILIKE unaccent(${kw2})
+             OR unaccent(mc.content) ILIKE unaccent(${kw2})
+             OR unaccent(mc.content) ILIKE unaccent(${kw3})
+          ORDER BY score DESC
           LIMIT 8
         `;
-
-        // Se ainda não achou, busca só pela primeira palavra
-        if (chunks.length === 0) {
-          chunks = await prisma.$queryRaw`
-            SELECT
-              mc.content,
-              m.title,
-              m.brand,
-              m.model,
-              m.year
-            FROM manual_chunks mc
-            JOIN manuals m ON m.id = mc."manualId"
-            WHERE unaccent(mc.content) ILIKE unaccent(${kw1})
-            LIMIT 8
-          `;
-        }
       } catch (dbErr) {
         console.error("Erro no fallback ILIKE:", dbErr);
       }
