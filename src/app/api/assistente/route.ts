@@ -160,10 +160,17 @@ Recomendação: ${entry.recommendation}`;
       }
     }
 
+    const streamHeaders = {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache",
+      "X-Accel-Buffering": "no",
+    };
+
     if (chunks.length === 0 && !suspensionContext) {
-      return NextResponse.json({
-        answer: "Não encontrei informações específicas sobre isso nos manuais indexados. Tente reformular com o modelo da moto ou termo técnico.",
-      });
+      return new Response(
+        "Não encontrei informações específicas sobre isso nos manuais indexados. Tente reformular com o modelo da moto ou termo técnico.",
+        { headers: streamHeaders }
+      );
     }
 
     const contextText = [
@@ -172,7 +179,7 @@ Recomendação: ${entry.recommendation}`;
     ].filter(Boolean).join("\n\n---\n\n");
 
     // Streaming da resposta
-    const stream = await openai.chat.completions.create({
+    const aiStream = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       max_tokens: 600,
       stream: true,
@@ -192,7 +199,7 @@ Recomendação: ${entry.recommendation}`;
     const body = new ReadableStream({
       async start(controller) {
         try {
-          for await (const chunk of stream) {
+          for await (const chunk of aiStream) {
             const text = chunk.choices[0]?.delta?.content ?? "";
             if (text) controller.enqueue(encoder.encode(text));
           }
@@ -202,13 +209,7 @@ Recomendação: ${entry.recommendation}`;
       },
     });
 
-    return new Response(body, {
-      headers: {
-        "Content-Type": "text/plain; charset=utf-8",
-        "X-Sources-Count": String(chunks.length),
-        "Cache-Control": "no-cache",
-      },
-    });
+    return new Response(body, { headers: streamHeaders });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error("Erro no assistente:", msg);

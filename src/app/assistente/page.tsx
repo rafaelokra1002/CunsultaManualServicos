@@ -50,10 +50,17 @@ export default function AssistentePage() {
         return;
       }
 
+      if (!res.body) {
+        // Fallback: lê como texto simples
+        const text = await res.text();
+        setMessages((prev) => [...prev, { role: "assistant", content: text || "Sem resposta do servidor." }]);
+        return;
+      }
+
       // Adiciona mensagem vazia e vai preenchendo com o stream
       setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
 
-      const reader = res.body!.getReader();
+      const reader = res.body.getReader();
       const decoder = new TextDecoder();
 
       while (true) {
@@ -67,7 +74,8 @@ export default function AssistentePage() {
           return msgs;
         });
       }
-    } catch {
+    } catch (e) {
+      console.error("Assistente erro:", e);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "Erro de conexão. Tente novamente." },
