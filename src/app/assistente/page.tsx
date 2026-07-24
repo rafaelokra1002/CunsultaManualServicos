@@ -10,7 +10,7 @@ interface Message {
 
 const SUGGESTIONS = [
   "Qual o torque do cabeçote da Honda CG 160?",
-  "Como calibrar a suspensão dianteira da Yamaha Fazer 250?",
+  "Como calibrar a suspensão dianteira da Yamaha Fazer 150?",
   "Qual o procedimento de sincronização de carburador?",
   "Torque de aperto da manivela da Kawasaki Z 650",
 ];
