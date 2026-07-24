@@ -376,13 +376,32 @@ export const suspensionDatabase: SuspensionEntry[] = [
   }
 ];
 
+// Nomes de linha que são, na prática, o mesmo chassi/suspensão da CG (trims comerciais).
+const MODEL_ALIASES: Record<string, string> = {
+  fan: "cg",
+  titan: "cg",
+  start: "cg",
+};
+
+function normalize(s: string): string {
+  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+}
+
 export function findSuspensionData(query: string): SuspensionEntry | null {
-  const q = query.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-  return suspensionDatabase.find(entry => {
-    const model = entry.model.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-    const modelWords = model.split(' ');
-    const queryWords = q.split(' ').filter(w => w.length > 1);
-    return modelWords.filter(w => queryWords.some(qw => model.includes(qw) || qw.includes(w))).length >= 2
-      || queryWords.some(qw => qw.length > 3 && model.includes(qw));
-  }) ?? null;
+  const queryWordsRaw = normalize(query).split(/\s+/).filter((w) => w.length > 1);
+  const aliasExtra = queryWordsRaw.flatMap((w) => (MODEL_ALIASES[w] ? [MODEL_ALIASES[w]] : []));
+  const queryWords = new Set([...queryWordsRaw, ...aliasExtra]);
+
+  let best: { entry: SuspensionEntry; matched: number; total: number } | null = null;
+  for (const entry of suspensionDatabase) {
+    const modelWords = normalize(entry.model).split(/\s+/).filter((w) => w && w !== "honda");
+    const matched = modelWords.filter((w) => queryWords.has(w)).length;
+    // Só considera a entrada se TODAS as palavras significativas do modelo aparecerem na pergunta
+    if (matched === 0 || matched < modelWords.length) continue;
+    // Entre matches completos, prefere o mais específico (ex.: variante com ano, se o ano também bateu)
+    if (!best || modelWords.length > best.total) {
+      best = { entry, matched, total: modelWords.length };
+    }
+  }
+  return best?.entry ?? null;
 }
