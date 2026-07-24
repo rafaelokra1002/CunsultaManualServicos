@@ -205,12 +205,15 @@ Recomendação: ${entry.recommendation}`;
         const mk2 = modelParts[1] ? `%${modelParts[1]}%` : mk1;
 
         // Encontra IDs dos manuais do modelo
+        // Modelos populares (ex.: XRE) têm dezenas de manuais separados por seção
+        // (Chassi, Freio, Cabeçote...). Um LIMIT baixo aqui cortava o manual certo
+        // fora do conjunto pesquisado antes mesmo de olhar o conteúdo dos chunks.
         const matchedManuals = await prisma.$queryRaw<{ id: string }[]>`
           SELECT id FROM manuals
           WHERE (unaccent(model) ILIKE unaccent(${mk1}) OR unaccent(model) ILIKE unaccent(${mk2})
               OR unaccent(title) ILIKE unaccent(${mk1}) OR unaccent(title) ILIKE unaccent(${mk2}))
             AND category != 'ebook'
-          LIMIT 5
+          LIMIT 60
         `;
 
         if (matchedManuals.length > 0) {
