@@ -60,6 +60,30 @@ function expandQuery(question: string): string {
   return question + " " + [...new Set(extra)].join(" ");
 }
 
+// Reescreve a pergunta (que pode vir em gíria/linguagem informal) em termos técnicos
+// de manual de moto, para cobrir casos que o dicionário local (SLANG) não prevê.
+async function expandQueryWithAI(question: string): Promise<string> {
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      max_tokens: 60,
+      temperature: 0,
+      messages: [
+        {
+          role: "system",
+          content:
+            "Você é mecânico especialista em motocicletas. O cliente descreve um problema muitas vezes em linguagem informal ou gíria. Gere de 5 a 10 palavras-chave técnicas em português (peças, sistemas, sintomas, sensores) que ajudem a buscar a resposta em manuais de moto. Responda APENAS com as palavras-chave separadas por espaço, sem frases nem explicações.",
+        },
+        { role: "user", content: question },
+      ],
+    });
+    return completion.choices[0]?.message?.content?.trim() ?? "";
+  } catch (err) {
+    console.error("Erro na reescrita da pergunta via IA:", err);
+    return "";
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -72,6 +96,8 @@ export async function POST(request: Request) {
 
     const modelTerms = extractModelTerms(question);
     let searchQuery = expandQuery(question);
+    const aiTerms = await expandQueryWithAI(question);
+    if (aiTerms) searchQuery = `${searchQuery} ${aiTerms}`;
 
     // Garante que modelo/marca sempre esteja na busca
     if (modelTerms) {
@@ -293,7 +319,7 @@ Recomendação: ${entry.recommendation}`;
       messages: [
         {
           role: "system",
-          content: `Você é um assistente técnico especialista em motocicletas. Responda com base APENAS nos trechos dos manuais fornecidos. Se a informação não estiver nos trechos, diga que não encontrou. Seja direto e técnico. Use listas quando houver múltiplos itens.`,
+          content: `Você é um assistente especialista em motocicletas que conversa com mecânicos e donos de moto nem sempre familiarizados com termos técnicos. Responda com base APENAS nos trechos dos manuais fornecidos. Se a informação não estiver nos trechos, diga que não encontrou. Explique de forma simples e direta, em português do dia a dia, evitando jargão técnico sempre que possível; quando precisar usar um termo técnico, explique rapidamente o que ele significa. Use listas quando houver múltiplos itens.`,
         },
         {
           role: "user",

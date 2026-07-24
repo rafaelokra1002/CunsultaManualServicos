@@ -72,6 +72,16 @@ function ArrowRightIcon() {
   );
 }
 
+function ChatIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      <path d="M8 10h8" />
+      <path d="M8 14h5" />
+    </svg>
+  );
+}
+
 function MotorcycleIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -144,6 +154,29 @@ export default function DashboardPage() {
           </Link>
         </div>
       </div>
+
+      {/* Assistente IA — CTA de destaque */}
+      <Link
+        href="/assistente"
+        className="group relative mb-8 flex flex-col items-start gap-4 overflow-hidden rounded-2xl border border-[#6c5ce7]/30 bg-gradient-to-br from-[#6c5ce7]/20 via-[#1a1a2e] to-[#12121a] p-6 transition-all hover:border-[#6c5ce7]/50 hover:shadow-xl hover:shadow-[#6c5ce7]/10 sm:flex-row sm:items-center sm:justify-between sm:p-8"
+      >
+        <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#6c5ce7]/20 blur-3xl transition-all group-hover:bg-[#6c5ce7]/30" />
+        <div className="relative flex items-center gap-4">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6c5ce7] to-[#a78bfa] text-white shadow-lg shadow-[#6c5ce7]/30">
+            <ChatIcon />
+          </div>
+          <div>
+            <h2 className="text-lg font-bold text-white sm:text-xl">Pergunte pro Assistente IA</h2>
+            <p className="mt-1 text-sm text-[#c4c4de]">
+              Descreva o problema com suas palavras — o assistente busca a resposta nos manuais pra você.
+            </p>
+          </div>
+        </div>
+        <span className="relative flex shrink-0 items-center gap-2 self-stretch rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-[#12121a] shadow-lg transition-all group-hover:bg-[#f0f0ff] sm:self-auto">
+          Perguntar agora
+          <ArrowRightIcon />
+        </span>
+      </Link>
 
       {/* Cards de status */}
       <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
@@ -254,63 +287,54 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Instalar App */}
-      <div className="rounded-2xl border border-[#6c5ce7]/20 bg-gradient-to-r from-[#6c5ce7]/[0.08] to-transparent p-5 sm:p-6">
-        <div className="flex items-start gap-4">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#6c5ce7]/15 text-[#6c5ce7]">
+      {/* Avisos rápidos */}
+      <div className="flex gap-4 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {/* Instalar App */}
+        <div className="min-w-[240px] flex-1 rounded-2xl border border-[#6c5ce7]/20 bg-gradient-to-br from-[#6c5ce7]/[0.08] to-transparent p-4">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#6c5ce7]/15 text-[#6c5ce7]">
             <DownloadIcon />
           </div>
-          <div className="flex-1">
-            <h3 className="font-bold text-white">Instale o App no Celular!</h3>
-            <p className="mt-1 text-sm text-[#8888a4]">
-              Tenha o OficinaDigital como app na tela inicial do seu celular. Acesso rápido sem precisar abrir o navegador.
-            </p>
-            <div className="mt-3">
-              <InstallButton />
-            </div>
+          <h3 className="mt-3 text-sm font-bold text-white">Instale o App</h3>
+          <p className="mt-1 text-xs text-[#8888a4]">
+            Acesso rápido direto da tela do seu celular.
+          </p>
+          <div className="mt-3">
+            <InstallButton />
           </div>
         </div>
-      </div>
 
-      {/* Novos manuais */}
-      <div className="mt-6 rounded-2xl border border-emerald-500/20 bg-gradient-to-r from-emerald-500/[0.08] to-transparent p-5 sm:p-6">
-        <div className="flex items-start gap-4">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400">
+        {/* Novos manuais */}
+        <div className="min-w-[240px] flex-1 rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/[0.08] to-transparent p-4">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-400">
             <SparklesIcon />
           </div>
-          <div>
-            <h3 className="font-bold text-white">Novos manuais toda semana!</h3>
-            <p className="mt-1 text-sm text-[#8888a4]">
-              Nossa biblioteca está em constante atualização. Novos manuais de serviço são adicionados <strong className="text-emerald-400">todas as semanas</strong>. Fique de olho!
-            </p>
-          </div>
+          <h3 className="mt-3 text-sm font-bold text-white">Novos manuais toda semana!</h3>
+          <p className="mt-1 text-xs text-[#8888a4]">
+            Biblioteca em constante atualização. <strong className="text-emerald-400">Fique de olho!</strong>
+          </p>
         </div>
-      </div>
 
-      {/* Grupo WhatsApp */}
-      <a
-        href="https://chat.whatsapp.com/Lihae7qmtS7GfAoRmMIWo4"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-6 block rounded-2xl border border-green-500/20 bg-gradient-to-r from-green-500/[0.08] to-transparent p-5 transition-all hover:border-green-500/40 sm:p-6"
-      >
-        <div className="flex items-start gap-4">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-500/15 text-green-400">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        {/* Grupo WhatsApp */}
+        <a
+          href="https://chat.whatsapp.com/Lihae7qmtS7GfAoRmMIWo4"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="min-w-[240px] flex-1 rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/[0.08] to-transparent p-4 transition-all hover:border-green-500/40"
+        >
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-green-500/15 text-green-400">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
           </div>
-          <div>
-            <h3 className="font-bold text-white">Grupo de Suporte & Dicas</h3>
-            <p className="mt-1 text-sm text-[#8888a4]">
-              Entre no nosso grupo do WhatsApp para receber <strong className="text-green-400">dicas, suporte</strong> e trocar experiências com outros mecânicos.
-            </p>
-            <span className="mt-3 inline-flex items-center gap-2 rounded-lg bg-green-600/20 px-3 py-1.5 text-xs font-bold text-green-400">
-              Entrar no Grupo →
-            </span>
-          </div>
-        </div>
-      </a>
+          <h3 className="mt-3 text-sm font-bold text-white">Grupo de Suporte</h3>
+          <p className="mt-1 text-xs text-[#8888a4]">
+            Dicas e troca de experiências com outros mecânicos.
+          </p>
+          <span className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-green-600/20 px-2.5 py-1 text-xs font-bold text-green-400">
+            Entrar no Grupo →
+          </span>
+        </a>
+      </div>
 
       {/* Mensagem para admin */}
       {session?.user?.role === "ADMIN" && (
