@@ -336,6 +336,41 @@ export default function DashboardPage() {
         </a>
       </div>
 
+      {/* Cursos Joab Motos */}
+      <a
+        href="https://wa.me/5575998772223?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20cursos%20da%20Joab%20Motos"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group mt-6 block overflow-hidden rounded-2xl border border-red-500/20 bg-gradient-to-br from-red-500/[0.08] to-transparent p-5 transition-all hover:border-red-500/40 sm:p-6"
+      >
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <div className="flex shrink-0 gap-2">
+            <img
+              src="/promo/joab-motos-curso-mecanica.jpg"
+              alt="Curso de Formação e Mecânica de Motocicleta - Joab Motos"
+              className="h-24 w-20 rounded-lg object-cover object-top shadow-lg sm:h-28 sm:w-24"
+            />
+            <img
+              src="/promo/joab-motos-curso-injecao.jpg"
+              alt="Curso de Injeção Eletrônica - Joab Motos"
+              className="h-24 w-20 rounded-lg object-cover object-top shadow-lg sm:h-28 sm:w-24"
+            />
+          </div>
+          <div className="flex-1">
+            <span className="inline-flex items-center rounded-full bg-red-500/15 px-2.5 py-0.5 text-[11px] font-bold text-red-400">
+              Inscrições abertas
+            </span>
+            <h3 className="mt-2 font-bold text-white">Cursos de Mecânica com a Joab Motos</h3>
+            <p className="mt-1 text-sm text-[#8888a4]">
+              Formação e Mecânica de Motocicleta e Injeção Eletrônica. Turmas presenciais com o instrutor Joab Motos.
+            </p>
+            <span className="mt-3 inline-flex items-center gap-2 rounded-lg bg-red-600/20 px-3 py-1.5 text-xs font-bold text-red-400 group-hover:bg-red-600/30">
+              Falar no WhatsApp →
+            </span>
+          </div>
+        </div>
+      </a>
+
       {/* Mensagem para admin */}
       {session?.user?.role === "ADMIN" && (
         <div className="mt-6 overflow-hidden rounded-2xl border border-orange-500/20 bg-gradient-to-br from-orange-500/[0.08] to-transparent p-5 sm:p-6">
