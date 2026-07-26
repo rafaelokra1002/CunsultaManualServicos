@@ -344,16 +344,16 @@ export default function DashboardPage() {
         className="group mt-6 block overflow-hidden rounded-2xl border border-red-500/20 bg-gradient-to-br from-red-500/[0.08] to-transparent p-5 transition-all hover:border-red-500/40 sm:p-6"
       >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-          <div className="flex shrink-0 gap-2">
+          <div className="flex shrink-0 gap-3">
             <img
               src="/promo/joab-motos-curso-mecanica.jpg"
               alt="Curso de Formação e Mecânica de Motocicleta - Joab Motos"
-              className="h-24 w-20 rounded-lg object-cover object-top shadow-lg sm:h-28 sm:w-24"
+              className="h-44 w-36 rounded-xl object-cover object-top shadow-lg sm:h-52 sm:w-44"
             />
             <img
               src="/promo/joab-motos-curso-injecao.jpg"
               alt="Curso de Injeção Eletrônica - Joab Motos"
-              className="h-24 w-20 rounded-lg object-cover object-top shadow-lg sm:h-28 sm:w-24"
+              className="h-44 w-36 rounded-xl object-cover object-top shadow-lg sm:h-52 sm:w-44"
             />
           </div>
           <div className="flex-1">
