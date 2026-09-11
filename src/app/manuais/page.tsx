@@ -203,11 +203,28 @@ export default function ManuaisPage() {
 
       {/* Tabs das Montadoras */}
       {!loading && !error && (
-        <div className="mb-6 -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="flex flex-nowrap gap-2 overflow-x-auto scrollbar-none pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
+        <div className="mb-6">
+          {/* Mobile: seletor */}
+          <div className="sm:hidden">
+            <select
+              value={selectedBrand}
+              onChange={(e) => setSelectedBrand(e.target.value)}
+              className="w-full rounded-lg border border-white/10 bg-[#111118] px-3 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-1 focus:ring-[#6c5ce7]/50"
+            >
+              <option value="all">Todas as marcas ({categoryManuais.length})</option>
+              {brandGroups.map(([brand, items]) => (
+                <option key={brand} value={brand}>
+                  {brand} ({items.length})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Desktop: chips */}
+          <div className="hidden sm:flex sm:flex-wrap sm:gap-2">
             <button
               onClick={() => setSelectedBrand("all")}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                 selectedBrand === "all"
                   ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
                   : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
@@ -219,7 +236,7 @@ export default function ManuaisPage() {
               <button
                 key={brand}
                 onClick={() => setSelectedBrand(brand)}
-                className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   selectedBrand === brand
                     ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
                     : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
