@@ -203,11 +203,11 @@ export default function ManuaisPage() {
 
       {/* Tabs das Montadoras */}
       {!loading && !error && (
-        <div className="mb-6">
-          <div className="flex flex-wrap gap-2">
+        <div className="mb-6 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="flex flex-nowrap gap-2 overflow-x-auto scrollbar-none pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
             <button
               onClick={() => setSelectedBrand("all")}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
+              className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
                 selectedBrand === "all"
                   ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
                   : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
@@ -219,7 +219,7 @@ export default function ManuaisPage() {
               <button
                 key={brand}
                 onClick={() => setSelectedBrand(brand)}
-                className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   selectedBrand === brand
                     ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
                     : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
