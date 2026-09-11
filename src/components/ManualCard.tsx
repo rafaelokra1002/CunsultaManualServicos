@@ -75,7 +75,9 @@ export default function ManualCard({
       // Se retornou JSON com URL (Vercel Blob ou externo)
       const data = await res.json();
             if (data.url) {
-        window.location.href = data.url;
+        const fid = data.url.match(/files\/([a-zA-Z0-9_-]+)/)?.[1];
+        window.location.href = fid ? ("https://drive.google.com/file/d/" + fid + "/view") : data.url;
+
         return;
       }
 
