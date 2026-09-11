@@ -74,16 +74,11 @@ export default function ManualCard({
 
       // Se retornou JSON com URL (Vercel Blob ou externo)
       const data = await res.json();
-      if (data.url) {
-        const a = document.createElement("a");
-        a.href = data.url;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+            if (data.url) {
+        window.location.href = data.url;
         return;
       }
+
 
       throw new Error("Link de download inválido");
     } catch (error) {
