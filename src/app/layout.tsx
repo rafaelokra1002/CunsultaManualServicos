@@ -12,6 +12,19 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "OficinaDigital - Manuais de Serviço de Motocicletas",
   description: "Acesse manuais de serviço de motocicletas de diversas marcas e modelos.",
+  metadataBase: new URL("https://www.manualdeservicos.store"),
+  openGraph: {
+    title: "Descubra qualquer defeito de moto em 5 minutos",
+    description: "+2.300 manuais oficiais, diagnóstico Honda sem scanner e calculadora de válvulas. R$ 67, acesso vitalício.",
+    type: "website",
+    locale: "pt_BR",
+    siteName: "OficinaDigital",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Descubra qualquer defeito de moto em 5 minutos",
+    description: "+2.300 manuais oficiais, diagnóstico Honda sem scanner. R$ 67, vitalício.",
+  },
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
