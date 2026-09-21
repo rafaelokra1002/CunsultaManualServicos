@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import { trackFb } from "@/lib/fbpixel";
 
 function RegisterForm() {
   const router = useRouter();
@@ -24,6 +25,7 @@ function RegisterForm() {
   const [paymentId, setPaymentId] = useState("");
   const [copied, setCopied] = useState(false);
   const pollRef = useRef<NodeJS.Timeout | null>(null);
+  const purchaseFiredRef = useRef(false);
 
   // Poll payment status
   useEffect(() => {
@@ -34,6 +36,10 @@ function RegisterForm() {
           const data = await res.json();
           if (data.status === "approved") {
             clearInterval(pollRef.current!);
+            if (!purchaseFiredRef.current) {
+              purchaseFiredRef.current = true;
+              trackFb("Purchase", { value: 67.0, currency: "BRL" });
+            }
             setSuccess("Pagamento confirmado! Redirecionando...");
             setTimeout(() => router.push("/login"), 2500);
           }
@@ -97,6 +103,7 @@ function RegisterForm() {
       setPixCode(data.pixCode || "");
       setPixQrCode(data.pixQrCode || "");
       setPaymentId(data.paymentId);
+      trackFb("InitiateCheckout", { value: 67.0, currency: "BRL" });
     } catch {
       setError("Erro ao gerar pagamento. Tente novamente.");
     } finally {

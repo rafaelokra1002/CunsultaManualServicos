@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { trackFb } from "@/lib/fbpixel";
 
 export default function ContaInativaPage() {
   const { data: session } = useSession();
@@ -14,6 +15,7 @@ export default function ContaInativaPage() {
   const [success, setSuccess] = useState("");
   const [copied, setCopied] = useState(false);
   const pollRef = useRef<NodeJS.Timeout | null>(null);
+  const purchaseFiredRef = useRef(false);
 
   // Poll payment status
   useEffect(() => {
@@ -24,6 +26,10 @@ export default function ContaInativaPage() {
           const data = await res.json();
           if (data.status === "approved") {
             clearInterval(pollRef.current!);
+            if (!purchaseFiredRef.current) {
+              purchaseFiredRef.current = true;
+              trackFb("Purchase", { value: 67.0, currency: "BRL" });
+            }
             setSuccess("Pagamento confirmado! Redirecionando...");
             setTimeout(() => (window.location.href = "/dashboard"), 2500);
           }
@@ -59,6 +65,7 @@ export default function ContaInativaPage() {
       setPixCode(data.pixCode || "");
       setPixQrCode(data.pixQrCode || "");
       setPaymentId(data.paymentId);
+      trackFb("InitiateCheckout", { value: 67.0, currency: "BRL" });
     } catch {
       setError("Erro ao gerar pagamento. Tente novamente.");
     } finally {
