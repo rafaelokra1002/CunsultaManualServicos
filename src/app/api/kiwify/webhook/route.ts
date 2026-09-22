@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { PLAN_PRICE } from "@/lib/pushinpay";
-import { isValidKiwifySignature, onlyDigits, PENDING_PASSWORD } from "@/lib/kiwify";
+import { isValidKiwifySignature, kiwifySignatures, onlyDigits, PENDING_PASSWORD } from "@/lib/kiwify";
 
 export const dynamic = "force-dynamic";
 
@@ -18,10 +18,18 @@ export async function POST(request: Request) {
   }
 
   const rawBody = await request.text();
-  const signature = new URL(request.url).searchParams.get("signature");
+  const signature =
+    new URL(request.url).searchParams.get("signature") ??
+    request.headers.get("x-kiwify-signature");
 
   if (!isValidKiwifySignature(rawBody, signature, token)) {
-    console.error("Webhook Kiwify: assinatura inválida");
+    // Registra o que chegou para dar pra corrigir e reenviar o webhook pelo painel da Kiwify
+    console.error(
+      "Webhook Kiwify: assinatura inválida.",
+      `recebida=${signature}`,
+      `esperadas=${kiwifySignatures(rawBody, token).join(",")}`,
+      `corpo=${rawBody.slice(0, 500)}`
+    );
     return NextResponse.json({ error: "Assinatura inválida" }, { status: 401 });
   }
 

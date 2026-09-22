@@ -14,13 +14,26 @@ export function kiwifyCheckoutUrl(email?: string | null) {
   return `${KIWIFY_CHECKOUT_URL}${sep}email=${encodeURIComponent(email)}`;
 }
 
-// A Kiwify envia ?signature= com o HMAC-SHA1 (hex) do corpo, usando o token do webhook
+// A Kiwify envia ?signature= com o HMAC do corpo, usando o token do webhook.
+// A documentação oficial não diz o algoritmo, então aceitamos as variações
+// possíveis — todas exigem o token, então nenhuma enfraquece a verificação.
+export function kiwifySignatures(rawBody: string, token: string) {
+  const variants: string[] = [];
+  for (const algo of ["sha1", "sha256"]) {
+    for (const enc of ["hex", "base64"] as const) {
+      variants.push(createHmac(algo, token).update(rawBody).digest(enc));
+    }
+  }
+  return variants;
+}
+
 export function isValidKiwifySignature(rawBody: string, signature: string | null, token: string) {
   if (!signature) return false;
-  const expected = createHmac("sha1", token).update(rawBody).digest("hex");
-  const a = Buffer.from(expected);
-  const b = Buffer.from(signature);
-  return a.length === b.length && timingSafeEqual(a, b);
+  const received = Buffer.from(signature);
+  return kiwifySignatures(rawBody, token).some((expected) => {
+    const a = Buffer.from(expected);
+    return a.length === received.length && timingSafeEqual(a, received);
+  });
 }
 
 export function onlyDigits(v: unknown) {
