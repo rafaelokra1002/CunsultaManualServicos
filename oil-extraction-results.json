@@ -1,0 +1,619 @@
+[
+  {
+    "file": "CB 600F Hornet.pdf",
+    "status": "processado",
+    "pages": 372,
+    "charsExtracted": 744,
+    "suspensionOil": [],
+    "fluidLevel": [],
+    "engineOil": [],
+    "relevantSections": []
+  },
+  {
+    "file": "crf250f 19 22.pdf",
+    "status": "processado",
+    "pages": 304,
+    "charsExtracted": 366026,
+    "suspensionOil": [
+      {
+        "value": "637",
+        "context": "ushion Oil 10W ou  equivalente – Nível de óleo94– Capacidade de óleo637 cm 3 –  1-8 INFORMAÇÕES GERAIS ESPECIFICAÇÕES DA RODA"
+      },
+      {
+        "value": "637",
+        "context": "NDADO: Honda Ultra Cushion Oil 10W ou equivalente CAPACIDADE DE ÓLEO DE GARFO: 637 cm 3 Bombeie\tlentamente\to\t tubo\tdo\t  garfo\tvárias\tveze"
+      },
+      {
+        "value": "637",
+        "context": "ushion Oil 10W ou  equivalente – Nível de óleo94– Capacidade de óleo637 cm 3 –  1-8 INFORMAÇÕES GERAIS ESPECIFICAÇÕES DA RODA"
+      }
+    ],
+    "fluidLevel": [
+      {
+        "value": "94",
+        "context": "dadoHonda Ultra Cushion Oil 10W ou  equivalente – Nível de óleo94– Capacidade de óleo637 cm 3 –  1-8 INFORMAÇÕES GE"
+      },
+      {
+        "value": "94",
+        "context": "prima\tpor\t   completo\to\t tubo\tdo\t  garfo.\tMeça\to\t nível\tde\t  óleo\tno\t  topo\tdo\t tubo\tdo\tgarfo. NÍVEL DE ÓLEO DE GARFO: 94 mm Instale\ta\t mola\tdo\t  garfo\t[1]\t  com\to\t lado\tdas"
+      },
+      {
+        "value": "94",
+        "context": "completo\to\t tubo\tdo\t  garfo.\tMeça\to\t nível\tde\t  óleo\tno\t  topo\tdo\t tubo\tdo\tgarfo. NÍVEL DE ÓLEO DE GARFO: 94 mm Instale\ta\t mola\tdo\t  garfo\t[1]\t  com\to\t lado\tdas"
+      }
+    ],
+    "engineOil": [
+      {
+        "value": "1,4",
+        "context": "segundos SISTEMA DE LUBRIFICAÇÃO ITEMPADRÃOLIMITE Capacidade de óleo  do motor Depois da drenagem1,4 litro– Depois da troca do filtro  de óleo 1,4 litro"
+      },
+      {
+        "value": "1,4",
+        "context": "eça\to\tmotor\tcom\to\tóleo\trecomendado\t(página\t3-10). CAPACIDADE DE ÓLEO DO MOTOR: 1,4 litros na drenagem 1,4 litros na troca do filtro de óleo 1,7 litros na des"
+      },
+      {
+        "value": "1,4",
+        "context": "MA DE LUBRIFICAÇÃO ITEMPADRÃOLIMITE Capacidade de óleo  do motor Depois da drenagem1,4 litro– Depois da troca do filtro  de óleo 1,4 litro"
+      },
+      {
+        "value": "1,4",
+        "context": "m\to\tóleo\trecomendado\t(página\t3-10). CAPACIDADE DE ÓLEO DO MOTOR: 1,4 litros na drenagem 1,4 litros na troca do filtro de"
+      },
+      {
+        "value": "1,4",
+        "context": "segundos SISTEMA DE LUBRIFICAÇÃO ITEMPADRÃOLIMITE Capacidade de óleo  do motor Depois da drenagem1,4 litro– Depois da troca do filtro  de óleo 1,4 litro"
+      },
+      {
+        "value": "1,4",
+        "context": "eça\to\tmotor\tcom\to\tóleo\trecomendado\t(página\t3-10). CAPACIDADE DE ÓLEO DO MOTOR: 1,4 litros na drenagem 1,4 litros na troca do filtro de"
+      }
+    ],
+    "relevantSections": [
+      "Suspensão dianteiraGarfo telescópico\nCurso do eixo dianteiro216 mm\nCurso do amortecedor da suspensão dianteira240 mm\nSuspensão traseiraPro-Link\nCurso do eixo traseiro230 mm\nTamanho do pneu dianteiro80/100-21 51R NHS\nTamanho do pneu traseiro100/100-18 59R NHS\nMarca do pneuDianteiroPIRELLI / SCORPION XC HEAVY DUTY MIDHARD\nTraseiroPIRELLI / SCORPION XC MIDHARD\nFreio dianteiroHidráulico, disco único\nFreio traseiroHidráulico, disco único\nÂngulo de cáster 26° 5’\nComprimento de trail102 mm\nCapacidade d",
+      "SUSPENSÃO DIANTEIRA\nVerifique\ta\tação\tdo\tgarfo\tcomprimindo-o\tvárias\tvezes\tenquanto\taciona\to\tfreio\tdianteiro.\nVerifique\to\tconjunto\tdo\tgarfo\tbuscando\tpor\tsinais\tde\tvazamento,\tdanos\tou\tfixadores\tfrouxos.\nSubstitua\tos\tcomponentes\tdanificados\tque\tnão\tpodem\tser\treparados.\nAperte\ttodos\tos\tfixadores.\nPara\tmanutenção\tdo\tgarfo\t(página\t15-11).\nINSPEÇÃO DA SUSPENSÃO TRASEIRA\nVerifique\ta\tação\tdo\tamortecedor\tcomprimindo-o\tvárias\tvezes.\nVerifique\to\tconjunto\tdo\tamortecedor\tbuscando\tpor\tvazamentos,\tdanos\tou\tfixad"
+    ]
+  },
+  {
+    "file": "fan125i.pdf",
+    "status": "processado",
+    "pages": 111,
+    "charsExtracted": 93704,
+    "suspensionOil": [
+      {
+        "value": "72",
+        "context": "pensão Fluido para suspensão– Nível de fluido178– Capacidade de fluido72 ± 1 cm 3 – Freio dianteiro à tambor Folga na alavanca do f"
+      },
+      {
+        "value": "72",
+        "context": "PARA O GARFO DA SuSPENSÃO: Fluido para suspensão CAPACIDADE DE FluIDO PARA O GARFO DA SuSPENSÃO: 72 ± 1 cm 3 •\tComprima  completamente  o  garfo  da  suspensã"
+      }
+    ],
+    "fluidLevel": [
+      {
+        "value": "178",
+        "context": "para o garfo da  suspensão Fluido para suspensão– Nível de fluido178– Capacidade de fluido72 ± 1 cm 3 – Freio dianteir"
+      },
+      {
+        "value": "178",
+        "context": "mpletamente  o  garfo  da  suspensão  e  meça  o  nível  de  fluido  a  partir  do  topo  do  cilindro   interno do garfo da suspensão. NÍvEl DE FluIDO PARA O GARFO DA SuSPENSÃO: 178 mm •\t 3  Puxe o cilindro interno e instale a mola do"
+      },
+      {
+        "value": "43,0",
+        "context": "a 2 cc (ThreeBond  1215 ou 1207G) [A] Trava Trava Óleo MO Óleo MO Óleo MO Trava Junta Óleo INSPEÇÃO DA EXCENtRICIDADE DA ÁRvORE DE MANIvElAS Básico 43,0 mm 47,5 mm •\tPosicione a árvore de manivelas nos blo"
+      },
+      {
+        "value": "178",
+        "context": "o  garfo  da  suspensão  e  meça  o  nível  de  fluido  a  partir  do  topo  do  cilindro   interno do garfo da suspensão. NÍvEl DE FluIDO PARA O GARFO DA SuSPENSÃO: 178 mm •\t 3  Puxe o cilindro interno e instale a mola do"
+      }
+    ],
+    "engineOil": [
+      {
+        "value": "1,0",
+        "context": "EMA DE lubRIFICAÇÃO Unidade: mm Item PadrãoLIMITE Capacidade de óleo do motor Após a drenagem1,0 litro– Após a desmontagem1,2 litros– Óleo recomenda"
+      },
+      {
+        "value": "1,2",
+        "context": "astecimento  de óleo e substitua se necessário. •\tCAPACIDADE DE ÓLEO DO MOTOR: 1,0 litro após a drenagem 1,2 litros após a desmontagem Óleo Básico 30 N·m  Nova"
+      },
+      {
+        "value": "1,0",
+        "context": "CAÇÃO Unidade: mm Item PadrãoLIMITE Capacidade de óleo do motor Após a drenagem1,0 litro– Após a desmontagem1,2 litros– Óleo recomenda"
+      },
+      {
+        "value": "1,0",
+        "context": "e óleo e substitua se necessário. •\tCAPACIDADE DE ÓLEO DO MOTOR: 1,0 litro após a drenagem 1,2 litros após a desmontagem"
+      },
+      {
+        "value": "1,0",
+        "context": "EMA DE lubRIFICAÇÃO Unidade: mm Item PadrãoLIMITE Capacidade de óleo do motor Após a drenagem1,0 litro– Após a desmontagem1,2 litros– Óleo recomenda"
+      },
+      {
+        "value": "1,0",
+        "context": "astecimento  de óleo e substitua se necessário. •\tCAPACIDADE DE ÓLEO DO MOTOR: 1,0 litro após a drenagem 1,2 litros após a desmontagem"
+      }
+    ],
+    "relevantSections": [
+      "Suspensão dianteiraGarfo telescópico\nCurso da roda dianteira102 mm\nSuspensão traseiraBraço oscilante\nCurso da roda traseira82 mm\nMedida do pneu dianteiro80/100-18M/C 47P\nMedida do pneu traseiro90/90 -18M/C REINF 57P\nModelo do pneu dianteiro\nCITY DRAGON (PIRELLI)\nMATRIX (LEVORIN)\nModelo do pneu traseiro\nCITY DRAGON (PIRELLI)\nMATRIX (LEVORIN)\nFreio dianteiroMecânico, a tambor (leading-trailing)\nFreio traseiroMecânico, a tambor (leading-trailing)\nÂngulo do cáster26° 54’\nComprimento do Trail102 mm\nC",
+      "Suspensão dianteiraTrocar o fluido (nota 2)\n16.000\nGuia da corrente de transmissãoVerificar o desgaste  \n4.000\nPorcas, parafusos e fixaçõesVerificar\n8.000\nRodas\nVerificar\n4.000\nVerificar o alinhamento, rolamentos, \ncubos, raios, niples e lubrificar eixos\n8.000\nPneusVerificar e calibrara cada 1000 km ou semanalmente\nColuna de direção\nVerificar a folga e ajustar se \nnecessário\n4.000\nLubrificar\n12.000\nConjunto de travas\nVerificar e lubrificar se \nnecessário (nota 2)\n8.000\nParafusos do suporte do mo"
+    ]
+  },
+  {
+    "file": "NXR150 Bros 2009-11.pdf",
+    "status": "processado",
+    "pages": 557,
+    "charsExtracted": 777787,
+    "suspensionOil": [
+      {
+        "value": "176",
+        "context": "mendadoFluido para suspensão— Nível de fluido184— Capacidade de fluido176 ± 2,5 cm 3 — Pré-carga do rolamento da coluna de direção11,8"
+      },
+      {
+        "value": "176",
+        "context": "mendadoFluido para suspensão— nível de fluido184— Capacidade de fluido176 ± 2,5 cm 3 — pré-carga do rolamento da coluna de direção11,8"
+      },
+      {
+        "value": "176",
+        "context": "mendadofluido para suspensão— Nível de fluido184— capacidade de fluido176 ± 2,5 cm 3 — Pré-carga do rolamento da coluna de direção11,8"
+      },
+      {
+        "value": "176",
+        "context": "mendadoFluido para suspensão— Nível de fluido184— Capacidade de fluido176 ± 2,5 cm 3 — Pré-carga do rolamento da coluna de direção11,8"
+      }
+    ],
+    "fluidLevel": [
+      {
+        "value": "184",
+        "context": "no—0,20  Fluido recomendadoFluido para suspensão— Nível de fluido184— Capacidade de fluido176 ± 2,5 cm 3 — Pré-carga d"
+      },
+      {
+        "value": "184",
+        "context": "no—0,20  Fluido recomendadoFluido para suspensão— nível de fluido184— Capacidade de fluido176 ± 2,5 cm 3 — pré-carga d"
+      },
+      {
+        "value": "184",
+        "context": "de fluido a partir  do topo do cilindro interno. nível de fluido: 184 mm puxe o cilindro interno para cima e instale a"
+      },
+      {
+        "value": "184",
+        "context": "no—0,20  fluido recomendadofluido para suspensão— Nível de fluido184— capacidade de fluido176 ± 2,5 cm 3 — Pré-carga d"
+      },
+      {
+        "value": "184",
+        "context": "no—0,20  Fluido recomendadoFluido para suspensão— Nível de fluido184— Capacidade de fluido176 ± 2,5 cm 3 — Pré-carga d"
+      },
+      {
+        "value": "184",
+        "context": "te inferior. Comprima totalmente o garfo e meça o nível de fluido a partir  do topo do cilindro interno. nível de fluido: 184 mm puxe o cilindro interno para cima e instale a mol"
+      },
+      {
+        "value": "184",
+        "context": "or. Comprima totalmente o garfo e meça o nível de fluido a partir  do topo do cilindro interno. nível de fluido: 184 mm puxe o cilindro interno para cima e instale a mol"
+      }
+    ],
+    "engineOil": [
+      {
+        "value": "1,0",
+        "context": "/ válvulas Unidade: mm item padrão limite de uso  Capacidade de óleo do  motor  Após drenagem 1,0 litro— Após desmontagem1,2 litro— Óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "a das válvulasADM0,08 ± 0,02 mm ESC0,12 ± 0,02 mm Capacidade de óleo do  motor  Após drenagem 1,0 litro Após desmontagem 1,2 litro Óleo de motor reco"
+      },
+      {
+        "value": "1,0",
+        "context": "cificações Unidade: mm item padrão limite de uso  Capacidade de óleo do  motor  Após drenagem 1,0 litro— Após desmontagem1,2 litro— óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "ágina 12-17) especificações  item especificações  Capacidade de óleo do motor Após drenagem 1,0 litro Após desmontagem 1,2 litro Peso seco do motor"
+      },
+      {
+        "value": "1,0",
+        "context": "/ VÁlVulAs Unidade: mm Item padrão limite de uso  capacidade de óleo do  motor  após drenagem 1,0 litro— após desmontagem1,2 litro— Óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "/ VÁlVulAs Unidade: mm Item padrão limite de uso  Capacidade de óleo do  motor  Após drenagem 1,0 litro— Após desmontagem1,2 litro— Óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "dade: mm item padrão limite de uso  Capacidade de óleo do  motor  Após drenagem 1,0 litro— Após desmontagem1,2 litro— Óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "ADM0,08 ± 0,02 mm ESC0,12 ± 0,02 mm Capacidade de óleo do  motor  Após drenagem 1,0 litro Após desmontagem 1,2 litro Óleo de motor reco"
+      },
+      {
+        "value": "1,0",
+        "context": "(página 4-11)  – Limpeza do filtro centrífugo de óleo do motor (página 4-12) especificações Unidade: mm item padrão limite de uso  Capacidade de óleo do  motor  Após drenagem 1,0 litro— Após desmontagem1,2 litro— óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "specificações  item especificações  Capacidade de óleo do motor Após drenagem 1,0 litro Após desmontagem 1,2 litro Peso seco do motor"
+      },
+      {
+        "value": "1,0",
+        "context": "dade: mm Item padrão limite de uso  capacidade de óleo do  motor  após drenagem 1,0 litro— após desmontagem1,2 litro— Óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "dade: mm Item padrão limite de uso  Capacidade de óleo do  motor  Após drenagem 1,0 litro— Após desmontagem1,2 litro— Óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "/ válvulas Unidade: mm item padrão limite de uso  Capacidade de óleo do  motor  Após drenagem 1,0 litro— Após desmontagem1,2 litro— Óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "a das válvulasADM0,08 ± 0,02 mm ESC0,12 ± 0,02 mm Capacidade de óleo do  motor  Após drenagem 1,0 litro Após desmontagem 1,2 litro Óleo de motor reco"
+      },
+      {
+        "value": "1,0",
+        "context": "cificações Unidade: mm item padrão limite de uso  Capacidade de óleo do  motor  Após drenagem 1,0 litro— Após desmontagem1,2 litro— óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "ágina 12-17) especificações  item especificações  Capacidade de óleo do motor Após drenagem 1,0 litro Após desmontagem 1,2 litro Peso seco do motor"
+      },
+      {
+        "value": "1,0",
+        "context": "/ VÁlVulAs Unidade: mm Item padrão limite de uso  capacidade de óleo do  motor  após drenagem 1,0 litro— após desmontagem1,2 litro— Óleo recomendado"
+      },
+      {
+        "value": "1,0",
+        "context": "/ VÁlVulAs Unidade: mm Item padrão limite de uso  Capacidade de óleo do  motor  Após drenagem 1,0 litro— Após desmontagem1,2 litro— Óleo recomendado"
+      }
+    ],
+    "relevantSections": [
+      "Suspensão dianteiraGarfo telescópico\nCurso da roda dianteira161,3 mm\nSuspensão traseiraBraço oscilante\nCurso da roda traseira148,6 mm\nAmortecedor traseiroAmortecedor único\nMedida do pneu dianteiro90/90-19M/C 52P\nMedida do pneu traseiro110/90-17M/C 60P\nMarca do pneu dianteiroMT60 (PIRELLI) \nMarca do pneu traseiroMT60 (PIRELLI) \nFreio dianteiroNXR150 BROS KS · ESMecânico a tambor (sapatas de expansão interna)\nNXR150 BROS ESDA disco hidráulico, único\nFreio traseiroMecânico a tambor (sapatas de expa",
+      "suspensão dIanTeIra\nVerifique  a  ação  dos  garfos  acionando  o  freio  dianteiro  e \ncomprimindo a suspensão dianteira várias vezes. \nVerifique o conjunto da suspensão dianteira quanto a sinais de \nvazamentos, danos ou fixadores soltos. \nNOTA\nComponentes da suspensão frouxos, desgastados ou danificados \nafetam a estabilidade e o controle da motocicleta. \nSubstitua  os  componentes  danificados  que  não  podem  ser \nreparados.\nAperte todas as porcas e parafusos. \nPara os procedimentos de serv"
+    ]
+  },
+  {
+    "file": "Twister Nueva www clubtwister com ar.pdf",
+    "status": "processado",
+    "pages": 155,
+    "charsExtracted": 130457,
+    "suspensionOil": [
+      {
+        "value": "306",
+        "context": ",0 Peso para balanceamento da rodaMáximo de 60 g– Garfo da suspensão Comprimento livre da mola 439,3430,5 Fluido recomendado Fluido para suspensão– Nível de fluido 150– Capacidade de fluido 306 ± 2,5 cm³–    1-10 CB 250F TWISTER INFORMAÇÕES GERAIS RODA"
+      },
+      {
+        "value": "306",
+        "context": "pensão– Nível de fluido 150– Capacidade de fluido 306 ± 2,5 cm³–    1-10 CB 250F TWISTER INFORMAÇÕES GERAIS RODA TRASEIRA/SUSPENSÃO Unidade: mm ITEM PADRÃO LIMITE Pressão do pneu"
+      }
+    ],
+    "fluidLevel": [
+      {
+        "value": "150",
+        "context": ",3430,5 Fluido recomendado Fluido para suspensão– Nível de fluido 150– Capacidade de fluido 306 ± 2,5 cm³–    1-10 CB 2"
+      },
+      {
+        "value": "150",
+        "context": "prima completamente o garfo da suspensão e meça o nível de fluido a partir do topo do cilindro interno. NÍVEL DE FLUIDO PARA A SUSPENSÃO: 150 mm •\t 3 Puxe o cilindro interno e instale a mola do"
+      },
+      {
+        "value": "150",
+        "context": "pletamente o garfo da suspensão e meça o nível de fluido a partir do topo do cilindro interno. NÍVEL DE FLUIDO PARA A SUSPENSÃO: 150 mm •\t 3 Puxe o cilindro interno e instale a mola do"
+      }
+    ],
+    "engineOil": [
+      {
+        "value": "1,3",
+        "context": "MA DE LUBRIFICAÇÃO Unidade: mm ITEM PADRÃO LIMITE Capacidade de óleo do motor  Após a drenagem1,3 litro– Após a drenagem/ troca do filtro 1,4 litro–"
+      },
+      {
+        "value": "1,4",
+        "context": "leo. •\tComplete o motor com o óleo recomendado. •\tCAPACIDADE DE ÓLEO DO MOTOR: 1,3 litro após a drenagem 1,4 litro após a drenagem/troca do filtro 1,8 litro apó"
+      },
+      {
+        "value": "1,3",
+        "context": "AÇÃO Unidade: mm ITEM PADRÃO LIMITE Capacidade de óleo do motor  Após a drenagem1,3 litro– Após a drenagem/ troca do filtro 1,4 litro–"
+      },
+      {
+        "value": "1,3",
+        "context": "em danos graves ao motor. •\tInspeção do filtro de óleo do motor.  è2-14 •\tDrene completamente o óleo. •\tComplete o motor com o óleo recomendado. •\tCAPACIDADE DE ÓLEO DO MOTOR: 1,3 litro após a drenagem 1,4 litro após a drenagem/tro"
+      },
+      {
+        "value": "1,3",
+        "context": "MA DE LUBRIFICAÇÃO Unidade: mm ITEM PADRÃO LIMITE Capacidade de óleo do motor  Após a drenagem1,3 litro– Após a drenagem/ troca do filtro 1,4 litro–"
+      },
+      {
+        "value": "1,3",
+        "context": "leo. •\tComplete o motor com o óleo recomendado. •\tCAPACIDADE DE ÓLEO DO MOTOR: 1,3 litro após a drenagem 1,4 litro após a drenagem/tro"
+      }
+    ],
+    "relevantSections": [
+      "Suspensão dianteira Garfo telescópico\nCurso do eixo dianteiro117 mm\nSuspensão traseira Mono Shock \nCurso do eixo traseiro108 mm\nMedida do pneu dianteiro110/70R17M/C 54H\nMedida do pneu traseiro 140/70R17M/C 66H\nModelo do pneu dianteiro Diablo Rosso II (PIRELLI)\nModelo do pneu traseiro Diablo Rosso II (PIRELLI)\nFreio dianteiro Freio hidráulico a disco\nFreio traseiro Freio hidráulico a disco\nÂngulo de cáster 25°33’\nComprimento do Trail101 mm\nCapacidade do tanque de combustível16,5 litros\nCapacidade",
+      "Suspensão dianteiraTrocar o fluido\n18.000\nSuspensão traseira\nLubrificar buchas, rolamentos e \nterminal inferior do amortecedor\n24.000\nDeslizador da corrente de \ntransmissão\nVerificar o desgaste\n6.000\nPorcas, parafusos e fixaçõesVerificar\n12.000\nRodasVerificar\n12.000\nPneusVerificar e calibrara cada 1.000 km ou semanalmente\nColuna de direção\nVerificar a folga e ajustar se \nnecessário\n12.000\nLubrificar\n18.000\nConjunto de travas\nVerificar e lubrificar se \nnecessário\n12.000\nN OTA\n1. Para leituras mai"
+    ]
+  },
+  {
+    "file": "XRE 300 2009-10.pdf",
+    "status": "processado",
+    "pages": 470,
+    "charsExtracted": 540299,
+    "suspensionOil": [
+      {
+        "value": "547",
+        "context": "ushion 10 W ou equivalente  – Nível de fluido143– Capacidade de fluido547 ± 2,5 cm 3 – Pré-carga do rolamento da coluna de direção7,8"
+      },
+      {
+        "value": "547",
+        "context": "ushion 10 W ou equivalente  – Nível de fluido143– Capacidade de fluido547 ± 2,5 cm 3 – Pré-carga do rolamento da coluna de direção7,8"
+      }
+    ],
+    "fluidLevel": [
+      {
+        "value": "143",
+        "context": "Fluido Honda Ultra Cushion 10 W ou equivalente  – Nível de fluido143– Capacidade de fluido547 ± 2,5 cm 3 – Pré-carga d"
+      },
+      {
+        "value": "143",
+        "context": "Fluido Honda Ultra Cushion 10 W ou equivalente  – Nível de fluido143– Capacidade de fluido547 ± 2,5 cm 3 – Pré-carga d"
+      },
+      {
+        "value": "143",
+        "context": "l de fluido a partir do topo do cilindro interno. Nível de fluido: 143 mm Puxe o cilindro interno para cima e instale a"
+      },
+      {
+        "value": "8",
+        "context": "tor, utilizando o óleo recomendado, e verifique o nível de óleo do motor (página 3-10). DUTO DE PASSAGEM DE ÓLEO DUTO DE PASSAGEM DE ÓLEO PARAFUSOS, 8 mm/ARRUELAS DE VEDAÇÃO PARAFUSOS/ARRUELAS DE VEDAÇÃO"
+      },
+      {
+        "value": "8",
+        "context": "raxa nas roscas. Tampa do orifício da árvore de manivelas8 N.m (0,8 kgf.m)Aplique graxa nas roscas. Parafuso da conexão do duto de passagem de óleo, 8 mm12 N.m (1,2 kgf.m) 7-3 XRE300/A ItemPadrãoLimite d"
+      },
+      {
+        "value": "143",
+        "context": "prima completamente o garfo da suspensão e meça o nível de fluido a partir do topo do cilindro interno. Nível de fluido: 143 mm Puxe o cilindro interno para cima e instale a mol"
+      },
+      {
+        "value": "143",
+        "context": "pletamente o garfo da suspensão e meça o nível de fluido a partir do topo do cilindro interno. Nível de fluido: 143 mm Puxe o cilindro interno para cima e instale a mol"
+      }
+    ],
+    "engineOil": [
+      {
+        "value": "1,4",
+        "context": "AÇÕES GERAIS 1-6 XRE300/A ItemPadrãoLimite de Uso Capacidade de óleo do motorNa drenagem1,4 l– Na troca de óleo e filtro1,5 l– Na desmontagem2,"
+      },
+      {
+        "value": "1,4",
+        "context": "ssificação de Serviço API: SF Viscosidade: 20W-50 Capacidade de óleo do motorNa drenagem1,4 l Na troca de óleo/filtro1,5 l Na desmontagem2,0 l"
+      },
+      {
+        "value": "1,4",
+        "context": "desgastados  4-3 XRE300/A ItemPadrãoLimite de Uso Capacidade de óleo do motorNa drenagem1,4 l– Na troca de óleo e filtro1,5 l– Após a desmontag"
+      },
+      {
+        "value": "1,4",
+        "context": "-6 XRE300/A ItemPadrãoLimite de Uso Capacidade de óleo do motorNa drenagem1,4 l– Na troca de óleo e filtro1,5 l– Na desmontagem2,"
+      },
+      {
+        "value": "1,4",
+        "context": "Serviço API: SF Viscosidade: 20W-50 Capacidade de óleo do motorNa drenagem1,4 l Na troca de óleo/filtro1,5 l Na desmontagem2,0 l"
+      },
+      {
+        "value": "1,4",
+        "context": "-3 XRE300/A ItemPadrãoLimite de Uso Capacidade de óleo do motorNa drenagem1,4 l– Na troca de óleo e filtro1,5 l– Após a desmontag"
+      },
+      {
+        "value": "1,5",
+        "context": "motor36,7 kg Capacidade de  Após a drenagem1,4 l óleo do motor Após a troca de óleo e filtro1,5 l Após a desmontagem2,0 l  REMOÇÃO/INSTALAÇÃO DO MO"
+      },
+      {
+        "value": "1,4",
+        "context": "AÇÕES GERAIS 1-6 XRE300/A ItemPadrãoLimite de Uso Capacidade de óleo do motorNa drenagem1,4 l– Na troca de óleo e filtro1,5 l– Na desmontagem2,"
+      },
+      {
+        "value": "1,4",
+        "context": "ssificação de Serviço API: SF Viscosidade: 20W-50 Capacidade de óleo do motorNa drenagem1,4 l Na troca de óleo/filtro1,5 l Na desmontagem2,0 l"
+      },
+      {
+        "value": "1,4",
+        "context": "desgastados  4-3 XRE300/A ItemPadrãoLimite de Uso Capacidade de óleo do motorNa drenagem1,4 l– Na troca de óleo e filtro1,5 l– Após a desmontag"
+      },
+      {
+        "value": "1,5",
+        "context": "300/A ItemEspecificação Peso seco do motor36,7 kg Capacidade de  Após a drenagem1,4 l óleo do motor Após a troca de óleo e filtro1,5 l Após a desmontagem2,0 l  REMOÇÃO/INSTALAÇÃO DO MO"
+      }
+    ],
+    "relevantSections": [
+      "Suspensão dianteiraGarfo telescópico\nCurso do eixo dianteiro219 mm\nSuspensão traseiraBraço oscilante\nCurso do eixo traseiro225 mm\nMedida do pneu dianteiro90/90-21M/C 54S\nMedida do pneu traseiro120/80-18M/C 62S\nModelo do pneu dianteiroMETZELER ENDURO 3\nModelo do pneu traseiroMETZELER ENDURO 3\nFreio dianteiroHidráulico, disco simples\nFreio traseiroHidráulico, disco simples\nCaster26°48’\nTrail109,7 mm\nCapacidade do tanque de combustível12,4 l\nCapacidade da reserva de combustível2,3 l\nMotorDisposição",
+      "Suspensão dianteira e traseira  Verificar12.000\nPorcas, parafusos e fixadoresVerificar (nota 7)12.000\nRodasVerificar (nota 7)12.000\nPneusVerificar e calibrar (nota 7)a cada 1.000 km ou semanalmente\nColuna de direçãoVerificar    12.000\n\nMANUTENÇÃO\n3-4\nXRE300/A\nLINHA DE COMBUSTÍVEL\nRemova a tampa lateral esquerda (página 2-5).\nInspecione a mangueira de combustível, a mangueira de\nsuprimento de combustível e a mangueira de respiro da\nbomba de combustível quanto a deterioração, trincas, danos\nou vaz"
+    ]
+  },
+  {
+    "file": "WR250F Service PDF 2006.pdf",
+    "status": "processado",
+    "pages": 912,
+    "charsExtracted": 1825526,
+    "suspensionOil": [],
+    "fluidLevel": [
+      {
+        "value": "10",
+        "context": "p Stiff over entire range Compression damping Oil level (oil amount) Spring Turn adjuster counterclockwise (about 2 clicks) to  decrease damping. Decrease oil level by about 5 ~ 10 mm (0.2 ~ 0.4 in). Replace with soft spring. Unsmoot"
+      },
+      {
+        "value": "10",
+        "context": "ire  range, bottoming out Compression damping Oil level (oil amount) Spring Turn adjuster clockwise (about 2 clicks) to increase  damping. Increase oil level by about 5 ~ 10 mm (0.2 ~ 0.4 in). Replace with stiff spring. Stiff"
+      },
+      {
+        "value": "5",
+        "context": "e with stiff spring. Stiff toward stroke  end Oil level (oil amount)Decrease oil level by about 5 mm (0.2 in). Soft toward stroke  end, bottoming out"
+      },
+      {
+        "value": "5",
+        "context": "2 in). Soft toward stroke  end, bottoming out Oil level (oil amount)Increase oil level by about 5 mm (0.2 in). Stiff initial movementCompression dampi"
+      },
+      {
+        "value": "132",
+        "context": "apacity648 cm 3   (22.8 Imp oz,  21.9 US oz)  ←←  Oil level132 mm (5.20 in)←←  <Min. ~ Max.> (From top of outer tub"
+      },
+      {
+        "value": "5",
+        "context": "changing the fork oil amount. CAUTION: Adjust the oil level in 5 mm (0.2 in) increments   or   decrements.   Too low"
+      },
+      {
+        "value": "132",
+        "context": "front   fork within the specified range. Standard oil level: 132 mm (5.20 in) Extent of adjustment: 95 ~ 150 mm  (3.7"
+      },
+      {
+        "value": "10",
+        "context": "e (about 2 clicks) to  decrease damping. Decrease oil level by about 5 ~ 10 mm (0.2 ~ 0.4 in). Replace with soft spring. Unsmoot"
+      },
+      {
+        "value": "10",
+        "context": "e (about 2 clicks) to increase  damping. Increase oil level by about 5 ~ 10 mm (0.2 ~ 0.4 in). Replace with stiff spring. Stiff"
+      },
+      {
+        "value": "5",
+        "context": "place with stiff spring. Stiff toward stroke  end Oil level (oil amount)Decrease oil level by about 5 mm (0.2 in). Soft toward stroke  end, bottoming out"
+      },
+      {
+        "value": "5",
+        "context": "(0.2 in). Soft toward stroke  end, bottoming out Oil level (oil amount)Increase oil level by about 5 mm (0.2 in). Stiff initial movementCompression dampi"
+      },
+      {
+        "value": "5",
+        "context": "r is astride seat (lower rear  posture). Increase oil level by about 5 mm (0.2 in). “Obtrusive” front,  tending to upper fr"
+      },
+      {
+        "value": "10",
+        "context": "ear  posture). Replace with soft spring. Decrease oil level by about 5 ~ 10 mm (0.2 ~ 0.4 in).  4 - 40 TUN SETTING •Rear shock a"
+      },
+      {
+        "value": "130",
+        "context": "poor  handling  and  loss  of stability. Standard oil level: 130 mm (5.12 in) Extent of adjustment: 95 ~ 150 mm  (3.7"
+      }
+    ],
+    "engineOil": [
+      {
+        "value": "1.1",
+        "context": "GENERAL SPECIFICATIONS 2 - 2 SPEC Oil capacity: Engine oil Periodic oil change1.1 L (0.97 Imp qt, 1.16 US qt) With oil filter replace"
+      },
+      {
+        "value": "97",
+        "context": "el muelle L cm 3   Litros Centímetros cúbicos — — Volumen o capacidad Volumen o capacidad r/min Revoluciones por  minuto —Régimen del motor  2 - 96 SPEC MEMO  SPEC 2 - 97 LUBRICATION DIAGRAMS LUBRICATION DIAGRAMS 1 Oil fil"
+      }
+    ],
+    "relevantSections": [
+      "FRONT FORK\n..........................  6-61\nHANDLEBAR\n...........................  6-91\nSTEERING\n.............................  6-105\nSWINGARM\n...........................  6-121\nREAR SHOCK \nABSORBER\n...........................  6-141\nCHAPITRE 4\nMISE AU POINT\nMOTEUR\n......................................... 4-1\nCHÂSSIS\n........................................ 4-21\nCHAPITRE 5\nMOTEUR\nRADIATEUR\n................................... 5-2\nCARBURATEUR\n.......................... 5-10\nSYSTEME D’INDUCTION \nD",
+      "Front fork\nNOTE:\n•The  machine  you  have  purchased  may  differ  slightly\nfrom those shown in the following.\n•Designs and specifications are subject to change with-\nout notice.\nRENSEIGNEMENTS GENERAUX\nDESCRIPTION\n1Levier d’embrayage\n2Levier de démarrage à chaud\n3Coupe-circuit du moteur\n4Ecran multifonction\n5Contacteur à clé\n6Contacteur du démarreur\n7Levier de frein avant\n8Poignée des gaz\n9Bouchon du radiateur\n0Bouchon de réservoir de carburant\nAFeu arrière\nBPédale de kick\nCRéservoir de carbura"
+    ]
+  },
+  {
+    "file": "XJ6N 2013.pdf",
+    "status": "processado",
+    "pages": 511,
+    "charsExtracted": 545354,
+    "suspensionOil": [
+      {
+        "value": "473,0",
+        "context": "ianteiro para cima e para baixo para distribuir o óleo de suspensão. NOTA: Quantidade: 473,0 cm³ Óleo recomendado: Óleo para suspensão 01 ou equi-"
+      },
+      {
+        "value": "473,0",
+        "context": "is de abastecer, bombeie com cuidado a bengala do garfo dianteiro para cima e para baixo para distribuir o óleo de suspensão. NOTA: Quantidade: 473,0 cm³ Óleo recomendado: Óleo para suspensão 01 ou equi-"
+      },
+      {
+        "value": "473,0",
+        "context": "distribuir o óleo de suspensão. NOTA: Quantidade: 473,0 cm³ Óleo recomendado: Óleo para suspensão 01 ou equi- valente •   Certifique-se  de  usar"
+      }
+    ],
+    "fluidLevel": [
+      {
+        "value": "2.",
+        "context": "la 15.  Virabrequim  2-31 ESPEC 1. Interruptor do nível de óleo 2. Radiador de óleo 3. Válvula de alívio 4. Tampa da"
+      },
+      {
+        "value": "4.",
+        "context": "adiador de óleo 2. Tela do óleo 3. Interruptor do nível de óleo 4. Bomba de óleo 5. Tubo de óleo 6. Filtro de óleo 3"
+      },
+      {
+        "value": "1",
+        "context": "e estator1Desconecte. 6Conector do interruptor do nível de  óleo1Desconecte. 7Conector do interruptor de neutro1Des"
+      },
+      {
+        "value": "1",
+        "context": "a capítulo 6. 1Conector do cabo do interruptor do nível de óleo1Desconecte. 2Bandeja  de  óleo1 3Gaxeta da bandeja"
+      },
+      {
+        "value": "1",
+        "context": "bandeja de óleo1 4Filtro de óleo1 5Interruptor do nível de óleo1 6Suporte  da  carenagem  lateral2 6 6 12 12 11 10"
+      },
+      {
+        "value": "1,0",
+        "context": "r do nível de óleo Parafuso  do  interruptor  do  nível de óleo: 1,0 kgf.m (10 Nm) LOCTITE®  5-61 MOTORMOTOR MOTORMOTO"
+      }
+    ],
+    "engineOil": [
+      {
+        "value": "3,40",
+        "context": "viço API ou superior, norma JASO MA Quantidade de óleo do motor Quantidade total3,40 L Sem troca do cartucho do filtro de óleo2,50 L Com"
+      },
+      {
+        "value": "3,40",
+        "context": "icada do óleo de motor recomendado) Quantidade de óleo do motor: Quantidade total: 3,40 L Sem substituição do cartucho do filtro de óleo: 2"
+      },
+      {
+        "value": "3.",
+        "context": "da  embreagemConsulte “EMBREAGEM”, no capítulo 5. Óleo do motorDrene. Consulte “TROCA DO ÓLEO DO MOTOR, no capítulo 3. Líquido  de  arrefecimentoDrene. Consulte “TROCA DO"
+      },
+      {
+        "value": "1.",
+        "context": "ento da bom- ba de óleo. Lubrificante recomendado Óleo do motor MONTAGEM DA BOMBA DE ÓLEO 1. Lubrifique: •   Rotor interno •   Rotor externo •"
+      }
+    ],
+    "relevantSections": [
+      "Suspensão dianteira\nTipoGarfo telescópico\nTipo de mola/amortecedorMola helicoidal/amortecedor hidráulico\nCurso do garfo dianteiro130,0 mm\nComprimento livre da mola do garfo365,1 mm\nComprimento do espaçador145,0 mm\nComprimento instalado358,1 mm\nESPECIFICAÇÕES DO CHASSI\n\n2-12\nESPEC\nForça da mola K10,75 kgf/mm (7,40 N/mm)\nForça da mola K21,20 kgf/mm (11,80 N/mm)\nCurso da mola K10,0 - 70,0 mm\nCurso da mola K270,0 - 130,0 mm\nDiâmetro externo do tubo interno41,0 mm\nLimite da curvatura do tubo interno0",
+      "garfo\ndianteiroM3722,4 kgf·m (24 Nm)\nParafuso do conjunto da haste\ndo amortizadorM1022,3 kgf·m (23 Nm)\nParafuso de fixação do eixo\nda roda dianteiraM811,9 kgf·m (19 Nm)\nParafuso do suporte do cilindro\nmestre do freio dianteiroM621,0 kgf·m (10 Nm)\nParafuso da tampa do cilindro\nmestre do freio dianteiroM420,15 kgf·m (1,5 Nm)\nParafuso de união da\nmangueira do freio dianteiroM1023,2 kgf·m (32 Nm)\nGarfo dianteiro e para-lama\ndianteiroM640,6 kgf·m (6 Nm)\nTampa lateral traseiraM620,7 kgf·m (7 Nm)\nParaf"
+    ]
+  },
+  {
+    "file": "Z 650 20 portugues 2017-20.pdf",
+    "status": "processado",
+    "pages": 724,
+    "charsExtracted": 871488,
+    "suspensionOil": [
+      {
+        "value": "410",
+        "context": "que a quanti- dade e tipo especificado de óleo de garfo. Óleo da Suspensão -  KHL34-G10 (1l): 44091-0002  KHL34-G10 (4l): 44091-0011  Quantidade (Por Lado):   Ao substituir o óleo: aproximadamente 410 ml   Após desmontagem e  completamente seco:  479 ±"
+      }
+    ],
+    "fluidLevel": [
+      {
+        "value": "41",
+        "context": "esmontagem e  Completamente Seco Ao Trocar o Óleo Nível de óleo do garfo: Comprimento Livre da Mola do  Garfo ø41 mm Pressão atmosférica (não ajustável) Kawasaki KHL3"
+      },
+      {
+        "value": "2",
+        "context": "de ser obtida a menos que  o tubo do indicador de nível seja colocado no centro do  tubo interno. Nível do Óleo (completamente comprimido, sem mola)   Padrão: 101 ± 2 mm  {Coloque o batente do medidor do nível de óleo n"
+      },
+      {
+        "value": "41",
+        "context": "pós Desmontagem e  Completamente Seco Ao Trocar o Óleo Nível de óleo do garfo: Comprimento Livre da Mola do  Garfo ø41 mm Pressão atmosférica (não ajustável) Kawasaki KHL3"
+      }
+    ],
+    "engineOil": [
+      {
+        "value": "1,6",
+        "context": "~ 3 mm   – – – Sistema de Lubrificação do  Motor Óleo do Motor: Tipo Viscosidade Capacidade Nível   API SG, SH, SJ, SL ou SM com JASO MA, MA1 ou MA2 SAE 10W-40 1,6 l (com o filtro não removido.) 1,8 l (com o filtro"
+      },
+      {
+        "value": "1,6",
+        "context": "cione o tipo e a quantidade especificada de óleo. Óleo do Motor Recomendado   Tipo:  API SG, SH, SJ, SL ou SM com JASO MA,  MA1 ou MA2   Viscosidade: SAE 10W-40   Capacidade:  1,6  l (Com o filtro não removido.)          1,8    l (C"
+      },
+      {
+        "value": "1,6",
+        "context": "eagem2 ~ 3 mm   – – – Sistema de Lubrificação do  Motor Óleo do Motor: Tipo Viscosidade Capacidade Nível   API SG, SH, SJ, SL ou SM com JASO MA, MA1 ou MA2 SAE 10W-40 1,6 l (com o filtro não removido.) 1,8 l (com o filtro"
+      }
+    ],
+    "relevantSections": [
+      "Suspensão Dianteira:\nTipo\nCurso da Roda\nSuspensão Traseira:\nTipo\nCurso da Roda\nTipo de Freio:\nDianteiro\nTraseiro\n \nTubular, diamante\n24°\n100 mm\nSem câmara\n120/70ZR17 M/C (58W)\nJ17M/C × MT3,50\nSem câmara\n160/60ZR17 M/C (69W)\nJ17M/C × MT4,50\nGarfo telescópico\n125 mm\nBalança traseira (back-link horizontal)\n130 mm\nDisco duplo \nDisco único\nEquipamento Elétrico\nBateria\nFarol:\nFacho Alto\nFacho Baixo\nLanterna/Luz de Freio\nAlternador:\nTipo\nSaída Nominal\n \n12 V 8,6 Ah (10 HR)\n12 V 60 W\n12 V 55 W\nLED\nTrifá",
+      "Garfo Dianteiro\nBujões Superiores do Garfo Dianteiro\nParafusos da Mesa Inferior do Garfo Dianteiro\nParafusos Allen Inferior do Garfo Dianteiro\nPorca Superior do Amortecedor Traseiro\nParafusos do Suporte da Balança Traseira\nParafuso da Haste de Conexão (Inferior)\nParafusos do Suporte do Cavalete Lateral\nPorca do Eixo do Pivô da Balança Traseira\nParafuso da Haste de Conexão (Superior)\nParafuso do Braço Oscilante\nParafuso Inferior do Amortecedor Traseiro\n \n20\n22\n20\n30\n34\n25\n44\n49\n108\n44\n59\n34\n \n2,0"
+    ]
+  }
+]

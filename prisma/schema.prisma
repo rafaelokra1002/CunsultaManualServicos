@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id           String    @id @default(cuid())
+  nome         String
+  email        String    @unique
+  password     String
+  phone        String?
+  role         Role      @default(USER)
+  active       Boolean   @default(true)
+  isPremium    Boolean   @default(false)
+  demoUsed     Boolean   @default(false)
+  referralCode String?   // código do link de indicação usado no cadastro
+  createdAt    DateTime  @default(now())
+  payments     Payment[]
+
+  @@map("users")
+}
+
+model ReferralLink {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  label     String
+  createdAt DateTime @default(now())
+
+  @@map("referral_links")
+}
+
+model Payment {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  amount          Float
+  status          String   @default("pending") // pending, approved, expired
+  pushinPayId         String?  @unique
+  pixCode             String?
+  pixQrCode           String?
+  recoveryMessageSent Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@map("payments")
+}
+
+model Manual {
+  id        String   @id @default(cuid())
+  title     String
+  brand     String
+  model     String
+  year      Int
+  fileUrl   String
+  coverUrl  String?
+  category  String        @default("servico") // "servico" ou "catalogo"
+  createdAt DateTime      @default(now())
+  chunks    ManualChunk[]
+
+  @@map("manuals")
+}
+
+model BotConversation {
+  phone      String   @id
+  messages   Json     @default("[]")
+  updated_at DateTime @default(now())
+
+  @@map("bot_conversations")
+}
+
+model ManualChunk {
+  id        String  @id @default(cuid())
+  manualId  String
+  manual    Manual  @relation(fields: [manualId], references: [id], onDelete: Cascade)
+  content   String
+  pageNum   Int?
+  chunkIdx  Int
+
+  @@map("manual_chunks")
+}
+
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  createdAt DateTime @default(now())
+
+  @@map("page_views")
+}
+
+model Moto {
+  id          String       @id @default(cuid())
+  marca       String
+  modelo      String
+  ano         String
+  ecuTipo     String?
+  parametros  Parametro[]
+  pinagens    Pinagem[]
+
+  @@map("motos")
+}
+
+model Parametro {
+  id        String  @id @default(cuid())
+  nome      String
+  descricao String?
+  valorMin  String
+  valorMax  String
+  unidade   String
+  motoId    String
+  moto      Moto    @relation(fields: [motoId], references: [id], onDelete: Cascade)
+
+  @@map("parametros")
+}
+
+model Pinagem {
+  id     String @id @default(cuid())
+  pino   String
+  cor    String
+  funcao String
+  motoId String
+  moto   Moto   @relation(fields: [motoId], references: [id], onDelete: Cascade)
+
+  @@map("pinagens")
+}

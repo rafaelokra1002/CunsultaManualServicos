@@ -1,0 +1,389 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+interface User {
+  id: string;
+  nome: string;
+  email: string;
+  role: string;
+  active: boolean;
+  isPremium: boolean;
+  referralLabel: string | null;
+  createdAt: string;
+}
+
+export default function AdminUsuariosPage() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [createLoading, setCreateLoading] = useState(false);
+  const [createError, setCreateError] = useState("");
+  const [newUser, setNewUser] = useState({ nome: "", email: "", password: "" });
+
+  async function fetchUsers() {
+    try {
+      const res = await fetch("/api/users");
+      if (res.ok) {
+        setUsers(await res.json());
+      }
+    } catch (err) {
+      console.error("Erro ao carregar usuários:", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  async function toggleActive(userId: string, currentActive: boolean) {
+    setActionLoading(userId);
+
+    try {
+      const res = await fetch(`/api/users/${userId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ active: !currentActive }),
+      });
+
+      if (res.ok) {
+        setUsers((prev) =>
+          prev.map((u) =>
+            u.id === userId ? { ...u, active: !currentActive, isPremium: !currentActive } : u
+          )
+        );
+      }
+    } catch (err) {
+      console.error("Erro ao atualizar usuário:", err);
+    } finally {
+      setActionLoading(null);
+    }
+  }
+
+  async function deleteUser(userId: string, userName: string) {
+    if (!confirm(`Tem certeza que deseja remover o usuário "${userName}"? Esta ação não pode ser desfeita.`)) {
+      return;
+    }
+
+    setActionLoading(userId);
+
+    try {
+      const res = await fetch(`/api/users/${userId}`, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        setUsers((prev) => prev.filter((u) => u.id !== userId));
+      } else {
+        const data = await res.json();
+        alert(data.error || "Erro ao remover usuário");
+      }
+    } catch (err) {
+      console.error("Erro ao remover usuário:", err);
+    } finally {
+      setActionLoading(null);
+    }
+  }
+
+  async function createUser(e: React.FormEvent) {
+    e.preventDefault();
+    setCreateError("");
+    setCreateLoading(true);
+
+    try {
+      const res = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newUser),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setUsers((prev) => [data, ...prev]);
+        setNewUser({ nome: "", email: "", password: "" });
+        setShowCreateForm(false);
+      } else {
+        setCreateError(data.error || "Erro ao criar usuário");
+      }
+    } catch (err) {
+      console.error("Erro ao criar usuário:", err);
+      setCreateError("Erro ao criar usuário");
+    } finally {
+      setCreateLoading(false);
+    }
+  }
+
+  return (
+    <div>
+      <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-white sm:text-3xl">
+            👥 Gerenciar Usuários
+          </h1>
+          <p className="mt-1 text-[#8888a4]">
+            Ative ou desative o acesso dos usuários
+          </p>
+        </div>
+        <button
+          onClick={() => { setShowCreateForm(!showCreateForm); setCreateError(""); }}
+          className="rounded-xl bg-[#6c5ce7] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#5a4bd6] self-start sm:self-auto"
+        >
+          {showCreateForm ? "✕ Cancelar" : "+ Novo Usuário"}
+        </button>
+      </div>
+
+      {/* Formulário de criar usuário */}
+      {showCreateForm && (
+        <div className="mb-6 card-glass rounded-2xl p-6">
+          <h2 className="mb-4 text-lg font-semibold text-white">Criar Novo Usuário</h2>
+          <form onSubmit={createUser} className="space-y-4">
+            <div className="grid gap-4 sm:grid-cols-3">
+              <div>
+                <label className="mb-1 block text-sm text-[#8888a4]">Nome</label>
+                <input
+                  type="text"
+                  required
+                  minLength={2}
+                  value={newUser.nome}
+                  onChange={(e) => setNewUser({ ...newUser, nome: e.target.value })}
+                  className="w-full rounded-lg border border-[#2a2a3e] bg-[#12121a] px-4 py-2.5 text-sm text-white placeholder-[#8888a4] outline-none focus:border-[#6c5ce7] transition-colors"
+                  placeholder="Nome completo"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm text-[#8888a4]">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={newUser.email}
+                  onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                  className="w-full rounded-lg border border-[#2a2a3e] bg-[#12121a] px-4 py-2.5 text-sm text-white placeholder-[#8888a4] outline-none focus:border-[#6c5ce7] transition-colors"
+                  placeholder="email@exemplo.com"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm text-[#8888a4]">Senha</label>
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={newUser.password}
+                  onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                  className="w-full rounded-lg border border-[#2a2a3e] bg-[#12121a] px-4 py-2.5 text-sm text-white placeholder-[#8888a4] outline-none focus:border-[#6c5ce7] transition-colors"
+                  placeholder="Mínimo 6 caracteres"
+                />
+              </div>
+            </div>
+
+            {createError && (
+              <p className="text-sm text-red-400">{createError}</p>
+            )}
+
+            <button
+              type="submit"
+              disabled={createLoading}
+              className="rounded-lg bg-[#6c5ce7] px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#5a4bd6] disabled:opacity-50"
+            >
+              {createLoading ? "Criando..." : "Criar Usuário"}
+            </button>
+          </form>
+        </div>
+      )}
+
+      {/* Tabela de usuários */}
+      <div className="card-glass overflow-hidden rounded-2xl">
+        {loading ? (
+          <div className="p-8 text-center text-[#8888a4]">
+            Carregando usuários...
+          </div>
+        ) : users.length === 0 ? (
+          <div className="p-8 text-center text-[#8888a4]">
+            Nenhum usuário cadastrado
+          </div>
+        ) : (
+          <>
+            <div className="space-y-4 p-4 md:hidden">
+              {users.map((user) => (
+                <div key={user.id} className="rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="truncate font-medium text-white">{user.nome}</p>
+                      <p className="mt-1 break-all text-sm text-[#8888a4]">{user.email}</p>
+                    </div>
+                    <span
+                      className={`inline-block rounded-md px-2.5 py-0.5 text-xs font-semibold ${
+                        user.role === "ADMIN"
+                          ? "bg-orange-500/20 text-orange-400"
+                          : "bg-blue-500/20 text-blue-400"
+                      }`}
+                    >
+                      {user.role}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2 text-xs">
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 font-semibold ${
+                        user.active
+                          ? "bg-green-500/20 text-green-400"
+                          : "bg-gray-500/20 text-gray-400"
+                      }`}
+                    >
+                      <span className={`h-1.5 w-1.5 rounded-full ${user.active ? "bg-green-400" : "bg-gray-400"}`} />
+                      {user.active ? "Ativo" : "Inativo"}
+                    </span>
+                    <span
+                      className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 font-semibold ${
+                        user.isPremium
+                          ? "bg-amber-500/20 text-amber-400"
+                          : "bg-gray-500/20 text-gray-400"
+                      }`}
+                    >
+                      {user.isPremium ? "👑 Premium" : "Demo"}
+                    </span>
+                    {user.referralLabel && (
+                      <span className="inline-flex items-center gap-1 rounded-md bg-purple-500/20 px-2.5 py-1 font-semibold text-purple-400">
+                        🔗 {user.referralLabel}
+                      </span>
+                    )}
+                    <span className="rounded-md bg-[#1a1a2e] px-2.5 py-1 text-[#8888a4]">
+                      Cadastro: {new Date(user.createdAt).toLocaleDateString("pt-BR")}
+                    </span>
+                  </div>
+
+                  {user.role !== "ADMIN" && (
+                    <div className="mt-4 flex gap-2">
+                      <button
+                        onClick={() => toggleActive(user.id, user.active)}
+                        disabled={actionLoading === user.id}
+                        className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-all disabled:opacity-50 ${
+                          user.active
+                            ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
+                            : "bg-green-500/20 text-green-400 hover:bg-green-500/30"
+                        }`}
+                      >
+                        {actionLoading === user.id ? "..." : user.active ? "Desativar" : "Ativar"}
+                      </button>
+                      <button
+                        onClick={() => deleteUser(user.id, user.nome)}
+                        disabled={actionLoading === user.id}
+                        className="rounded-lg bg-red-600/20 px-3 py-2 text-sm font-semibold text-red-400 transition-all hover:bg-red-600/40 disabled:opacity-50"
+                      >
+                        Remover
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="hidden overflow-x-auto md:block">
+            <table className="w-full text-left text-sm">
+              <thead className="border-b border-[#2a2a3e] text-xs font-medium uppercase text-[#8888a4]">
+                <tr>
+                  <th className="px-6 py-4">Nome</th>
+                  <th className="px-6 py-4">Email</th>
+                  <th className="px-6 py-4">Tipo</th>
+                  <th className="px-6 py-4">Status</th>
+                  <th className="px-6 py-4">Plano</th>
+                  <th className="px-6 py-4">Indicado por</th>
+                  <th className="px-6 py-4">Cadastro</th>
+                  <th className="px-6 py-4">Ações</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#2a2a3e]">
+                {users.map((user) => (
+                  <tr key={user.id} className="transition-colors hover:bg-[#1a1a2e]">
+                    <td className="px-6 py-4 font-medium text-white">
+                      {user.nome}
+                    </td>
+                    <td className="px-6 py-4 text-[#8888a4]">{user.email}</td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-block rounded-md px-2.5 py-0.5 text-xs font-semibold ${
+                          user.role === "ADMIN"
+                            ? "bg-orange-500/20 text-orange-400"
+                            : "bg-blue-500/20 text-blue-400"
+                        }`}
+                      >
+                        {user.role}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-0.5 text-xs font-semibold ${
+                          user.active
+                            ? "bg-green-500/20 text-green-400"
+                            : "bg-gray-500/20 text-gray-400"
+                        }`}
+                      >
+                        <span className={`h-1.5 w-1.5 rounded-full ${user.active ? "bg-green-400" : "bg-gray-400"}`} />
+                        {user.active ? "Ativo" : "Inativo"}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-0.5 text-xs font-semibold ${
+                          user.isPremium
+                            ? "bg-amber-500/20 text-amber-400"
+                            : "bg-gray-500/20 text-gray-400"
+                        }`}
+                      >
+                        {user.isPremium ? "👑 Premium" : "Demo"}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      {user.referralLabel ? (
+                        <span className="inline-flex items-center gap-1 rounded-md bg-purple-500/20 px-2.5 py-0.5 text-xs font-semibold text-purple-400">
+                          🔗 {user.referralLabel}
+                        </span>
+                      ) : (
+                        <span className="text-[#8888a4]">—</span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 text-[#8888a4]">
+                      {new Date(user.createdAt).toLocaleDateString("pt-BR")}
+                    </td>
+                    <td className="px-6 py-4">
+                      {user.role !== "ADMIN" && (
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => toggleActive(user.id, user.active)}
+                            disabled={actionLoading === user.id}
+                            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all disabled:opacity-50 ${
+                              user.active
+                                ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
+                                : "bg-green-500/20 text-green-400 hover:bg-green-500/30"
+                            }`}
+                          >
+                            {actionLoading === user.id
+                              ? "..."
+                              : user.active
+                              ? "Desativar"
+                              : "Ativar"}
+                          </button>
+                          <button
+                            onClick={() => deleteUser(user.id, user.nome)}
+                            disabled={actionLoading === user.id}
+                            className="rounded-lg bg-red-600/20 px-3 py-1.5 text-xs font-semibold text-red-400 transition-all hover:bg-red-600/40 disabled:opacity-50"
+                          >
+                            Remover
+                          </button>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

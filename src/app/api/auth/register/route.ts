@@ -1,0 +1,78 @@
+import { NextResponse } from "next/server";
+import { hash } from "bcryptjs";
+import { prisma } from "@/lib/prisma";
+import { registerSchema } from "@/lib/validations";
+
+export const dynamic = "force-dynamic";
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+
+    // Validação com Zod
+    const result = registerSchema.safeParse(body);
+    if (!result.success) {
+      return NextResponse.json(
+        { error: result.error.errors[0].message },
+        { status: 400 }
+      );
+    }
+
+    const { nome, email, phone, password } = result.data;
+    const referralCode = typeof body.referralCode === "string" ? body.referralCode.trim() || null : null;
+
+    // Verifica se o email já está cadastrado
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return NextResponse.json(
+        { error: "Este email já está cadastrado" },
+        { status: 409 }
+      );
+    }
+
+    // Criptografa a senha
+    const hashedPassword = await hash(password, 12);
+
+    // Valida o referralCode se fornecido
+    let validReferralCode: string | null = null;
+    if (referralCode) {
+      const link = await prisma.referralLink.findUnique({ where: { code: referralCode } });
+      if (link) validReferralCode = referralCode;
+    }
+
+    // Cria o usuário (active = true, isPremium = false por padrão — modo demo)
+    const user = await prisma.user.create({
+      data: {
+        nome,
+        email,
+        phone: phone ?? null,
+        password: hashedPassword,
+        active: true,
+        referralCode: validReferralCode,
+      },
+      select: {
+        id: true,
+        nome: true,
+        email: true,
+        role: true,
+        active: true,
+        isPremium: true,
+        createdAt: true,
+      },
+    });
+
+    return NextResponse.json(
+      { message: "Cadastro realizado com sucesso!", user },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("Erro ao registrar usuário:", error);
+    return NextResponse.json(
+      { error: "Erro interno do servidor" },
+      { status: 500 }
+    );
+  }
+}
