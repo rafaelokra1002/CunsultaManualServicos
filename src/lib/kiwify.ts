@@ -1,7 +1,7 @@
 import { createHmac, timingSafeEqual } from "crypto";
 
 // Link do checkout do produto "Plano Acesso Total" na Kiwify
-export const KIWIFY_CHECKOUT_URL = "COLE_AQUI_O_LINK_DO_CHECKOUT";
+export const KIWIFY_CHECKOUT_URL = "https://pay.kiwify.com.br/XcIkB9z";
 
 // Senha "impossível" usada em contas criadas pelo webhook da Kiwify.
 // Não é um hash bcrypt (60 caracteres), então o login sempre falha até o
