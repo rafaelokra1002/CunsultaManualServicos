@@ -68,6 +68,10 @@ const CSS = `
 .od .head .lead{margin-top:14px}
 .od .center{text-align:center;margin-inline:auto}
 .od .center .eyebrow{justify-content:center}
+.od .video{padding-top:0}
+.od .video-frame{max-width:860px;margin:32px auto 0;aspect-ratio:16/9;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--bg-2);box-shadow:0 30px 60px -30px #000}
+.od .video-frame iframe{width:100%;height:100%;border:0;display:block}
+.od .video-cta{display:flex;justify-content:center;margin-top:28px}
 .od .grid{display:grid;gap:16px;margin-top:36px}
 .od .g3{grid-template-columns:repeat(3,1fr)}
 .od .g4{grid-template-columns:repeat(4,1fr)}
@@ -201,6 +205,28 @@ export default function Home() {
                 <div className="fix">→ teste os pinos 1 e 3</div>
               </div>
               <div className="rd-foot"><span>tempo: ~4 min</span><span>fonte: manual oficial</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="video">
+          <div className="wrap">
+            <div className="head center">
+              <span className="eyebrow">Veja funcionando</span>
+              <h2>Pare de chutar defeito: veja na prática</h2>
+            </div>
+            <div className="video-frame">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/_-39Wl5513o?rel=0"
+                title="Mecânico: pare de chutar defeito (use isso aqui)"
+                loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+            <div className="video-cta">
+              <a className="btn" href="/register">Quero acessar agora <span className="pill">R$ 67 no PIX</span></a>
             </div>
           </div>
         </section>
