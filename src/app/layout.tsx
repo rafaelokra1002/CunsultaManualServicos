@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "OficinaDigital",
   },
+  other: {
+    "facebook-domain-verification": "rulsf2u0ef9xqbcni0d479x0r1b9ue",
+  },
 };
 
 export const viewport: Viewport = {
