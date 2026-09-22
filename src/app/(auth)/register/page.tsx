@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/components/Logo";
-import { trackFb } from "@/lib/fbpixel";
+import { kiwifyCheckoutUrl } from "@/lib/kiwify";
 
 function RegisterForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const refCode = searchParams.get("ref") ?? undefined;
   const [step, setStep] = useState<"register" | "payment">("register");
@@ -15,48 +14,12 @@ function RegisterForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  const [paymentLoading, setPaymentLoading] = useState(false);
-  const [pixCode, setPixCode] = useState("");
-  const [pixQrCode, setPixQrCode] = useState("");
-  const [paymentId, setPaymentId] = useState("");
-  const [copied, setCopied] = useState(false);
-  const pollRef = useRef<NodeJS.Timeout | null>(null);
-  const purchaseFiredRef = useRef(false);
-
-  // Poll payment status
-  useEffect(() => {
-    if (paymentId && step === "payment") {
-      pollRef.current = setInterval(async () => {
-        try {
-          const res = await fetch(`/api/payments/status?id=${paymentId}`);
-          const data = await res.json();
-          if (data.status === "approved") {
-            clearInterval(pollRef.current!);
-            if (!purchaseFiredRef.current) {
-              purchaseFiredRef.current = true;
-              trackFb("Purchase", { value: 67.0, currency: "BRL" });
-            }
-            setSuccess("Pagamento confirmado! Redirecionando...");
-            setTimeout(() => router.push("/login"), 2500);
-          }
-        } catch {
-          // silently retry
-        }
-      }, 5000);
-    }
-    return () => {
-      if (pollRef.current) clearInterval(pollRef.current);
-    };
-  }, [paymentId, step, router]);
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    setSuccess("");
     setLoading(true);
 
     try {
@@ -73,48 +36,12 @@ function RegisterForm() {
         return;
       }
 
-      setUserId(data.user.id);
       setStep("payment");
     } catch {
       setError("Erro ao conectar com o servidor");
     } finally {
       setLoading(false);
     }
-  }
-
-  async function handleGeneratePayment(uid?: string) {
-    setPaymentLoading(true);
-    setError("");
-
-    try {
-      const res = await fetch("/api/payments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: uid || userId }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || "Erro ao gerar pagamento");
-        return;
-      }
-
-      setPixCode(data.pixCode || "");
-      setPixQrCode(data.pixQrCode || "");
-      setPaymentId(data.paymentId);
-      trackFb("InitiateCheckout", { value: 67.0, currency: "BRL" });
-    } catch {
-      setError("Erro ao gerar pagamento. Tente novamente.");
-    } finally {
-      setPaymentLoading(false);
-    }
-  }
-
-  function handleCopyPix() {
-    navigator.clipboard.writeText(pixCode);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 3000);
   }
 
   return (
@@ -263,100 +190,20 @@ function RegisterForm() {
             </div>
             <h2 className="mb-2 text-2xl font-bold text-white">Liberar Acesso Completo</h2>
             <p className="mb-4 text-sm text-[#8888a4]">
-              Pague via PIX para liberar todos os recursos, ou explore a plataforma em modo demo.
+              Pague R$ 67 pela Kiwify (PIX ou cartão) para liberar todos os recursos, ou explore a plataforma em modo demo.
+            </p>
+            <a href={kiwifyCheckoutUrl(email)} className="btn-primary mb-3 block w-full text-center">
+              Liberar acesso completo →
+            </a>
+            <p className="mb-6 text-center text-xs text-[#8888a4]">
+              Use o mesmo email do cadastro no pagamento ({email}). O acesso é liberado automaticamente.
             </p>
             <a
               href="/login"
-              className="btn-outline mb-6 block w-full text-center"
+              className="btn-outline block w-full text-center"
             >
               Acessar modo demo →
             </a>
-
-            {error && (
-              <div className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-400">
-                {error}
-              </div>
-            )}
-
-            {success && (
-              <div className="mb-4 rounded-xl border border-green-500/30 bg-green-500/10 p-3 text-sm text-green-400">
-                {success}
-              </div>
-            )}
-
-            {paymentLoading ? (
-              <div className="flex flex-col items-center py-10">
-                <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#6c5ce7] border-t-transparent" />
-                <p className="mt-4 text-sm text-[#8888a4]">Gerando PIX...</p>
-              </div>
-            ) : (
-              <>
-                {/* QR Code */}
-                {pixQrCode && (
-                  <div className="mb-6 flex justify-center">
-                    <div className="rounded-2xl bg-white p-4">
-                      <img
-                        src={pixQrCode}
-                        alt="QR Code PIX"
-                        className="h-48 w-48"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* PIX Copy-Paste */}
-                {pixCode && (
-                  <div className="mb-6">
-                    <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
-                      Código PIX (Copia e Cola)
-                    </label>
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        readOnly
-                        value={pixCode}
-                        className="input-dark flex-1 text-xs"
-                      />
-                      <button
-                        onClick={handleCopyPix}
-                        className={`rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
-                          copied
-                            ? "bg-[#00d68f]/20 text-[#00d68f]"
-                            : "bg-[#6c5ce7] text-white hover:bg-[#7c6ef7]"
-                        }`}
-                      >
-                        {copied ? "Copiado!" : "Copiar"}
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Status info */}
-                {pixCode && (
-                  <div className="rounded-xl border border-[#2a2a3e] bg-[#12121a] p-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-3 w-3 animate-pulse rounded-full bg-yellow-500" />
-                      <div>
-                        <p className="text-sm font-medium text-white">Aguardando pagamento...</p>
-                        <p className="text-xs text-[#8888a4]">
-                          O acesso será liberado automaticamente após a confirmação
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Retry button */}
-                {!pixCode && !paymentLoading && (
-                  <button
-                    onClick={() => handleGeneratePayment()}
-                    className="btn-primary mt-4 w-full"
-                  >
-                    Gerar PIX
-                  </button>
-                )}
-              </>
-            )}
 
             <p className="mt-6 text-center text-sm text-[#8888a4]">
               Já pagou?{" "}

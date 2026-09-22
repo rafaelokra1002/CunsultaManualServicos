@@ -1,3 +1,5 @@
+import { KIWIFY_CHECKOUT_URL } from "@/lib/kiwify";
+
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 .od{
@@ -184,11 +186,11 @@ export default function Home() {
               <h1>Descubra <span className="s">qualquer defeito</span> de moto em <span className="u">5 minutos</span> — sem chutar peça, sem scanner caro</h1>
               <p className="lead">+2.300 manuais oficiais, diagnóstico Honda sem scanner e calculadora de válvulas. Tudo no seu celular, funcionando até offline na oficina.</p>
               <div className="hero-cta">
-                <a className="btn" href="/register">Quero acessar agora <span className="pill">R$ 67 no PIX</span></a>
+                <a className="btn" href={KIWIFY_CHECKOUT_URL}>Quero acessar agora <span className="pill">R$ 67</span></a>
                 <div className="trustline">
                   <span><span className="k">◆</span> Pagamento seguro</span>
                   <span><span className="k">◆</span> 4.9/5 · 87 avaliações</span>
-                  <span><span className="k">◆</span> PIX · liberação imediata</span>
+                  <span><span className="k">◆</span> PIX ou cartão · liberação imediata</span>
                 </div>
               </div>
             </div>
@@ -226,7 +228,7 @@ export default function Home() {
               />
             </div>
             <div className="video-cta">
-              <a className="btn" href="/register">Quero acessar agora <span className="pill">R$ 67 no PIX</span></a>
+              <a className="btn" href={KIWIFY_CHECKOUT_URL}>Quero acessar agora <span className="pill">R$ 67</span></a>
             </div>
           </div>
         </section>
@@ -243,7 +245,7 @@ export default function Home() {
               <div className="card"><div className="tick">✓ EMPRESA REAL</div><h3>CNPJ e atendimento humano</h3><p>Empresa registrada, com gente de verdade respondendo. Fale com a gente antes de comprar.</p></div>
               <div className="card"><div className="tick">✓ COMUNIDADE</div><h3>+300 mecânicos ativos</h3><p>Converse com outros mecânicos no grupo do WhatsApp antes de decidir.</p></div>
               <div className="card"><div className="tick">✓ SUPORTE</div><h3>Resposta em 10 minutos</h3><p>WhatsApp (71) 99950-4584. Atendimento humano, não é robô.</p></div>
-              <div className="card"><div className="tick">✓ PAGAMENTO</div><h3>Gateway oficial</h3><p>Processado por gateway seguro. Seus dados bancários nunca chegam até nós.</p></div>
+              <div className="card"><div className="tick">✓ PAGAMENTO</div><h3>Pagamento pela Kiwify</h3><p>Processado pela Kiwify, plataforma de pagamentos de produtos digitais. Seus dados de pagamento nunca chegam até nós.</p></div>
               <div className="card"><div className="tick">✓ SEM PEGADINHA</div><h3>Paga uma vez, é seu</h3><p>Nada de mensalidade escondida. Um pagamento de R$ 67 e acesso vitalício.</p></div>
             </div>
           </div>
@@ -340,9 +342,9 @@ export default function Home() {
               <div className="price-now">
                 <div className="lbl">Hoje você leva por</div>
                 <div className="big"><small>R$</small>67</div>
-                <div className="meta">Pagamento único via PIX · Liberação imediata · Sem mensalidade</div>
+                <div className="meta">Pagamento único · PIX ou cartão · Liberação imediata · Sem mensalidade</div>
               </div>
-              <a className="btn" href="/register">Quero acessar agora <span className="pill">R$ 67</span></a>
+              <a className="btn" href={KIWIFY_CHECKOUT_URL}>Quero acessar agora <span className="pill">R$ 67</span></a>
             </div>
           </div>
         </section>
@@ -362,7 +364,7 @@ export default function Home() {
           <div className="wrap">
             <div className="head center"><span className="eyebrow">Dúvidas</span><h2>Perguntas frequentes</h2></div>
             <div className="faq">
-              <details open><summary><span className="q">É confiável? Como sei que não é golpe?</span><span className="plus">+</span></summary><div className="a">Somos empresa com +300 clientes ativos, pagamento via gateway oficial e 30 dias de garantia. Se não gostar, devolvemos 100%, sem perguntas. Fale conosco antes pelo (71) 99950-4584.</div></details>
+              <details open><summary><span className="q">É confiável? Como sei que não é golpe?</span><span className="plus">+</span></summary><div className="a">Somos empresa com +300 clientes ativos, pagamento processado pela Kiwify e 30 dias de garantia. Se não gostar, devolvemos 100%, sem perguntas. Fale conosco antes pelo (71) 99950-4584.</div></details>
               <details><summary><span className="q">Funciona em iPhone e Android?</span><span className="plus">+</span></summary><div className="a">Sim, em qualquer celular com navegador. Também pode ser instalado como app na tela inicial (PWA), sem precisar da App Store.</div></details>
               <details><summary><span className="q">Preciso de internet o tempo todo?</span><span className="plus">+</span></summary><div className="a">Não. Os manuais ficam salvos em cache no celular depois da primeira abertura. Você consulta mesmo sem sinal na oficina.</div></details>
               <details><summary><span className="q">É vitalício mesmo? Sem mensalidade?</span><span className="plus">+</span></summary><div className="a">Sim. Você paga uma vez (R$ 67) e acessa para sempre, incluindo as atualizações futuras de manuais.</div></details>
@@ -379,8 +381,8 @@ export default function Home() {
               <span className="eyebrow">Acesso vitalício</span>
               <h2>Garanta seu acesso por R$ 67</h2>
               <p>Paga uma vez e usa pra sempre, sem mensalidade. Cada dia parado é serviço que vai pra concorrência.</p>
-              <a className="btn" href="/register">Quero acessar agora <span className="pill">R$ 67 no PIX</span></a>
-              <span className="cta-sub">🔒 Pagamento seguro via PIX · Liberação imediata · Garantia de 30 dias</span>
+              <a className="btn" href={KIWIFY_CHECKOUT_URL}>Quero acessar agora <span className="pill">R$ 67</span></a>
+              <span className="cta-sub">🔒 Pagamento seguro pela Kiwify · Liberação imediata · Garantia de 30 dias</span>
             </div>
           </div>
         </section>
@@ -392,7 +394,7 @@ export default function Home() {
           <div className="links">
             <a href="https://wa.me/5571999504584">WhatsApp (71) 99950-4584</a>
             <a href="/login">Entrar</a>
-            <a href="/register">Criar conta</a>
+            <a href="/primeiro-acesso">Primeiro acesso</a>
           </div>
         </div>
         <div className="wrap" style={{ marginTop: "14px", fontFamily: "var(--mono)", fontSize: ".74rem", color: "var(--muted-2)" }}>manualdeservicos.store · contato@manualdeservicos.store</div>
@@ -400,7 +402,7 @@ export default function Home() {
 
       <div className="buybar">
         <div className="p">R$ 67<small>único · vitalício</small></div>
-        <a className="btn" href="/register">Quero acessar</a>
+        <a className="btn" href={KIWIFY_CHECKOUT_URL}>Quero acessar</a>
       </div>
     </div>
   );
