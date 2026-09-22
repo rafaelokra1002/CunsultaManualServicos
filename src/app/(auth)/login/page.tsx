@@ -116,15 +116,6 @@ export default function LoginPage() {
               Cadastre-se
             </Link>
           </p>
-          <p className="mt-2 text-center text-sm text-[#8888a4]">
-            Comprou pela Kiwify?{" "}
-            <Link
-              href="/primeiro-acesso"
-              className="font-semibold text-[#6c5ce7] transition-colors hover:text-[#7c6ef7]"
-            >
-              Crie sua senha
-            </Link>
-          </p>
         </div>
       </div>
     </div>
