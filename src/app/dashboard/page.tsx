@@ -272,10 +272,10 @@ export default function DashboardPage() {
         </h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            { label: "Honda", color: "from-red-600 to-red-700", href: "/manuais" },
-            { label: "Yamaha", color: "from-blue-600 to-blue-700", href: "/manuais" },
-            { label: "Kawasaki", color: "from-green-600 to-green-700", href: "/manuais" },
-            { label: "Todas", color: "from-[#ff6a1a] to-[#ff8c3f]", href: "/manuais" },
+            { label: "Honda", mark: "H", color: "from-red-600 to-red-700", href: "/manuais" },
+            { label: "Yamaha", mark: "Y", color: "from-blue-600 to-blue-700", href: "/manuais" },
+            { label: "Kawasaki", mark: "K", color: "from-green-600 to-green-700", href: "/manuais" },
+            { label: "Todas", mark: "", color: "from-[#ff6a1a] to-[#ff8c3f]", href: "/manuais" },
           ].map((brand) => (
             <Link
               key={brand.label}
@@ -283,7 +283,13 @@ export default function DashboardPage() {
               className="group flex flex-col items-center gap-2 rounded-xl border border-[#33373f] bg-[#111317] p-4 transition-all hover:border-[#ff6a1a]/30 hover:bg-[#1e2127] active:scale-95"
             >
               <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${brand.color} text-white shadow-md`}>
-                <MotorcycleIcon />
+                {brand.mark ? (
+                  <span className="font-display text-lg font-black leading-none tracking-tight">
+                    {brand.mark}
+                  </span>
+                ) : (
+                  <MotorcycleIcon className="h-6 w-6" />
+                )}
               </div>
               <span className="text-sm font-medium text-[#9aa1ac] group-hover:text-white">
                 {brand.label}
