@@ -5,92 +5,98 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import InstallButton from "@/components/InstallButton";
 
-function BookIcon() {
+type IconProps = { className?: string };
+
+/* Conjunto unificado: viewBox 24, traço 1.75, pontas arredondadas.
+   O tamanho vem do className, então dá pra ajustar sem mexer no SVG. */
+
+function BookIcon({ className = "h-6 w-6" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-      <path d="M8 7h6" />
-      <path d="M8 11h4" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M6.5 2.5H20v19H6.5A2.5 2.5 0 0 1 4 19V5a2.5 2.5 0 0 1 2.5-2.5Z" />
+      <path d="M4 17.2a2.5 2.5 0 0 1 2.5-1.2H20" />
+      <path d="M8 7h7" />
+      <path d="M8 10.5h4.5" />
     </svg>
   );
 }
 
-function ShieldCheckIcon() {
+function ShieldCheckIcon({ className = "h-6 w-6" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-      <path d="m9 12 2 2 4-4" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 21.6C8.2 19.1 4.5 15.6 4.5 11.2V5.7l7.5-3 7.5 3v5.5c0 4.4-3.7 7.9-7.5 10.4Z" />
+      <path d="m8.8 11.6 2.2 2.2 4.4-4.4" />
     </svg>
   );
 }
 
-function CrownIcon() {
+function CrownIcon({ className = "h-6 w-6" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z" />
-      <path d="M5 16h14v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-2z" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m3.2 17.5 1-9.4 4.6 3.9L12 5.2l3.2 6.8 4.6-3.9 1 9.4Z" />
+      <path d="M4.6 21h14.8" />
     </svg>
   );
 }
 
-function DownloadIcon() {
+function DownloadIcon({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3v11.5" />
+      <path d="m7.6 10.4 4.4 4.4 4.4-4.4" />
+      <path d="M4 16.8v2.4A1.8 1.8 0 0 0 5.8 21h12.4a1.8 1.8 0 0 0 1.8-1.8v-2.4" />
     </svg>
   );
 }
 
-function WrenchIcon() {
+function WrenchIcon({ className = "h-6 w-6" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
     </svg>
   );
 }
 
-function SparklesIcon() {
+function SparklesIcon({ className = "h-[22px] w-[22px]" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-      <path d="M5 3v4" />
-      <path d="M19 17v4" />
-      <path d="M3 5h4" />
-      <path d="M17 19h4" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3.4 13.6 8.6a2 2 0 0 0 1.3 1.3l5.2 1.6-5.2 1.6a2 2 0 0 0-1.3 1.3L12 19.6l-1.6-5.2a2 2 0 0 0-1.3-1.3L3.9 11.5l5.2-1.6a2 2 0 0 0 1.3-1.3Z" />
+      <path d="M18.8 3.6v2.8" />
+      <path d="M17.4 5h2.8" />
+      <path d="M5.4 17.6v2.4" />
+      <path d="M4.2 18.8h2.4" />
     </svg>
   );
 }
 
-function ArrowRightIcon() {
+function ArrowRightIcon({ className = "h-4 w-4" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4.5 12h14" />
+      <path d="m12.5 6 6 6-6 6" />
     </svg>
   );
 }
 
-function ChatIcon() {
+function ChatIcon({ className = "h-[26px] w-[26px]" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-      <path d="M8 10h8" />
-      <path d="M8 14h5" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20.5 14.6A2.4 2.4 0 0 1 18.1 17H8.2L3.5 21V5.9A2.4 2.4 0 0 1 5.9 3.5h12.2a2.4 2.4 0 0 1 2.4 2.4Z" />
+      <path d="M7.8 8.6h8.4" />
+      <path d="M7.8 12.1h5.2" />
     </svg>
   );
 }
 
-function MotorcycleIcon() {
+function MotorcycleIcon({ className = "h-7 w-7" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="5" cy="17" r="3" />
-      <circle cx="19" cy="17" r="3" />
-      <path d="M9 17h6" />
-      <path d="m7 14 2-5h4l3 5" />
-      <path d="M11 9V7h2" />
-      <path d="M16 7h2l1 3" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="5.4" cy="16.6" r="3.4" />
+      <circle cx="18.6" cy="16.6" r="3.4" />
+      <path d="M8.8 16.6h5.6" />
+      <path d="m6.9 13.4 2.2-4.3h3.9l3 4.4" />
+      <path d="M11.6 9.1V7.4h2.2" />
+      <path d="M16.1 7.4h2.3l1.3 3.6" />
     </svg>
   );
 }

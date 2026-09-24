@@ -1,12 +1,11 @@
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 .od{
   --bg:#16181c;--bg-2:#111317;--surface:#1e2127;--surface-2:#262a31;
   --line:#33373f;--line-soft:#2a2e35;--ink:#f3f0ea;--muted:#9aa1ac;--muted-2:#6c727c;
   --signal:#ff6a1a;--signal-2:#ff8c3f;--signal-dim:rgba(255,106,26,.12);
   --ok:#37c07a;--ok-dim:rgba(55,192,122,.12);--warn:#e5484d;--warn-dim:rgba(229,72,77,.12);
   --r:14px;--maxw:1060px;
-  --disp:"Archivo",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+  --disp:var(--font-display),"Archivo",system-ui,sans-serif;--body:var(--font-body),"IBM Plex Sans",system-ui,sans-serif;--mono:var(--font-mono),"IBM Plex Mono",ui-monospace,monospace;
   background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 .od *{box-sizing:border-box}
