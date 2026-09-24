@@ -124,7 +124,7 @@ export default function DashboardPage() {
   return (
     <div className="relative">
       {/* Background glow */}
-      <div className="pointer-events-none absolute -top-20 left-1/2 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-[#6c5ce7]/[0.07] blur-[100px]" />
+      <div className="pointer-events-none absolute -top-20 left-1/2h-[300px] w-full max-w-[600px] -translate-x-1/2 rounded-full bg-[#6c5ce7]/[0.07] blur-[100px]" />
 
       {/* Header */}
       <div className="relative mb-8 sm:mb-10">
