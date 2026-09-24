@@ -164,7 +164,7 @@ export default function ManuaisPage() {
       {/* Header */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-2xl font-bold text-white sm:text-3xl">📄 Manuais</h1>
-        <p className="mt-1 text-[#8888a4]">
+        <p className="mt-1 text-[#9aa1ac]">
           {manuais.length} manuais &middot; {servicoCount} serviço · {catalogoCount} catálogo &middot; {totalBrands} montadoras
         </p>
       </div>
@@ -176,8 +176,8 @@ export default function ManuaisPage() {
             onClick={() => { setSelectedCategory("servico"); setSelectedBrand("all"); setSelectedYear("all"); setSortOrder("recent"); setModelFilter(""); }}
             className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${
               selectedCategory === "servico"
-                ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
-                : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
+                ? "bg-[#ff6a1a] text-white shadow-lg shadow-[#ff6a1a]/25"
+                : "bg-white/5 text-[#9aa1ac] hover:bg-white/10 hover:text-white"
             }`}
           >
             📋 Manuais de Serviço
@@ -190,7 +190,7 @@ export default function ManuaisPage() {
             className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${
               selectedCategory === "catalogo"
                 ? "bg-amber-500 text-white shadow-lg shadow-amber-500/25"
-                : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
+                : "bg-white/5 text-[#9aa1ac] hover:bg-white/10 hover:text-white"
             }`}
           >
             📦 Catálogo de Peças
@@ -209,7 +209,7 @@ export default function ManuaisPage() {
             <select
               value={selectedBrand}
               onChange={(e) => setSelectedBrand(e.target.value)}
-              className="w-full rounded-lg border border-white/10 bg-[#111118] px-3 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-1 focus:ring-[#6c5ce7]/50"
+              className="w-full rounded-lg border border-white/10 bg-[#111317] px-3 py-2.5 text-sm font-medium text-white focus:outline-none focus:ring-1 focus:ring-[#ff6a1a]/50"
             >
               <option value="all">Todas as marcas ({categoryManuais.length})</option>
               {brandGroups.map(([brand, items]) => (
@@ -226,8 +226,8 @@ export default function ManuaisPage() {
               onClick={() => setSelectedBrand("all")}
               className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${
                 selectedBrand === "all"
-                  ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
-                  : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
+                  ? "bg-[#ff6a1a] text-white shadow-lg shadow-[#ff6a1a]/25"
+                  : "bg-white/5 text-[#9aa1ac] hover:bg-white/10 hover:text-white"
               }`}
             >
               Todas ({categoryManuais.length})
@@ -238,8 +238,8 @@ export default function ManuaisPage() {
                 onClick={() => setSelectedBrand(brand)}
                 className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   selectedBrand === brand
-                    ? "bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/25"
-                    : "bg-white/5 text-[#8888a4] hover:bg-white/10 hover:text-white"
+                    ? "bg-[#ff6a1a] text-white shadow-lg shadow-[#ff6a1a]/25"
+                    : "bg-white/5 text-[#9aa1ac] hover:bg-white/10 hover:text-white"
                 }`}
               >
                 <span className={`inline-block h-2.5 w-2.5 rounded-full ${brandColors[brand] || "bg-purple-500"}`} />
@@ -254,11 +254,11 @@ export default function ManuaisPage() {
       {!loading && !error && (
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-[#8888a4]">Ano:</span>
+            <span className="text-xs font-medium text-[#9aa1ac]">Ano:</span>
             <select
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
-              className="rounded-lg border border-white/10 bg-[#111118] px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#6c5ce7]/50"
+              className="rounded-lg border border-white/10 bg-[#111317] px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#ff6a1a]/50"
             >
               <option value="all">Todos</option>
               {availableYears.map((y) => (
@@ -267,11 +267,11 @@ export default function ManuaisPage() {
             </select>
           </div>
           <div className="ml-auto flex items-center gap-2">
-            <span className="text-xs font-medium text-[#8888a4]">Ordenar:</span>
+            <span className="text-xs font-medium text-[#9aa1ac]">Ordenar:</span>
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
-              className="rounded-lg border border-white/10 bg-[#111118] px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#6c5ce7]/50"
+              className="rounded-lg border border-white/10 bg-[#111317] px-3 py-1.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-[#ff6a1a]/50"
             >
               <option value="recent">Mais recentes (cadastro)</option>
               <option value="year_desc">Ano mais novo</option>
@@ -304,7 +304,7 @@ export default function ManuaisPage() {
       {/* Loading */}
       {loading && (
         <div className="flex items-center justify-center py-12">
-          <div className="text-[#8888a4]">Carregando manuais...</div>
+          <div className="text-[#9aa1ac]">Carregando manuais...</div>
         </div>
       )}
 
@@ -324,13 +324,13 @@ export default function ManuaisPage() {
               <h3 className="text-lg font-semibold text-white">
                 Nenhum manual encontrado
               </h3>
-              <p className="text-sm text-[#8888a4]">
+              <p className="text-sm text-[#9aa1ac]">
                 Tente ajustar os filtros ou volte mais tarde
               </p>
             </div>
           ) : (
             <div className="space-y-10">
-              <div className="flex flex-col gap-2 text-sm text-[#8888a4] sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-2 text-sm text-[#9aa1ac] sm:flex-row sm:items-center sm:justify-between">
                 <span>
                   Mostrando {Math.min(visibleCount, filteredManuais.length)} de {filteredManuais.length} manuais
                 </span>
@@ -345,7 +345,7 @@ export default function ManuaisPage() {
                   <div className="mb-4 flex items-center gap-3">
                     <span className={`inline-block h-4 w-4 rounded-full ${brandColors[brand] || "bg-purple-500"}`} />
                     <h2 className="text-xl font-bold text-white">{brand}</h2>
-                    <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-medium text-[#8888a4]">
+                    <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-medium text-[#9aa1ac]">
                       {items.length} {items.length === 1 ? "manual" : "manuais"}
                     </span>
                   </div>

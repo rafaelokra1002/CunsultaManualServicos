@@ -62,21 +62,21 @@ export default function DiagnosticoPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0f]">
+    <div className="flex min-h-screen bg-[#16181c]">
       <Sidebar />
       <main className="flex-1 pb-8 pt-20 md:ml-64 md:pt-8">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
 
           {/* Breadcrumb */}
           {selectedModel && (
-            <div className="mb-4 flex items-center gap-2 text-sm text-[#8888a4]">
+            <div className="mb-4 flex items-center gap-2 text-sm text-[#9aa1ac]">
               <button
                 onClick={() => { setSelectedModel(null); setSelectedVariant(null); setSelectedCode(null); setSearchTerm(""); }}
                 className="transition-colors hover:text-white"
               >
                 Modelos
               </button>
-              <span className="text-[#555570]">/</span>
+              <span className="text-[#6c727c]">/</span>
               <button
                 onClick={() => { setSelectedVariant(null); setSelectedCode(null); }}
                 className="transition-colors hover:text-white"
@@ -85,7 +85,7 @@ export default function DiagnosticoPage() {
               </button>
               {selectedVariant && (
                 <>
-                  <span className="text-[#555570]">/</span>
+                  <span className="text-[#6c727c]">/</span>
                   <button onClick={() => setSelectedCode(null)} className="transition-colors hover:text-white">
                     {selectedVariant.yearRange}
                   </button>
@@ -93,8 +93,8 @@ export default function DiagnosticoPage() {
               )}
               {selectedCode && (
                 <>
-                  <span className="text-[#555570]">/</span>
-                  <span className="text-[#6c5ce7]">{selectedCode.name}</span>
+                  <span className="text-[#6c727c]">/</span>
+                  <span className="text-[#ff6a1a]">{selectedCode.name}</span>
                 </>
               )}
             </div>
@@ -105,52 +105,52 @@ export default function DiagnosticoPage() {
             <div>
               {/* Hero */}
               <div className="mb-8 text-center py-6">
-                <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6c5ce7] to-[#a78bfa] shadow-lg shadow-[#6c5ce7]/20">
+                <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff6a1a] to-[#ff8c3f] shadow-lg shadow-[#ff6a1a]/20">
                   <span className="text-3xl">🔧</span>
                 </div>
-                <h1 className="mb-2 text-3xl font-extrabold bg-gradient-to-r from-[#6c5ce7] to-[#a78bfa] bg-clip-text text-transparent">
+                <h1 className="mb-2 text-3xl font-extrabold bg-gradient-to-r from-[#ff6a1a] to-[#ff8c3f] bg-clip-text text-transparent">
                   Diagnóstico Eletrônico
                 </h1>
-                <p className="mx-auto max-w-md text-sm text-[#8888a4]">
+                <p className="mx-auto max-w-md text-sm text-[#9aa1ac]">
                   Consulte códigos de falha, padrões de teste e localizações para diagnóstico de injeção eletrônica Honda.
                 </p>
               </div>
 
               {/* Quick Stats */}
               <div className="mb-6 grid grid-cols-3 gap-3">
-                <div className="rounded-xl border border-[#2a2a3e] bg-[#12121a] p-3 text-center">
-                  <div className="text-2xl font-bold text-[#6c5ce7]">{motorcycleModels.length}</div>
-                  <div className="mt-1 text-xs text-[#8888a4]">Modelos</div>
+                <div className="rounded-xl border border-[#33373f] bg-[#111317] p-3 text-center">
+                  <div className="text-2xl font-bold text-[#ff6a1a]">{motorcycleModels.length}</div>
+                  <div className="mt-1 text-xs text-[#9aa1ac]">Modelos</div>
                 </div>
-                <div className="rounded-xl border border-[#2a2a3e] bg-[#12121a] p-3 text-center">
+                <div className="rounded-xl border border-[#33373f] bg-[#111317] p-3 text-center">
                   <div className="text-2xl font-bold text-blue-400">
                     {motorcycleModels.reduce((acc, m) => acc + m.variants.length, 0)}
                   </div>
-                  <div className="mt-1 text-xs text-[#8888a4]">Variantes</div>
+                  <div className="mt-1 text-xs text-[#9aa1ac]">Variantes</div>
                 </div>
-                <div className="rounded-xl border border-[#2a2a3e] bg-[#12121a] p-3 text-center">
+                <div className="rounded-xl border border-[#33373f] bg-[#111317] p-3 text-center">
                   <div className="text-2xl font-bold text-green-400">
                     {motorcycleModels.reduce((acc, m) => acc + m.variants.reduce((a, v) => a + v.codes.length, 0), 0)}
                   </div>
-                  <div className="mt-1 text-xs text-[#8888a4]">Códigos</div>
+                  <div className="mt-1 text-xs text-[#9aa1ac]">Códigos</div>
                 </div>
               </div>
 
               {/* How it works */}
-              <div className="mb-6 rounded-xl border border-[#2a2a3e] bg-[#12121a]/50 p-4">
-                <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#555570]">Como usar</h3>
+              <div className="mb-6 rounded-xl border border-[#33373f] bg-[#111317]/50 p-4">
+                <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#6c727c]">Como usar</h3>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                   <div className="flex items-start gap-2">
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#6c5ce7]/20 text-xs font-bold text-[#6c5ce7]">1</div>
-                    <p className="text-xs text-[#8888a4]">Selecione o <span className="text-[#e4e4ef]">modelo</span> da motocicleta</p>
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#ff6a1a]/20 text-xs font-bold text-[#ff6a1a]">1</div>
+                    <p className="text-xs text-[#9aa1ac]">Selecione o <span className="text-[#f3f0ea]">modelo</span> da motocicleta</p>
                   </div>
                   <div className="flex items-start gap-2">
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#6c5ce7]/20 text-xs font-bold text-[#6c5ce7]">2</div>
-                    <p className="text-xs text-[#8888a4]">Escolha o <span className="text-[#e4e4ef]">ano</span> e o código de falha</p>
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#ff6a1a]/20 text-xs font-bold text-[#ff6a1a]">2</div>
+                    <p className="text-xs text-[#9aa1ac]">Escolha o <span className="text-[#f3f0ea]">ano</span> e o código de falha</p>
                   </div>
                   <div className="flex items-start gap-2">
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#6c5ce7]/20 text-xs font-bold text-[#6c5ce7]">3</div>
-                    <p className="text-xs text-[#8888a4]">Consulte os <span className="text-[#e4e4ef]">testes</span> e padrões</p>
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#ff6a1a]/20 text-xs font-bold text-[#ff6a1a]">3</div>
+                    <p className="text-xs text-[#9aa1ac]">Consulte os <span className="text-[#f3f0ea]">testes</span> e padrões</p>
                   </div>
                 </div>
               </div>
@@ -169,20 +169,20 @@ export default function DiagnosticoPage() {
                   <button
                     key={model.name}
                     onClick={() => handleModelSelect(model)}
-                    className="group flex items-center justify-between rounded-xl border border-[#2a2a3e] bg-[#12121a] p-4 text-left transition-all hover:border-[#6c5ce7]/50 hover:bg-[#1a1a2e]"
+                    className="group flex items-center justify-between rounded-xl border border-[#33373f] bg-[#111317] p-4 text-left transition-all hover:border-[#ff6a1a]/50 hover:bg-[#1e2127]"
                   >
                     <div>
-                      <div className="font-semibold text-white transition-colors group-hover:text-[#6c5ce7]">{model.name}</div>
-                      <div className="mt-1 text-xs text-[#8888a4]">
+                      <div className="font-semibold text-white transition-colors group-hover:text-[#ff6a1a]">{model.name}</div>
+                      <div className="mt-1 text-xs text-[#9aa1ac]">
                         {model.variants.length} variante{model.variants.length > 1 ? "s" : ""} · {model.variants[0].yearStart} - {model.variants[model.variants.length - 1].yearEnd}
                       </div>
                     </div>
-                    <span className="text-[#555570] transition-colors group-hover:text-[#6c5ce7]">→</span>
+                    <span className="text-[#6c727c] transition-colors group-hover:text-[#ff6a1a]">→</span>
                   </button>
                 ))}
               </div>
               {filteredModels.length === 0 && (
-                <p className="py-8 text-center text-[#8888a4]">Nenhum modelo encontrado</p>
+                <p className="py-8 text-center text-[#9aa1ac]">Nenhum modelo encontrado</p>
               )}
             </div>
           )}
@@ -190,23 +190,23 @@ export default function DiagnosticoPage() {
           {/* ==================== YEAR VARIANT SELECTION ==================== */}
           {selectedModel && !selectedVariant && (
             <div>
-              <button onClick={handleBack} className="mb-4 flex items-center gap-1 text-sm text-[#8888a4] transition-colors hover:text-white">
+              <button onClick={handleBack} className="mb-4 flex items-center gap-1 text-sm text-[#9aa1ac] transition-colors hover:text-white">
                 ← Voltar
               </button>
               <h2 className="mb-1 text-2xl font-bold text-white">{selectedModel.name}</h2>
-              <p className="mb-6 text-sm text-[#8888a4]">Selecione o ano do modelo</p>
+              <p className="mb-6 text-sm text-[#9aa1ac]">Selecione o ano do modelo</p>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {selectedModel.variants.map((variant) => (
                   <button
                     key={variant.yearRange}
                     onClick={() => handleVariantSelect(variant)}
-                    className="group flex items-center justify-between rounded-xl border border-[#2a2a3e] bg-[#12121a] p-4 text-left transition-all hover:border-[#6c5ce7]/50 hover:bg-[#1a1a2e]"
+                    className="group flex items-center justify-between rounded-xl border border-[#33373f] bg-[#111317] p-4 text-left transition-all hover:border-[#ff6a1a]/50 hover:bg-[#1e2127]"
                   >
                     <div>
-                      <div className="text-lg font-semibold text-white transition-colors group-hover:text-[#6c5ce7]">{variant.yearRange}</div>
-                      <div className="mt-1 text-xs text-[#8888a4]">{variant.codes.length} códigos de diagnóstico</div>
+                      <div className="text-lg font-semibold text-white transition-colors group-hover:text-[#ff6a1a]">{variant.yearRange}</div>
+                      <div className="mt-1 text-xs text-[#9aa1ac]">{variant.codes.length} códigos de diagnóstico</div>
                     </div>
-                    <span className="text-[#555570] transition-colors group-hover:text-[#6c5ce7]">→</span>
+                    <span className="text-[#6c727c] transition-colors group-hover:text-[#ff6a1a]">→</span>
                   </button>
                 ))}
               </div>
@@ -216,30 +216,30 @@ export default function DiagnosticoPage() {
           {/* ==================== DIAGNOSTIC CODES LIST ==================== */}
           {selectedVariant && !selectedCode && (
             <div>
-              <button onClick={handleBack} className="mb-4 flex items-center gap-1 text-sm text-[#8888a4] transition-colors hover:text-white">
+              <button onClick={handleBack} className="mb-4 flex items-center gap-1 text-sm text-[#9aa1ac] transition-colors hover:text-white">
                 ← Voltar
               </button>
               <h2 className="mb-1 text-2xl font-bold text-white">{selectedModel!.name}</h2>
-              <p className="mb-6 text-sm font-medium text-[#6c5ce7]">{selectedVariant.yearRange}</p>
+              <p className="mb-6 text-sm font-medium text-[#ff6a1a]">{selectedVariant.yearRange}</p>
               <div className="space-y-2">
                 {selectedVariant.codes.map((code, i) => (
                   <button
                     key={`${code.code}-${code.name}-${i}`}
                     onClick={() => setSelectedCode(code)}
-                    className="group flex w-full items-center justify-between rounded-xl border border-[#2a2a3e] bg-[#12121a] p-4 text-left transition-all hover:border-[#6c5ce7]/50 hover:bg-[#1a1a2e]"
+                    className="group flex w-full items-center justify-between rounded-xl border border-[#33373f] bg-[#111317] p-4 text-left transition-all hover:border-[#ff6a1a]/50 hover:bg-[#1e2127]"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#6c5ce7]/10 text-xs font-bold text-[#6c5ce7]">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#ff6a1a]/10 text-xs font-bold text-[#ff6a1a]">
                         {code.code.match(/\d+/)?.[0] || "⚡"}
                       </div>
                       <div>
-                        <div className="font-semibold text-white transition-colors group-hover:text-[#6c5ce7]">{code.name}</div>
-                        <div className="text-xs text-[#8888a4]">{code.code}</div>
+                        <div className="font-semibold text-white transition-colors group-hover:text-[#ff6a1a]">{code.name}</div>
+                        <div className="text-xs text-[#9aa1ac]">{code.code}</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-[#555570]">{code.tests.length} testes</span>
-                      <span className="text-[#555570] transition-colors group-hover:text-[#6c5ce7]">→</span>
+                      <span className="text-xs text-[#6c727c]">{code.tests.length} testes</span>
+                      <span className="text-[#6c727c] transition-colors group-hover:text-[#ff6a1a]">→</span>
                     </div>
                   </button>
                 ))}
@@ -250,13 +250,13 @@ export default function DiagnosticoPage() {
           {/* ==================== DIAGNOSTIC TEST DETAILS ==================== */}
           {selectedCode && (
             <div>
-              <button onClick={handleBack} className="mb-4 flex items-center gap-1 text-sm text-[#8888a4] transition-colors hover:text-white">
+              <button onClick={handleBack} className="mb-4 flex items-center gap-1 text-sm text-[#9aa1ac] transition-colors hover:text-white">
                 ← Voltar
               </button>
               <div className="mb-6">
                 <h2 className="text-2xl font-bold text-white">{selectedCode.name}</h2>
-                <p className="text-sm font-medium text-[#6c5ce7]">{selectedCode.code}</p>
-                <p className="mt-1 text-xs text-[#8888a4]">{selectedModel!.name} · {selectedVariant!.yearRange}</p>
+                <p className="text-sm font-medium text-[#ff6a1a]">{selectedCode.code}</p>
+                <p className="mt-1 text-xs text-[#9aa1ac]">{selectedModel!.name} · {selectedVariant!.yearRange}</p>
                 {selectedCode.note && (
                   <div className="mt-3 rounded-lg border border-yellow-500/30 bg-yellow-500/10 px-3 py-2 text-sm text-yellow-300">
                     ⚠ {selectedCode.note}
@@ -272,23 +272,23 @@ export default function DiagnosticoPage() {
                   />
                 )}
                 <div className={blocked ? "pointer-events-none select-none" : ""}>
-                  <div className="overflow-x-auto rounded-xl border border-[#2a2a3e]">
+                  <div className="overflow-x-auto rounded-xl border border-[#33373f]">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-[#2a2a3e] bg-[#12121a]">
-                          <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#8888a4]">Padrão</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#8888a4]">Localização</th>
-                          <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#8888a4]">Tipo</th>
+                        <tr className="border-b border-[#33373f] bg-[#111317]">
+                          <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#9aa1ac]">Padrão</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#9aa1ac]">Localização</th>
+                          <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[#9aa1ac]">Tipo</th>
                         </tr>
                       </thead>
                       <tbody>
                         {selectedCode.tests.slice(0, blocked ? 1 : undefined).map((test, i) => (
-                          <tr key={i} className="border-b border-[#2a2a3e]/50 transition-colors hover:bg-[#1a1a2e]/50">
+                          <tr key={i} className="border-b border-[#33373f]/50 transition-colors hover:bg-[#1e2127]/50">
                             <td className="px-4 py-3 font-mono text-sm text-white">{test.padrao}</td>
-                            <td className="px-4 py-3 text-[#e4e4ef]">{test.localizacao}</td>
+                            <td className="px-4 py-3 text-[#f3f0ea]">{test.localizacao}</td>
                             <td className="px-4 py-3">
                               <span
-                                className={`inline-flex rounded px-2 py-0.5 text-xs font-medium ${typeColors[test.tipo] || "bg-[#2a2a3e] text-[#8888a4]"}`}
+                                className={`inline-flex rounded px-2 py-0.5 text-xs font-medium ${typeColors[test.tipo] || "bg-[#33373f] text-[#9aa1ac]"}`}
                                 title={testTypeLegend[test.tipo]}
                               >
                                 {test.tipo}
@@ -303,11 +303,11 @@ export default function DiagnosticoPage() {
               </div>
 
               {/* Legend */}
-              <div className="mt-6 rounded-xl border border-[#2a2a3e] bg-[#12121a] p-4">
-                <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#555570]">Legenda dos Tipos de Teste</h3>
+              <div className="mt-6 rounded-xl border border-[#33373f] bg-[#111317] p-4">
+                <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#6c727c]">Legenda dos Tipos de Teste</h3>
                 <div className="flex flex-wrap gap-2">
                   {Object.entries(testTypeLegend).map(([key, value]) => (
-                    <span key={key} className={`inline-flex items-center gap-1 rounded px-2 py-1 text-xs ${typeColors[key] || "bg-[#2a2a3e] text-[#8888a4]"}`}>
+                    <span key={key} className={`inline-flex items-center gap-1 rounded px-2 py-1 text-xs ${typeColors[key] || "bg-[#33373f] text-[#9aa1ac]"}`}>
                       <span className="font-bold">{key}</span>
                       <span className="opacity-80">= {value}</span>
                     </span>
@@ -316,12 +316,12 @@ export default function DiagnosticoPage() {
               </div>
 
               {/* Abbreviations */}
-              <div className="mt-4 rounded-xl border border-[#2a2a3e] bg-[#12121a] p-4">
-                <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#555570]">Abreviações</h3>
+              <div className="mt-4 rounded-xl border border-[#33373f] bg-[#111317] p-4">
+                <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#6c727c]">Abreviações</h3>
                 <div className="flex flex-wrap gap-2">
                   {Object.entries(abbreviationLegend).map(([key, value]) => (
-                    <span key={key} className="inline-flex items-center gap-1 rounded bg-[#1a1a2e] px-2 py-1 text-xs text-[#8888a4]">
-                      <span className="font-bold text-[#e4e4ef]">{key}</span>
+                    <span key={key} className="inline-flex items-center gap-1 rounded bg-[#1e2127] px-2 py-1 text-xs text-[#9aa1ac]">
+                      <span className="font-bold text-[#f3f0ea]">{key}</span>
                       <span>= {value}</span>
                     </span>
                   ))}

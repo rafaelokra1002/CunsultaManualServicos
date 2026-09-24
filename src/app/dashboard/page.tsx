@@ -130,29 +130,29 @@ export default function DashboardPage() {
   return (
     <div className="relative">
       {/* Background glow */}
-      <div className="pointer-events-none absolute -top-20 left-1/2h-[300px] w-full max-w-[600px] -translate-x-1/2 rounded-full bg-[#6c5ce7]/[0.07] blur-[100px]" />
+      <div className="pointer-events-none absolute -top-20 left-1/2h-[300px] w-full max-w-[600px] -translate-x-1/2 rounded-full bg-[#ff6a1a]/[0.07] blur-[100px]" />
 
       {/* Header */}
       <div className="relative mb-8 sm:mb-10">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <div className="mb-2 flex items-center gap-2 text-sm text-[#8888a4]">
+            <div className="mb-2 flex items-center gap-2 text-sm text-[#9aa1ac]">
               <SparklesIcon />
               <span>{currentTime}</span>
             </div>
             <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               {greeting},{" "}
-              <span className="bg-gradient-to-r from-[#6c5ce7] to-[#a78bfa] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#ff6a1a] to-[#ff8c3f] bg-clip-text text-transparent">
                 {firstName}
               </span>
             </h1>
-            <p className="mt-2 text-[#8888a4]">
+            <p className="mt-2 text-[#9aa1ac]">
               Bem-vindo ao seu painel de manuais de motocicletas
             </p>
           </div>
           <Link
             href="/manuais"
-            className="group flex items-center gap-2 rounded-xl bg-[#6c5ce7] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#6c5ce7]/20 transition-all hover:bg-[#7c6ef7] hover:shadow-[#6c5ce7]/30 active:scale-95"
+            className="group flex items-center gap-2 rounded-xl bg-[#ff6a1a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#ff6a1a]/20 transition-all hover:bg-[#ff8c3f] hover:shadow-[#ff6a1a]/30 active:scale-95"
           >
             <BookIcon />
             Ver Manuais
@@ -164,11 +164,11 @@ export default function DashboardPage() {
       {/* Assistente IA — CTA de destaque */}
       <Link
         href="/assistente"
-        className="group relative mb-8 flex flex-col items-start gap-4 overflow-hidden rounded-2xl border border-[#6c5ce7]/30 bg-gradient-to-br from-[#6c5ce7]/20 via-[#1a1a2e] to-[#12121a] p-6 transition-all hover:border-[#6c5ce7]/50 hover:shadow-xl hover:shadow-[#6c5ce7]/10 sm:flex-row sm:items-center sm:justify-between sm:p-8"
+        className="group relative mb-8 flex flex-col items-start gap-4 overflow-hidden rounded-2xl border border-[#ff6a1a]/30 bg-gradient-to-br from-[#ff6a1a]/20 via-[#1e2127] to-[#111317] p-6 transition-all hover:border-[#ff6a1a]/50 hover:shadow-xl hover:shadow-[#ff6a1a]/10 sm:flex-row sm:items-center sm:justify-between sm:p-8"
       >
-        <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#6c5ce7]/20 blur-3xl transition-all group-hover:bg-[#6c5ce7]/30" />
+        <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#ff6a1a]/20 blur-3xl transition-all group-hover:bg-[#ff6a1a]/30" />
         <div className="relative flex items-center gap-4">
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6c5ce7] to-[#a78bfa] text-white shadow-lg shadow-[#6c5ce7]/30">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff6a1a] to-[#ff8c3f] text-white shadow-lg shadow-[#ff6a1a]/30">
             <ChatIcon />
           </div>
           <div>
@@ -178,7 +178,7 @@ export default function DashboardPage() {
             </p>
           </div>
         </div>
-        <span className="relative flex shrink-0 items-center gap-2 self-stretch rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-[#12121a] shadow-lg transition-all group-hover:bg-[#f0f0ff] sm:self-auto">
+        <span className="relative flex shrink-0 items-center gap-2 self-stretch rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-[#111317] shadow-lg transition-all group-hover:bg-[#f0f0ff] sm:self-auto">
           Perguntar agora
           <ArrowRightIcon />
         </span>
@@ -187,17 +187,17 @@ export default function DashboardPage() {
       {/* Cards de status */}
       <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
         {/* Card Manuais */}
-        <Link href="/manuais" className="group relative overflow-hidden rounded-2xl border border-[#2a2a3e] bg-gradient-to-br from-[#1a1a2e] to-[#12121a] p-6 transition-all duration-300 hover:border-[#6c5ce7]/40 hover:shadow-xl hover:shadow-[#6c5ce7]/5">
-          <div className="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-[#6c5ce7]/10 blur-2xl transition-all group-hover:bg-[#6c5ce7]/20" />
+        <Link href="/manuais" className="group relative overflow-hidden rounded-2xl border border-[#33373f] bg-gradient-to-br from-[#1e2127] to-[#111317] p-6 transition-all duration-300 hover:border-[#ff6a1a]/40 hover:shadow-xl hover:shadow-[#ff6a1a]/5">
+          <div className="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-[#ff6a1a]/10 blur-2xl transition-all group-hover:bg-[#ff6a1a]/20" />
           <div className="relative">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#6c5ce7] to-[#a78bfa] text-white shadow-lg shadow-[#6c5ce7]/25">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6a1a] to-[#ff8c3f] text-white shadow-lg shadow-[#ff6a1a]/25">
               <BookIcon />
             </div>
             <h3 className="text-lg font-bold text-white">Manuais de Serviço</h3>
-            <p className="mt-1 text-sm text-[#8888a4]">
+            <p className="mt-1 text-sm text-[#9aa1ac]">
               Biblioteca completa com manuais de diversas marcas e modelos
             </p>
-            <div className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-[#6c5ce7] transition-colors group-hover:text-[#a78bfa]">
+            <div className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-[#ff6a1a] transition-colors group-hover:text-[#ff8c3f]">
               Acessar biblioteca
               <ArrowRightIcon />
             </div>
@@ -205,14 +205,14 @@ export default function DashboardPage() {
         </Link>
 
         {/* Card Status */}
-        <div className="group relative overflow-hidden rounded-2xl border border-[#2a2a3e] bg-gradient-to-br from-[#1a1a2e] to-[#12121a] p-6 transition-all duration-300 hover:border-green-500/30 hover:shadow-xl hover:shadow-green-500/5">
+        <div className="group relative overflow-hidden rounded-2xl border border-[#33373f] bg-gradient-to-br from-[#1e2127] to-[#111317] p-6 transition-all duration-300 hover:border-green-500/30 hover:shadow-xl hover:shadow-green-500/5">
           <div className="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-green-500/10 blur-2xl transition-all group-hover:bg-green-500/20" />
           <div className="relative">
             <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl shadow-lg ${session?.user?.active ? "bg-gradient-to-br from-green-500 to-emerald-600 shadow-green-500/25 text-white" : "bg-gradient-to-br from-red-500 to-rose-600 shadow-red-500/25 text-white"}`}>
               <ShieldCheckIcon />
             </div>
             <h3 className="text-lg font-bold text-white">Status da Conta</h3>
-            <p className="mt-1 text-sm text-[#8888a4]">
+            <p className="mt-1 text-sm text-[#9aa1ac]">
               Sua conta está{" "}
               <span
                 className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold ${
@@ -235,14 +235,14 @@ export default function DashboardPage() {
         </div>
 
         {/* Card Plano */}
-        <div className="group relative overflow-hidden rounded-2xl border border-[#2a2a3e] bg-gradient-to-br from-[#1a1a2e] to-[#12121a] p-6 transition-all duration-300 hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/5">
+        <div className="group relative overflow-hidden rounded-2xl border border-[#33373f] bg-gradient-to-br from-[#1e2127] to-[#111317] p-6 transition-all duration-300 hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/5">
           <div className="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full bg-amber-500/10 blur-2xl transition-all group-hover:bg-amber-500/20" />
           <div className="relative">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-lg shadow-amber-500/25">
               <CrownIcon />
             </div>
             <h3 className="text-lg font-bold text-white">Seu Plano</h3>
-            <p className="mt-1 text-sm text-[#8888a4]">
+            <p className="mt-1 text-sm text-[#9aa1ac]">
               {session?.user?.isPremium
                 ? "Acesso liberado a todos os recursos"
                 : "Modo demo — libere o acesso completo"}
@@ -255,7 +255,7 @@ export default function DashboardPage() {
             ) : (
               <Link
                 href="/conta-inativa"
-                className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#6c5ce7] to-[#a78bfa] px-4 py-1.5 text-xs font-bold text-white shadow-lg shadow-[#6c5ce7]/25 transition-all hover:shadow-[#6c5ce7]/40"
+                className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#ff6a1a] to-[#ff8c3f] px-4 py-1.5 text-xs font-bold text-white shadow-lg shadow-[#ff6a1a]/25 transition-all hover:shadow-[#ff6a1a]/40"
               >
                 🚀 Liberar acesso
               </Link>
@@ -275,17 +275,17 @@ export default function DashboardPage() {
             { label: "Honda", color: "from-red-600 to-red-700", href: "/manuais" },
             { label: "Yamaha", color: "from-blue-600 to-blue-700", href: "/manuais" },
             { label: "Kawasaki", color: "from-green-600 to-green-700", href: "/manuais" },
-            { label: "Todas", color: "from-[#6c5ce7] to-[#a78bfa]", href: "/manuais" },
+            { label: "Todas", color: "from-[#ff6a1a] to-[#ff8c3f]", href: "/manuais" },
           ].map((brand) => (
             <Link
               key={brand.label}
               href={brand.href}
-              className="group flex flex-col items-center gap-2 rounded-xl border border-[#2a2a3e] bg-[#12121a] p-4 transition-all hover:border-[#6c5ce7]/30 hover:bg-[#1a1a2e] active:scale-95"
+              className="group flex flex-col items-center gap-2 rounded-xl border border-[#33373f] bg-[#111317] p-4 transition-all hover:border-[#ff6a1a]/30 hover:bg-[#1e2127] active:scale-95"
             >
               <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${brand.color} text-white shadow-md`}>
                 <MotorcycleIcon />
               </div>
-              <span className="text-sm font-medium text-[#8888a4] group-hover:text-white">
+              <span className="text-sm font-medium text-[#9aa1ac] group-hover:text-white">
                 {brand.label}
               </span>
             </Link>
@@ -296,12 +296,12 @@ export default function DashboardPage() {
       {/* Avisos rápidos */}
       <div className="flex gap-4 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {/* Instalar App */}
-        <div className="min-w-[240px] flex-1 rounded-2xl border border-[#6c5ce7]/20 bg-gradient-to-br from-[#6c5ce7]/[0.08] to-transparent p-4">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#6c5ce7]/15 text-[#6c5ce7]">
+        <div className="min-w-[240px] flex-1 rounded-2xl border border-[#ff6a1a]/20 bg-gradient-to-br from-[#ff6a1a]/[0.08] to-transparent p-4">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#ff6a1a]/15 text-[#ff6a1a]">
             <DownloadIcon />
           </div>
           <h3 className="mt-3 text-sm font-bold text-white">Instale o App</h3>
-          <p className="mt-1 text-xs text-[#8888a4]">
+          <p className="mt-1 text-xs text-[#9aa1ac]">
             Acesso rápido direto da tela do seu celular.
           </p>
           <div className="mt-3">
@@ -315,7 +315,7 @@ export default function DashboardPage() {
             <SparklesIcon />
           </div>
           <h3 className="mt-3 text-sm font-bold text-white">Novos manuais toda semana!</h3>
-          <p className="mt-1 text-xs text-[#8888a4]">
+          <p className="mt-1 text-xs text-[#9aa1ac]">
             Biblioteca em constante atualização. <strong className="text-emerald-400">Fique de olho!</strong>
           </p>
         </div>
@@ -333,7 +333,7 @@ export default function DashboardPage() {
             </svg>
           </div>
           <h3 className="mt-3 text-sm font-bold text-white">Grupo de Suporte</h3>
-          <p className="mt-1 text-xs text-[#8888a4]">
+          <p className="mt-1 text-xs text-[#9aa1ac]">
             Dicas e troca de experiências com outros mecânicos.
           </p>
           <span className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-green-600/20 px-2.5 py-1 text-xs font-bold text-green-400">
@@ -367,7 +367,7 @@ export default function DashboardPage() {
               Inscrições abertas
             </span>
             <h3 className="mt-2 font-bold text-white">Cursos de Mecânica com a Joab Motos</h3>
-            <p className="mt-1 text-sm text-[#8888a4]">
+            <p className="mt-1 text-sm text-[#9aa1ac]">
               Formação e Mecânica de Motocicleta e Injeção Eletrônica. Turmas presenciais com o instrutor Joab Motos.
             </p>
             <span className="mt-3 inline-flex items-center gap-2 rounded-lg bg-red-600/20 px-3 py-1.5 text-xs font-bold text-red-400 group-hover:bg-red-600/30">
@@ -388,7 +388,7 @@ export default function DashboardPage() {
               <h3 className="text-lg font-bold text-orange-400">
                 Painel Administrativo
               </h3>
-              <p className="mt-1 text-sm text-[#8888a4]">
+              <p className="mt-1 text-sm text-[#9aa1ac]">
                 Você é um administrador. Gerencie manuais e usuários pelo painel admin.
               </p>
               <Link

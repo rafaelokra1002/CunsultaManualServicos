@@ -28,8 +28,8 @@ const TESTS_EOT = [
   { padrao: "4,75 – 5,25 V",  local: "Am/Az+ | Terra-",   tipo: "AL", color: "#3b82f6" },
   { padrao: "Contín. (N)",     local: "Am/Az | Terra",      tipo: "CC", color: "#ef4444" },
   { padrao: "2,5 – 2,8 kΩ",   local: "Am/Az | Vd/Bc",     tipo: "RS", color: "#8b5cf6" },
-  { padrao: "Contín. (S)",     local: "Am/Az | Pino 24",    tipo: "CA", color: "#f59e0b" },
-  { padrao: "Contín. (S)",     local: "Vd/Bc | Pino 4",     tipo: "CA", color: "#f59e0b" },
+  { padrao: "Contín. (S)",     local: "Am/Az | Pino 24",    tipo: "CA", color: "#ff8c3f" },
+  { padrao: "Contín. (S)",     local: "Vd/Bc | Pino 4",     tipo: "CA", color: "#ff8c3f" },
   { padrao: "2,70 – 3,10 V",  local: "Pino 4– | Pino 24+", tipo: "SN", color: "#10b981" },
 ];
 
@@ -77,8 +77,8 @@ export default function MockupDiagnostico() {
           50%     { transform:translateY(-14px)  rotate(-1deg); }
         }
         @keyframes od-dot-pulse {
-          0%,100% { transform:scale(1);   opacity:1;   box-shadow:0 0 0 0   rgba(167,139,250,.7); }
-          50%     { transform:scale(1.5); opacity:.65; box-shadow:0 0 0 6px rgba(167,139,250,0);  }
+          0%,100% { transform:scale(1);   opacity:1;   box-shadow:0 0 0 0   rgba(255,140,63,.7); }
+          50%     { transform:scale(1.5); opacity:.65; box-shadow:0 0 0 6px rgba(255,140,63,0);  }
         }
         @keyframes od-icon-bounce {
           0%,100% { transform:translateY(0)    rotate(0deg);  }
@@ -95,9 +95,9 @@ export default function MockupDiagnostico() {
           100% { opacity:0; transform:translate(72px,-52px)  scale(.5); }
         }
         @keyframes od-card-highlight {
-          0%,15%   { border-color: rgba(167,139,250,.42); box-shadow: none; }
-          28%,42%  { border-color: rgba(167,139,250,.85); box-shadow: 0 0 14px rgba(167,139,250,.35); }
-          57%,100% { border-color: rgba(167,139,250,.42); box-shadow: none; }
+          0%,15%   { border-color: rgba(255,140,63,.42); box-shadow: none; }
+          28%,42%  { border-color: rgba(255,140,63,.85); box-shadow: 0 0 14px rgba(255,140,63,.35); }
+          57%,100% { border-color: rgba(255,140,63,.42); box-shadow: none; }
         }
         /* Mobile: scale phone down */
         @media (max-width:640px) {
@@ -141,7 +141,7 @@ export default function MockupDiagnostico() {
               {/* Pill */}
               <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-[#7c3aed]/40 bg-[#7c3aed]/10 px-4 py-1.5 text-sm font-semibold text-[#c4b5fd]">
                 <span
-                  className="inline-block h-2.5 w-2.5 rounded-full bg-[#a78bfa]"
+                  className="inline-block h-2.5 w-2.5 rounded-full bg-[#ff8c3f]"
                   style={{ animation: "od-dot-pulse 1.8s ease-in-out infinite" }}
                 />
                 🟣 FERRAMENTA EXCLUSIVA
@@ -152,7 +152,7 @@ export default function MockupDiagnostico() {
                 Decifre{" "}
                 <span
                   style={{
-                    background: "linear-gradient(135deg,#c4b5fd,#a78bfa,#7c3aed)",
+                    background: "linear-gradient(135deg,#c4b5fd,#ff8c3f,#7c3aed)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
@@ -181,7 +181,7 @@ export default function MockupDiagnostico() {
                     className="rounded-2xl py-4 text-center"
                     style={{
                       background: "#0a0a1a",
-                      border: `1px solid ${s.green ? "rgba(16,185,129,.30)" : "rgba(167,139,250,.25)"}`,
+                      border: `1px solid ${s.green ? "rgba(16,185,129,.30)" : "rgba(255,140,63,.25)"}`,
                     }}
                   >
                     <p
@@ -189,14 +189,14 @@ export default function MockupDiagnostico() {
                       style={{
                         background: s.green
                           ? "linear-gradient(135deg,#34d399,#10b981)"
-                          : "linear-gradient(135deg,#c4b5fd,#a78bfa)",
+                          : "linear-gradient(135deg,#c4b5fd,#ff8c3f)",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                       }}
                     >
                       {s.value}
                     </p>
-                    <p className="mt-0.5 text-xs font-medium text-[#8888a4]">{s.label}</p>
+                    <p className="mt-0.5 text-xs font-medium text-[#9aa1ac]">{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -214,11 +214,11 @@ export default function MockupDiagnostico() {
                   >
                     <span
                       className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-lg"
-                      style={{ background: "#1a0a2e", border: "1px solid rgba(124,58,237,.30)" }}
+                      style={{ background: "#1a0a2e", border: "1px solid rgba(255,106,26,.30)" }}
                     >
                       {f.icon}
                     </span>
-                    <span className="text-sm text-[#c8cad7]">{f.text}</span>
+                    <span className="text-sm text-[#c7cad1]">{f.text}</span>
                   </div>
                 ))}
               </div>
@@ -230,8 +230,8 @@ export default function MockupDiagnostico() {
                   className="inline-flex items-center justify-center rounded-2xl px-8 py-5 text-base font-extrabold uppercase tracking-wide text-white transition-all hover:brightness-110 active:scale-[.98]"
                   style={{
                     minHeight: "64px",
-                    background: "linear-gradient(135deg,#7c3aed,#a78bfa)",
-                    boxShadow: "0 8px 32px rgba(124,58,237,.45)",
+                    background: "linear-gradient(135deg,#7c3aed,#ff8c3f)",
+                    boxShadow: "0 8px 32px rgba(255,106,26,.45)",
                   }}
                 >
                   🔓 Quero acessar por R$ 67
@@ -249,7 +249,7 @@ export default function MockupDiagnostico() {
                 className="absolute inset-0 rounded-full"
                 style={{
                   background:
-                    "radial-gradient(ellipse 75% 55% at 45% 52%, rgba(167,139,250,.55) 0%, rgba(124,58,237,.18) 50%, transparent 75%)",
+                    "radial-gradient(ellipse 75% 55% at 45% 52%, rgba(255,140,63,.55) 0%, rgba(255,106,26,.18) 50%, transparent 75%)",
                   filter: "blur(55px)",
                   transform: "scale(1.5) translateX(-5%) translateY(5%)",
                   animation: "od-glow-pulse 4s ease-in-out infinite",
@@ -280,7 +280,7 @@ export default function MockupDiagnostico() {
                     borderRadius: "14px 0 0 14px",
                     background:
                       "linear-gradient(to right," +
-                      "#0a0a14 0%," +
+                      "#16181c 0%," +
                       "#1a1a2c 25%," +
                       "#28283e 52%," +
                       "#1e1e30 76%," +
@@ -430,15 +430,15 @@ export default function MockupDiagnostico() {
                             <div
                               className="flex h-14 w-14 items-center justify-center rounded-[20px] text-2xl"
                               style={{
-                                background: "linear-gradient(135deg,#7c3aed,#a78bfa)",
-                                boxShadow: "0 8px 24px rgba(124,58,237,.55)",
+                                background: "linear-gradient(135deg,#7c3aed,#ff8c3f)",
+                                boxShadow: "0 8px 24px rgba(255,106,26,.55)",
                                 animation: "od-icon-bounce 3s ease-in-out infinite",
                               }}
                             >
                               🔧
                             </div>
                             <p className="mt-1.5 text-[14px] font-bold text-white">Diagnóstico Eletrônico</p>
-                            <p className="mt-0.5 px-4 text-[10px] leading-tight text-[#8888a4]">
+                            <p className="mt-0.5 px-4 text-[10px] leading-tight text-[#9aa1ac]">
                               Selecione o modelo da moto
                             </p>
                           </div>
@@ -454,12 +454,12 @@ export default function MockupDiagnostico() {
                                 key={s.l}
                                 className="rounded-xl py-2 text-center"
                                 style={{
-                                  background: s.g ? "rgba(16,185,129,.12)" : "rgba(124,58,237,.12)",
-                                  border: `1px solid ${s.g ? "rgba(16,185,129,.30)" : "rgba(124,58,237,.28)"}`,
+                                  background: s.g ? "rgba(16,185,129,.12)" : "rgba(255,106,26,.12)",
+                                  border: `1px solid ${s.g ? "rgba(16,185,129,.30)" : "rgba(255,106,26,.28)"}`,
                                 }}
                               >
-                                <p className="text-[14px] font-extrabold" style={{ color: s.g ? "#34d399" : "#a78bfa" }}>{s.v}</p>
-                                <p className="text-[9px] text-[#8888a4]">{s.l}</p>
+                                <p className="text-[14px] font-extrabold" style={{ color: s.g ? "#34d399" : "#ff8c3f" }}>{s.v}</p>
+                                <p className="text-[9px] text-[#9aa1ac]">{s.l}</p>
                               </div>
                             ))}
                           </div>
@@ -469,8 +469,8 @@ export default function MockupDiagnostico() {
                             className="mt-3 flex items-center gap-2 rounded-xl px-3 py-2"
                             style={{ background: "rgba(255,255,255,.05)", border: "1px solid rgba(255,255,255,.10)" }}
                           >
-                            <span className="text-[12px] text-[#8888a4]">🔍</span>
-                            <span className="text-[10px] text-[#555570]">Buscar modelo...</span>
+                            <span className="text-[12px] text-[#9aa1ac]">🔍</span>
+                            <span className="text-[10px] text-[#6c727c]">Buscar modelo...</span>
                           </div>
 
                           {/* Model grid */}
@@ -482,15 +482,15 @@ export default function MockupDiagnostico() {
                                 className="rounded-xl p-2.5 text-left"
                                 style={{
                                   background: i === 0
-                                    ? "linear-gradient(135deg,rgba(124,58,237,.28),rgba(167,139,250,.10))"
+                                    ? "linear-gradient(135deg,rgba(255,106,26,.28),rgba(255,140,63,.10))"
                                     : "rgba(255,255,255,.04)",
-                                  border: `1px solid ${i === 0 ? "rgba(167,139,250,.42)" : "rgba(255,255,255,.08)"}`,
+                                  border: `1px solid ${i === 0 ? "rgba(255,140,63,.42)" : "rgba(255,255,255,.08)"}`,
                                   animation: i === 0 ? "od-card-highlight 6s ease-in-out infinite" : "none",
                                 }}
                               >
                                 <p className="text-[11px] font-bold text-white">{m.name}</p>
-                                <p className="text-[9px] text-[#8888a4]">{m.variants} variante{m.variants > 1 ? "s" : ""}</p>
-                                <p className="text-[9px] text-[#555570]">{m.years}</p>
+                                <p className="text-[9px] text-[#9aa1ac]">{m.variants} variante{m.variants > 1 ? "s" : ""}</p>
+                                <p className="text-[9px] text-[#6c727c]">{m.years}</p>
                               </button>
                             ))}
 
@@ -516,15 +516,15 @@ export default function MockupDiagnostico() {
                       {/* ══ SCREEN 1: Variant selection ══ */}
                       {step === 1 && (
                         <>
-                          <p className="mb-1 text-[8px] text-[#555570]">Modelos / BIZ 110</p>
+                          <p className="mb-1 text-[8px] text-[#6c727c]">Modelos / BIZ 110</p>
                           <button
                             onClick={() => goToStep(0)}
-                            className="mb-3 text-[10px] text-[#a78bfa] hover:opacity-80"
+                            className="mb-3 text-[10px] text-[#ff8c3f] hover:opacity-80"
                           >
                             ← Voltar
                           </button>
                           <h2 className="text-[22px] font-extrabold text-white">BIZ 110</h2>
-                          <p className="mb-5 text-[10px] text-[#8888a4]">Selecione o ano do modelo</p>
+                          <p className="mb-5 text-[10px] text-[#9aa1ac]">Selecione o ano do modelo</p>
 
                           {[
                             { range: "2016 - 2017", count: 7 },
@@ -542,11 +542,11 @@ export default function MockupDiagnostico() {
                               <div className="flex items-center justify-between">
                                 <div>
                                   <p className="text-[15px] font-bold text-white">{v.range}</p>
-                                  <p className="mt-0.5 text-[10px] text-[#8888a4]">
+                                  <p className="mt-0.5 text-[10px] text-[#9aa1ac]">
                                     {v.count} códigos de diagnóstico
                                   </p>
                                 </div>
-                                <span className="text-lg text-[#8888a4]">→</span>
+                                <span className="text-lg text-[#9aa1ac]">→</span>
                               </div>
                             </button>
                           ))}
@@ -556,15 +556,15 @@ export default function MockupDiagnostico() {
                       {/* ══ SCREEN 2: Fault code list ══ */}
                       {step === 2 && (
                         <>
-                          <p className="mb-1 text-[8px] text-[#555570]">Modelos / BIZ 110 / 2016 - 2017</p>
+                          <p className="mb-1 text-[8px] text-[#6c727c]">Modelos / BIZ 110 / 2016 - 2017</p>
                           <button
                             onClick={() => goToStep(1)}
-                            className="mb-2 text-[10px] text-[#a78bfa] hover:opacity-80"
+                            className="mb-2 text-[10px] text-[#ff8c3f] hover:opacity-80"
                           >
                             ← Voltar
                           </button>
                           <h2 className="text-[18px] font-extrabold text-white">BIZ 110</h2>
-                          <p className="mb-3 text-[11px] font-semibold" style={{ color: "#a78bfa" }}>
+                          <p className="mb-3 text-[11px] font-semibold" style={{ color: "#ff8c3f" }}>
                             2016 - 2017
                           </p>
 
@@ -576,9 +576,9 @@ export default function MockupDiagnostico() {
                                 className="w-full rounded-xl p-2.5 text-left transition-all hover:brightness-110"
                                 style={{
                                   background: fault.name === "EOT"
-                                    ? "rgba(124,58,237,.12)"
+                                    ? "rgba(255,106,26,.12)"
                                     : "rgba(255,255,255,.04)",
-                                  border: `1px solid ${fault.name === "EOT" ? "rgba(124,58,237,.35)" : "rgba(255,255,255,.08)"}`,
+                                  border: `1px solid ${fault.name === "EOT" ? "rgba(255,106,26,.35)" : "rgba(255,255,255,.08)"}`,
                                 }}
                               >
                                 <div className="flex items-center gap-2.5">
@@ -587,19 +587,19 @@ export default function MockupDiagnostico() {
                                     style={{
                                       background: fault.electric
                                         ? "rgba(245,158,11,.28)"
-                                        : "rgba(124,58,237,.45)",
+                                        : "rgba(255,106,26,.45)",
                                     }}
                                   >
                                     {fault.code}
                                   </div>
                                   <div className="min-w-0 flex-1">
                                     <p className="text-[11px] font-bold text-white">{fault.name}</p>
-                                    <p className="text-[8.5px] text-[#8888a4]">{fault.subtitle}</p>
+                                    <p className="text-[8.5px] text-[#9aa1ac]">{fault.subtitle}</p>
                                   </div>
                                   <div className="shrink-0 text-right">
-                                    <p className="text-[9px] text-[#8888a4]">{fault.tests} testes</p>
+                                    <p className="text-[9px] text-[#9aa1ac]">{fault.tests} testes</p>
                                   </div>
-                                  <span className="text-[11px] text-[#555570]">→</span>
+                                  <span className="text-[11px] text-[#6c727c]">→</span>
                                 </div>
                               </button>
                             ))}
@@ -610,16 +610,16 @@ export default function MockupDiagnostico() {
                       {/* ══ SCREEN 3: Test detail (EOT) ══ */}
                       {step === 3 && (
                         <>
-                          <p className="mb-1 text-[8px] text-[#555570]">BIZ 110 / 2016 - 2017 / EOT</p>
+                          <p className="mb-1 text-[8px] text-[#6c727c]">BIZ 110 / 2016 - 2017 / EOT</p>
                           <button
                             onClick={() => goToStep(2)}
-                            className="mb-2 text-[10px] text-[#a78bfa] hover:opacity-80"
+                            className="mb-2 text-[10px] text-[#ff8c3f] hover:opacity-80"
                           >
                             ← Voltar
                           </button>
                           <h2 className="text-[20px] font-extrabold text-white">EOT</h2>
-                          <p className="text-[11px] font-bold" style={{ color: "#a78bfa" }}>7 PISCADAS MIL</p>
-                          <p className="mb-3 text-[9px] text-[#8888a4]">BIZ 110 · 2016 - 2017</p>
+                          <p className="text-[11px] font-bold" style={{ color: "#ff8c3f" }}>7 PISCADAS MIL</p>
+                          <p className="mb-3 text-[9px] text-[#9aa1ac]">BIZ 110 · 2016 - 2017</p>
 
                           {/* Test table */}
                           <div
@@ -640,7 +640,7 @@ export default function MockupDiagnostico() {
                               }}
                             >
                               {["PADRÃO", "LOCAL.", "TIPO"].map((h) => (
-                                <span key={h} className="text-[8px] font-bold uppercase tracking-wider text-[#555570]">{h}</span>
+                                <span key={h} className="text-[8px] font-bold uppercase tracking-wider text-[#6c727c]">{h}</span>
                               ))}
                             </div>
                             {/* Rows */}
@@ -654,7 +654,7 @@ export default function MockupDiagnostico() {
                                 }}
                               >
                                 <span className="text-[9.5px] leading-tight text-white">{t.padrao}</span>
-                                <span className="text-[8.5px] leading-tight text-[#8888a4]">{t.local}</span>
+                                <span className="text-[8.5px] leading-tight text-[#9aa1ac]">{t.local}</span>
                                 <span
                                   className="flex h-[18px] w-[28px] items-center justify-center rounded text-[7.5px] font-bold"
                                   style={{
@@ -677,7 +677,7 @@ export default function MockupDiagnostico() {
                               border: "1px solid rgba(255,255,255,.07)",
                             }}
                           >
-                            <p className="mb-1.5 text-[7px] font-bold uppercase tracking-wider text-[#555570]">
+                            <p className="mb-1.5 text-[7px] font-bold uppercase tracking-wider text-[#6c727c]">
                               LEGENDA DOS TIPOS
                             </p>
                             <div className="flex flex-wrap gap-1">
@@ -685,7 +685,7 @@ export default function MockupDiagnostico() {
                                 ["AL", "#3b82f6"],
                                 ["CC", "#ef4444"],
                                 ["RS", "#8b5cf6"],
-                                ["CA", "#f59e0b"],
+                                ["CA", "#ff8c3f"],
                                 ["SN", "#10b981"],
                               ].map(([code, color]) => (
                                 <span
@@ -773,7 +773,7 @@ export default function MockupDiagnostico() {
                     style={{
                       width: step === i ? "16px" : "6px",
                       height: "6px",
-                      background: step === i ? "#a78bfa" : "rgba(255,255,255,.20)",
+                      background: step === i ? "#ff8c3f" : "rgba(255,255,255,.20)",
                     }}
                   />
                 ))}
@@ -784,7 +784,7 @@ export default function MockupDiagnostico() {
                 className="absolute -right-4 top-10 z-10 flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-2xl backdrop-blur-sm"
                 style={{
                   background: "rgba(13,13,26,.92)",
-                  border: "1px solid rgba(124,58,237,.35)",
+                  border: "1px solid rgba(255,106,26,.35)",
                   boxShadow: "0 8px 32px rgba(0,0,0,.50), 0 0 0 1px rgba(255,255,255,.04)",
                   animation: "od-badge1 3.5s ease-in-out infinite",
                 }}
@@ -792,7 +792,7 @@ export default function MockupDiagnostico() {
                 <span className="text-base">⚡</span>
                 <div>
                   <p className="text-[11px] font-bold text-white">Diagnóstico</p>
-                  <p className="text-[10px] text-[#a78bfa]">em 5 segundos</p>
+                  <p className="text-[10px] text-[#ff8c3f]">em 5 segundos</p>
                 </div>
               </div>
 

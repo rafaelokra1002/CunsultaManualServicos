@@ -17,20 +17,20 @@ export default function AccessBlock({
     <div
       className={`absolute inset-0 z-30 flex items-center justify-center backdrop-blur-sm ${className}`}
     >
-      <div className="absolute inset-0 bg-[#0a0a0f]/80" />
-      <div className="relative z-10 mx-4 max-w-sm rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-8 text-center shadow-2xl shadow-[#6c5ce7]/10">
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#6c5ce7]/15 text-3xl">
+      <div className="absolute inset-0 bg-[#16181c]/80" />
+      <div className="relative z-10 mx-4 max-w-sm rounded-2xl border border-[#33373f] bg-[#111317] p-8 text-center shadow-2xl shadow-[#ff6a1a]/10">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ff6a1a]/15 text-3xl">
           🔒
         </div>
         <h3 className="mb-2 text-xl font-bold text-white">{title}</h3>
-        <p className="mb-6 text-sm text-[#8888a4]">{message}</p>
+        <p className="mb-6 text-sm text-[#9aa1ac]">{message}</p>
         <Link
           href="/conta-inativa"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#6c5ce7] to-[#a78bfa] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#6c5ce7]/25 transition-all hover:shadow-[#6c5ce7]/40 active:scale-95"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#ff6a1a] to-[#ff8c3f] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#ff6a1a]/25 transition-all hover:shadow-[#ff6a1a]/40 active:scale-95"
         >
           🚀 LIBERAR ACESSO AGORA
         </Link>
-        <p className="mt-3 text-xs text-[#555570]">
+        <p className="mt-3 text-xs text-[#6c727c]">
           Pagamento único • Acesso vitalício
         </p>
       </div>

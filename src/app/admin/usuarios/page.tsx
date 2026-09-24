@@ -124,13 +124,13 @@ export default function AdminUsuariosPage() {
           <h1 className="text-2xl font-bold text-white sm:text-3xl">
             👥 Gerenciar Usuários
           </h1>
-          <p className="mt-1 text-[#8888a4]">
+          <p className="mt-1 text-[#9aa1ac]">
             Ative ou desative o acesso dos usuários
           </p>
         </div>
         <button
           onClick={() => { setShowCreateForm(!showCreateForm); setCreateError(""); }}
-          className="rounded-xl bg-[#6c5ce7] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#5a4bd6] self-start sm:self-auto"
+          className="rounded-xl bg-[#ff6a1a] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#5a4bd6] self-start sm:self-auto"
         >
           {showCreateForm ? "✕ Cancelar" : "+ Novo Usuário"}
         </button>
@@ -143,37 +143,37 @@ export default function AdminUsuariosPage() {
           <form onSubmit={createUser} className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-3">
               <div>
-                <label className="mb-1 block text-sm text-[#8888a4]">Nome</label>
+                <label className="mb-1 block text-sm text-[#9aa1ac]">Nome</label>
                 <input
                   type="text"
                   required
                   minLength={2}
                   value={newUser.nome}
                   onChange={(e) => setNewUser({ ...newUser, nome: e.target.value })}
-                  className="w-full rounded-lg border border-[#2a2a3e] bg-[#12121a] px-4 py-2.5 text-sm text-white placeholder-[#8888a4] outline-none focus:border-[#6c5ce7] transition-colors"
+                  className="w-full rounded-lg border border-[#33373f] bg-[#111317] px-4 py-2.5 text-sm text-white placeholder-[#9aa1ac] outline-none focus:border-[#ff6a1a] transition-colors"
                   placeholder="Nome completo"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-sm text-[#8888a4]">Email</label>
+                <label className="mb-1 block text-sm text-[#9aa1ac]">Email</label>
                 <input
                   type="email"
                   required
                   value={newUser.email}
                   onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                  className="w-full rounded-lg border border-[#2a2a3e] bg-[#12121a] px-4 py-2.5 text-sm text-white placeholder-[#8888a4] outline-none focus:border-[#6c5ce7] transition-colors"
+                  className="w-full rounded-lg border border-[#33373f] bg-[#111317] px-4 py-2.5 text-sm text-white placeholder-[#9aa1ac] outline-none focus:border-[#ff6a1a] transition-colors"
                   placeholder="email@exemplo.com"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-sm text-[#8888a4]">Senha</label>
+                <label className="mb-1 block text-sm text-[#9aa1ac]">Senha</label>
                 <input
                   type="password"
                   required
                   minLength={6}
                   value={newUser.password}
                   onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-                  className="w-full rounded-lg border border-[#2a2a3e] bg-[#12121a] px-4 py-2.5 text-sm text-white placeholder-[#8888a4] outline-none focus:border-[#6c5ce7] transition-colors"
+                  className="w-full rounded-lg border border-[#33373f] bg-[#111317] px-4 py-2.5 text-sm text-white placeholder-[#9aa1ac] outline-none focus:border-[#ff6a1a] transition-colors"
                   placeholder="Mínimo 6 caracteres"
                 />
               </div>
@@ -186,7 +186,7 @@ export default function AdminUsuariosPage() {
             <button
               type="submit"
               disabled={createLoading}
-              className="rounded-lg bg-[#6c5ce7] px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#5a4bd6] disabled:opacity-50"
+              className="rounded-lg bg-[#ff6a1a] px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#5a4bd6] disabled:opacity-50"
             >
               {createLoading ? "Criando..." : "Criar Usuário"}
             </button>
@@ -197,22 +197,22 @@ export default function AdminUsuariosPage() {
       {/* Tabela de usuários */}
       <div className="card-glass overflow-hidden rounded-2xl">
         {loading ? (
-          <div className="p-8 text-center text-[#8888a4]">
+          <div className="p-8 text-center text-[#9aa1ac]">
             Carregando usuários...
           </div>
         ) : users.length === 0 ? (
-          <div className="p-8 text-center text-[#8888a4]">
+          <div className="p-8 text-center text-[#9aa1ac]">
             Nenhum usuário cadastrado
           </div>
         ) : (
           <>
             <div className="space-y-4 p-4 md:hidden">
               {users.map((user) => (
-                <div key={user.id} className="rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-4">
+                <div key={user.id} className="rounded-2xl border border-[#33373f] bg-[#111317] p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="truncate font-medium text-white">{user.nome}</p>
-                      <p className="mt-1 break-all text-sm text-[#8888a4]">{user.email}</p>
+                      <p className="mt-1 break-all text-sm text-[#9aa1ac]">{user.email}</p>
                     </div>
                     <span
                       className={`inline-block rounded-md px-2.5 py-0.5 text-xs font-semibold ${
@@ -250,7 +250,7 @@ export default function AdminUsuariosPage() {
                         🔗 {user.referralLabel}
                       </span>
                     )}
-                    <span className="rounded-md bg-[#1a1a2e] px-2.5 py-1 text-[#8888a4]">
+                    <span className="rounded-md bg-[#1e2127] px-2.5 py-1 text-[#9aa1ac]">
                       Cadastro: {new Date(user.createdAt).toLocaleDateString("pt-BR")}
                     </span>
                   </div>
@@ -283,7 +283,7 @@ export default function AdminUsuariosPage() {
 
             <div className="hidden overflow-x-auto md:block">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-[#2a2a3e] text-xs font-medium uppercase text-[#8888a4]">
+              <thead className="border-b border-[#33373f] text-xs font-medium uppercase text-[#9aa1ac]">
                 <tr>
                   <th className="px-6 py-4">Nome</th>
                   <th className="px-6 py-4">Email</th>
@@ -295,13 +295,13 @@ export default function AdminUsuariosPage() {
                   <th className="px-6 py-4">Ações</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#2a2a3e]">
+              <tbody className="divide-y divide-[#33373f]">
                 {users.map((user) => (
-                  <tr key={user.id} className="transition-colors hover:bg-[#1a1a2e]">
+                  <tr key={user.id} className="transition-colors hover:bg-[#1e2127]">
                     <td className="px-6 py-4 font-medium text-white">
                       {user.nome}
                     </td>
-                    <td className="px-6 py-4 text-[#8888a4]">{user.email}</td>
+                    <td className="px-6 py-4 text-[#9aa1ac]">{user.email}</td>
                     <td className="px-6 py-4">
                       <span
                         className={`inline-block rounded-md px-2.5 py-0.5 text-xs font-semibold ${
@@ -342,10 +342,10 @@ export default function AdminUsuariosPage() {
                           🔗 {user.referralLabel}
                         </span>
                       ) : (
-                        <span className="text-[#8888a4]">—</span>
+                        <span className="text-[#9aa1ac]">—</span>
                       )}
                     </td>
-                    <td className="px-6 py-4 text-[#8888a4]">
+                    <td className="px-6 py-4 text-[#9aa1ac]">
                       {new Date(user.createdAt).toLocaleDateString("pt-BR")}
                     </td>
                     <td className="px-6 py-4">

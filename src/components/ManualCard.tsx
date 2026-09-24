@@ -95,20 +95,20 @@ export default function ManualCard({
     <div className="relative">
       {showBlock && (
         <div className="absolute inset-0 z-40 flex items-center justify-center rounded-2xl backdrop-blur-sm">
-          <div className="absolute inset-0 rounded-2xl bg-[#0a0a0f]/80" />
-          <div className="relative z-10 mx-2 rounded-xl border border-[#2a2a3e] bg-[#12121a] p-5 text-center shadow-2xl">
+          <div className="absolute inset-0 rounded-2xl bg-[#16181c]/80" />
+          <div className="relative z-10 mx-2 rounded-xl border border-[#33373f] bg-[#111317] p-5 text-center shadow-2xl">
             <div className="mb-2 text-2xl">🔒</div>
             <p className="mb-1 text-sm font-bold text-white">Download bloqueado</p>
-            <p className="mb-3 text-xs text-[#8888a4]">Libere o acesso para baixar</p>
+            <p className="mb-3 text-xs text-[#9aa1ac]">Libere o acesso para baixar</p>
             <a
               href="/conta-inativa"
-              className="inline-block rounded-lg bg-gradient-to-r from-[#6c5ce7] to-[#a78bfa] px-4 py-2 text-xs font-bold text-white"
+              className="inline-block rounded-lg bg-gradient-to-r from-[#ff6a1a] to-[#ff8c3f] px-4 py-2 text-xs font-bold text-white"
             >
               LIBERAR ACESSO
             </a>
             <button
               onClick={(e) => { e.stopPropagation(); setShowBlock(false); }}
-              className="mt-2 block w-full text-xs text-[#555570] hover:text-[#8888a4]"
+              className="mt-2 block w-full text-xs text-[#6c727c] hover:text-[#9aa1ac]"
             >
               Fechar
             </button>
@@ -118,7 +118,7 @@ export default function ManualCard({
       <button
         onClick={handleDownload}
         disabled={loading}
-        className="group relative flex h-[340px] w-full flex-col overflow-hidden rounded-2xl bg-[#111118] text-left ring-1 ring-white/[0.06] transition-all duration-300 hover:-translate-y-1 hover:ring-[#6c5ce7]/40 hover:shadow-xl hover:shadow-[#6c5ce7]/10 sm:h-[380px]"
+        className="group relative flex h-[340px] w-full flex-col overflow-hidden rounded-2xl bg-[#111317] text-left ring-1 ring-white/[0.06] transition-all duration-300 hover:-translate-y-1 hover:ring-[#ff6a1a]/40 hover:shadow-xl hover:shadow-[#ff6a1a]/10 sm:h-[380px]"
       >
       {/* Imagem / Capa */}
       <div className="relative flex-1 overflow-hidden">
@@ -135,10 +135,10 @@ export default function ManualCard({
         )}
 
         {/* Gradient overlay bottom */}
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#111118] via-[#111118]/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#111317] via-[#111317]/80 to-transparent" />
 
         {/* Badge da marca */}
-        <div className="absolute left-4 top-4 rounded-full bg-[#6c5ce7] px-3 py-1 text-[11px] font-bold text-white shadow-lg">
+        <div className="absolute left-4 top-4 rounded-full bg-[#ff6a1a] px-3 py-1 text-[11px] font-bold text-white shadow-lg">
           {brand}
         </div>
 
@@ -149,7 +149,7 @@ export default function ManualCard({
 
         {/* Download icon overlay on hover */}
         <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/30">
-          <div className="flex h-14 w-14 scale-0 items-center justify-center rounded-full bg-[#6c5ce7] text-xl shadow-xl transition-transform duration-300 group-hover:scale-100">
+          <div className="flex h-14 w-14 scale-0 items-center justify-center rounded-full bg-[#ff6a1a] text-xl shadow-xl transition-transform duration-300 group-hover:scale-100">
             {loading ? "⏳" : "⬇️"}
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function ManualCard({
 
       {/* Info - Bottom section */}
       <div className="relative z-10 -mt-8 px-4 pb-4 sm:px-5 sm:pb-5">
-        <p className="mb-0.5 text-[11px] font-medium text-[#8888a4]">
+        <p className="mb-0.5 text-[11px] font-medium text-[#9aa1ac]">
           {brand} · {year}
         </p>
         <h3 className="line-clamp-1 text-xl font-bold leading-tight text-white sm:text-2xl">

@@ -85,7 +85,7 @@ export default function InstallButton({ compact = false }: { compact?: boolean }
     return (
       <button
         onClick={handleInstall}
-        className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#6c5ce7]/30 bg-[#6c5ce7]/10 text-[#6c5ce7] transition-all hover:bg-[#6c5ce7]/20 active:scale-95"
+        className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#ff6a1a]/30 bg-[#ff6a1a]/10 text-[#ff6a1a] transition-all hover:bg-[#ff6a1a]/20 active:scale-95"
         aria-label="Instalar App"
       >
         <DownloadIcon size={20} />
@@ -97,26 +97,26 @@ export default function InstallButton({ compact = false }: { compact?: boolean }
     <div>
       <button
         onClick={handleInstall}
-        className="flex items-center gap-2 rounded-xl border border-[#6c5ce7]/30 bg-[#6c5ce7]/10 px-4 py-2.5 text-sm font-medium text-[#6c5ce7] transition-all hover:bg-[#6c5ce7]/20 hover:shadow-lg hover:shadow-[#6c5ce7]/10 active:scale-95"
+        className="flex items-center gap-2 rounded-xl border border-[#ff6a1a]/30 bg-[#ff6a1a]/10 px-4 py-2.5 text-sm font-medium text-[#ff6a1a] transition-all hover:bg-[#ff6a1a]/20 hover:shadow-lg hover:shadow-[#ff6a1a]/10 active:scale-95"
       >
         <DownloadIcon />
         Instalar App
       </button>
 
       {showIOSGuide && (
-        <div className="mt-3 rounded-xl border border-[#6c5ce7]/20 bg-[#12121a] p-4 text-sm">
+        <div className="mt-3 rounded-xl border border-[#ff6a1a]/20 bg-[#111317] p-4 text-sm">
           <p className="mb-3 font-semibold text-white">Como instalar no iPhone/iPad:</p>
-          <ol className="space-y-2 text-[#8888a4]">
+          <ol className="space-y-2 text-[#9aa1ac]">
             <li className="flex items-start gap-2">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#6c5ce7]/20 text-xs font-bold text-[#6c5ce7]">1</span>
-              <span>Toque no botão <span className="inline-flex items-center gap-1 text-[#6c5ce7]"><ShareIcon /> Compartilhar</span> na barra do Safari</span>
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ff6a1a]/20 text-xs font-bold text-[#ff6a1a]">1</span>
+              <span>Toque no botão <span className="inline-flex items-center gap-1 text-[#ff6a1a]"><ShareIcon /> Compartilhar</span> na barra do Safari</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#6c5ce7]/20 text-xs font-bold text-[#6c5ce7]">2</span>
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ff6a1a]/20 text-xs font-bold text-[#ff6a1a]">2</span>
               <span>Role e toque em <strong className="text-white">&quot;Adicionar à Tela de Início&quot;</strong></span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#6c5ce7]/20 text-xs font-bold text-[#6c5ce7]">3</span>
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#ff6a1a]/20 text-xs font-bold text-[#ff6a1a]">3</span>
               <span>Toque em <strong className="text-white">&quot;Adicionar&quot;</strong> para confirmar</span>
             </li>
           </ol>

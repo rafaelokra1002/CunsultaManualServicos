@@ -52,7 +52,7 @@ export default function AdminDashboardPage() {
         <h1 className="text-2xl font-bold text-white sm:text-3xl">
           📊 Painel Administrativo
         </h1>
-        <p className="mt-1 text-[#8888a4]">
+        <p className="mt-1 text-[#9aa1ac]">
           Gerencie manuais e usuários do sistema
         </p>
       </div>
@@ -65,7 +65,7 @@ export default function AdminDashboardPage() {
               👥
             </div>
             <div>
-              <p className="text-sm text-[#8888a4]">Total de Usuários</p>
+              <p className="text-sm text-[#9aa1ac]">Total de Usuários</p>
               <p className="text-2xl font-bold text-white">
                 {stats.totalUsers}
               </p>
@@ -79,7 +79,7 @@ export default function AdminDashboardPage() {
               ✅
             </div>
             <div>
-              <p className="text-sm text-[#8888a4]">Usuários Ativos</p>
+              <p className="text-sm text-[#9aa1ac]">Usuários Ativos</p>
               <p className="text-2xl font-bold text-white">
                 {stats.activeUsers}
               </p>
@@ -93,7 +93,7 @@ export default function AdminDashboardPage() {
               📄
             </div>
             <div>
-              <p className="text-sm text-[#8888a4]">Manuais Cadastrados</p>
+              <p className="text-sm text-[#9aa1ac]">Manuais Cadastrados</p>
               <p className="text-2xl font-bold text-white">
                 {stats.totalManuais}
               </p>
@@ -110,7 +110,7 @@ export default function AdminDashboardPage() {
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
           <div className="card-glass rounded-2xl p-6 transition-all hover:border-yellow-500/30">
             <div className="text-center">
-              <p className="text-sm text-[#8888a4]">Hoje</p>
+              <p className="text-sm text-[#9aa1ac]">Hoje</p>
               <p className="mt-1 text-3xl font-bold text-yellow-400">
                 {views.today}
               </p>
@@ -119,7 +119,7 @@ export default function AdminDashboardPage() {
 
           <div className="card-glass rounded-2xl p-6 transition-all hover:border-orange-500/30">
             <div className="text-center">
-              <p className="text-sm text-[#8888a4]">Últimos 7 dias</p>
+              <p className="text-sm text-[#9aa1ac]">Últimos 7 dias</p>
               <p className="mt-1 text-3xl font-bold text-orange-400">
                 {views.week}
               </p>
@@ -128,7 +128,7 @@ export default function AdminDashboardPage() {
 
           <div className="card-glass rounded-2xl p-6 transition-all hover:border-cyan-500/30">
             <div className="text-center">
-              <p className="text-sm text-[#8888a4]">Este mês</p>
+              <p className="text-sm text-[#9aa1ac]">Este mês</p>
               <p className="mt-1 text-3xl font-bold text-cyan-400">
                 {views.month}
               </p>
@@ -137,7 +137,7 @@ export default function AdminDashboardPage() {
 
           <div className="card-glass rounded-2xl p-6 transition-all hover:border-pink-500/30">
             <div className="text-center">
-              <p className="text-sm text-[#8888a4]">Total</p>
+              <p className="text-sm text-[#9aa1ac]">Total</p>
               <p className="mt-1 text-3xl font-bold text-pink-400">
                 {views.total}
               </p>

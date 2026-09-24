@@ -127,7 +127,7 @@ export default function AdminManuaisPage() {
           <h1 className="text-2xl font-bold text-white sm:text-3xl">
             📄 Gerenciar Manuais
           </h1>
-          <p className="mt-1 text-[#8888a4]">
+          <p className="mt-1 text-[#9aa1ac]">
             Adicione e gerencie os manuais do sistema
           </p>
         </div>
@@ -160,25 +160,25 @@ export default function AdminManuaisPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+                <label className="mb-1.5 block text-sm font-medium text-[#9aa1ac]">
                   Título
                 </label>
                 <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Manual de Serviço Honda CG 160" className="input-dark" />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+                <label className="mb-1.5 block text-sm font-medium text-[#9aa1ac]">
                   Marca
                 </label>
                 <input type="text" required value={brand} onChange={(e) => setBrand(e.target.value)} placeholder="Honda" className="input-dark" />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+                <label className="mb-1.5 block text-sm font-medium text-[#9aa1ac]">
                   Modelo
                 </label>
                 <input type="text" required value={model} onChange={(e) => setModel(e.target.value)} placeholder="CG 160" className="input-dark" />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+                <label className="mb-1.5 block text-sm font-medium text-[#9aa1ac]">
                   Ano
                 </label>
                 <input type="number" required value={year} onChange={(e) => setYear(e.target.value)} placeholder="2024" min="1900" max="2030" className="input-dark" />
@@ -186,13 +186,13 @@ export default function AdminManuaisPage() {
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+                <label className="mb-1.5 block text-sm font-medium text-[#9aa1ac]">
                   URL do PDF
                 </label>
                 <input type="url" required value={fileUrl} onChange={(e) => setFileUrl(e.target.value)} placeholder="https://exemplo.com/manual.pdf" className="input-dark" />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+                <label className="mb-1.5 block text-sm font-medium text-[#9aa1ac]">
                   Categoria
                 </label>
                 <select value={category} onChange={(e) => setCategory(e.target.value)} className="input-dark">
@@ -211,18 +211,18 @@ export default function AdminManuaisPage() {
       {/* Tabela de manuais */}
       <div className="card-glass overflow-hidden rounded-2xl">
         {loading ? (
-          <div className="p-8 text-center text-[#8888a4]">
+          <div className="p-8 text-center text-[#9aa1ac]">
             Carregando manuais...
           </div>
         ) : manuais.length === 0 ? (
-          <div className="p-8 text-center text-[#8888a4]">
+          <div className="p-8 text-center text-[#9aa1ac]">
             Nenhum manual cadastrado
           </div>
         ) : (
           <>
             <div className="space-y-4 p-4 md:hidden">
               {manuais.map((manual) => (
-                <div key={manual.id} className="rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-4">
+                <div key={manual.id} className="rounded-2xl border border-[#33373f] bg-[#111317] p-4">
                   <div className="flex gap-4">
                     {manual.coverUrl ? (
                       <img
@@ -230,20 +230,20 @@ export default function AdminManuaisPage() {
                         alt="Capa"
                         loading="lazy"
                         decoding="async"
-                        className="h-20 w-16 shrink-0 rounded-lg object-cover ring-1 ring-[#2a2a3e]"
+                        className="h-20 w-16 shrink-0 rounded-lg object-cover ring-1 ring-[#33373f]"
                       />
                     ) : (
-                      <div className="flex h-20 w-16 shrink-0 items-center justify-center rounded-lg bg-[#1a1a2e] ring-1 ring-[#2a2a3e]">
+                      <div className="flex h-20 w-16 shrink-0 items-center justify-center rounded-lg bg-[#1e2127] ring-1 ring-[#33373f]">
                         <span className="text-lg">📋</span>
                       </div>
                     )}
 
                     <div className="min-w-0 flex-1">
                       <p className="font-medium text-white">{manual.title}</p>
-                      <div className="mt-2 flex flex-wrap gap-2 text-xs text-[#8888a4]">
-                        <span className="rounded-md bg-[#1a1a2e] px-2 py-1">{manual.brand}</span>
-                        <span className="rounded-md bg-[#1a1a2e] px-2 py-1">{manual.model}</span>
-                        <span className="rounded-md bg-[#1a1a2e] px-2 py-1">{manual.year}</span>
+                      <div className="mt-2 flex flex-wrap gap-2 text-xs text-[#9aa1ac]">
+                        <span className="rounded-md bg-[#1e2127] px-2 py-1">{manual.brand}</span>
+                        <span className="rounded-md bg-[#1e2127] px-2 py-1">{manual.model}</span>
+                        <span className="rounded-md bg-[#1e2127] px-2 py-1">{manual.year}</span>
                         <span className={`rounded-md px-2 py-1 ${
                           manual.category === "catalogo" ? "bg-amber-500/20 text-amber-400" : "bg-blue-500/20 text-blue-400"
                         }`}>
@@ -254,16 +254,16 @@ export default function AdminManuaisPage() {
                         href={manual.fileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-3 inline-block text-sm font-medium text-[#6c5ce7] transition-colors hover:text-[#7c6ef7]"
+                        className="mt-3 inline-block text-sm font-medium text-[#ff6a1a] transition-colors hover:text-[#ff8c3f]"
                       >
                         Ver PDF
                       </a>
                     </div>
                   </div>
 
-                  <label className="mt-4 flex cursor-pointer items-center justify-center gap-1 rounded-md bg-[#6c5ce7]/10 px-3 py-2 text-xs font-medium text-[#6c5ce7] transition-all hover:bg-[#6c5ce7]/20">
+                  <label className="mt-4 flex cursor-pointer items-center justify-center gap-1 rounded-md bg-[#ff6a1a]/10 px-3 py-2 text-xs font-medium text-[#ff6a1a] transition-all hover:bg-[#ff6a1a]/20">
                     {uploadingId === manual.id ? (
-                      <span className="text-[#8888a4]">Enviando...</span>
+                      <span className="text-[#9aa1ac]">Enviando...</span>
                     ) : (
                       <>
                         📷 {manual.coverUrl ? "Trocar capa" : "Adicionar capa"}
@@ -286,7 +286,7 @@ export default function AdminManuaisPage() {
 
             <div className="hidden overflow-x-auto md:block">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-[#2a2a3e] text-xs font-medium uppercase text-[#8888a4]">
+              <thead className="border-b border-[#33373f] text-xs font-medium uppercase text-[#9aa1ac]">
                 <tr>
                   <th className="px-4 py-4">Capa</th>
                   <th className="px-4 py-4">Título</th>
@@ -297,9 +297,9 @@ export default function AdminManuaisPage() {
                   <th className="px-4 py-4">Link</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#2a2a3e]">
+              <tbody className="divide-y divide-[#33373f]">
                 {manuais.map((manual) => (
-                  <tr key={manual.id} className="transition-colors hover:bg-[#1a1a2e]">
+                  <tr key={manual.id} className="transition-colors hover:bg-[#1e2127]">
                     <td className="px-4 py-3">
                       <div className="flex flex-col items-center gap-1.5">
                         {manual.coverUrl ? (
@@ -308,16 +308,16 @@ export default function AdminManuaisPage() {
                             alt="Capa"
                             loading="lazy"
                             decoding="async"
-                            className="h-14 w-11 rounded-lg object-cover ring-1 ring-[#2a2a3e]"
+                            className="h-14 w-11 rounded-lg object-cover ring-1 ring-[#33373f]"
                           />
                         ) : (
-                          <div className="flex h-14 w-11 items-center justify-center rounded-lg bg-[#1a1a2e] ring-1 ring-[#2a2a3e]">
+                          <div className="flex h-14 w-11 items-center justify-center rounded-lg bg-[#1e2127] ring-1 ring-[#33373f]">
                             <span className="text-lg">📋</span>
                           </div>
                         )}
-                        <label className="group/btn flex cursor-pointer items-center gap-1 rounded-md bg-[#6c5ce7]/10 px-2 py-1 text-[10px] font-medium text-[#6c5ce7] transition-all hover:bg-[#6c5ce7]/20">
+                        <label className="group/btn flex cursor-pointer items-center gap-1 rounded-md bg-[#ff6a1a]/10 px-2 py-1 text-[10px] font-medium text-[#ff6a1a] transition-all hover:bg-[#ff6a1a]/20">
                           {uploadingId === manual.id ? (
-                            <span className="text-[#8888a4]">Enviando...</span>
+                            <span className="text-[#9aa1ac]">Enviando...</span>
                           ) : (
                             <>
                               📷 {manual.coverUrl ? "Trocar" : "Adicionar"}
@@ -339,9 +339,9 @@ export default function AdminManuaisPage() {
                     <td className="px-4 py-3 font-medium text-white">
                       {manual.title}
                     </td>
-                    <td className="px-4 py-3 text-[#8888a4]">{manual.brand}</td>
-                    <td className="px-4 py-3 text-[#8888a4]">{manual.model}</td>
-                    <td className="px-4 py-3 text-[#8888a4]">{manual.year}</td>
+                    <td className="px-4 py-3 text-[#9aa1ac]">{manual.brand}</td>
+                    <td className="px-4 py-3 text-[#9aa1ac]">{manual.model}</td>
+                    <td className="px-4 py-3 text-[#9aa1ac]">{manual.year}</td>
                     <td className="px-4 py-3">
                       <span className={`inline-block rounded-md px-2.5 py-0.5 text-xs font-semibold ${
                         manual.category === "catalogo" ? "bg-amber-500/20 text-amber-400" : "bg-blue-500/20 text-blue-400"
@@ -354,7 +354,7 @@ export default function AdminManuaisPage() {
                         href={manual.fileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-medium text-[#6c5ce7] transition-colors hover:text-[#7c6ef7]"
+                        className="font-medium text-[#ff6a1a] transition-colors hover:text-[#ff8c3f]"
                       >
                         Ver PDF
                       </a>

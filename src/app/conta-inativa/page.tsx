@@ -80,28 +80,28 @@ export default function ContaInativaPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#0a0a0f] px-4">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(108,92,231,0.1),_transparent_60%)]" />
+    <div className="flex min-h-screen items-center justify-center bg-[#16181c] px-4">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,106,26,0.1),_transparent_60%)]" />
       <div className="relative z-10 w-full max-w-md text-center">
         <div className="card-glass rounded-2xl p-10">
-          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#6c5ce7]/15 text-4xl">
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#ff6a1a]/15 text-4xl">
             �
           </div>
           <h1 className="mb-3 text-2xl font-bold text-white">Liberar Acesso Completo</h1>
-          <p className="mb-6 text-[#8888a4]">
+          <p className="mb-6 text-[#9aa1ac]">
             Pague uma única vez e libere todos os recursos da plataforma.
           </p>
 
           {/* Plan info */}
-          <div className="mb-6 rounded-xl border border-[#2a2a3e] bg-[#12121a] p-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#00d68f]">
+          <div className="mb-6 rounded-xl border border-[#33373f] bg-[#111317] p-4">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#37c07a]">
               🔥 Oferta Especial
             </span>
             <div className="mt-2">
-              <span className="text-sm text-[#8888a4] line-through">R$ 97,90</span>
-              <span className="ml-2 text-2xl font-extrabold text-[#00d68f]">R$ 67</span>
+              <span className="text-sm text-[#9aa1ac] line-through">R$ 97,90</span>
+              <span className="ml-2 text-2xl font-extrabold text-[#37c07a]">R$ 67</span>
             </div>
-            <p className="mt-1 text-xs text-[#8888a4]">Acesso total • Pagamento único</p>
+            <p className="mt-1 text-xs text-[#9aa1ac]">Acesso total • Pagamento único</p>
           </div>
 
           {error && (
@@ -124,8 +124,8 @@ export default function ContaInativaPage() {
 
           {loading && (
             <div className="flex flex-col items-center py-6">
-              <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#6c5ce7] border-t-transparent" />
-              <p className="mt-4 text-sm text-[#8888a4]">Gerando PIX...</p>
+              <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#ff6a1a] border-t-transparent" />
+              <p className="mt-4 text-sm text-[#9aa1ac]">Gerando PIX...</p>
             </div>
           )}
 
@@ -139,7 +139,7 @@ export default function ContaInativaPage() {
 
           {pixCode && (
             <div className="mb-4 text-left">
-              <label className="mb-1.5 block text-sm font-medium text-[#8888a4]">
+              <label className="mb-1.5 block text-sm font-medium text-[#9aa1ac]">
                 Código PIX (Copia e Cola)
               </label>
               <div className="flex gap-2">
@@ -148,8 +148,8 @@ export default function ContaInativaPage() {
                   onClick={handleCopyPix}
                   className={`rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
                     copied
-                      ? "bg-[#00d68f]/20 text-[#00d68f]"
-                      : "bg-[#6c5ce7] text-white hover:bg-[#7c6ef7]"
+                      ? "bg-[#37c07a]/20 text-[#37c07a]"
+                      : "bg-[#ff6a1a] text-white hover:bg-[#ff8c3f]"
                   }`}
                 >
                   {copied ? "Copiado!" : "Copiar"}
@@ -159,12 +159,12 @@ export default function ContaInativaPage() {
           )}
 
           {pixCode && (
-            <div className="mb-6 rounded-xl border border-[#2a2a3e] bg-[#12121a] p-4">
+            <div className="mb-6 rounded-xl border border-[#33373f] bg-[#111317] p-4">
               <div className="flex items-center gap-3">
                 <div className="h-3 w-3 animate-pulse rounded-full bg-yellow-500" />
                 <div className="text-left">
                   <p className="text-sm font-medium text-white">Aguardando pagamento...</p>
-                  <p className="text-xs text-[#8888a4]">O acesso será liberado automaticamente</p>
+                  <p className="text-xs text-[#9aa1ac]">O acesso será liberado automaticamente</p>
                 </div>
               </div>
             </div>

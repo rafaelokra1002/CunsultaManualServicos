@@ -40,7 +40,7 @@ export default function SocialProofToast() {
 
   return (
     <div
-      className={`fixed bottom-4 left-4 z-50 max-w-xs rounded-xl border border-[#2a2a3e] bg-[#12121a]/95 px-4 py-3 shadow-2xl shadow-black/40 backdrop-blur-md transition-all duration-500 ${
+      className={`fixed bottom-4 left-4 z-50 max-w-xs rounded-xl border border-[#33373f] bg-[#111317]/95 px-4 py-3 shadow-2xl shadow-black/40 backdrop-blur-md transition-all duration-500 ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"
@@ -50,7 +50,7 @@ export default function SocialProofToast() {
         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-500/20 text-sm">
           🔥
         </span>
-        <p className="text-sm text-[#e4e4ef]">
+        <p className="text-sm text-[#f3f0ea]">
           <strong className="text-green-400">{name}</strong>{" "}
           acabou de acessar a plataforma
         </p>

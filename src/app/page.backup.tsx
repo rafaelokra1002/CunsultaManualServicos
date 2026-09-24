@@ -35,15 +35,15 @@ const testimonials = [
 export default function HomePage() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#090a0f] text-white">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(245,158,11,0.16),_transparent_28%),radial-gradient(circle_at_85%_15%,_rgba(108,92,231,0.22),_transparent_26%),linear-gradient(180deg,_rgba(255,255,255,0.02),_transparent_45%)]" />
-      <div className="pointer-events-none fixed inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#f59e0b]/50 to-transparent" />
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(245,158,11,0.16),_transparent_28%),radial-gradient(circle_at_85%_15%,_rgba(255,106,26,0.22),_transparent_26%),linear-gradient(180deg,_rgba(255,255,255,0.02),_transparent_45%)]" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ff8c3f]/50 to-transparent" />
 
       <nav className="relative z-20 border-b border-white/10 bg-[#090a0f]/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 text-lg font-semibold sm:text-xl">
             <Logo size="sm" />
             <span>
-              Oficina<span className="text-[#f59e0b]">Digital</span>
+              Oficina<span className="text-[#ff8c3f]">Digital</span>
             </span>
           </div>
 
@@ -53,7 +53,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/register"
-              className="rounded-xl bg-[#f59e0b] px-4 py-2 text-sm font-semibold text-[#090a0f] transition-all hover:bg-[#ffb83d]"
+              className="rounded-xl bg-[#ff8c3f] px-4 py-2 text-sm font-semibold text-[#090a0f] transition-all hover:bg-[#ffb83d]"
             >
               Liberar acesso
             </Link>
@@ -67,7 +67,7 @@ export default function HomePage() {
             <div className="flex flex-col justify-between rounded-[28px] border border-white/10 bg-white/[0.03] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:p-6 xl:p-7">
               <div>
                 <div className="mb-4 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#ffd38a]">
-                  <span className="rounded-full border border-[#f59e0b]/30 bg-[#f59e0b]/10 px-3 py-1 text-[11px]">
+                  <span className="rounded-full border border-[#ff8c3f]/30 bg-[#ff8c3f]/10 px-3 py-1 text-[11px]">
                     pagamento único via pix
                   </span>
                   <span className="rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-[11px] text-emerald-300">
@@ -79,7 +79,7 @@ export default function HomePage() {
                   A ferramenta que faz o mecânico achar o defeito da moto sem perder meia hora no chute.
                 </h1>
 
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#c8cad7] sm:text-lg xl:max-w-3xl xl:text-[1.05rem]">
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#c7cad1] sm:text-lg xl:max-w-3xl xl:text-[1.05rem]">
                   Manuais de serviço, diagnóstico eletrônico Honda, calculadora de válvulas e dados técnicos em uma única plataforma.
                   Você abre no celular, consulta na hora e entrega a moto mais rápido.
                 </p>
@@ -90,7 +90,7 @@ export default function HomePage() {
                       key={item}
                       className="rounded-2xl border border-white/10 bg-[#0f1118] px-4 py-3 text-sm font-medium text-[#eef0f7]"
                     >
-                      <span className="mr-2 text-[#f59e0b]">●</span>
+                      <span className="mr-2 text-[#ff8c3f]">●</span>
                       {item}
                     </div>
                   ))}
@@ -118,15 +118,15 @@ export default function HomePage() {
               </div>
 
               <div className="mt-5 grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-                <div className="rounded-[24px] border border-[#f59e0b]/20 bg-[linear-gradient(135deg,rgba(245,158,11,0.14),rgba(245,158,11,0.03))] p-4">
+                <div className="rounded-[24px] border border-[#ff8c3f]/20 bg-[linear-gradient(135deg,rgba(245,158,11,0.14),rgba(245,158,11,0.03))] p-4">
                   <div className="flex items-center justify-between text-xs font-bold uppercase tracking-[0.18em] text-[#ffd38a]">
                     <span>simulação real</span>
                     <span className="rounded-full bg-black/20 px-2 py-1 text-[10px] text-white/75">10 segundos</span>
                   </div>
                   <div className="mt-4 rounded-2xl border border-white/10 bg-[#090a0f]/70 p-4">
-                    <div className="flex items-center justify-between text-sm text-[#9ea3b5]">
+                    <div className="flex items-center justify-between text-sm text-[#9aa1ac]">
                       <span>Honda Biz 110i</span>
-                      <span className="text-[#f59e0b]">8 piscadas</span>
+                      <span className="text-[#ff8c3f]">8 piscadas</span>
                     </div>
                     <div className="mt-4 space-y-2 text-sm leading-relaxed text-[#edf0f8]">
                       <p><strong className="text-white">Falha:</strong> Sensor TPS</p>
@@ -147,7 +147,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <aside className="flex flex-col justify-between rounded-[28px] border border-[#f59e0b]/25 bg-[linear-gradient(180deg,rgba(245,158,11,0.12),rgba(9,10,15,0.94)_22%)] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.45)] sm:p-6 xl:p-7">
+            <aside className="flex flex-col justify-between rounded-[28px] border border-[#ff8c3f]/25 bg-[linear-gradient(180deg,rgba(245,158,11,0.12),rgba(9,10,15,0.94)_22%)] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.45)] sm:p-6 xl:p-7">
               <div>
                 <div className="flex items-center justify-between gap-3">
                   <div>
@@ -157,9 +157,9 @@ export default function HomePage() {
                     </h2>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-right">
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-[#9ea3b5]">promocional</p>
-                    <p className="text-3xl font-extrabold text-[#f59e0b]">PIX</p>
-                    <p className="text-xs text-[#9ea3b5]">liberado na hora</p>
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-[#9aa1ac]">promocional</p>
+                    <p className="text-3xl font-extrabold text-[#ff8c3f]">PIX</p>
+                    <p className="text-xs text-[#9aa1ac]">liberado na hora</p>
                   </div>
                 </div>
 
@@ -188,26 +188,26 @@ export default function HomePage() {
                 <div className="mt-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                   <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center">
                     <p className="text-lg font-bold text-white">7 dias</p>
-                    <p className="text-xs uppercase tracking-[0.16em] text-[#9ea3b5]">garantia</p>
+                    <p className="text-xs uppercase tracking-[0.16em] text-[#9aa1ac]">garantia</p>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center">
                     <p className="text-lg font-bold text-white">0</p>
-                    <p className="text-xs uppercase tracking-[0.16em] text-[#9ea3b5]">mensalidade</p>
+                    <p className="text-xs uppercase tracking-[0.16em] text-[#9aa1ac]">mensalidade</p>
                   </div>
                   <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center">
                     <p className="text-lg font-bold text-white">100%</p>
-                    <p className="text-xs uppercase tracking-[0.16em] text-[#9ea3b5]">no celular</p>
+                    <p className="text-xs uppercase tracking-[0.16em] text-[#9aa1ac]">no celular</p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-5 rounded-[24px] border border-[#f59e0b]/30 bg-[#120f08] p-4">
+              <div className="mt-5 rounded-[24px] border border-[#ff8c3f]/30 bg-[#120f08] p-4">
                 <p className="text-sm leading-relaxed text-[#f6e6c7]">
                   Se em até 7 dias você achar que a plataforma não acelerou seus diagnósticos, devolvemos 100% do valor.
                 </p>
                 <Link
                   href="/register"
-                  className="mt-4 block rounded-2xl bg-[#f59e0b] px-6 py-4 text-center text-base font-extrabold uppercase tracking-[0.08em] text-[#090a0f] transition-all hover:bg-[#ffb83d] hover:shadow-[0_16px_36px_rgba(245,158,11,0.25)]"
+                  className="mt-4 block rounded-2xl bg-[#ff8c3f] px-6 py-4 text-center text-base font-extrabold uppercase tracking-[0.08em] text-[#090a0f] transition-all hover:bg-[#ffb83d] hover:shadow-[0_16px_36px_rgba(245,158,11,0.25)]"
                 >
                   Quero acessar agora
                 </Link>

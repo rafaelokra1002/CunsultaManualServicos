@@ -20,11 +20,11 @@ export default function AdminSidebar() {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[#2a2a3e] bg-[#0f0f18]/95 px-4 backdrop-blur md:hidden">
+      <div className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[#33373f] bg-[#111317]/95 px-4 backdrop-blur md:hidden">
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#2a2a3e] bg-[#151522] text-white"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#33373f] bg-[#1e2127] text-white"
           aria-label="Abrir menu admin"
         >
           ☰
@@ -42,15 +42,15 @@ export default function AdminSidebar() {
         />
       )}
 
-      <aside className={`fixed left-0 top-0 z-50 flex h-screen w-[84vw] max-w-[320px] flex-col border-r border-[#2a2a3e] bg-[#0f0f18] transition-transform duration-300 md:z-40 md:w-64 md:max-w-none ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
-        <div className="flex h-16 items-center justify-between border-b border-[#2a2a3e] px-6">
+      <aside className={`fixed left-0 top-0 z-50 flex h-screen w-[84vw] max-w-[320px] flex-col border-r border-[#33373f] bg-[#111317] transition-transform duration-300 md:z-40 md:w-64 md:max-w-none ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
+        <div className="flex h-16 items-center justify-between border-b border-[#33373f] px-6">
           <Link href="/admin" className="flex items-center text-xl font-bold text-white" onClick={() => setOpen(false)}>
             <Logo size="sm" /> <span className="ml-2"><span className="text-orange-400">Oficina</span>Digital</span>
           </Link>
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="text-xl text-[#8888a4] md:hidden"
+            className="text-xl text-[#9aa1ac] md:hidden"
             aria-label="Fechar menu admin"
           >
             ✕
@@ -68,7 +68,7 @@ export default function AdminSidebar() {
                 className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all ${
                   isActive
                     ? "bg-orange-500/15 text-orange-400 shadow-sm shadow-orange-500/10"
-                    : "text-[#8888a4] hover:bg-[#1a1a2e] hover:text-white"
+                    : "text-[#9aa1ac] hover:bg-[#1e2127] hover:text-white"
                 }`}
               >
                 <span>{item.icon}</span>
@@ -77,29 +77,29 @@ export default function AdminSidebar() {
             );
           })}
 
-          <div className="my-4 border-t border-[#2a2a3e]" />
+          <div className="my-4 border-t border-[#33373f]" />
 
           <Link
             href="/dashboard"
             onClick={() => setOpen(false)}
-            className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-[#8888a4] transition-all hover:bg-[#1a1a2e] hover:text-white"
+            className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-[#9aa1ac] transition-all hover:bg-[#1e2127] hover:text-white"
           >
             <span>↩️</span>
             Ir para o site
           </Link>
         </nav>
 
-        <div className="border-t border-[#2a2a3e] p-4">
+        <div className="border-t border-[#33373f] p-4">
           <div className="mb-3 overflow-hidden">
             <p className="truncate text-sm font-medium text-white">{session?.user?.name}</p>
-            <p className="truncate text-xs text-[#8888a4]">{session?.user?.email}</p>
+            <p className="truncate text-xs text-[#9aa1ac]">{session?.user?.email}</p>
             <span className="mt-1.5 inline-block rounded-md bg-orange-500/20 px-2 py-0.5 text-xs font-semibold text-orange-400">
               ADMIN
             </span>
           </div>
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
-            className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm text-[#8888a4] transition-all hover:bg-[#1a1a2e] hover:text-red-400"
+            className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm text-[#9aa1ac] transition-all hover:bg-[#1e2127] hover:text-red-400"
           >
             🚪 Sair
           </button>

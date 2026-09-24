@@ -106,22 +106,22 @@ export default function OleoSuspensaoPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a14]">
+    <div className="flex min-h-screen bg-[#16181c]">
       <Sidebar />
       <main className="flex-1 px-4 pb-10 pt-20 md:ml-64 md:pt-8">
         <div className="mx-auto max-w-3xl">
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-white md:text-3xl">
-              Consulta Óleo de <span className="text-[#6c5ce7]">Suspensão</span>
+              Consulta Óleo de <span className="text-[#ff6a1a]">Suspensão</span>
             </h1>
-            <p className="mt-2 text-sm text-[#8888a4]">
+            <p className="mt-2 text-sm text-[#9aa1ac]">
               Busque o modelo da motocicleta para verificar o volume de óleo da suspensão
             </p>
           </div>
 
           {/* Search Box */}
-          <div className="rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-6">
+          <div className="rounded-2xl border border-[#33373f] bg-[#111317] p-6">
             <h2 className="mb-4 text-lg font-semibold text-white">Buscar Modelo</h2>
             <div className="flex gap-3">
               <input
@@ -130,11 +130,11 @@ export default function OleoSuspensaoPage() {
                 onChange={(e) => setSearch(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder="Digite o modelo (ex: Honda CB 500F, Honda XRE 300)"
-                className="flex-1 rounded-xl border border-[#2a2a3e] bg-[#0a0a14] px-4 py-3 text-sm text-white placeholder-[#555570] outline-none transition-colors focus:border-[#6c5ce7]/50"
+                className="flex-1 rounded-xl border border-[#33373f] bg-[#16181c] px-4 py-3 text-sm text-white placeholder-[#6c727c] outline-none transition-colors focus:border-[#ff6a1a]/50"
               />
               <button
                 onClick={handleSearch}
-                className="rounded-xl bg-[#6c5ce7] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#5a4bd6]"
+                className="rounded-xl bg-[#ff6a1a] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#5a4bd6]"
               >
                 Buscar
               </button>
@@ -151,41 +151,41 @@ export default function OleoSuspensaoPage() {
                 />
               )}
               <div className={blocked ? "pointer-events-none select-none" : ""}>
-              <div className="rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-6">
-                <h3 className="mb-4 border-b border-[#2a2a3e] pb-3 text-lg font-semibold text-[#6c5ce7]">
+              <div className="rounded-2xl border border-[#33373f] bg-[#111317] p-6">
+                <h3 className="mb-4 border-b border-[#33373f] pb-3 text-lg font-semibold text-[#ff6a1a]">
                   Modelo: {formatModelName(result.model)}
                 </h3>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                   {/* Left Volume */}
-                  <div className="rounded-xl border border-[#2a2a3e] bg-[#0a0a14] p-4 text-center">
-                    <h4 className="mb-2 text-sm font-medium text-[#8888a4]">Suspensão Esquerda</h4>
-                    <p className="text-xl font-bold text-[#6c5ce7]">{result.leftVolume}</p>
+                  <div className="rounded-xl border border-[#33373f] bg-[#16181c] p-4 text-center">
+                    <h4 className="mb-2 text-sm font-medium text-[#9aa1ac]">Suspensão Esquerda</h4>
+                    <p className="text-xl font-bold text-[#ff6a1a]">{result.leftVolume}</p>
                   </div>
 
                   {/* Right Volume */}
-                  <div className="rounded-xl border border-[#2a2a3e] bg-[#0a0a14] p-4 text-center">
-                    <h4 className="mb-2 text-sm font-medium text-[#8888a4]">Suspensão Direita</h4>
-                    <p className="text-xl font-bold text-[#6c5ce7]">{result.rightVolume}</p>
+                  <div className="rounded-xl border border-[#33373f] bg-[#16181c] p-4 text-center">
+                    <h4 className="mb-2 text-sm font-medium text-[#9aa1ac]">Suspensão Direita</h4>
+                    <p className="text-xl font-bold text-[#ff6a1a]">{result.rightVolume}</p>
                   </div>
 
                   {/* Fluid Level */}
-                  <div className="rounded-xl border border-[#2a2a3e] bg-[#0a0a14] p-4 text-center">
-                    <h4 className="mb-2 text-sm font-medium text-[#8888a4]">Nível de Fluido</h4>
-                    <p className="text-xl font-bold text-[#6c5ce7]">{result.fluidLevel || "Não informado"}</p>
+                  <div className="rounded-xl border border-[#33373f] bg-[#16181c] p-4 text-center">
+                    <h4 className="mb-2 text-sm font-medium text-[#9aa1ac]">Nível de Fluido</h4>
+                    <p className="text-xl font-bold text-[#ff6a1a]">{result.fluidLevel || "Não informado"}</p>
                   </div>
                 </div>
 
                 {/* Engine Oil */}
                 {result.engineOil && (
-                  <div className="mt-4 rounded-xl border border-[#6c5ce7]/20 bg-[#6c5ce7]/5 p-4 text-center">
-                    <h4 className="mb-2 text-sm font-medium text-[#8888a4]">Óleo do Motor</h4>
-                    <p className="text-xl font-bold text-[#6c5ce7]">{result.engineOil}</p>
+                  <div className="mt-4 rounded-xl border border-[#ff6a1a]/20 bg-[#ff6a1a]/5 p-4 text-center">
+                    <h4 className="mb-2 text-sm font-medium text-[#9aa1ac]">Óleo do Motor</h4>
+                    <p className="text-xl font-bold text-[#ff6a1a]">{result.engineOil}</p>
                   </div>
                 )}
 
                 {/* Recommendation */}
-                <div className="mt-4 rounded-xl border-l-4 border-[#6c5ce7] bg-[#6c5ce7]/5 p-4">
+                <div className="mt-4 rounded-xl border-l-4 border-[#ff6a1a] bg-[#ff6a1a]/5 p-4">
                   <p className="text-sm text-[#c0c0d0]">
                     <span className="font-semibold text-white">Recomendação:</span> {result.recommendation}
                   </p>
@@ -196,13 +196,13 @@ export default function OleoSuspensaoPage() {
           )}
 
           {searched && notFound && (
-            <div className="mt-6 rounded-2xl border border-[#2a2a3e] bg-[#12121a] p-6">
-              <h3 className="mb-3 text-lg font-semibold text-[#6c5ce7]">
+            <div className="mt-6 rounded-2xl border border-[#33373f] bg-[#111317] p-6">
+              <h3 className="mb-3 text-lg font-semibold text-[#ff6a1a]">
                 Modelo: {formatModelName(search)}
               </h3>
               <p className="mb-3 font-semibold text-yellow-400">Modelo não encontrado em nosso banco de dados.</p>
-              <p className="mb-2 text-sm text-[#8888a4]">Sugestões:</p>
-              <ul className="list-inside list-disc space-y-1 text-sm text-[#8888a4]">
+              <p className="mb-2 text-sm text-[#9aa1ac]">Sugestões:</p>
+              <ul className="list-inside list-disc space-y-1 text-sm text-[#9aa1ac]">
                 <li>Verifique a ortografia do modelo.</li>
                 <li>Tente buscar pela marca e modelo (ex: Honda CB500F).</li>
                 <li>Consulte o manual do proprietário para informações precisas.</li>
@@ -211,7 +211,7 @@ export default function OleoSuspensaoPage() {
           )}
 
           {/* Info */}
-          <p className="mt-6 text-center text-xs text-[#555570]">
+          <p className="mt-6 text-center text-xs text-[#6c727c]">
             As informações são extraídas dos manuais de serviço oficiais de cada modelo.
           </p>
         </div>

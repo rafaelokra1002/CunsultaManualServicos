@@ -198,11 +198,11 @@ function CountdownTimer({ seconds, onDone }: { seconds: number; onDone: () => vo
         {running ? "⏱ Contando..." : "▶ Iniciar cronômetro"}
       </button>
       <div className="flex-1">
-        <div className="mb-1 flex justify-between text-xs text-[#8888a4]">
+        <div className="mb-1 flex justify-between text-xs text-[#9aa1ac]">
           <span>{remaining}s restantes</span>
           <span>{Math.round(pct)}%</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-[#1a1a2e]">
+        <div className="h-2 overflow-hidden rounded-full bg-[#1e2127]">
           <div
             className="h-full rounded-full bg-orange-500 transition-all duration-1000"
             style={{ width: `${pct}%` }}
@@ -249,7 +249,7 @@ export function FerramentaInicializacao() {
                 ? "bg-emerald-500/30 text-emerald-300 border border-emerald-500/40"
                 : i === currentStep
                 ? `${c.bg} ${c.text} border ${c.border}`
-                : "border border-[#2a2a3e] bg-[#0f0f18] text-[#555570]"
+                : "border border-[#33373f] bg-[#111317] text-[#6c727c]"
             }`}
           >
             {completed.includes(i) ? "✓" : s.id}
@@ -258,13 +258,13 @@ export function FerramentaInicializacao() {
       </div>
 
       {!allDone ? (
-        <div className={`rounded-2xl border ${c.border} bg-[#0f0f18] p-5`}>
+        <div className={`rounded-2xl border ${c.border} bg-[#111317] p-5`}>
           <div className="mb-3 flex items-start gap-3">
             <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${c.border} ${c.bg} text-xl`}>
               {step.icon}
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#555570]">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#6c727c]">
                 Passo {step.id} de {INIT_STEPS.length}
               </p>
               <h3 className="text-lg font-extrabold text-white">{step.title}</h3>
@@ -273,7 +273,7 @@ export function FerramentaInicializacao() {
 
           <ul className="mb-4 space-y-2">
             {step.details.map((d, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-[#c8cad7]">
+              <li key={i} className="flex items-start gap-2 text-sm text-[#c7cad1]">
                 <span className={`mt-0.5 shrink-0 text-xs font-bold ${c.text}`}>→</span>
                 {d}
               </li>
@@ -294,7 +294,7 @@ export function FerramentaInicializacao() {
             {currentStep > 0 && (
               <button
                 onClick={() => setCurrentStep((s) => s - 1)}
-                className="flex h-10 items-center gap-1.5 rounded-xl border border-[#2a2a3e] bg-[#151522] px-4 text-sm text-[#8888a4] transition hover:border-[#3a3a5e] hover:text-white"
+                className="flex h-10 items-center gap-1.5 rounded-xl border border-[#33373f] bg-[#1e2127] px-4 text-sm text-[#9aa1ac] transition hover:border-[#3a3a5e] hover:text-white"
               >
                 ← Voltar
               </button>
@@ -316,7 +316,7 @@ export function FerramentaInicializacao() {
         <div className="rounded-2xl border border-emerald-500/40 bg-emerald-500/8 p-6 text-center">
           <div className="text-4xl">✅</div>
           <h3 className="mt-3 text-xl font-extrabold text-white">ECM Inicializado com Sucesso!</h3>
-          <p className="mt-1 text-sm text-[#8888a4]">Verifique a rotação de marcha lenta do motor.</p>
+          <p className="mt-1 text-sm text-[#9aa1ac]">Verifique a rotação de marcha lenta do motor.</p>
           <button
             onClick={reset}
             className="mt-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-5 py-2 text-sm font-bold text-emerald-300 transition hover:bg-emerald-500/20"
@@ -365,7 +365,7 @@ export function FerramentaResetCombustivel() {
                 ? "bg-emerald-500/30 text-emerald-300 border border-emerald-500/40"
                 : i === currentStep
                 ? `${c.bg} ${c.text} border ${c.border}`
-                : "border border-[#2a2a3e] bg-[#0f0f18] text-[#555570]"
+                : "border border-[#33373f] bg-[#111317] text-[#6c727c]"
             }`}
           >
             {completed.includes(i) ? "✓" : s.id}
@@ -374,20 +374,20 @@ export function FerramentaResetCombustivel() {
       </div>
 
       {!allDone ? (
-        <div className={`rounded-2xl border ${c.border} bg-[#0f0f18] p-5`}>
+        <div className={`rounded-2xl border ${c.border} bg-[#111317] p-5`}>
           <div className="mb-3 flex items-start gap-3">
             <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border ${c.border} ${c.bg} text-xl`}>
               {step.icon}
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#555570]">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#6c727c]">
                 Passo {step.id} de {RESET_STEPS.length}
               </p>
               <h3 className="text-lg font-extrabold text-white">{step.title}</h3>
             </div>
           </div>
 
-          <p className="mb-3 text-sm leading-relaxed text-[#c8cad7]">{step.desc}</p>
+          <p className="mb-3 text-sm leading-relaxed text-[#c7cad1]">{step.desc}</p>
 
           {step.highlight && (
             <div className={`rounded-xl border ${c.border} ${c.bg} px-4 py-2.5 text-sm font-semibold ${c.text}`}>
@@ -403,7 +403,7 @@ export function FerramentaResetCombustivel() {
             {currentStep > 0 && (
               <button
                 onClick={() => setCurrentStep((s) => s - 1)}
-                className="flex h-10 items-center gap-1.5 rounded-xl border border-[#2a2a3e] bg-[#151522] px-4 text-sm text-[#8888a4] transition hover:border-[#3a3a5e] hover:text-white"
+                className="flex h-10 items-center gap-1.5 rounded-xl border border-[#33373f] bg-[#1e2127] px-4 text-sm text-[#9aa1ac] transition hover:border-[#3a3a5e] hover:text-white"
               >
                 ← Voltar
               </button>
@@ -425,7 +425,7 @@ export function FerramentaResetCombustivel() {
         <div className="rounded-2xl border border-emerald-500/40 bg-emerald-500/8 p-6 text-center">
           <div className="text-4xl">✅</div>
           <h3 className="mt-3 text-xl font-extrabold text-white">Dados de Combustível Resetados!</h3>
-          <p className="mt-1 text-sm text-[#8888a4]">Verifique os dados de condição no ECM.</p>
+          <p className="mt-1 text-sm text-[#9aa1ac]">Verifique os dados de condição no ECM.</p>
           <button
             onClick={reset}
             className="mt-4 rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-5 py-2 text-sm font-bold text-emerald-300 transition hover:bg-emerald-500/20"
@@ -453,15 +453,15 @@ function PulseDiagram({ pulses, barClass }: { pulses: number; barClass: string }
           <div
             key={i}
             style={{ width: seg.w, height: seg.on ? 24 : 4, flexShrink: 0 }}
-            className={`rounded-sm ${seg.on ? barClass : "bg-[#1a1a2e]"}`}
+            className={`rounded-sm ${seg.on ? barClass : "bg-[#1e2127]"}`}
           />
         ))}
         <div className="flex flex-1 items-center gap-1 self-center pl-1">
           <div className="h-px flex-1 border-t border-dashed border-[#3a3a5e]" />
-          <span className="text-[9px] text-[#555570]">repete</span>
+          <span className="text-[9px] text-[#6c727c]">repete</span>
         </div>
       </div>
-      <div className="flex gap-0 text-[8px] text-[#555570]" style={{ lineHeight: 1 }}>
+      <div className="flex gap-0 text-[8px] text-[#6c727c]" style={{ lineHeight: 1 }}>
         {segments.map((seg, i) => (
           <div key={i} style={{ width: seg.w, flexShrink: 0 }} className="text-center">
             {seg.on ? "0.3" : seg.w > 20 ? "1.3" : ""}
@@ -475,14 +475,14 @@ function PulseDiagram({ pulses, barClass }: { pulses: number; barClass: string }
 export function ReferenciaIndicador() {
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl border border-[#2a2a3e] bg-[#0f0f18] p-5">
+      <div className="rounded-2xl border border-[#33373f] bg-[#111317] p-5">
         <h3 className="mb-4 text-base font-extrabold text-white">
           💡 Indicador de Partida a Frio — Comportamento
         </h3>
         <div className="space-y-3">
-          <div className="rounded-xl border border-[#2a2a3e] bg-[#151522] p-3.5">
-            <p className="mb-1 text-xs font-bold uppercase tracking-wider text-[#555570]">Normal</p>
-            <p className="text-sm text-[#c8cad7]">
+          <div className="rounded-xl border border-[#33373f] bg-[#1e2127] p-3.5">
+            <p className="mb-1 text-xs font-bold uppercase tracking-wider text-[#6c727c]">Normal</p>
+            <p className="text-sm text-[#c7cad1]">
               Ao ligar a ignição, o indicador acende por{" "}
               <span className="font-bold text-white">2 segundos</span> e então se apaga.
             </p>
@@ -492,7 +492,7 @@ export function ReferenciaIndicador() {
             <p className="mb-2 text-xs font-bold uppercase tracking-wider text-yellow-400">
               ⚠️ Indicador Piscando ao Ligar → Partida Difícil
             </p>
-            <ul className="space-y-1.5 text-sm text-[#c8cad7]">
+            <ul className="space-y-1.5 text-sm text-[#c7cad1]">
               <li className="flex items-start gap-2">
                 <span className="mt-0.5 shrink-0 text-yellow-400">—</span>
                 Temperatura do ar abaixo de <strong className="text-white">15 °C</strong>
@@ -502,7 +502,7 @@ export function ReferenciaIndicador() {
                 Taxa de etanol aproximadamente <strong className="text-white">80–100%</strong>
               </li>
             </ul>
-            <div className="mt-2.5 rounded-lg border border-yellow-500/20 bg-[#0f0f18] p-2.5 text-xs font-semibold text-yellow-300">
+            <div className="mt-2.5 rounded-lg border border-yellow-500/20 bg-[#111317] p-2.5 text-xs font-semibold text-yellow-300">
               → Adicione <strong>3 L de gasolina</strong> ao tanque e deixe em marcha lenta por 2 minutos
             </div>
           </div>
@@ -511,22 +511,22 @@ export function ReferenciaIndicador() {
             <p className="mb-2 text-xs font-bold uppercase tracking-wider text-blue-400">
               🔵 Indicador NÃO Acende + Motor Não Pega
             </p>
-            <div className="rounded-lg border border-blue-500/20 bg-[#0f0f18] p-2.5 text-xs font-semibold text-blue-300">
+            <div className="rounded-lg border border-blue-500/20 bg-[#111317] p-2.5 text-xs font-semibold text-blue-300">
               → Adicione <strong>2 L de gasolina</strong> ao tanque e deixe em marcha lenta por 2 minutos
             </div>
           </div>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-[#2a2a3e] bg-[#0f0f18] p-5">
+      <div className="rounded-2xl border border-[#33373f] bg-[#111317] p-5">
         <h3 className="mb-1 text-base font-extrabold text-white">
           📊 Índice de Dados de Condição de Combustível no ECM
         </h3>
-        <p className="mb-4 text-xs text-[#8888a4]">
+        <p className="mb-4 text-xs text-[#9aa1ac]">
           Leitura igual ao procedimento de leitura do DTC — unidade: segundos.
         </p>
 
-        <div className="mb-2 grid grid-cols-[40px_1fr_1fr] gap-2 px-1 text-[10px] font-bold uppercase tracking-wider text-[#555570]">
+        <div className="mb-2 grid grid-cols-[40px_1fr_1fr] gap-2 px-1 text-[10px] font-bold uppercase tracking-wider text-[#6c727c]">
           <span>Cód.</span>
           <span>Etanol aprox.</span>
           <span>Padrão de piscadas</span>
@@ -536,21 +536,21 @@ export function ReferenciaIndicador() {
           {PATTERNS.map((p) => (
             <div
               key={p.id}
-              className={`grid grid-cols-[40px_1fr_1fr] items-center gap-2 rounded-xl border ${p.border} bg-[#151522] p-3`}
+              className={`grid grid-cols-[40px_1fr_1fr] items-center gap-2 rounded-xl border ${p.border} bg-[#1e2127] p-3`}
             >
               <div className={`flex h-9 w-9 items-center justify-center rounded-lg text-sm font-extrabold ${p.bg} ${p.text} border ${p.border}`}>
                 {p.id}
               </div>
               <div>
                 <p className={`text-sm font-extrabold ${p.text}`}>Padrão {p.label}</p>
-                <p className="text-xs text-[#8888a4]">{p.ethanol}</p>
+                <p className="text-xs text-[#9aa1ac]">{p.ethanol}</p>
               </div>
               <PulseDiagram pulses={p.pulses} barClass={p.bar} />
             </div>
           ))}
         </div>
 
-        <p className="mt-3 text-[10px] text-[#555570]">
+        <p className="mt-3 text-[10px] text-[#6c727c]">
           * Padrão repetido em ciclos. Largura de cada pulso = 0,3 s · Pausa = 1,3 s
         </p>
       </div>

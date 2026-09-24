@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #12121a;
-    --bg-card: #1a1a2e;
-    --bg-card-hover: #1f1f35;
-    --border: #2a2a3e;
-    --text-primary: #e4e4ef;
-    --text-secondary: #8888a4;
-    --accent: #6c5ce7;
-    --accent-hover: #7c6ef7;
-    --accent-glow: rgba(108, 92, 231, 0.25);
-    --success: #00d68f;
+    --bg-primary: #16181c;
+    --bg-secondary: #111317;
+    --bg-card: #1e2127;
+    --bg-card-hover: #262a31;
+    --border: #33373f;
+    --text-primary: #f3f0ea;
+    --text-secondary: #9aa1ac;
+    --accent: #ff6a1a;
+    --accent-hover: #ff8c3f;
+    --accent-glow: rgba(255,106,26, 0.25);
+    --success: #37c07a;
     --danger: #ff4757;
     --warning: #ffa502;
   }
@@ -81,25 +81,25 @@ h3,
 
 /* Glow effects */
 .glow-accent {
-  box-shadow: 0 0 20px var(--accent-glow), 0 0 60px rgba(108, 92, 231, 0.1);
+  box-shadow: 0 0 20px var(--accent-glow), 0 0 60px rgba(255,106,26, 0.1);
 }
 
 .card-glass {
-  background: rgba(26, 26, 46, 0.6);
+  background: rgba(30,33,39, 0.6);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border);
 }
 
 .input-dark {
-  @apply w-full rounded-xl border border-[#2a2a3e] bg-[#12121a] px-4 py-3 text-[#e4e4ef] placeholder-[#555570] transition-all focus:border-[#6c5ce7] focus:outline-none focus:ring-2 focus:ring-[#6c5ce7]/20;
+  @apply w-full rounded-xl border border-[#33373f] bg-[#111317] px-4 py-3 text-[#f3f0ea] placeholder-[#6c727c] transition-all focus:border-[#ff6a1a] focus:outline-none focus:ring-2 focus:ring-[#ff6a1a]/20;
 }
 
 .btn-primary {
-  @apply rounded-xl bg-[#6c5ce7] px-6 py-3 font-semibold text-white transition-all hover:bg-[#7c6ef7] hover:shadow-lg hover:shadow-[#6c5ce7]/25 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  @apply rounded-xl bg-[#ff6a1a] px-6 py-3 font-semibold text-white transition-all hover:bg-[#ff8c3f] hover:shadow-lg hover:shadow-[#ff6a1a]/25 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
 }
 
 .btn-outline {
-  @apply rounded-xl border border-[#2a2a3e] px-6 py-3 font-semibold text-[#e4e4ef] transition-all hover:border-[#6c5ce7] hover:bg-[#6c5ce7]/10 hover:text-white;
+  @apply rounded-xl border border-[#33373f] px-6 py-3 font-semibold text-[#f3f0ea] transition-all hover:border-[#ff6a1a] hover:bg-[#ff6a1a]/10 hover:text-white;
 }
 
 .scrollbar-none {

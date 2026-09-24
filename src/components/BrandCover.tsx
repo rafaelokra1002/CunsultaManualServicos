@@ -18,7 +18,7 @@ const brandThemes: Record<string, { bg: string; accent: string; text: string; ic
   Referência:    { bg: "from-slate-800/80 to-slate-950",   accent: "#64748b", text: "#94a3b8",  icon: "⚙" },
 };
 
-const defaultTheme = { bg: "from-purple-900/80 to-purple-950", accent: "#6c5ce7", text: "#c4b5fd", icon: "M" };
+const defaultTheme = { bg: "from-purple-900/80 to-purple-950", accent: "#ff6a1a", text: "#c4b5fd", icon: "M" };
 
 export default function BrandCover({ brand, model, year, className = "" }: BrandCoverProps) {
   const theme = brandThemes[brand] || defaultTheme;
