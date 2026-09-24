@@ -12,7 +12,7 @@ type IconProps = { className?: string };
 
 function BookIcon({ className = "h-6 w-6" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M6.5 2.5H20v19H6.5A2.5 2.5 0 0 1 4 19V5a2.5 2.5 0 0 1 2.5-2.5Z" />
       <path d="M4 17.2a2.5 2.5 0 0 1 2.5-1.2H20" />
       <path d="M8 7h7" />
@@ -23,7 +23,7 @@ function BookIcon({ className = "h-6 w-6" }: IconProps) {
 
 function ShieldCheckIcon({ className = "h-6 w-6" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M12 21.6C8.2 19.1 4.5 15.6 4.5 11.2V5.7l7.5-3 7.5 3v5.5c0 4.4-3.7 7.9-7.5 10.4Z" />
       <path d="m8.8 11.6 2.2 2.2 4.4-4.4" />
     </svg>
@@ -32,7 +32,7 @@ function ShieldCheckIcon({ className = "h-6 w-6" }: IconProps) {
 
 function CrownIcon({ className = "h-6 w-6" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="m3.2 17.5 1-9.4 4.6 3.9L12 5.2l3.2 6.8 4.6-3.9 1 9.4Z" />
       <path d="M4.6 21h14.8" />
     </svg>
@@ -41,7 +41,7 @@ function CrownIcon({ className = "h-6 w-6" }: IconProps) {
 
 function DownloadIcon({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M12 3v11.5" />
       <path d="m7.6 10.4 4.4 4.4 4.4-4.4" />
       <path d="M4 16.8v2.4A1.8 1.8 0 0 0 5.8 21h12.4a1.8 1.8 0 0 0 1.8-1.8v-2.4" />
@@ -51,7 +51,7 @@ function DownloadIcon({ className = "h-5 w-5" }: IconProps) {
 
 function WrenchIcon({ className = "h-6 w-6" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
     </svg>
   );
@@ -59,7 +59,7 @@ function WrenchIcon({ className = "h-6 w-6" }: IconProps) {
 
 function SparklesIcon({ className = "h-[22px] w-[22px]" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M12 3.4 13.6 8.6a2 2 0 0 0 1.3 1.3l5.2 1.6-5.2 1.6a2 2 0 0 0-1.3 1.3L12 19.6l-1.6-5.2a2 2 0 0 0-1.3-1.3L3.9 11.5l5.2-1.6a2 2 0 0 0 1.3-1.3Z" />
       <path d="M18.8 3.6v2.8" />
       <path d="M17.4 5h2.8" />
@@ -71,7 +71,7 @@ function SparklesIcon({ className = "h-[22px] w-[22px]" }: IconProps) {
 
 function ArrowRightIcon({ className = "h-4 w-4" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M4.5 12h14" />
       <path d="m12.5 6 6 6-6 6" />
     </svg>
@@ -80,7 +80,7 @@ function ArrowRightIcon({ className = "h-4 w-4" }: IconProps) {
 
 function ChatIcon({ className = "h-[26px] w-[26px]" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M20.5 14.6A2.4 2.4 0 0 1 18.1 17H8.2L3.5 21V5.9A2.4 2.4 0 0 1 5.9 3.5h12.2a2.4 2.4 0 0 1 2.4 2.4Z" />
       <path d="M7.8 8.6h8.4" />
       <path d="M7.8 12.1h5.2" />
@@ -90,7 +90,7 @@ function ChatIcon({ className = "h-[26px] w-[26px]" }: IconProps) {
 
 function MotorcycleIcon({ className = "h-7 w-7" }: IconProps) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.25} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <circle cx="5.4" cy="16.6" r="3.4" />
       <circle cx="18.6" cy="16.6" r="3.4" />
       <path d="M8.8 16.6h5.6" />
