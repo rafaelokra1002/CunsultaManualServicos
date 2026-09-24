@@ -33,6 +33,29 @@ body {
   overscroll-behavior-x: none;
 }
 
+/* Impede que itens de flex/grid empurrem a largura (causa nº1 de rolagem lateral) */
+*,
+*::before,
+*::after {
+  min-width: 0;
+}
+
+/* Mídia nunca passa da tela */
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+/* Quebra palavras e links gigantes em vez de esticar a tela */
+body {
+  overflow-wrap: break-word;
+}
+
+
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
