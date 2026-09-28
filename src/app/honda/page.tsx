@@ -154,6 +154,19 @@ const CSS = `
 .hd .bonus h3{font-size:1rem}
 .hd .bonus p{color:var(--muted);font-size:.9rem;margin-top:5px}
 
+.hd .vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:34px}
+.hd .vs-col{border-radius:var(--r);padding:24px;border:1px solid var(--line-soft);background:var(--bg-2)}
+.hd .vs-col.us{border-color:rgba(255,106,26,.35);background:linear-gradient(180deg,var(--surface),var(--bg-2))}
+.hd .vs-col .t{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+.hd .vs-col.us .t{color:var(--signal)}
+.hd .vs-col h3{margin-top:10px;font-size:1.08rem}
+.hd .vs-col ul{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-direction:column;gap:11px}
+.hd .vs-col li{display:flex;gap:10px;font-size:.91rem;color:var(--muted);align-items:flex-start}
+.hd .vs-col li .m{font-family:var(--mono);font-weight:700;flex:none}
+.hd .vs-col.them li .m{color:var(--warn)}
+.hd .vs-col.us li{color:var(--ink)}
+.hd .vs-col.us li .m{color:var(--ok)}
+
 .hd .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px}
 .hd .fact{background:var(--bg-2);border:1px solid var(--line-soft);border-radius:12px;padding:18px}
 .hd .fact .t{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2)}
@@ -195,6 +208,7 @@ const CSS = `
   .hd .hero-cta{align-items:stretch}
   .hd .hero-cta .btn,.hd .cta-block .btn{width:100%}
   .hd .facts{grid-template-columns:1fr}
+  .hd .vs{grid-template-columns:1fr}
   .hd .bonus{grid-template-columns:1fr}
   .hd .tbl th:nth-child(3),.hd .tbl td:nth-child(3){display:none}
   .hd .tbl th,.hd .tbl td{padding-inline:13px}
@@ -458,7 +472,7 @@ export default function HondaLanding() {
               <div className="tool">
                 <span className="k">02 · Pinagem ECU</span>
                 <span className="q">O sinal chegou na central?</span>
-                <p>536 pinos mapeados em 23 modelos Honda de 2009 a 2026, com número do pino, cor do fio e função de cada um.</p>
+                <p>536 pinos mapeados em 23 modelos Honda de 2009 a 2026, separados por ano e por versão da ECU — com número do pino, cor do fio e função de cada um.</p>
               </div>
               <div className="tool">
                 <span className="k">03 · Parâmetros</span>
@@ -481,6 +495,46 @@ export default function HondaLanding() {
                   não for Honda. Mais pinagem de 8 modelos Yamaha e 1 Kawasaki.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="wrap">
+            <div className="head center">
+              <span className="eyebrow">Por que não vendemos um e-book</span>
+              <h2>A diferença aparece com a moto na bancada</h2>
+              <p className="lead">
+                Apostila de pinagem em PDF você já viu. O problema nunca foi ter o dado — foi achar o dado com a mão suja
+                e o cliente esperando.
+              </p>
+            </div>
+
+            <div className="vs">
+              <div className="vs-col them">
+                <span className="t">E-book em PDF</span>
+                <h3>Você procura dentro do arquivo</h3>
+                <ul>
+                  <li><span className="m">✕</span><span>Rola o PDF atrás do modelo e do ano certo</span></li>
+                  <li><span className="m">✕</span><span>Anota a cor do fio num papel pra não esquecer</span></li>
+                  <li><span className="m">✕</span><span>Achou o pino, mas o parâmetro está em outra apostila</span></li>
+                  <li><span className="m">✕</span><span>Só dá pra buscar por modelo — nunca pelo sintoma</span></li>
+                </ul>
+              </div>
+              <div className="vs-col us">
+                <span className="t">Consulta no app</span>
+                <h3>O dado já vem pronto na tela</h3>
+                <ul>
+                  <li><span className="m">✓</span><span>Escolhe a moto e o ano: a pinagem abre montada</span></li>
+                  <li><span className="m">✓</span><span>Cor do fio, função e faixa do multímetro na mesma tela</span></li>
+                  <li><span className="m">✓</span><span>Pinagem e parâmetro juntos, sem trocar de arquivo</span></li>
+                  <li><span className="m">✓</span><span>Busca por sintoma: &quot;moto falhando&quot; já lista o que testar</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="verdictbox">
+              <p>Você não precisa <span className="a">decorar cor de fio</span>. Precisa dela na tela na hora da medição.</p>
             </div>
           </div>
         </section>
