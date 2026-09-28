@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import { signIn } from "next-auth/react";
 import { trackFb } from "@/lib/fbpixel";
 
 function RegisterForm() {
@@ -26,6 +27,8 @@ function RegisterForm() {
   const [copied, setCopied] = useState(false);
   const pollRef = useRef<NodeJS.Timeout | null>(null);
   const purchaseFiredRef = useRef(false);
+  // Guarda as credenciais para entrar sozinho assim que o pagamento cair.
+  const credsRef = useRef({ email: "", password: "" });
 
   // Poll payment status
   useEffect(() => {
@@ -40,8 +43,16 @@ function RegisterForm() {
               purchaseFiredRef.current = true;
               trackFb("Purchase", { value: 67.0, currency: "BRL" });
             }
-            setSuccess("Pagamento confirmado! Redirecionando...");
-            setTimeout(() => router.push("/login"), 2500);
+            setSuccess("Pagamento confirmado! Entrando...");
+            try {
+              const signed = await signIn("credentials", {
+                ...credsRef.current,
+                redirect: false,
+              });
+              router.push(signed?.ok ? "/dashboard" : "/login");
+            } catch {
+              router.push("/login");
+            }
           }
         } catch {
           // silently retry
@@ -73,8 +84,12 @@ function RegisterForm() {
         return;
       }
 
+      credsRef.current = { email, password };
       setUserId(data.user.id);
       setStep("payment");
+      // Quem acabou de se cadastrar ja decidiu comprar: exigir mais um
+      // clique para ver o PIX so derruba venda.
+      handleGeneratePayment(data.user.id);
     } catch {
       setError("Erro ao conectar com o servidor");
     } finally {
@@ -145,7 +160,7 @@ function RegisterForm() {
               </p>
             </div>
             <div className="text-right">
-              <span className="text-sm text-[#9aa1ac] line-through">R$ 97,90</span>
+              <span className="text-sm text-[#9aa1ac] line-through">R$ 1.396</span>
               <div className="text-3xl font-extrabold text-[#37c07a]">R$ 67</div>
               <span className="text-xs text-[#9aa1ac]">pagamento único</span>
             </div>

@@ -98,7 +98,7 @@ export default function ContaInativaPage() {
               🔥 Oferta Especial
             </span>
             <div className="mt-2">
-              <span className="text-sm text-[#9aa1ac] line-through">R$ 97,90</span>
+              <span className="text-sm text-[#9aa1ac] line-through">R$ 1.396</span>
               <span className="ml-2 text-2xl font-extrabold text-[#37c07a]">R$ 67</span>
             </div>
             <p className="mt-1 text-xs text-[#9aa1ac]">Acesso total • Pagamento único</p>
