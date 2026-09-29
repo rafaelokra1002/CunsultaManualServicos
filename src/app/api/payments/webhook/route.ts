@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { sendPurchaseToMeta } from "@/lib/meta-capi";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,8 @@ export async function POST(request: Request) {
     // Busca o pagamento pelo ID da transação Mistic Pay
     const payment = await prisma.payment.findUnique({
       where: { pushinPayId: String(transactionId) },
+      // o usuário vem junto para alimentar o evento da Conversions API
+      include: { user: { select: { email: true, phone: true } } },
     });
 
     if (!payment) {
@@ -32,6 +35,10 @@ export async function POST(request: Request) {
     // Verifica se o pagamento foi aprovado
     const approvedStates = ["APROVADO", "APROVADA", "COMPLETO", "COMPLETA", "COMPLETED", "PAID", "approved", "completed", "paid"];
     if (approvedStates.some(s => s.toLowerCase() === String(state).toLowerCase())) {
+      // Guarda contra webhook reenviado: só segue se ainda não estava aprovado,
+      // senão o evento de compra seria mandado de novo para a Meta.
+      const jaAprovado = payment.status === "approved";
+
       // Atualiza status do pagamento
       await prisma.payment.update({
         where: { id: payment.id },
@@ -45,6 +52,17 @@ export async function POST(request: Request) {
       });
 
       console.log(`Pagamento ${transactionId} aprovado. Usuário ${payment.userId} ativado.`);
+
+      if (!jaAprovado) {
+        // Não usa await: o gateway não pode esperar a Meta responder, e o
+        // envio já trata os próprios erros internamente.
+        void sendPurchaseToMeta({
+          eventId: payment.id,
+          value: payment.amount,
+          email: payment.user?.email,
+          phone: payment.user?.phone,
+        });
+      }
     } else if (["EXPIRADO", "CANCELADO", "expired", "cancelled", "refunded"].some(s => s.toLowerCase() === String(state).toLowerCase())) {
       await prisma.payment.update({
         where: { id: payment.id },

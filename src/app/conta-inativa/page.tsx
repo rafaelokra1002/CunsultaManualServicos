@@ -28,7 +28,8 @@ export default function ContaInativaPage() {
             clearInterval(pollRef.current!);
             if (!purchaseFiredRef.current) {
               purchaseFiredRef.current = true;
-              trackFb("Purchase", { value: 67.0, currency: "BRL" });
+              // mesmo id usado pela Conversions API no webhook: evita contar 2x
+              trackFb("Purchase", { value: 67.0, currency: "BRL" }, paymentId);
             }
             setSuccess("Pagamento confirmado! Redirecionando...");
             setTimeout(() => (window.location.href = "/dashboard"), 2500);
