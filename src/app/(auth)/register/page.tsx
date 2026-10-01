@@ -253,9 +253,11 @@ function RegisterForm() {
             </form>
 
             <div className="mt-4 rounded-xl border border-[#33373f] bg-[#111317] p-3">
+              {/* Antes este aviso anunciava o modo demo antes mesmo de a pessoa
+                  ver o preço — plantava a saída grátis no meio do cadastro. */}
               <p className="text-center text-xs text-[#9aa1ac]">
-                ⚡ Após o cadastro, você já pode explorar a plataforma em modo demo.
-                Pague para liberar o acesso completo.
+                ⚡ Pagamento único de R$ 67 no PIX. O acesso é liberado na hora,
+                vale para sempre e tem garantia de 30 dias.
               </p>
             </div>
 
@@ -278,15 +280,12 @@ function RegisterForm() {
               ✅ Conta criada com sucesso!
             </div>
             <h2 className="mb-2 text-2xl font-bold text-white">Liberar Acesso Completo</h2>
-            <p className="mb-4 text-sm text-[#9aa1ac]">
-              Pague via PIX para liberar todos os recursos, ou explore a plataforma em modo demo.
+            {/* O acesso em modo demo saiu daqui: era um botão de largura total
+                ACIMA do PIX, oferecendo de graça o que a tela está cobrando.
+                Virou um link discreto no rodapé, depois do preço e do QR code. */}
+            <p className="mb-6 text-sm text-[#9aa1ac]">
+              Pague via PIX para liberar todos os recursos. A confirmação é automática.
             </p>
-            <a
-              href="/login"
-              className="btn-outline mb-6 block w-full text-center"
-            >
-              Acessar modo demo →
-            </a>
 
             {error && (
               <div className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-400">
@@ -381,6 +380,17 @@ function RegisterForm() {
                 className="font-semibold text-[#ff6a1a] transition-colors hover:text-[#ff8c3f]"
               >
                 Faça login
+              </Link>
+            </p>
+
+            {/* Saída para quem realmente quer olhar antes: discreta e depois do
+                PIX, de propósito. Quem quer achar, acha. */}
+            <p className="mt-3 text-center text-xs text-[#6b7178]">
+              <Link
+                href="/login"
+                className="underline underline-offset-2 transition-colors hover:text-[#9aa1ac]"
+              >
+                Prefiro ver antes de pagar
               </Link>
             </p>
           </div>
