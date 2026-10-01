@@ -383,16 +383,9 @@ function RegisterForm() {
               </Link>
             </p>
 
-            {/* Saída para quem realmente quer olhar antes: discreta e depois do
-                PIX, de propósito. Quem quer achar, acha. */}
-            <p className="mt-3 text-center text-xs text-[#6b7178]">
-              <Link
-                href="/login"
-                className="underline underline-offset-2 transition-colors hover:text-[#9aa1ac]"
-              >
-                Prefiro ver antes de pagar
-              </Link>
-            </p>
+            {/* Nenhuma saída anunciada aqui, de propósito: a tela de pagamento
+                não oferece alternativa ao pagamento. Quem quiser entrar sem
+                pagar ainda consegue pelo "Faça login" acima — a conta já existe. */}
           </div>
         )}
       </div>
