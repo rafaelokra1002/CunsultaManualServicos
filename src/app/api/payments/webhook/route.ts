@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendPurchaseToMeta } from "@/lib/meta-capi";
+import { avisarVenda } from "@/lib/telegram";
 
 export const dynamic = "force-dynamic";
 
@@ -23,8 +24,8 @@ export async function POST(request: Request) {
     // Busca o pagamento pelo ID da transação Mistic Pay
     const payment = await prisma.payment.findUnique({
       where: { pushinPayId: String(transactionId) },
-      // o usuário vem junto para alimentar o evento da Conversions API
-      include: { user: { select: { email: true, phone: true } } },
+      // o usuário vem junto para o evento da Conversions API e o aviso no Telegram
+      include: { user: { select: { nome: true, email: true, phone: true } } },
     });
 
     if (!payment) {
@@ -54,13 +55,20 @@ export async function POST(request: Request) {
       console.log(`Pagamento ${transactionId} aprovado. Usuário ${payment.userId} ativado.`);
 
       if (!jaAprovado) {
-        // Não usa await: o gateway não pode esperar a Meta responder, e o
-        // envio já trata os próprios erros internamente.
+        // Nenhum await: o gateway não pode esperar a Meta nem o Telegram
+        // responderem, e os dois tratam os próprios erros internamente.
         void sendPurchaseToMeta({
           eventId: payment.id,
           value: payment.amount,
           email: payment.user?.email,
           phone: payment.user?.phone,
+        });
+
+        void avisarVenda({
+          nome: payment.user?.nome || "Cliente",
+          email: payment.user?.email || "",
+          phone: payment.user?.phone,
+          valor: payment.amount,
         });
       }
     } else if (["EXPIRADO", "CANCELADO", "expired", "cancelled", "refunded"].some(s => s.toLowerCase() === String(state).toLowerCase())) {
