@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendPurchaseToMeta } from "@/lib/meta-capi";
-import { avisarVenda } from "@/lib/telegram";
+import { avisarVenda, avisarErro } from "@/lib/telegram";
 
 export const dynamic = "force-dynamic";
 
@@ -83,6 +83,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ received: true });
   } catch (error) {
     console.error("Erro no webhook de pagamento:", error);
+    // Falha aqui significa pagamento que entrou e acesso que não liberou:
+    // precisa chegar no celular, não só no log do container.
+    void avisarErro(
+      "webhook de pagamento",
+      error instanceof Error ? error.message : String(error)
+    );
     return NextResponse.json(
       { error: "Erro ao processar webhook" },
       { status: 500 }
