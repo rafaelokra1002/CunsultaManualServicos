@@ -1,20 +1,41 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { trackFb } from "@/lib/fbpixel";
 
 // Páginas que já têm seu próprio botão de envio no canto inferior direito —
 // o botão flutuante do WhatsApp sobrepõe esse botão nelas, então fica escondido.
 const HIDDEN_ON = ["/assistente"];
 
+// Páginas de venda: quem clica aqui é lead do anúncio, não cliente pedindo
+// suporte. Só nelas o clique vale como evento de contato para a Meta.
+const PAGINAS_DE_VENDA = ["/", "/honda", "/acervo", "/register", "/conta-inativa"];
+
+const NUMERO = "5571999504584";
+const MENSAGEM =
+  "Olá! Vi o site de vocês e queria saber mais sobre o acesso aos manuais.";
+
 export default function FloatingWhatsApp() {
   const pathname = usePathname();
   if (HIDDEN_ON.some((p) => pathname?.startsWith(p))) return null;
 
+  const ehPaginaDeVenda = PAGINAS_DE_VENDA.includes(pathname || "");
+
+  // Sem isto, todo lead que prefere o WhatsApp ao checkout fica invisível para
+  // a Meta: ela trata como clique perdido e deixa de procurar gente parecida —
+  // justamente o perfil que mais tem comprado.
+  function registrarContato() {
+    if (ehPaginaDeVenda) {
+      trackFb("Contact", { content_name: pathname || "/" });
+    }
+  }
+
   return (
     <a
-      href="https://wa.me/5571999504584"
+      href={`https://wa.me/${NUMERO}?text=${encodeURIComponent(MENSAGEM)}`}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={registrarContato}
       aria-label="Contato via WhatsApp"
       style={{
         position: "fixed",
