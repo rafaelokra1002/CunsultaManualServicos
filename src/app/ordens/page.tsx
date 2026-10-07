@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
-import { useAccess } from "@/hooks/useAccess";
 import { formatarReais } from "@/lib/ordens";
 
 type ItemLista = {
@@ -24,16 +23,21 @@ function data(iso: string): string {
 
 export default function Ordens() {
   const router = useRouter();
-  const { isPremium, isLoading } = useAccess();
   const [ordens, setOrdens] = useState<ItemLista[]>([]);
   const [carregando, setCarregando] = useState(true);
+  // vem do banco, nao da sessao: quem acabou de comprar o adicional entra
+  // sem precisar deslogar
+  const [podeUsar, setPodeUsar] = useState(true);
   const [criando, setCriando] = useState(false);
   const [erro, setErro] = useState("");
 
   useEffect(() => {
     fetch("/api/ordens", { cache: "no-store" })
       .then((r) => (r.ok ? r.json() : { ordens: [] }))
-      .then((d) => setOrdens(d.ordens || []))
+      .then((d) => {
+        setOrdens(d.ordens || []);
+        if (d.acesso) setPodeUsar(d.acesso.podeUsarOrdens === true);
+      })
       .catch(() => setErro("Não foi possível carregar as ordens."))
       .finally(() => setCarregando(false));
   }, []);
@@ -92,7 +96,7 @@ export default function Ordens() {
               </Link>
               <button
                 onClick={novaOrdem}
-                disabled={criando || !isPremium}
+                disabled={criando || !podeUsar}
                 className="rounded-xl bg-[#ff6a1a] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#ff8c3f] disabled:opacity-50"
               >
                 {criando ? "Criando..." : "+ Nova ordem"}
@@ -100,11 +104,21 @@ export default function Ordens() {
             </div>
           </div>
 
-          {!isLoading && !isPremium && (
-            <div className="mb-6 rounded-xl border border-[#ff6a1a]/30 bg-[#ff6a1a]/10 p-4 text-sm text-[#ffd7b0]">
-              A ordem de serviço faz parte do acesso completo.{" "}
-              <Link href="/conta-inativa" className="font-semibold underline">
-                Liberar acesso
+          {!carregando && !podeUsar && (
+            <div className="mb-6 rounded-2xl border border-[#ff6a1a]/30 bg-[#ff6a1a]/10 p-5">
+              <p className="font-semibold text-white">
+                A Ordem de Serviço é um adicional
+              </p>
+              <p className="mt-2 text-sm text-[#ffd7b0]">
+                Entregue ao seu cliente um documento com o nome da sua oficina, a
+                tabela dos testes que você mediu e o total do serviço. Pagamento
+                único de R$ 27, sem mensalidade.
+              </p>
+              <Link
+                href="/ordens/liberar"
+                className="mt-4 inline-block rounded-xl bg-[#ff6a1a] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#ff8c3f]"
+              >
+                Liberar por R$ 27
               </Link>
             </div>
           )}

@@ -12,6 +12,9 @@ function RegisterForm() {
   const searchParams = useSearchParams();
   const refCode = searchParams.get("ref") ?? undefined;
   const [step, setStep] = useState<"register" | "payment">("register");
+  // Adicional escolhido ANTES do cadastro: o PIX é gerado automaticamente
+  // assim que a conta é criada, então não dá para oferecer depois.
+  const [comOrdens, setComOrdens] = useState(false);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -42,7 +45,7 @@ function RegisterForm() {
             if (!purchaseFiredRef.current) {
               purchaseFiredRef.current = true;
               // mesmo id usado pela Conversions API no webhook: evita contar 2x
-              trackFb("Purchase", { value: 67.0, currency: "BRL" }, paymentId);
+              trackFb("Purchase", { value: comOrdens ? 94.0 : 67.0, currency: "BRL" }, paymentId);
             }
             setSuccess("Pagamento confirmado! Entrando...");
             try {
@@ -106,7 +109,10 @@ function RegisterForm() {
       const res = await fetch("/api/payments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: uid || userId }),
+        body: JSON.stringify({
+          userId: uid || userId,
+          tipo: comOrdens ? "acesso_ordens" : "acesso",
+        }),
       });
 
       const data = await res.json();
@@ -119,7 +125,7 @@ function RegisterForm() {
       setPixCode(data.pixCode || "");
       setPixQrCode(data.pixQrCode || "");
       setPaymentId(data.paymentId);
-      trackFb("InitiateCheckout", { value: 67.0, currency: "BRL" });
+      trackFb("InitiateCheckout", { value: comOrdens ? 94.0 : 67.0, currency: "BRL" });
     } catch {
       setError("Erro ao gerar pagamento. Tente novamente.");
     } finally {
@@ -252,12 +258,44 @@ function RegisterForm() {
               </button>
             </form>
 
+            {/* Order bump: adicional marcado aqui entra no mesmo PIX, sem
+                segunda etapa de pagamento. */}
+            <button
+              type="button"
+              onClick={() => setComOrdens((v) => !v)}
+              className={`mt-4 flex w-full gap-3 rounded-xl border-2 p-4 text-left transition ${
+                comOrdens
+                  ? "border-[#ff6a1a] bg-[#ff6a1a]/10"
+                  : "border-dashed border-[#4a4038] bg-[#111317] hover:border-[#ff6a1a]/60"
+              }`}
+            >
+              <span
+                className={`mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded border-2 text-xs font-bold ${
+                  comOrdens
+                    ? "border-[#ff6a1a] bg-[#ff6a1a] text-white"
+                    : "border-[#6b7178] text-transparent"
+                }`}
+              >
+                ✓
+              </span>
+              <span>
+                <span className="block text-sm font-semibold text-white">
+                  Adicionar Ordem de Serviço por + R$ 27
+                </span>
+                <span className="mt-1 block text-xs leading-relaxed text-[#9aa1ac]">
+                  Entregue ao cliente um documento com o nome da sua oficina, a
+                  tabela dos testes que você mediu e o total do serviço. Gera PDF
+                  pelo celular. Pagamento único, sem mensalidade.
+                </span>
+              </span>
+            </button>
+
             <div className="mt-4 rounded-xl border border-[#33373f] bg-[#111317] p-3">
               {/* Antes este aviso anunciava o modo demo antes mesmo de a pessoa
                   ver o preço — plantava a saída grátis no meio do cadastro. */}
               <p className="text-center text-xs text-[#9aa1ac]">
-                ⚡ Pagamento único de R$ 67 no PIX. O acesso é liberado na hora,
-                vale para sempre e tem garantia de 30 dias.
+                ⚡ Pagamento único de R$ {comOrdens ? "94" : "67"} no PIX. O acesso é
+                liberado na hora, vale para sempre e tem garantia de 30 dias.
               </p>
             </div>
 

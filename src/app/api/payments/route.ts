@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { createPixPayment, PLAN_PRICE } from "@/lib/pushinpay";
+import { createPixPayment, precoPorTipo } from "@/lib/pushinpay";
 
 export const dynamic = "force-dynamic";
 
@@ -8,6 +8,12 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { userId } = body;
+
+    // "acesso" = R$ 67 | "acesso_ordens" = R$ 94 (com o adicional da Ordem de
+    // Serviço) | "ordens" = R$ 27, upgrade de quem já tem acesso.
+    const tipo = ["acesso", "acesso_ordens", "ordens"].includes(body.tipo)
+      ? body.tipo
+      : "acesso";
 
     if (!userId) {
       return NextResponse.json(
@@ -27,18 +33,35 @@ export async function POST(request: Request) {
       );
     }
 
-    if (user.isPremium) {
+    if (tipo === "ordens") {
+      // upgrade: só faz sentido para quem já tem acesso e ainda não tem a OS
+      if (!user.isPremium) {
+        return NextResponse.json(
+          { error: "Libere o acesso completo antes de comprar o adicional" },
+          { status: 400 }
+        );
+      }
+      if (user.hasOrdens) {
+        return NextResponse.json(
+          { error: "A Ordem de Serviço já está liberada na sua conta" },
+          { status: 400 }
+        );
+      }
+    } else if (user.isPremium) {
       return NextResponse.json(
         { error: "Sua conta já possui acesso premium" },
         { status: 400 }
       );
     }
 
+    const valor = precoPorTipo(tipo);
+
     // Verifica se já tem um pagamento pendente recente (menos de 30min)
     const recentPayment = await prisma.payment.findFirst({
       where: {
         userId: user.id,
         status: "pending",
+        tipo,
         createdAt: { gte: new Date(Date.now() - 30 * 60 * 1000) },
       },
       orderBy: { createdAt: "desc" },
@@ -62,11 +85,16 @@ export async function POST(request: Request) {
 
     // Cria o pagamento no Mistic Pay
     const pixResponse = await createPixPayment({
-      amount: PLAN_PRICE,
+      amount: valor,
       payerName: user.nome,
       payerDocument: "00000000000",
       transactionId,
-      description: "OficinaDigital - Plano Acesso Total",
+      description:
+        tipo === "ordens"
+          ? "OficinaDigital - Ordem de Servico"
+          : tipo === "acesso_ordens"
+            ? "OficinaDigital - Acesso Total + Ordem de Servico"
+            : "OficinaDigital - Plano Acesso Total",
       webhookUrl,
     });
 
@@ -74,7 +102,8 @@ export async function POST(request: Request) {
     const payment = await prisma.payment.create({
       data: {
         userId: user.id,
-        amount: PLAN_PRICE,
+        amount: valor,
+        tipo,
         status: "pending",
         pushinPayId: pixResponse.data.transactionId,
         pixCode: pixResponse.data.copyPaste,

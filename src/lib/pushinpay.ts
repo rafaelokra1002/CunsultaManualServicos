@@ -10,6 +10,18 @@ export const PLAN_PRICE = 67.00;
 export const PLAN_PRICE_ORIGINAL = "97,90";
 export const PLAN_PRICE_CURRENT = "67,00";
 
+// Adicional da Ordem de Serviço, vendido no checkout ou depois, dentro do app.
+export const ORDENS_PRICE = 27.00;
+export const ORDENS_PRICE_LABEL = "27,00";
+export const PLAN_COM_ORDENS_PRICE = PLAN_PRICE + ORDENS_PRICE;
+
+/** Quanto cobrar e o que a compra libera. */
+export function precoPorTipo(tipo: string): number {
+  if (tipo === "ordens") return ORDENS_PRICE;
+  if (tipo === "acesso_ordens") return PLAN_COM_ORDENS_PRICE;
+  return PLAN_PRICE;
+}
+
 interface CreatePixParams {
   amount: number;
   payerName: string;

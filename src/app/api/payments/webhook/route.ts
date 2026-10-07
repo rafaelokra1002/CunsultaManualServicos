@@ -46,10 +46,18 @@ export async function POST(request: Request) {
         data: { status: "approved" },
       });
 
-      // Ativa a conta do usuário e libera acesso premium
+      // Libera o que foi comprado. "ordens" é upgrade de quem já tem acesso:
+      // não mexe no premium, só destrava a Ordem de Serviço.
+      const liberar =
+        payment.tipo === "ordens"
+          ? { hasOrdens: true }
+          : payment.tipo === "acesso_ordens"
+            ? { active: true, isPremium: true, hasOrdens: true }
+            : { active: true, isPremium: true };
+
       await prisma.user.update({
         where: { id: payment.userId },
-        data: { active: true, isPremium: true },
+        data: liberar,
       });
 
       console.log(`Pagamento ${transactionId} aprovado. Usuário ${payment.userId} ativado.`);

@@ -10,10 +10,13 @@ async function usuarioLogado() {
   const session = await getServerSession(authOptions);
   const id = (session?.user as { id?: string } | undefined)?.id;
   if (!id) return null;
-  return {
-    id,
-    isPremium: session!.user.isPremium === true || session!.user.role === "ADMIN",
-  };
+  const u = await prisma.user.findUnique({
+    where: { id },
+    select: { isPremium: true, hasOrdens: true, role: true },
+  });
+  if (!u) return null;
+  const admin = u.role === "ADMIN";
+  return { id, isPremium: u.isPremium || admin, podeUsarOrdens: u.hasOrdens || admin };
 }
 
 // Toda consulta filtra por userId: uma oficina nunca enxerga a ordem da outra.

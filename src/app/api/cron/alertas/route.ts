@@ -27,17 +27,40 @@ export async function GET(request: Request) {
     // O cliente pagou e está sem o produto: em vez de só avisar, o cron
     // libera o acesso e conta o que fez. Avisa uma vez só, porque depois
     // de corrigido o caso não aparece mais na busca.
+    // Pega tanto quem pagou o acesso e não ficou premium quanto quem pagou o
+    // adicional e não recebeu a Ordem de Serviço.
     const travados = await prisma.payment.findMany({
-      where: { status: "approved", user: { isPremium: false } },
+      where: {
+        status: "approved",
+        OR: [
+          { tipo: { in: ["acesso", "acesso_ordens"] }, user: { isPremium: false } },
+          { tipo: { in: ["ordens", "acesso_ordens"] }, user: { hasOrdens: false } },
+        ],
+      },
       include: { user: { select: { id: true, nome: true, email: true, phone: true } } },
       take: 20,
     });
 
     if (travados.length > 0) {
-      await prisma.user.updateMany({
-        where: { id: { in: travados.map((p) => p.user.id) } },
-        data: { active: true, isPremium: true },
-      });
+      const precisamAcesso = travados
+        .filter((p) => p.tipo !== "ordens")
+        .map((p) => p.user.id);
+      const precisamOrdens = travados
+        .filter((p) => p.tipo === "ordens" || p.tipo === "acesso_ordens")
+        .map((p) => p.user.id);
+
+      if (precisamAcesso.length > 0) {
+        await prisma.user.updateMany({
+          where: { id: { in: precisamAcesso } },
+          data: { active: true, isPremium: true },
+        });
+      }
+      if (precisamOrdens.length > 0) {
+        await prisma.user.updateMany({
+          where: { id: { in: precisamOrdens } },
+          data: { hasOrdens: true },
+        });
+      }
       await avisarFalhaDeAtivacao(
         travados.map((p) => ({
           nome: p.user.nome,

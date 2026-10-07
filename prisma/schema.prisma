@@ -23,6 +23,8 @@ model User {
   active       Boolean   @default(true)
   isPremium    Boolean   @default(false)
   demoUsed     Boolean   @default(false)
+  // Adicional comprado a parte: libera a Ordem de Serviço
+  hasOrdens    Boolean   @default(false)
   referralCode String?   // código do link de indicação usado no cadastro
   createdAt    DateTime  @default(now())
 
@@ -56,6 +58,9 @@ model Payment {
   pixCode             String?
   pixQrCode           String?
   recoveryMessageSent Boolean  @default(false)
+  // o que esta compra libera: "acesso" (R$ 67), "acesso_ordens" (R$ 94)
+  // ou "ordens" (R$ 27, upgrade de quem ja tem acesso)
+  tipo                String   @default("acesso")
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 

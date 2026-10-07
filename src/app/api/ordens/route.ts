@@ -10,9 +10,19 @@ async function usuarioLogado() {
   const session = await getServerSession(authOptions);
   const id = (session?.user as { id?: string } | undefined)?.id;
   if (!id) return null;
+
+  const u = await prisma.user.findUnique({
+    where: { id },
+    select: { isPremium: true, hasOrdens: true, role: true },
+  });
+  if (!u) return null;
+
+  const admin = u.role === "ADMIN";
   return {
     id,
-    isPremium: session!.user.isPremium === true || session!.user.role === "ADMIN",
+    isPremium: u.isPremium || admin,
+    // o adicional libera a OS; admin entra sempre
+    podeUsarOrdens: u.hasOrdens || admin,
   };
 }
 
@@ -31,7 +41,10 @@ export async function GET() {
         motoPlaca: true, total: true, status: true, createdAt: true,
       },
     });
-    return NextResponse.json({ ordens });
+    return NextResponse.json({
+      ordens,
+      acesso: { isPremium: u.isPremium, podeUsarOrdens: u.podeUsarOrdens },
+    });
   } catch (error) {
     console.error("Erro ao listar ordens:", error);
     return NextResponse.json({ error: "Erro ao listar" }, { status: 500 });
@@ -42,9 +55,9 @@ export async function GET() {
 export async function POST(request: Request) {
   const u = await usuarioLogado();
   if (!u) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
-  if (!u.isPremium) {
+  if (!u.podeUsarOrdens) {
     return NextResponse.json(
-      { error: "A ordem de serviço faz parte do acesso completo." },
+      { error: "A Ordem de Serviço é um adicional. Libere para criar ordens." },
       { status: 403 }
     );
   }
