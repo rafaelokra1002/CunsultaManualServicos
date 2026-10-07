@@ -25,7 +25,14 @@ model User {
   demoUsed     Boolean   @default(false)
   referralCode String?   // código do link de indicação usado no cadastro
   createdAt    DateTime  @default(now())
+
+  // Cabeçalho da ordem de serviço: preenchido uma vez, reaproveitado em todas
+  oficinaNome     String?
+  oficinaTelefone String?
+  oficinaEndereco String?
+
   payments     Payment[]
+  ordens       ServiceOrder[]
 
   @@map("users")
 }
@@ -131,4 +138,46 @@ model Pinagem {
   moto   Moto   @relation(fields: [motoId], references: [id], onDelete: Cascade)
 
   @@map("pinagens")
+}
+
+model ServiceOrder {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // Número sequencial POR oficina: cada mecânico tem a própria contagem,
+  // começando em 1 — é o número que ele mostra para o cliente.
+  numero Int
+
+  clienteNome     String
+  clienteTelefone String?
+
+  motoMarca  String?
+  motoModelo String?
+  motoAno    String?
+  motoPlaca  String?
+  motoKm     String?
+
+  // O que o cliente relatou, com as palavras dele
+  sintoma String?
+
+  // Laudo: o que foi testado e a conclusão. `testes` guarda as medições em
+  // JSON ([{item, esperado, medido, ok}]) para sair como tabela na impressão.
+  diagnostico String?
+  testes      Json?
+
+  // [{descricao, valor}] e [{descricao, quantidade, valor}]
+  servicos Json?
+  pecas    Json?
+
+  observacoes String?
+  total       Float  @default(0)
+  status      String @default("aberta") // aberta, concluida
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, numero])
+  @@index([userId, createdAt])
+  @@map("service_orders")
 }

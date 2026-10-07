@@ -39,6 +39,17 @@ function OleoIcon({ active }: { active?: boolean }) {
   );
 }
 
+function OrdensIcon({ active }: { active?: boolean }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={active ? "#ff6a1a" : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 2h6a1 1 0 0 1 1 1v2H8V3a1 1 0 0 1 1-1z" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <line x1="8" y1="11" x2="16" y2="11" />
+      <line x1="8" y1="15" x2="13" y2="15" />
+    </svg>
+  );
+}
+
 function CalculadoraIcon({ active }: { active?: boolean }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={active ? "#ff6a1a" : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -141,6 +152,7 @@ function AssistenteIcon({ active }: { active?: boolean }) {
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", Icon: DashboardIcon },
+  { href: "/ordens", label: "Ordens de Serviço", Icon: OrdensIcon },
   { href: "/manuais", label: "Manuais", Icon: ManuaisIcon },
   { href: "/assistente", label: "Assistente IA", Icon: AssistenteIcon },
   { href: "/oleo-suspensao", label: "Óleo Suspensão", Icon: OleoIcon },
