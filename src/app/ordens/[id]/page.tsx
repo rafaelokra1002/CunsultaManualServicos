@@ -64,8 +64,9 @@ const PRINT_CSS = `
 .so-doc .ass div { flex: 1; border-top: 1px solid #000; padding-top: 4px; font-size: 9pt; text-align: center; }
 `;
 
-const inputCls =
-  "w-full rounded-xl border border-[#33373f] bg-[#111317] px-3 py-2.5 text-sm text-white placeholder-[#6b7178] outline-none focus:border-[#ff6a1a]";
+const inputBase =
+  "rounded-xl border border-[#33373f] bg-[#111317] px-3 py-2.5 text-sm text-white placeholder-[#6b7178] outline-none focus:border-[#ff6a1a]";
+const inputCls = `w-full ${inputBase}`;
 const labelCls = "mb-1 block text-xs uppercase tracking-wide text-[#9aa1ac]";
 
 export default function EditarOrdem() {
@@ -263,18 +264,24 @@ export default function EditarOrdem() {
                 placeholder="Moto falhando em baixa, luz da injeção acendendo" />
 
               <label className={labelCls}>Testes realizados</label>
+              <div className="mb-1 grid grid-cols-12 gap-2 text-[11px] uppercase tracking-wide text-[#6b7178]">
+                <span className="col-span-5">O que mediu</span>
+                <span className="col-span-3">Esperado</span>
+                <span className="col-span-2">Medido</span>
+                <span className="col-span-2">Ok?</span>
+              </div>
               <div className="mb-2 space-y-2">
                 {testes.map((t, i) => (
                   <div key={i} className="grid grid-cols-12 gap-2">
-                    <input className={`${inputCls} col-span-5`} value={t.item} placeholder="Sinal TPS (pino 5)"
+                    <input className={`${inputBase} col-span-5 w-full`} value={t.item} placeholder="Sinal TPS (pino 5)"
                       onChange={(e) => {
                         const n = [...testes]; n[i] = { ...t, item: e.target.value }; set("testes", n);
                       }} />
-                    <input className={`${inputCls} col-span-3`} value={t.esperado} placeholder="0,29–0,71 V"
+                    <input className={`${inputBase} col-span-3 w-full`} value={t.esperado} placeholder="0,29–0,71 V"
                       onChange={(e) => {
                         const n = [...testes]; n[i] = { ...t, esperado: e.target.value }; set("testes", n);
                       }} />
-                    <input className={`${inputCls} col-span-2`} value={t.medido} placeholder="0,52 V"
+                    <input className={`${inputBase} col-span-2 w-full`} value={t.medido} placeholder="0,52 V"
                       onChange={(e) => {
                         const n = [...testes]; n[i] = { ...t, medido: e.target.value }; set("testes", n);
                       }} />
@@ -318,14 +325,19 @@ export default function EditarOrdem() {
               <h2 className="mb-3 font-semibold text-white">Serviços e peças</h2>
 
               <label className={labelCls}>Serviços (mão de obra)</label>
+              <div className="mb-1 flex gap-2 text-[11px] uppercase tracking-wide text-[#6b7178]">
+                <span className="min-w-0 flex-1">Descrição do serviço</span>
+                <span className="w-28 flex-none">Valor R$</span>
+                <span className="w-9 flex-none" />
+              </div>
               <div className="mb-2 space-y-2">
                 {servicos.map((s, i) => (
                   <div key={i} className="flex gap-2">
-                    <input className={`${inputCls} flex-1`} value={s.descricao} placeholder="Reparo do chicote"
+                    <input className={`${inputBase} min-w-0 flex-1`} value={s.descricao} placeholder="Reparo do chicote"
                       onChange={(e) => {
                         const n = [...servicos]; n[i] = { ...s, descricao: e.target.value }; set("servicos", n);
                       }} />
-                    <input className={`${inputCls} w-28`} inputMode="decimal" value={s.valor || ""}
+                    <input className={`${inputBase} w-28 flex-none`} inputMode="decimal" value={s.valor || ""}
                       placeholder="120,00"
                       onChange={(e) => {
                         const n = [...servicos];
@@ -333,7 +345,7 @@ export default function EditarOrdem() {
                         set("servicos", n);
                       }} />
                     <button onClick={() => set("servicos", servicos.filter((_, j) => j !== i))}
-                      className="rounded-xl border border-[#33373f] px-3 text-[#6b7178] hover:text-red-400">×</button>
+                      className="w-9 flex-none rounded-xl border border-[#33373f] text-[#6b7178] hover:text-red-400">×</button>
                   </div>
                 ))}
               </div>
@@ -341,19 +353,25 @@ export default function EditarOrdem() {
                 className="mb-4 text-sm text-[#ff6a1a] hover:underline">+ adicionar serviço</button>
 
               <label className={labelCls}>Peças</label>
+              <div className="mb-1 flex gap-2 text-[11px] uppercase tracking-wide text-[#6b7178]">
+                <span className="min-w-0 flex-1">Nome da peça</span>
+                <span className="w-16 flex-none">Qtd</span>
+                <span className="w-28 flex-none">Valor R$</span>
+                <span className="w-9 flex-none" />
+              </div>
               <div className="mb-2 space-y-2">
                 {pecas.map((p, i) => (
                   <div key={i} className="flex gap-2">
-                    <input className={`${inputCls} flex-1`} value={p.descricao} placeholder="Conector 4 vias"
+                    <input className={`${inputBase} min-w-0 flex-1`} value={p.descricao} placeholder="Conector 4 vias"
                       onChange={(e) => {
                         const n = [...pecas]; n[i] = { ...p, descricao: e.target.value }; set("pecas", n);
                       }} />
-                    <input className={`${inputCls} w-16`} inputMode="numeric" value={p.quantidade || ""}
+                    <input className={`${inputBase} w-16 flex-none`} inputMode="numeric" value={p.quantidade || ""}
                       placeholder="1"
                       onChange={(e) => {
                         const n = [...pecas]; n[i] = { ...p, quantidade: parseInt(e.target.value) || 1 }; set("pecas", n);
                       }} />
-                    <input className={`${inputCls} w-28`} inputMode="decimal" value={p.valor || ""}
+                    <input className={`${inputBase} w-28 flex-none`} inputMode="decimal" value={p.valor || ""}
                       placeholder="35,00"
                       onChange={(e) => {
                         const n = [...pecas];
@@ -361,7 +379,7 @@ export default function EditarOrdem() {
                         set("pecas", n);
                       }} />
                     <button onClick={() => set("pecas", pecas.filter((_, j) => j !== i))}
-                      className="rounded-xl border border-[#33373f] px-3 text-[#6b7178] hover:text-red-400">×</button>
+                      className="w-9 flex-none rounded-xl border border-[#33373f] text-[#6b7178] hover:text-red-400">×</button>
                   </div>
                 ))}
               </div>
