@@ -3,7 +3,18 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 type Ponto = { x: number; y: number };
 
-export default function EsquemaViewer({ src, formato, titulo }: { src: string; formato: string; titulo: string }) {
+export default function EsquemaViewer({
+  src,
+  formato,
+  titulo,
+  ocupaTela = false,
+}: {
+  src: string;
+  formato: string;
+  titulo: string;
+  // preenche a altura do pai (página do esquema em tela inteira)
+  ocupaTela?: boolean;
+}) {
   const [escala, setEscala] = useState(1);
   const [escalaAjuste, setEscalaAjuste] = useState(1);
   const [pos, setPos] = useState<Ponto>({ x: 0, y: 0 });
@@ -158,12 +169,16 @@ export default function EsquemaViewer({ src, formato, titulo }: { src: string; f
 
   if (formato === "pdf") {
     return (
-      <div className="rounded-xl border border-line bg-surface">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-3 py-2 text-sm">
+      <div className={ocupaTela ? "flex h-full flex-col bg-surface" : "rounded-xl border border-line bg-surface"}>
+        <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-line px-3 py-2 text-sm">
           <span className="truncate text-muted">{titulo}</span>
           <a href={src} download className="flex h-10 items-center rounded-md border border-line px-3 hover:border-signal sm:h-8">Baixar PDF</a>
         </div>
-        <iframe src={src} className="h-[45dvh] w-full rounded-b-xl sm:h-[75vh]" title={titulo} />
+        <iframe
+          src={src}
+          className={ocupaTela ? "min-h-0 w-full flex-1" : "h-[45dvh] w-full rounded-b-xl sm:h-[75vh]"}
+          title={titulo}
+        />
       </div>
     );
   }
@@ -173,9 +188,9 @@ export default function EsquemaViewer({ src, formato, titulo }: { src: string; f
   const comZoom = escala > escalaAjuste + 0.01;
 
   return (
-    <div className="overflow-hidden rounded-xl border border-line bg-surface">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-3 py-2 text-sm">
-        <span className="truncate text-muted">{titulo}</span>
+    <div className={ocupaTela ? "flex h-full flex-col overflow-hidden bg-surface" : "overflow-hidden rounded-xl border border-line bg-surface"}>
+      <div className={`flex shrink-0 flex-wrap items-center gap-2 border-b border-line px-3 py-2 text-sm ${ocupaTela ? "justify-end" : "justify-between"}`}>
+        {!ocupaTela && <span className="truncate text-muted">{titulo}</span>}
         <div className="flex items-center gap-1">
           <button onClick={() => zoomCanto(0.25)} className="h-10 w-10 rounded-md border border-line sm:h-8 sm:w-8">+</button>
           <button onClick={() => zoomCanto(-0.25)} className="h-10 w-10 rounded-md border border-line sm:h-8 sm:w-8">−</button>
@@ -186,8 +201,9 @@ export default function EsquemaViewer({ src, formato, titulo }: { src: string; f
       </div>
       <div
         ref={box}
-        className="h-[45dvh] cursor-grab overflow-hidden bg-black/40 active:cursor-grabbing sm:h-[75vh]"
-        style={{ touchAction: comZoom ? "none" : "pan-y", overscrollBehavior: "contain" }}
+        className={`cursor-grab overflow-hidden bg-black/40 active:cursor-grabbing ${ocupaTela ? "min-h-0 flex-1" : "h-[45dvh] sm:h-[75vh]"}`}
+        // em tela inteira não há página para rolar: o gesto é sempre do quadro
+        style={{ touchAction: ocupaTela || comZoom ? "none" : "pan-y", overscrollBehavior: "contain" }}
         onPointerDown={aoDescer}
         onPointerMove={aoMover}
         onPointerUp={aoSoltar}
@@ -199,12 +215,14 @@ export default function EsquemaViewer({ src, formato, titulo }: { src: string; f
           alt={titulo}
           onLoad={aoCarregar}
           draggable={false}
-          className="origin-top-left select-none"
+          // max-w-none: o preflight do Tailwind põe max-width:100% em img,
+          // o que encolhia a largura natural antes da escala ser aplicada
+          className="max-w-none origin-top-left select-none"
           style={{ width: dim.w || undefined, transform: `translate(${pos.x}px, ${pos.y}px) scale(${escala})` }}
         />
       </div>
-      <p className="px-3 py-2 text-xs text-muted">
-        <span className="sm:hidden">Pinça dá zoom · um dedo rola a página</span>
+      <p className="shrink-0 px-3 py-2 text-xs text-muted">
+        <span className="sm:hidden">{ocupaTela ? "Pinça dá zoom · arraste para mover" : "Pinça dá zoom · um dedo rola a página"}</span>
         <span className="hidden sm:block">Roda do mouse ou pinça dão zoom · arraste para mover · duplo clique ajusta</span>
       </p>
     </div>

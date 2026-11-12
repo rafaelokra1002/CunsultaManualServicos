@@ -22,10 +22,7 @@ export default async function MotoEsquemasPage({
 
   const moto = await prisma.moto.findUnique({
     where: { id: params.id },
-    include: {
-      esquemas: { orderBy: [{ modulo: "asc" }, { id: "asc" }] },
-      _count: { select: { pinagens: true, parametros: true } },
-    },
+    include: { esquemas: { orderBy: [{ modulo: "asc" }, { id: "asc" }] } },
   });
   if (!moto) notFound();
   // id certo com marca errada na URL: manda para a URL canônica
@@ -35,74 +32,65 @@ export default async function MotoEsquemasPage({
 
   const selecionado = moto.esquemas.find((e) => e.id === searchParams.ver) ?? moto.esquemas[0];
   const base = `${marcaUrl(moto.marca)}/${moto.id}`;
+  const voltar = marcaUrl(moto.marca);
 
-  const porModulo = new Map<string, typeof moto.esquemas>();
-  for (const e of moto.esquemas) {
-    const lista = porModulo.get(e.modulo) ?? [];
-    lista.push(e);
-    porModulo.set(e.modulo, lista);
-  }
+  const rotulo = (e: (typeof moto.esquemas)[number]) =>
+    `${MODULO_LABEL[e.modulo]}${e.sistema?.trim() ? ` · ${e.sistema.trim()}` : ""}`;
 
-  const titulo = (e: (typeof moto.esquemas)[number]) =>
-    `${moto.marca} ${moto.modelo} · ${MODULO_LABEL[e.modulo]}${e.sistema?.trim() ? ` · ${e.sistema.trim()}` : ""}`;
-
+  // tela inteira, por cima da Sidebar (z-50) e da barra móvel
   return (
-    <div className="mx-auto max-w-7xl">
-      <Link href={marcaUrl(moto.marca)} className="block truncate text-sm text-muted hover:text-white">← {moto.marca}</Link>
-      <h1 className="mt-2 flex min-w-0 items-baseline gap-2 text-lg font-bold text-white lg:text-2xl">
-        <span className="truncate">{moto.modelo}</span>
-        <span className="shrink-0 text-sm font-normal text-muted lg:text-base">{moto.ano === "n/d" ? "" : moto.ano}</span>
-      </h1>
-
-      <div className="mt-4 flex flex-col gap-4 lg:mt-6 lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-6">
-        <div className="min-w-0 space-y-4">
-          {selecionado ? (
-            <EsquemaViewer key={selecionado.id} src={selecionado.arquivo} formato={selecionado.formato} titulo={titulo(selecionado)} />
-          ) : (
-            <p className="text-sm text-muted">Nenhum esquema cadastrado para esta moto.</p>
-          )}
-
-          <div className="space-y-4">
-            {Array.from(porModulo.entries()).map(([modulo, lista]) => (
-              <div key={modulo}>
-                <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
-                  {MODULO_LABEL[modulo as keyof typeof MODULO_LABEL]}
-                </p>
-                <div className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible">
-                  {lista.map((e) => {
-                    const ativo = e.id === selecionado?.id;
-                    return (
-                      <Link
-                        key={e.id}
-                        href={`${base}?ver=${e.id}`}
-                        scroll={false}
-                        className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs transition-colors ${
-                          ativo ? "border-signal bg-signal/10 text-signal" : "border-line text-muted hover:border-signal hover:text-white"
-                        }`}
-                      >
-                        {e.sistema?.trim() || MODULO_LABEL[e.modulo]} · {e.formato.toUpperCase()}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
+    <div className="fixed inset-0 z-[60] flex flex-col bg-[#16181c]">
+      <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-line bg-[#111317] px-3 py-2 sm:px-4">
+        <Link
+          href={voltar}
+          className="flex h-10 shrink-0 items-center gap-1 rounded-lg border border-line px-3 text-sm font-medium text-white hover:border-signal sm:h-9"
+        >
+          ← Voltar
+        </Link>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-bold text-white sm:text-base">
+            <span className="uppercase">{moto.marca}</span> {moto.modelo}
+          </p>
+          <p className="truncate text-xs text-muted">
+            {moto.ano === "n/d" ? "Ano n/d" : moto.ano}
+            {moto.ecuTipo ? ` · ECU ${moto.ecuTipo}` : ""}
+            {selecionado ? ` · ${rotulo(selecionado)}` : ""}
+          </p>
         </div>
+        {moto.esquemas.length > 1 && (
+          <nav className="flex w-full gap-2 overflow-x-auto pb-1 sm:w-auto sm:pb-0">
+            {moto.esquemas.map((e) => {
+              const ativo = e.id === selecionado?.id;
+              return (
+                <Link
+                  key={e.id}
+                  href={`${base}?ver=${e.id}`}
+                  replace
+                  scroll={false}
+                  className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs transition-colors ${
+                    ativo ? "border-signal bg-signal/10 text-signal" : "border-line text-muted hover:border-signal hover:text-white"
+                  }`}
+                >
+                  {rotulo(e)} · {e.formato.toUpperCase()}
+                </Link>
+              );
+            })}
+          </nav>
+        )}
+      </header>
 
-        <aside className="h-fit rounded-xl border border-line bg-surface p-4 text-sm">
-          <dl className="space-y-3">
-            <div><dt className="text-xs text-muted">Marca</dt><dd className="font-medium uppercase text-white">{moto.marca}</dd></div>
-            <div><dt className="text-xs text-muted">Modelo</dt><dd className="font-medium text-white">{moto.modelo}</dd></div>
-            <div><dt className="text-xs text-muted">Ano</dt><dd className="font-medium text-white">{moto.ano}</dd></div>
-            <div><dt className="text-xs text-muted">ECU</dt><dd className="font-medium text-white">{moto.ecuTipo || "—"}</dd></div>
-            <div className="flex gap-6 border-t border-line pt-3">
-              <div><dt className="text-xs text-muted">Esquemas</dt><dd className="font-medium text-white">{moto.esquemas.length}</dd></div>
-              <div><dt className="text-xs text-muted">Pinagens</dt><dd className="font-medium text-white">{moto._count.pinagens}</dd></div>
-              <div><dt className="text-xs text-muted">Parâmetros</dt><dd className="font-medium text-white">{moto._count.parametros}</dd></div>
-            </div>
-          </dl>
-        </aside>
+      <div className="min-h-0 flex-1">
+        {selecionado ? (
+          <EsquemaViewer
+            key={selecionado.id}
+            src={selecionado.arquivo}
+            formato={selecionado.formato}
+            titulo={`${moto.marca} ${moto.modelo} · ${rotulo(selecionado)}`}
+            ocupaTela
+          />
+        ) : (
+          <p className="p-6 text-sm text-muted">Nenhum esquema cadastrado para esta moto.</p>
+        )}
       </div>
     </div>
   );
