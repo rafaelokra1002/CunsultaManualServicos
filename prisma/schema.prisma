@@ -14,27 +14,27 @@ enum Role {
 }
 
 model User {
-  id           String    @id @default(cuid())
+  id           String   @id @default(cuid())
   nome         String
-  email        String    @unique
+  email        String   @unique
   password     String
   phone        String?
-  role         Role      @default(USER)
-  active       Boolean   @default(true)
-  isPremium    Boolean   @default(false)
-  demoUsed     Boolean   @default(false)
+  role         Role     @default(USER)
+  active       Boolean  @default(true)
+  isPremium    Boolean  @default(false)
+  demoUsed     Boolean  @default(false)
   // Adicional comprado a parte: libera a Ordem de Serviço
-  hasOrdens    Boolean   @default(false)
-  referralCode String?   // código do link de indicação usado no cadastro
-  createdAt    DateTime  @default(now())
+  hasOrdens    Boolean  @default(false)
+  referralCode String? // código do link de indicação usado no cadastro
+  createdAt    DateTime @default(now())
 
   // Cabeçalho da ordem de serviço: preenchido uma vez, reaproveitado em todas
   oficinaNome     String?
   oficinaTelefone String?
   oficinaEndereco String?
 
-  payments     Payment[]
-  ordens       ServiceOrder[]
+  payments Payment[]
+  ordens   ServiceOrder[]
 
   @@map("users")
 }
@@ -49,11 +49,11 @@ model ReferralLink {
 }
 
 model Payment {
-  id              String   @id @default(cuid())
-  userId          String
-  user            User     @relation(fields: [userId], references: [id])
-  amount          Float
-  status          String   @default("pending") // pending, approved, expired
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id])
+  amount              Float
+  status              String   @default("pending") // pending, approved, expired
   pushinPayId         String?  @unique
   pixCode             String?
   pixQrCode           String?
@@ -68,7 +68,7 @@ model Payment {
 }
 
 model Manual {
-  id        String   @id @default(cuid())
+  id        String        @id @default(cuid())
   title     String
   brand     String
   model     String
@@ -91,12 +91,12 @@ model BotConversation {
 }
 
 model ManualChunk {
-  id        String  @id @default(cuid())
-  manualId  String
-  manual    Manual  @relation(fields: [manualId], references: [id], onDelete: Cascade)
-  content   String
-  pageNum   Int?
-  chunkIdx  Int
+  id       String @id @default(cuid())
+  manualId String
+  manual   Manual @relation(fields: [manualId], references: [id], onDelete: Cascade)
+  content  String
+  pageNum  Int?
+  chunkIdx Int
 
   @@map("manual_chunks")
 }
@@ -110,15 +110,49 @@ model PageView {
 }
 
 model Moto {
-  id          String       @id @default(cuid())
-  marca       String
-  modelo      String
-  ano         String
-  ecuTipo     String?
-  parametros  Parametro[]
-  pinagens    Pinagem[]
+  id         String      @id @default(cuid())
+  marca      String
+  modelo     String
+  ano        String
+  ecuTipo    String?
+  origem     String      @default("manual")
+  parametros Parametro[]
+  pinagens   Pinagem[]
+  esquemas   Esquema[]
 
   @@map("motos")
+}
+
+enum ModuloEsquema {
+  INJECAO
+  ABS
+  CHASSI
+  INSTRUMENTACAO
+  ALARME
+  PNEUS
+  SUSPENSAO
+  PUNHO
+  ELOCK
+  HANDSFREE
+  RADIO
+  FAROIS
+}
+
+model Esquema {
+  id        String        @id @default(cuid())
+  motoId    String
+  moto      Moto          @relation(fields: [motoId], references: [id], onDelete: Cascade)
+  modulo    ModuloEsquema
+  sistema   String?
+  ecu       String?
+  arquivo   String
+  formato   String
+  bytes     Int
+  createdAt DateTime      @default(now())
+
+  @@index([motoId])
+  @@index([modulo])
+  @@map("esquemas")
 }
 
 model Parametro {
@@ -176,8 +210,8 @@ model ServiceOrder {
   pecas    Json?
 
   observacoes String?
-  total       Float  @default(0)
-  status      String @default("aberta") // aberta, concluida
+  total       Float   @default(0)
+  status      String  @default("aberta") // aberta, concluida
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

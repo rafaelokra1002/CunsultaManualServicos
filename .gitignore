@@ -8,3 +8,4 @@ public/manuais/
 Manuais de Serviço Motos/
 pdfs/
 *.pdf
+!public/esquemas/**/*.pdf
