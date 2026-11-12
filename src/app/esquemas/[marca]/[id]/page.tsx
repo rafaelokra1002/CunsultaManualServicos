@@ -48,12 +48,13 @@ export default async function MotoEsquemasPage({
 
   return (
     <div className="mx-auto max-w-7xl">
-      <Link href={marcaUrl(moto.marca)} className="text-sm text-muted hover:text-white">← {moto.marca}</Link>
-      <h1 className="mt-2 text-2xl font-bold text-white">
-        {moto.modelo} <span className="text-base font-normal text-muted">{moto.ano === "n/d" ? "" : moto.ano}</span>
+      <Link href={marcaUrl(moto.marca)} className="block truncate text-sm text-muted hover:text-white">← {moto.marca}</Link>
+      <h1 className="mt-2 flex min-w-0 items-baseline gap-2 text-lg font-bold text-white lg:text-2xl">
+        <span className="truncate">{moto.modelo}</span>
+        <span className="shrink-0 text-sm font-normal text-muted lg:text-base">{moto.ano === "n/d" ? "" : moto.ano}</span>
       </h1>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_280px]">
+      <div className="mt-4 flex flex-col gap-4 lg:mt-6 lg:grid lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-6">
         <div className="min-w-0 space-y-4">
           {selecionado ? (
             <EsquemaViewer key={selecionado.id} src={selecionado.arquivo} formato={selecionado.formato} titulo={titulo(selecionado)} />
@@ -67,7 +68,7 @@ export default async function MotoEsquemasPage({
                 <p className="mb-2 text-xs font-bold uppercase tracking-widest text-muted">
                   {MODULO_LABEL[modulo as keyof typeof MODULO_LABEL]}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible">
                   {lista.map((e) => {
                     const ativo = e.id === selecionado?.id;
                     return (
@@ -75,7 +76,7 @@ export default async function MotoEsquemasPage({
                         key={e.id}
                         href={`${base}?ver=${e.id}`}
                         scroll={false}
-                        className={`rounded-lg border px-3 py-1.5 text-xs transition-colors ${
+                        className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs transition-colors ${
                           ativo ? "border-signal bg-signal/10 text-signal" : "border-line text-muted hover:border-signal hover:text-white"
                         }`}
                       >
