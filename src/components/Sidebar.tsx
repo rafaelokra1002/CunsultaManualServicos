@@ -102,6 +102,19 @@ function ECUIcon({ active }: { active?: boolean }) {
   );
 }
 
+function EsquemasIcon({ active }: { active?: boolean }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={active ? "#ff6a1a" : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="5" cy="6" r="2" />
+      <circle cx="19" cy="6" r="2" />
+      <circle cx="12" cy="18" r="2" />
+      <path d="M7 6h10" />
+      <path d="M5 8v4h14V8" />
+      <path d="M12 12v4" />
+    </svg>
+  );
+}
+
 function LogoutIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -159,6 +172,7 @@ const navItems = [
   { href: "/calculadora", label: "Calculadora", Icon: CalculadoraIcon },
   { href: "/diagnostico", label: "Diagnóstico", Icon: DiagnosticoIcon },
   { href: "/ecu-pinagem", label: "ECU & Pinagem", Icon: ECUIcon },
+  { href: "/esquemas", label: "Esquemas", Icon: EsquemasIcon },
   { href: "/reset-ecm", label: "Reset / Init ECM", Icon: ResetECMIcon },
 ];
 

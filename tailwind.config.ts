@@ -9,6 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // tokens do visual escuro do app (usados pelo EsquemaViewer)
+        line: "#33373f",
+        surface: "#1e2127",
+        muted: "#9aa1ac",
+        signal: "#ff6a1a",
         primary: {
           50: "#eff6ff",
           100: "#dbeafe",
