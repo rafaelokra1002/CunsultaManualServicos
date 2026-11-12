@@ -22,11 +22,12 @@ export default async function EsquemasPage({ searchParams }: { searchParams: { q
             Diagramas de injeção, ABS, chassi, instrumentação e mais, com zoom e tela cheia.
           </p>
           <Link
-            href="/ordens/liberar"
+            href="/conta-inativa"
             className="mt-6 inline-block rounded-xl bg-signal px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
           >
             Liberar acesso
           </Link>
+          <p className="mt-3 text-xs text-muted">Pagamento único • Acesso vitalício</p>
         </div>
       </div>
     );
